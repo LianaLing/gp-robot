@@ -7,11 +7,47 @@
 
 #define WINDOW_TITLE "Practical 1"
 #define CW_USEDEFAULT 10
-#define WIDTH 600
-#define HEIGHT 600
+#define WIDTH 800
+#define HEIGHT 800
 #define M_PI 3.2
 
 int qNo = 1;
+
+float xConvertion(float x) {
+	float xCoor, width = WIDTH / 2;
+	if (x < width) {
+		xCoor = 0 - (x / width);
+	}
+	else if (x > width) {
+		xCoor = (x - width) / width;
+	}
+	else if (x == width) {
+		xCoor = 0.0;
+	}
+	return xCoor;
+}
+
+float yConvertion(float y) {
+	float yCoor, height = HEIGHT / 2;
+	if (y < height) {
+		yCoor = y / height;
+	}
+	else if (y > height) {
+		yCoor = 0 - ((y - height) / height);
+	}
+	else if (y == height) {
+		yCoor = 0.0;
+	}
+	return yCoor;
+}
+
+float xPixel(float x) {
+	return (x / (WIDTH / 2));
+}
+
+float yPixel(float y) {
+	return (y / (HEIGHT / 2));
+}
 
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -23,7 +59,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 	case WM_KEYDOWN:
 		if (wParam == VK_ESCAPE) {
-			PostQuitMessage(0);	
+			PostQuitMessage(0);
 		}
 		else if (wParam == 0x31) {
 			// press 1
@@ -107,10 +143,10 @@ bool initPixelFormat(HDC hdc)
 //--------------------------------------------------------------------
 
 void drawCircle(float x1, float y1, float x, float y, float min, float max) {
-	for (GLfloat i = min; i < max; i++)
+	for (float i = min; i < max; i++)
 	{
-		float x2 = x1 + cos(i * M_PI / 180.f) * x; // keep the axes radius same
-		float y2 = y1 + sin(i * M_PI / 180.f) * y;
+		float x2 = xConvertion(x1) + cos(i * M_PI / 180.f) * xPixel(x);
+		float y2 = yConvertion(y1) + sin(i * M_PI / 180.f) * yPixel(y);
 		glVertex2f(x2, y2);
 	}
 }
@@ -118,10 +154,10 @@ void drawCircle(float x1, float y1, float x, float y, float min, float max) {
 void test() {
 	glClearColor(0.0745, 0.109803, 0.129411, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
-	
+
 	float x1, y1, x2, y2;
 	float angle;
-	
+
 	// head
 	x1 = 0, y1 = 0;
 	glBegin(GL_POLYGON);
@@ -204,179 +240,26 @@ void pahangFlag() {
 
 	// flag shape
 	glLineWidth(1);
-	glBegin(GL_LINE_LOOP);				
-		glColor3f(0, 0, 0);			
-		
-		glVertex2f(-0.8, 0.5);
-		glVertex2f(0.8, 0.5);
-		glVertex2f(0.8, -0.5);
-		glVertex2f(-0.8, -0.5);
-
-	glEnd();
-	
-	glBegin(GL_POLYGON);
-		glColor3f(0, 0, 0);
-		glVertex2f(-0.8, 0);
-		glVertex2f(0.8, 0);
-		glVertex2f(0.8, -0.5);
-		glVertex2f(-0.8, -0.5);
-
-	glEnd();
-}
-
-void negeriSembilan() {
-
-	glClearColor(255, 255, 255, 255);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	glBegin(GL_POLYGON);
-	glColor3f(1, 1, 0);
-
-	glVertex2f(-0.8, 0.5);
-	glVertex2f(0.8, 0.5);
-	glVertex2f(0.8, -0.5);
-	glVertex2f(-0.8, -0.5);
-
-	glEnd();
-
-	glBegin(GL_POLYGON);
-	glColor3f(1, 0, 0);
-
-	glVertex2f(-0.8, 0.5);
-	glVertex2f(0, 0.5);
-	glVertex2f(0, 0);
-	glVertex2f(-0.8, 0);
-
-	glEnd();
-
-	glBegin(GL_POLYGON);
-	glColor3f(0.1678, 0, 0);
-
-	glVertex2f(-0.8, 0.5);
-	glVertex2f(0, 0);
-	glVertex2f(-0.8, 0);
-
-	glEnd();
-
-}
-
-void englandFlag() {
-	glClearColor(255, 255, 255, 255);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	glBegin(GL_POLYGON);
-	glColor3f(0.5686, 0.003, 0.003);
-
-	glVertex2f(-0.8, 0.5);
-	glVertex2f(0.8, 0.5);
-	glVertex2f(0.8, -0.5);
-	glVertex2f(-0.8, -0.5);
-
-	glEnd();
-
-	// top left
-	glBegin(GL_POLYGON);
-	glColor3f(0.78, 0.78, 0.78);
-	
-	glVertex2f(-0.8, 0.5);
-	glVertex2f(-0.075, 0.5);
-	glColor3f(1, 1, 1);
-	glVertex2f(-0.075, 0.075);
-	glVertex2f(-0.8, 0.075);
-
-	glEnd();
-
-	// top right
-	glBegin(GL_POLYGON);
-	glColor3f(0.78, 0.78, 0.78);
-
-	glVertex2f(0.8, 0.075);
-	glVertex2f(0.8, 0.5);
-	glVertex2f(0.075, 0.5);
-	glColor3f(1, 1, 1);
-	glVertex2f(0.075, 0.075);
-
-	glEnd();
-
-	// btm left
-	glBegin(GL_POLYGON);
-
-	glColor3f(0.78, 0.78, 0.78);
-	glVertex2f(0.8, -0.075);
-	glVertex2f(0.8, -0.5);
-	glVertex2f(0.075, -0.5);
-	glColor3f(1, 1, 1);
-	glVertex2f(0.075, -0.075);
-	
-	glEnd();
-
-	// btm right
-	glBegin(GL_POLYGON);
-	glColor3f(0.78, 0.78, 0.78);
-
-	glVertex2f(-0.8, -0.075);
-	glVertex2f(-0.8, -0.5);
-	glVertex2f(-0.075,- 0.5);
-	glColor3f(1, 1, 1);
-	glVertex2f(-0.075, -0.075);
-
-	glEnd();
-}
-
-void scoutlandFlag() {
-
-	glClearColor(255, 255, 255, 255);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	// flag shape
-	glLineWidth(1);
 	glBegin(GL_LINE_LOOP);
-	glColor3f(0.5215, 0.7098, 0.8863);
+	glColor3f(0, 0, 0);
 
-	glVertex2f(-0.8, 0.5);
+	/*glVertex2f(-0.8, 0.5);
 	glVertex2f(0.8, 0.5);
 	glVertex2f(0.8, -0.5);
+	glVertex2f(-0.8, -0.5);*/
+
+	glVertex2f(xConvertion(320), yConvertion(200));
+	glVertex2f(xConvertion(720), yConvertion(200));
+	glVertex2f(xConvertion(720), yConvertion(600));
+	glVertex2f(xConvertion(320), yConvertion(600));
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glColor3f(0, 0, 0);
+	glVertex2f(-0.8, 0);
+	glVertex2f(0.8, 0);
+	glVertex2f(0.8, -0.5);
 	glVertex2f(-0.8, -0.5);
-
-	glEnd();
-
-	// top
-	glBegin(GL_POLYGON);
-	glColor3f(0, 0.3961, 0.7411);
-
-	glVertex2f(-0.7, 0.5);
-	glVertex2f(0.0, 0.1);
-	glVertex2f(0.7, 0.5);
-
-	glEnd();
-
-	// btm
-	glBegin(GL_POLYGON);
-	glColor3f(0, 0.3961, 0.7411);
-
-	glVertex2f(-0.7, -0.5);
-	glVertex2f(0.0, -0.1);
-	glVertex2f(0.7, -0.5);
-
-	glEnd();
-
-	// left
-	glBegin(GL_POLYGON);
-	glColor3f(0, 0.3961, 0.7411);
-
-	glVertex2f(-0.8, 0.4);
-	glVertex2f(-0.1, 0.0);
-	glVertex2f(-0.8, -0.4);
-
-	glEnd();
-
-	// right
-	glBegin(GL_POLYGON);
-	glColor3f(0, 0.3961, 0.7411);
-
-	glVertex2f(0.8, 0.4);
-	glVertex2f(0.1, 0.0);
-	glVertex2f(0.8, -0.4);
 
 	glEnd();
 }
@@ -403,13 +286,11 @@ void japanFlag() {
 	float angle;
 	double radius = 0.3;
 
-	x1 = 0.0, y1 = 0.0;
+	x1 = 400.0, y1 = 400.0;
 	glColor3f(1, 0, 0);
 
 	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(x1, y1);
-
-	drawCircle(x1, y1, 0.3, 0.3, 0, 371);
+	drawCircle(x1, y1, 100, 100, 0, 371);
 
 	glEnd();
 }
@@ -432,7 +313,7 @@ void extra() {
 	glVertex2f(-1, -1);
 
 	glEnd();
-	
+
 	// head
 	float radius = 0.36;
 	x1 = 0, y1 = -0.027;
@@ -593,7 +474,7 @@ void extra() {
 	glEnd();
 
 	// eye dots 1
-	
+
 	x1 = -0.03, y1 = 0.24;
 	glBegin(GL_POLYGON);
 	glColor3f(0, 0, 0);
@@ -607,7 +488,7 @@ void extra() {
 	glEnd();
 
 	// eye dots 1.5
-	
+
 	x1 = -0.027, y1 = 0.24;
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
@@ -621,7 +502,7 @@ void extra() {
 	glEnd();
 
 	// eye dots 2
-	
+
 	x1 = 0.03, y1 = 0.24;
 	glBegin(GL_POLYGON);
 	glColor3f(0, 0, 0);
@@ -635,7 +516,7 @@ void extra() {
 	glEnd();
 
 	// eye dots 2.5
-	
+
 	x1 = 0.027, y1 = 0.24;
 	glBegin(GL_POLYGON);
 	glColor3f(1, 1, 1);
@@ -661,7 +542,7 @@ void extra() {
 	glEnd();
 
 	// nose border
-	
+
 	x1 = 0, y1 = 0.14;
 	glBegin(GL_LINE_STRIP);
 	glColor3f(0, 0, 0);
@@ -693,7 +574,7 @@ void extra() {
 
 	glVertex2f(0, 0.1);
 	glVertex2f(0, -0.05);
-	
+
 	glEnd();
 
 	// belt
@@ -901,37 +782,6 @@ void extra() {
 	glVertex2f(0.05, 0.03);
 
 	glEnd();
-
-	
-}
-
-void extra2() {
-	float x1, y1, x2, y2;
-
-	glLineWidth(3);
-	// eyes 2 
-	x1 = 0.05, y1 = 0.24;
-	glBegin(GL_POLYGON);
-	glColor3f(1, 1, 1);
-	
-	drawCircle(x1, y1, 0.05, 0.08, 0, 360);
-	glEnd();
-
-	// eyes 2 border
-	x1 = 0.05, y1 = 0.24;
-	glBegin(GL_LINE_STRIP);
-	glColor3f(0, 0, 0);
-
-	drawCircle(x1, y1, 0.05, 0.08, 0, 360);
-
-	glEnd();
-
-	glLineWidth(2);
-	glBegin(GL_LINE_STRIP);
-	glVertex2f(0.05, 0.26);
-	glVertex2f(0.02, 0.24);
-	glVertex2f(0.05, 0.22);
-	glEnd();
 }
 
 void display()
@@ -939,28 +789,15 @@ void display()
 	switch (qNo) {
 	case 1:
 		pahangFlag();
-		//test();
 		break;
 	case 2:
-		negeriSembilan();
-		break;
-	case 3:
-		englandFlag();
-		break;
-	case 4:
-		scoutlandFlag();
-		break;
-	case 5:
-		japanFlag();
-		break;
-	case 6:
 		extra();
 		break;
-	case 7:
-		extra2();
-		break;
-	case 8:
+	case 3:
 		test();
+		break;
+	case 4:
+		japanFlag();
 		break;
 	default:
 		pahangFlag();
