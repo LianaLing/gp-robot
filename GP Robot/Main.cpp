@@ -12,7 +12,7 @@
 #define M_PI 3.2
 
 int qNo = 1;
-int testing3 = 0;
+int testing4 = 0;
 float xConvertion(float x) {
 	float xCoor, width = WIDTH / 2;
 	if (x < width) {
