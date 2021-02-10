@@ -783,6 +783,47 @@ void extra() {
 	glEnd();
 }
 
+void test3D(){
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glRotatef(0.1, 1, 1, 0);
+	//Front face
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(0, 0.5, -0.25); //pinnacle
+		glVertex3f(-0.25, 0, 0);
+		glVertex3f(0.25, 0, 0);
+	glEnd();
+
+	//Left face
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(0, 0.5, -0.25); //pinnacle
+		glVertex3f(-0.25, 0, -0.5);
+		glVertex3f(-0.25, 0, 0);
+	glEnd();
+
+	//Back face
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(0, 0.5, -0.25); //pinnacle
+		glVertex3f(-0.25, 0, -0.5);
+		glVertex3f(0.25, 0, -0.5);
+	glEnd();
+
+	//Right face
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(0, 0.5, -0.25); //pinnacle
+		glVertex3f(0.25, 0, 0);
+		glVertex3f(0.25, 0, -0.5);
+	glEnd();
+
+	//Bottom face
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(-0.25, 0, 0);
+		glVertex3f(0.25, 0, 0);
+		glVertex3f(0.25, 0, -0.5);
+		glVertex3f(-0.25, 0, -0.5);
+	glEnd();
+}
+
 void display()
 {
 	switch (qNo) {
@@ -797,6 +838,9 @@ void display()
 		break;
 	case 4:
 		japanFlag();
+		break;
+	case 5:
+		test3D();
 		break;
 	default:
 		pahangFlag();
