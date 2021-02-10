@@ -287,6 +287,191 @@ void test2() {
 	drawSphere(0.3, 400, 400, 0, 30, 30);
 }
 
+void test3() {
+	//// 1
+	//glColor3f(0.5, 0.5, 0.5);
+	//glBegin(GL_POLYGON);
+	//glVertex3f(xC(200), yC(300), 0);
+	//glVertex3f(xC(200), yC(290), 0.1);
+	////glColor3f(0.7, 0.7, 0.5);
+	//glVertex3f(xC(600), yC(290), 0.1);
+	//glVertex3f(xC(600), yC(300), 0);
+	//glEnd();
+
+	glRotatef(1, 0, 1, 0);
+	glColor3f(0.7, 0.5, 0.5);
+
+	// 1
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(200), yC(300), zC(0));
+	glVertex3f(xC(200), yC(307.43303), zC(-46.93034));
+	glVertex3f(xC(600), yC(307.43303), zC(-46.93034));
+	glVertex3f(xC(600), yC(300), zC(0));
+	glEnd();
+
+	// 2
+	glBegin(GL_POLYGON);
+	glColor3f(0.7, 0.5, 0.5);
+	glVertex3f(xC(200), yC(307.43303), zC(-46.93034));
+	glVertex3f(xC(200), yC(329.00454), zC(-89.26681));
+	glVertex3f(xC(600), yC(329.00454), zC(-89.26681));
+	glVertex3f(xC(600), yC(307.43303), zC(-46.93034));
+	glEnd();
+
+	// 3
+	glBegin(GL_POLYGON);
+	glColor3f(0.7, 0.5, 0.5);
+	glVertex3f(xC(200), yC(329.00454), zC(-89.26681));
+	glVertex3f(xC(200), yC(362.60301), zC(-122.86522));
+	glVertex3f(xC(600), yC(362.60301), zC(-122.86522));
+	glVertex3f(xC(600), yC(329.00454), zC(-89.26681));
+	glEnd();
+
+	// 4
+	glBegin(GL_POLYGON);
+	glColor3f(0.7, 0.5, 0.5);
+	glVertex3f(xC(200), yC(362.60301), zC(-122.86522));
+	glVertex3f(xC(200), yC(404.93948), zC(-144.43673));
+	glVertex3f(xC(600), yC(404.93948), zC(-144.43673));
+	glVertex3f(xC(600), yC(362.60301), zC(-122.86522));
+	glEnd();
+
+	// 5
+	glBegin(GL_POLYGON);
+	glColor3f(0.7, 0.5, 0.5);
+	glVertex3f(xC(200), yC(404.93948), zC(-144.43673));
+	glVertex3f(xC(200), yC(451.86982), zC(-151.86976));
+	glVertex3f(xC(600), yC(451.86982), zC(-151.86976));
+	glVertex3f(xC(600), yC(404.93948), zC(-144.43673));
+	glEnd();
+
+	// 6
+	glBegin(GL_POLYGON);
+	glColor3f(0.7, 0.5, 0.5);
+	glVertex3f(xC(200), yC(451.86982), zC(-151.86976));
+	glVertex3f(xC(200), yC(498.80016), zC(-144.43673));
+	glVertex3f(xC(600), yC(498.80016), zC(-144.43673));
+	glVertex3f(xC(600), yC(451.86982), zC(-151.86976));
+	glEnd();
+
+	// 7
+	glBegin(GL_POLYGON);
+	glColor3f(0.7, 0.5, 0.5);
+	glVertex3f(xC(200), yC(541.13663), zC(-122.86522));
+	glVertex3f(xC(200), yC(498.80016), zC(-144.43673));
+	glVertex3f(xC(600), yC(498.80016), zC(-144.43673));
+	glVertex3f(xC(600), yC(541.13663), zC(-122.86522));
+	glEnd();
+
+	// 8
+	glBegin(GL_POLYGON);
+	glColor3f(0.7, 0.5, 0.5);
+	glVertex3f(xC(200), yC(574.73504), zC(-89.26681));
+	glVertex3f(xC(200), yC(541.13663), zC(-122.86522));
+	glVertex3f(xC(600), yC(541.13663), zC(-122.86522));
+	glVertex3f(xC(600), yC(574.73504), zC(-89.26681));
+	glEnd();
+
+	// 9
+	glBegin(GL_POLYGON);
+	glColor3f(0.7, 0.5, 0.5);
+	glVertex3f(xC(200), yC(596.30655), zC(-46.93034));
+	glVertex3f(xC(200), yC(574.73504), zC(-89.26681));
+	glVertex3f(xC(600), yC(574.73504), zC(-89.26681));
+	glVertex3f(xC(600), yC(596.30655), zC(-46.93034));
+	glEnd();
+
+	// 10
+	glBegin(GL_POLYGON);
+	glColor3f(0.7, 0.5, 0.5);
+	glVertex3f(xC(200), yC(603.73958), zC(0));
+	glVertex3f(xC(200), yC(596.30655), zC(-46.93034));
+	glVertex3f(xC(600), yC(596.30655), zC(-46.93034));
+	glVertex3f(xC(600), yC(603.73958), zC(0));
+	glEnd();
+
+	glColor3f(0.1, 0.5, 0.5);
+	// 1
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(200), yC(300), zC(0));
+	glVertex3f(xC(200), yC(307.43303), zC(46.93034));
+	glVertex3f(xC(600), yC(307.43303), zC(46.93034));
+	glVertex3f(xC(600), yC(300), zC(0));
+	glEnd();
+
+	// 2
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(200), yC(307.43303), zC(46.93034));
+	glVertex3f(xC(200), yC(329.00454), zC(89.26681));
+	glVertex3f(xC(600), yC(329.00454), zC(89.26681));
+	glVertex3f(xC(600), yC(307.43303), zC(46.93034));
+	glEnd();
+
+	// 3
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(200), yC(329.00454), zC(89.26681));
+	glVertex3f(xC(200), yC(362.60301), zC(122.86522));
+	glVertex3f(xC(600), yC(362.60301), zC(122.86522));
+	glVertex3f(xC(600), yC(329.00454), zC(89.26681));
+	glEnd();
+
+	// 4
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(200), yC(362.60301), zC(122.86522));
+	glVertex3f(xC(200), yC(404.93948), zC(144.43673));
+	glVertex3f(xC(600), yC(404.93948), zC(144.43673));
+	glVertex3f(xC(600), yC(362.60301), zC(122.86522));
+	glEnd();
+
+	// 5
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(200), yC(404.93948), zC(144.43673));
+	glVertex3f(xC(200), yC(451.86982), zC(151.86976));
+	glVertex3f(xC(600), yC(451.86982), zC(151.86976));
+	glVertex3f(xC(600), yC(404.93948), zC(144.43673));
+	glEnd();
+
+	// 6
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(200), yC(451.86982), zC(151.86976));
+	glVertex3f(xC(200), yC(498.80016), zC(144.43673));
+	glVertex3f(xC(600), yC(498.80016), zC(144.43673));
+	glVertex3f(xC(600), yC(451.86982), zC(151.86976));
+	glEnd();
+
+	// 7
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(200), yC(541.13663), zC(122.86522));
+	glVertex3f(xC(200), yC(498.80016), zC(144.43673));
+	glVertex3f(xC(600), yC(498.80016), zC(144.43673));
+	glVertex3f(xC(600), yC(541.13663), zC(122.86522));
+	glEnd();
+
+	// 8
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(200), yC(574.73504), zC(89.26681));
+	glVertex3f(xC(200), yC(541.13663), zC(122.86522));
+	glVertex3f(xC(600), yC(541.13663), zC(122.86522));
+	glVertex3f(xC(600), yC(574.73504), zC(89.26681));
+	glEnd();
+
+	// 9
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(200), yC(596.30655), zC(46.93034));
+	glVertex3f(xC(200), yC(574.73504), zC(89.26681));
+	glVertex3f(xC(600), yC(574.73504), zC(89.26681));
+	glVertex3f(xC(600), yC(596.30655), zC(46.93034));
+	glEnd();
+
+	// 10
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(200), yC(603.73958), zC(0));
+	glVertex3f(xC(200), yC(596.30655), zC(46.93034));
+	glVertex3f(xC(600), yC(596.30655), zC(46.93034));
+	glVertex3f(xC(600), yC(603.73958), zC(0));
+	glEnd();
+}
+
 void pahangFlag() {
 
 	glClearColor(255, 255, 255, 255);
@@ -297,10 +482,10 @@ void pahangFlag() {
 	glBegin(GL_LINE_LOOP);
 	glColor3f(0, 0, 0);
 
-	glVertex2f(-0.8, 0.5);
-	glVertex2f(0.8, 0.5);
-	glVertex2f(0.8, -0.5);
-	glVertex2f(-0.8, -0.5);
+	//glVertex2f(-0.8, 0.5);
+	//glVertex2f(0.8, 0.5);
+	//glVertex2f(0.8, -0.5);
+	//glVertex2f(-0.8, -0.5);
 
 	// white
 	glVertex2f(xC(90), yC(200));
@@ -359,19 +544,21 @@ void display()
 
 	switch (qNo) {
 	case 1:
-		pahangFlag();
+		test1();
 		break;
 	case 2:
 		//extra();
+		test2();
+		glPopMatrix();
 		break;
 	case 3:
-		test1();
+		test3();
 		break;
 	case 4:
 		japanFlag();
 		break;
 	case 5:
-		test2();
+		pahangFlag();
 		break;
 	default:
 		pahangFlag();
