@@ -13,6 +13,7 @@
 #define M_PI 3.2
 
 int qNo = 3;
+
 float xC(float x) {
 	float xCoor, width = WIDTH / 2;
 	if (x < width) {
