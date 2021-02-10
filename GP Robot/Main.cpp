@@ -10,6 +10,7 @@
 #define WIDTH 900.0
 #define HEIGHT 900.0
 #define DEPTH 800.0
+
 #define M_PI 3.2
 
 int qNo = 3;
@@ -296,10 +297,10 @@ void pahangFlag() {
 	glBegin(GL_LINE_LOOP);
 	glColor3f(0, 0, 0);
 
-	/*glVertex2f(-0.8, 0.5);
+	glVertex2f(-0.8, 0.5);
 	glVertex2f(0.8, 0.5);
 	glVertex2f(0.8, -0.5);
-	glVertex2f(-0.8, -0.5);*/
+	glVertex2f(-0.8, -0.5);
 
 	// white
 	glVertex2f(xC(90), yC(200));
