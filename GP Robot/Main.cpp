@@ -7,8 +7,8 @@
 
 #define WINDOW_TITLE "Practical 1"
 #define CW_USEDEFAULT 10
-#define WIDTH 800
-#define HEIGHT 800
+#define WIDTH 900
+#define HEIGHT 900
 #define M_PI 3.2
 
 int qNo = 1;
@@ -242,15 +242,15 @@ void pahangFlag() {
 	glBegin(GL_LINE_LOOP);
 	glColor3f(0, 0, 0);
 
-	/*glVertex2f(-0.8, 0.5);
+	glVertex2f(-0.8, 0.5);
 	glVertex2f(0.8, 0.5);
 	glVertex2f(0.8, -0.5);
-	glVertex2f(-0.8, -0.5);*/
+	glVertex2f(-0.8, -0.5);
 
-	glVertex2f(xConvertion(320), yConvertion(200));
+	/*glVertex2f(xConvertion(320), yConvertion(200));
 	glVertex2f(xConvertion(720), yConvertion(200));
 	glVertex2f(xConvertion(720), yConvertion(600));
-	glVertex2f(xConvertion(320), yConvertion(600));
+	glVertex2f(xConvertion(320), yConvertion(600));*/
 	glEnd();
 
 	glBegin(GL_POLYGON);
