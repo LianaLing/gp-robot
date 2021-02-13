@@ -2,15 +2,16 @@
 #include <Windows.h>
 #include <gl/GL.h>
 #include <math.h>
+#include <iostream>
 
 #pragma comment (lib, "OpenGL32.lib")
 
 #define WINDOW_TITLE "IRON-MAN MK47"
 #define CW_USEDEFAULT 10
-#define WIDTH 900.0
-#define HEIGHT 900.0
-#define DEPTH 800.0
-
+#define VALUE 800.0
+#define WIDTH VALUE
+#define HEIGHT VALUE
+#define DEPTH VALUE
 #define M_PI 3.2
 
 int qNo = 1;
@@ -108,13 +109,23 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			break;
 		}
 		else if (wParam == 0x37) {
-			// press 6
+			// press 7
 			qNo = 7;
 			break;
 		}
 		else if (wParam == 0x38) {
-			// press 6
+			// press 8
 			qNo = 8;
+			break;
+		}
+		else if (wParam == 0x39) {
+			// press 9
+			qNo = 9;
+			break;
+		}
+		else if (wParam == 0x61) {
+			// press numpad 1
+			qNo = 61;
 			break;
 		}
 		break;
@@ -596,6 +607,67 @@ void robotDraft() {
 	glEnd();
 }
 
+void body() {
+	glClearColor(0.5, 0.5, 0.5, 0);
+	glEnable(GL_DEPTH_TEST);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// front
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 0);
+	glVertex3f(xC(340), yC(200), zC(55));
+	glVertex3f(xC(355), yC(350), zC(44));
+	glVertex3f(xC(445), yC(350), zC(44));
+	glVertex3f(xC(460), yC(200), zC(55));
+	glEnd();
+
+	// top
+	glBegin(GL_POLYGON);
+	glColor3f(0, 1, 0);
+	glVertex3f(xC(340), yC(200), zC(-55));
+	glVertex3f(xC(340), yC(200), zC(55));
+	glVertex3f(xC(460), yC(200), zC(55));
+	glVertex3f(xC(460), yC(200), zC(-55));
+	glEnd();
+
+	// back
+	glBegin(GL_POLYGON);
+	glColor3f(0, 0, 1);
+	glVertex3f(xC(340), yC(200), zC(-55));
+	glVertex3f(xC(355), yC(350), zC(-44));
+	glVertex3f(xC(445), yC(350), zC(-44));
+	glVertex3f(xC(460), yC(200), zC(-55));
+	glEnd();
+
+	// left
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 0);
+	glVertex3f(xC(340), yC(200), zC(-55));
+	glVertex3f(xC(355), yC(350), zC(-44));
+	glVertex3f(xC(355), yC(350), zC(44));
+	glVertex3f(xC(340), yC(200), zC(55));
+	glEnd();
+
+	// right
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 1);
+	glVertex3f(xC(460), yC(200), zC(55));
+	glVertex3f(xC(445), yC(350), zC(44));
+	glVertex3f(xC(445), yC(350), zC(-44));
+	glVertex3f(xC(460), yC(200), zC(-55));
+	glEnd();
+
+	// btm
+	glBegin(GL_POLYGON);
+	glColor3f(0, 1, 1);
+	glVertex3f(xC(355), yC(350), zC(-44));
+	glVertex3f(xC(355), yC(350), zC(44));
+	glVertex3f(xC(445), yC(350), zC(44));
+	glVertex3f(xC(445), yC(350), zC(-44));
+	glEnd();
+
+}
+
 void pahangFlag() {
 
 	glClearColor(255, 255, 255, 255);
@@ -663,7 +735,7 @@ void japanFlag() {
 void display()
 {
 	glClearColor(0, 0, 0, 0);
-	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	switch (qNo) {
@@ -682,6 +754,10 @@ void display()
 		robotDraft();
 		break;
 	case 5:
+		glRotatef(1, 1, 0, 0);
+		body();
+		break;
+	case 61:
 		pahangFlag();
 		break;
 	default:
