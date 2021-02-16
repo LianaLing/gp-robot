@@ -536,6 +536,12 @@ void japanFlag() {
 	glEnd();
 }
 
+void robotHead() {
+	glBegin(GL_POLYGON);
+	glVertex3f();
+	glEnd();
+}
+
 void display()
 {
 	glClearColor(0, 0, 0, 0);
@@ -544,7 +550,7 @@ void display()
 
 	switch (qNo) {
 	case 1:
-		test1();
+		robotHead();
 		break;
 	case 2:
 		//extra();
@@ -555,7 +561,7 @@ void display()
 		test3();
 		break;
 	case 4:
-		japanFlag();
+		test1();
 		break;
 	case 5:
 		pahangFlag();
