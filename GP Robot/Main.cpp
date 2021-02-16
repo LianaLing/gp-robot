@@ -2,18 +2,19 @@
 #include <Windows.h>
 #include <gl/GL.h>
 #include <math.h>
+#include <iostream>
 
 #pragma comment (lib, "OpenGL32.lib")
 
 #define WINDOW_TITLE "IRON-MAN MK47"
 #define CW_USEDEFAULT 10
-#define WIDTH 900.0
-#define HEIGHT 900.0
-#define DEPTH 800.0
-
+#define VALUE 800.0
+#define WIDTH VALUE
+#define HEIGHT VALUE
+#define DEPTH VALUE
 #define M_PI 3.2
 
-int qNo = 3;
+int qNo = 1;
 
 float xC(float x) {
 	float xCoor, width = WIDTH / 2;
@@ -108,13 +109,23 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			break;
 		}
 		else if (wParam == 0x37) {
-			// press 6
+			// press 7
 			qNo = 7;
 			break;
 		}
 		else if (wParam == 0x38) {
-			// press 6
+			// press 8
 			qNo = 8;
+			break;
+		}
+		else if (wParam == 0x39) {
+			// press 9
+			qNo = 9;
+			break;
+		}
+		else if (wParam == 0x61) {
+			// press numpad 1
+			qNo = 61;
 			break;
 		}
 		break;
@@ -472,6 +483,191 @@ void test3() {
 	glEnd();
 }
 
+void robotDraft() {
+	glClearColor(0, 0, 0, 0);
+	glEnable(GL_DEPTH_TEST);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// head
+	glLineWidth(3);
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(375), yC(130));
+	glVertex2f(xC(375), yC(200));
+	glVertex2f(xC(425), yC(200));
+	glVertex2f(xC(425), yC(130));
+	glEnd();
+
+	// body
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(340), yC(200));
+	glVertex2f(xC(355), yC(350));
+	glVertex2f(xC(445), yC(350));
+	glVertex2f(xC(460), yC(200));
+	glEnd();
+
+	// loin
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(347), yC(350));
+	glVertex2f(xC(347), yC(400));
+	glVertex2f(xC(453), yC(400));
+	glVertex2f(xC(453), yC(350));
+	glEnd();
+
+	// da tui left
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(355), yC(400));
+	glVertex2f(xC(355), yC(525));
+	glVertex2f(xC(390), yC(525));
+	glVertex2f(xC(390), yC(400));
+	glEnd();
+
+	// xiao tui left
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(355), yC(525));
+	glVertex2f(xC(355), yC(680));
+	glVertex2f(xC(390), yC(680));
+	glVertex2f(xC(390), yC(525));
+	glEnd();
+
+	// jiao ban left
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(355), yC(680));
+	glVertex2f(xC(355), yC(710));
+	glVertex2f(xC(390), yC(710));
+	glVertex2f(xC(390), yC(680));
+	glEnd();
+
+	// da tui right right
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(410), yC(400));
+	glVertex2f(xC(410), yC(525));
+	glVertex2f(xC(445), yC(525));
+	glVertex2f(xC(445), yC(400));
+	glEnd();
+
+	// da tui right right
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(410), yC(525));
+	glVertex2f(xC(410), yC(680));
+	glVertex2f(xC(445), yC(680));
+	glVertex2f(xC(445), yC(525));
+	glEnd();
+
+	// da tui right right
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(410), yC(680));
+	glVertex2f(xC(410), yC(710));
+	glVertex2f(xC(445), yC(710));
+	glVertex2f(xC(445), yC(680));
+	glEnd();
+
+	// arm left
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(150), yC(210));
+	glVertex2f(xC(150), yC(245));
+	glVertex2f(xC(355), yC(245));
+	glVertex2f(xC(355), yC(210));
+	glEnd();
+
+	// hand left
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(80), yC(210));
+	glVertex2f(xC(80), yC(245));
+	glVertex2f(xC(150), yC(245));
+	glVertex2f(xC(150), yC(210));
+	glEnd();
+
+	// arm right
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(445), yC(210));
+	glVertex2f(xC(445), yC(245));
+	glVertex2f(xC(650), yC(245));
+	glVertex2f(xC(650), yC(210));
+	glEnd();
+
+	// hand right
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(650), yC(210));
+	glVertex2f(xC(650), yC(245));
+	glVertex2f(xC(720), yC(245));
+	glVertex2f(xC(720), yC(210));
+	glEnd();
+}
+
+void body() {
+	glClearColor(0.5, 0.5, 0.5, 0);
+	glEnable(GL_DEPTH_TEST);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// front
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 0);
+	glVertex3f(xC(340), yC(200), zC(55));
+	glVertex3f(xC(355), yC(350), zC(44));
+	glVertex3f(xC(445), yC(350), zC(44));
+	glVertex3f(xC(460), yC(200), zC(55));
+	glEnd();
+
+	// top
+	glBegin(GL_POLYGON);
+	glColor3f(0, 1, 0);
+	glVertex3f(xC(340), yC(200), zC(-55));
+	glVertex3f(xC(340), yC(200), zC(55));
+	glVertex3f(xC(460), yC(200), zC(55));
+	glVertex3f(xC(460), yC(200), zC(-55));
+	glEnd();
+
+	// back
+	glBegin(GL_POLYGON);
+	glColor3f(0, 0, 1);
+	glVertex3f(xC(340), yC(200), zC(-55));
+	glVertex3f(xC(355), yC(350), zC(-44));
+	glVertex3f(xC(445), yC(350), zC(-44));
+	glVertex3f(xC(460), yC(200), zC(-55));
+	glEnd();
+
+	// left
+	glBegin(GL_POLYGON);
+	glColor3f(1, 1, 0);
+	glVertex3f(xC(340), yC(200), zC(-55));
+	glVertex3f(xC(355), yC(350), zC(-44));
+	glVertex3f(xC(355), yC(350), zC(44));
+	glVertex3f(xC(340), yC(200), zC(55));
+	glEnd();
+
+	// right
+	glBegin(GL_POLYGON);
+	glColor3f(1, 0, 1);
+	glVertex3f(xC(460), yC(200), zC(55));
+	glVertex3f(xC(445), yC(350), zC(44));
+	glVertex3f(xC(445), yC(350), zC(-44));
+	glVertex3f(xC(460), yC(200), zC(-55));
+	glEnd();
+
+	// btm
+	glBegin(GL_POLYGON);
+	glColor3f(0, 1, 1);
+	glVertex3f(xC(355), yC(350), zC(-44));
+	glVertex3f(xC(355), yC(350), zC(44));
+	glVertex3f(xC(445), yC(350), zC(44));
+	glVertex3f(xC(445), yC(350), zC(-44));
+	glEnd();
+
+}
+
 void pahangFlag() {
 
 	glClearColor(255, 255, 255, 255);
@@ -545,7 +741,7 @@ void robotHead() {
 void display()
 {
 	glClearColor(0, 0, 0, 0);
-	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	switch (qNo) {
@@ -561,9 +757,13 @@ void display()
 		test3();
 		break;
 	case 4:
-		test1();
+		robotDraft();
 		break;
 	case 5:
+		glRotatef(1, 1, 0, 0);
+		body();
+		break;
+	case 61:
 		pahangFlag();
 		break;
 	default:
