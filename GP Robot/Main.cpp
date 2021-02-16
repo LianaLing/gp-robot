@@ -732,9 +732,61 @@ void japanFlag() {
 	glEnd();
 }
 
-void robotHead() {
-	glBegin(GL_POLYGON);
-	glVertex3f();
+void head() {
+	drawSphere(0.1, 400, 140, 36, 30, 30);
+
+	//Front face
+	glColor3f(0, 1, 0);
+	glBegin(GL_QUADS);
+		glVertex3f(xC(360), yC(130), zC(40));
+		glVertex3f(xC(375), yC(200), zC(40));
+		glVertex3f(xC(425), yC(200), zC(40));
+		glVertex3f(xC(440), yC(130), zC(40));
+	glEnd();
+
+	//Right face
+	glColor3f(1, 0, 0);
+	glBegin(GL_QUADS);
+		glVertex3f(xC(425), yC(200), zC(40));
+		glVertex3f(xC(425), yC(200), zC(0));
+		glVertex3f(xC(440), yC(130), zC(0));
+		glVertex3f(xC(440), yC(130), zC(40));
+	glEnd();
+
+	//Left face
+	glColor3f(0, 0, 1);
+	glBegin(GL_QUADS);
+		glVertex3f(xC(360), yC(130), zC(40));
+		glVertex3f(xC(360), yC(130), zC(0));
+		glVertex3f(xC(375), yC(200), zC(0));
+		glVertex3f(xC(375), yC(200), zC(40));
+	glEnd();
+
+	//Back face
+	glColor3f(1, 1, 1);
+	glBegin(GL_QUADS);
+		glVertex3f(xC(360), yC(130), zC(0));
+		glVertex3f(xC(375), yC(200), zC(0));
+		glVertex3f(xC(425), yC(200), zC(0));
+		glVertex3f(xC(440), yC(130), zC(0));
+	glEnd();
+	
+	//Top face
+	glColor3f(1, 1, 0);
+	glBegin(GL_QUADS);
+		glVertex3f(xC(360), yC(130), zC(40));
+		glVertex3f(xC(360), yC(130), zC(0));
+		glVertex3f(xC(440), yC(130), zC(0));
+		glVertex3f(xC(440), yC(130), zC(40));		
+	glEnd();
+
+	//Bottom face
+	glColor3f(0, 1, 1);
+	glBegin(GL_QUADS);
+		glVertex3f(xC(375), yC(200), zC(40));
+		glVertex3f(xC(375), yC(200), zC(0));
+		glVertex3f(xC(425), yC(200), zC(0));
+		glVertex3f(xC(425), yC(200), zC(40));		
 	glEnd();
 }
 
@@ -746,7 +798,8 @@ void display()
 
 	switch (qNo) {
 	case 1:
-		robotHead();
+		glRotatef(1, 1, 1, 0);
+		head();
 		break;
 	case 2:
 		//extra();
