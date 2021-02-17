@@ -12,9 +12,9 @@
 #define WIDTH VALUE
 #define HEIGHT VALUE
 #define DEPTH VALUE
-#define M_PI 3.2
+#define M_PI 3.141593
 
-int qNo = 1;
+int qNo = 4;
 
 float xC(float x) {
 	float xCoor, width = WIDTH / 2;
@@ -28,20 +28,6 @@ float xC(float x) {
 		xCoor = 0.0;
 	}
 	return xCoor;
-}
-
-float yC(float y) {
-	float yCoor, height = HEIGHT / 2;
-	if (y < height) {
-		yCoor = 1 - (y / height);
-	}
-	else if (y > height) {
-		yCoor = 0 - ((y - height) / height);
-	}
-	else if (y == height) {
-		yCoor = 0.0;
-	}
-	return yCoor;
 }
 
 float zC(float z) {
@@ -58,12 +44,30 @@ float zC(float z) {
 	return (z / depth);
 }
 
+float yC(float y) {
+	float yCoor, height = HEIGHT / 2;
+	if (y < height) {
+		yCoor = 1 - (y / height);
+	}
+	else if (y > height) {
+		yCoor = 0 - ((y - height) / height);
+	}
+	else if (y == height) {
+		yCoor = 0.0;
+	}
+	return yCoor;
+}
+
 float xP(float x) {
 	return (x / (WIDTH / 2));
 }
 
 float yP(float y) {
 	return (y / (HEIGHT / 2));
+}
+
+float zP(float z) {
+	return (z / (DEPTH / 2));
 }
 
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -178,11 +182,12 @@ void drawCircle(float x1, float y1, float x, float y, float min, float max) {
 	}
 }
 
-void drawSphere(float r, int xaxis, int yaxis, float zaxis, float xShape, float yShape) {
-	float i, j, lats = 30, longs = 30;
+void drawSphere(float xradius, float yradius, float zradius, int xaxis, int yaxis, float zaxis, float xmin, float xmax, float ymin, float ymax) {
+	float i, j, lats = 100, longs = 100;
 	float x2 = xC(xaxis), y2 = yC(yaxis), z2 = zC(zaxis);
+	float xr = xP(xradius), yr = yP(yradius), zr = zP(zradius);
 
-	for (i = 1; i <= xShape; i++) {
+	for (i = xmin; i <= xmax; i++) {
 		float lat0 = M_PI * (-0.5 + (i - 1) / lats);
 		float z0 = sin(lat0);
 		float zr0 = cos(lat0);
@@ -191,20 +196,55 @@ void drawSphere(float r, int xaxis, int yaxis, float zaxis, float xShape, float 
 		float z1 = sin(lat1);
 		float zr1 = cos(lat1);
 
-		glBegin(GL_QUAD_STRIP);
-		for (j = 0; j <= yShape; j++) {
+		glBegin(GL_POLYGON);
+		for (j = ymin; j <= ymax; j++) {
 			float lng = 2 * M_PI * (j - 1.0) / longs;
 			float x = cos(lng);
 			float y = sin(lng);
 
 			glColor3f(1, 1, 1);
-			glNormal3f(x2 + x * zr0, y2 + y * zr0, z2 + z0);
+			//glNormal3f(x2 + x * zr0, y2 + y * zr0, z2 + z0);
 
-			glVertex3f(x2 + r * x * zr0, y2 + r * y * zr0, z2 + r * z0);
+			glVertex3f(x2 + xr * x * zr0, y2 + yr * y * zr0, z2 + zr * z0);
+			//glColor3f(1, 0, 0);
+			//glNormal3f(x2 + x * zr1, y2 + y * zr1, z2 + z1);
+
+			glVertex3f(x2 + xr * x * zr1, y2 + yr * y * zr1, z2 + zr * z1);
+		}
+		glEnd();
+	}
+}
+
+void drawSphere2(float xradius, float yradius, float zradius, float xaxis, float yaxis, float zaxis, float xstart, float xdivide, float ydivide)
+{
+	glClearColor(0, 0, 0, 0);
+	glEnable(GL_DEPTH_TEST);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	float x1 = xC(xaxis), y1 = yC(yaxis), z1 = zC(zaxis);
+	float x, y, z;
+	float sliceA, stackA;
+	float xr = xP(xradius), yr = yP(yradius), zr = zP(zradius);
+	int sliceNo = 100, stackNo = 100;
+
+	for (sliceA = xstart; sliceA < (2 * M_PI)/xdivide; sliceA += M_PI / sliceNo)
+	{
+		glBegin(GL_LINE_STRIP);
+		for (stackA = xstart; stackA < (2 * M_PI)/ydivide; stackA += M_PI / stackNo)
+		{
+			// row
+			glColor3f(1, 1, 1);
+			x = x1 + xr * cos(stackA) * sin(sliceA);
+			y = y1 + yr * sin(stackA) * sin(sliceA);
+			z = z1 + zr * cos(sliceA);
+			glVertex3f(x, y, z);
+
+			// column
 			glColor3f(1, 0, 0);
-			glNormal3f(x2 + x * zr1, y2 + y * zr1, z2 + z1);
-
-			glVertex3f(x2 + r * x * zr1, y2 + r * y * zr1, z2 + r * z1);
+			x = x1 + xr * cos(stackA) * sin(sliceA + M_PI / stackNo);
+			y = y1 + yr * sin(stackA) * sin(sliceA + M_PI / sliceNo);
+			z = z1 + zr * cos(sliceA + M_PI / sliceNo);
+			glVertex3f(x, y, z);
 		}
 		glEnd();
 	}
@@ -295,7 +335,7 @@ void test1() {
 void test2() {
 	//glLoadIdentity();
 	glRotatef(1, 1, 1, 0);
-	drawSphere(0.3, 400, 400, 0, 30, 30);
+	//drawSphere(0.3, 400, 400, 0, 30, 30);
 }
 
 void test3() {
@@ -608,10 +648,10 @@ void robotDraft() {
 }
 
 void body() {
-	glClearColor(0.5, 0.5, 0.5, 0);
+	/*glClearColor(0.5, 0.5, 0.5, 0);
 	glEnable(GL_DEPTH_TEST);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);*/
+	//glRotatef(1, 0, 1, 0);
 	// front
 	glBegin(GL_POLYGON);
 	glColor3f(1, 0, 0);
@@ -733,8 +773,8 @@ void japanFlag() {
 }
 
 void head() {
-	drawSphere(0.1, 400, 140, 36, 30, 30);
-
+	//drawSphere(0.1, 400, 140, 36, 30, 30);
+	drawSphere(40, 60, 40, 400, 140, 36, 0, 500, 0, 500);
 	//Front face
 	glColor3f(0, 1, 0);
 	glBegin(GL_QUADS);
@@ -798,8 +838,15 @@ void display()
 
 	switch (qNo) {
 	case 1:
-		glRotatef(1, 1, 1, 0);
+		
+		//glLoadIdentity();
+		//glPushMatrix();
+		glRotatef(1, 0, 1, 0);
 		head();
+		//glPopMatrix();
+		//glPushMatrix();
+		body();
+		//glPopMatrix();
 		break;
 	case 2:
 		//extra();
@@ -807,7 +854,9 @@ void display()
 		glPopMatrix();
 		break;
 	case 3:
-		test3();
+		//test3();
+		glRotatef(1, 1, 0, 0);
+		drawSphere(200, 200, 200, 400, 400, 36, 125, 500, 125, 500);
 		break;
 	case 4:
 		robotDraft();
@@ -817,13 +866,13 @@ void display()
 		body();
 		break;
 	case 61:
-		pahangFlag();
+		glRotatef(1, 0, 1, 0);
+		drawSphere2(100, 150, 100, 400, 400, 36, 2, 1, 1);
 		break;
 	default:
 		pahangFlag();
 		break;
 	}
-
 }
 //--------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
