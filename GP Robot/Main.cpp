@@ -610,13 +610,22 @@ void robotDraft() {
 	glVertex2f(xC(445), yC(680));
 	glEnd();
 
-	// arm left
+	// arm upper left
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(250), yC(210));
+	glVertex2f(xC(250), yC(245));
+	glVertex2f(xC(355), yC(245));
+	glVertex2f(xC(355), yC(210));
+	glEnd();
+
+	// arm lower left
 	glBegin(GL_LINE_LOOP);
 	glColor3f(1, 1, 1);
 	glVertex2f(xC(150), yC(210));
 	glVertex2f(xC(150), yC(245));
-	glVertex2f(xC(355), yC(245));
-	glVertex2f(xC(355), yC(210));
+	glVertex2f(xC(250), yC(245));
+	glVertex2f(xC(250), yC(210));
 	glEnd();
 
 	// hand left
@@ -628,11 +637,20 @@ void robotDraft() {
 	glVertex2f(xC(150), yC(210));
 	glEnd();
 
-	// arm right
+	// arm upper right
 	glBegin(GL_LINE_LOOP);
 	glColor3f(1, 1, 1);
 	glVertex2f(xC(445), yC(210));
 	glVertex2f(xC(445), yC(245));
+	glVertex2f(xC(550), yC(245));
+	glVertex2f(xC(550), yC(210));
+	glEnd();
+
+	// arm lower right
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1, 1, 1);
+	glVertex2f(xC(550), yC(210));
+	glVertex2f(xC(550), yC(245));
 	glVertex2f(xC(650), yC(245));
 	glVertex2f(xC(650), yC(210));
 	glEnd();
@@ -838,7 +856,6 @@ void display()
 
 	switch (qNo) {
 	case 1:
-		
 		//glLoadIdentity();
 		//glPushMatrix();
 		glRotatef(1, 0, 1, 0);
