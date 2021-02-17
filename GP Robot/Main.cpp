@@ -15,7 +15,7 @@
 #define DEPTH VALUE
 #define M_PI 3.141593
 
-int qNo = 1;
+int qNo = 4;
 
 float xC(float x) {
 	float xCoor, width = WIDTH / 2;
@@ -31,20 +31,6 @@ float xC(float x) {
 	return xCoor;
 }
 
-float zC(float z) {
-	float zCoor, depth = DEPTH / 2;
-	/*if (z < 0) {
-		zCoor = (z / depth);
-	}
-	else if (z > depth) {
-		zCoor = (z - depth) / depth;
-	}
-	else if (z == depth) {
-		zCoor = 0;
-	}*/
-	return (z / depth);
-}
-
 float yC(float y) {
 	float yCoor, height = HEIGHT / 2;
 	if (y < height) {
@@ -57,6 +43,10 @@ float yC(float y) {
 		yCoor = 0.0;
 	}
 	return yCoor;
+}
+
+float zC(float z) {
+	return ((- z) / (DEPTH / 2));
 }
 
 float xP(float x) {
@@ -197,7 +187,7 @@ void drawSphere(float xradius, float yradius, float zradius, int xaxis, int yaxi
 		float z1 = sin(lat1);
 		float zr1 = cos(lat1);
 
-		glBegin(GL_POLYGON);
+		glBegin(GL_QUAD_STRIP);
 		for (j = ymin; j <= ymax; j++) {
 			float lng = 2 * M_PI * (j - 1.0) / longs;
 			float x = cos(lng);
@@ -250,87 +240,87 @@ void drawSphere2(float xradius, float yradius, float zradius, float xaxis, float
 	}
 }
 
-void test1() {
-	glClearColor(0.0745, 0.109803, 0.129411, 0);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	float x1, y1, x2, y2;
-	float angle;
-
-	// head
-	x1 = 450, y1 = 450;
-	glBegin(GL_POLYGON);
-	glColor3f(0.97647, 0.709804, 0.152941);
-	drawCircle(x1, y1, 180, 180, 0, 371);
-
-	glEnd();
-
-	// smile 1
-	x1 = 450, y1 = 472.5;
-	glLineWidth(2);
-	glBegin(GL_POLYGON);
-	glColor3f(0.45098, 0.28627, 0.054902);
-	drawCircle(x1, y1, 90, 67.5, 200, 330);
-
-	glEnd();
-
-	// smile 1 cover
-	x1 = 450, y1 = 472.5;
-	glLineWidth(2);
-	glBegin(GL_POLYGON);
-	glColor3f(0.97647, 0.709804, 0.152941);
-	drawCircle(x1, y1, 90, 58.5, 200, 330);
-
-	glEnd();
-
-	// eye 1
-	x1 = 387, y1 = 405;
-	glBegin(GL_POLYGON);
-	glColor3f(0.45098, 0.28627, 0.054902);
-	drawCircle(x1, y1, 22.5, 22.5, 0, 371);
-
-	glEnd();
-
-	x1 = 513, y1 = 405;
-	glBegin(GL_POLYGON);
-	glColor3f(0.45098, 0.28627, 0.054902);
-	drawCircle(x1, y1, 22.5, 22.5, 0, 371);
-
-	glEnd();
-
-	// eye 2
-	x1 = 387, y1 = 396;
-	glBegin(GL_POLYGON);
-	glColor3f(1, 1, 1);
-	drawCircle(x1, y1, 9, 9, 0, 371);
-
-	glEnd();
-
-	x1 = 513, y1 = 396;
-	glBegin(GL_POLYGON);
-	glColor3f(1, 1, 1);
-	drawCircle(x1, y1, 9, 9, 0, 371);
-
-	glEnd();
-
-	// tear 1
-	glBegin(GL_POLYGON);
-	glColor3f(1, 1, 1);
-	glVertex2f(0.14, 0.05);
-	glColor3f(0.48627, 0.839215, 0.890196);
-	glVertex2f(0.25, -0.15);
-	glVertex2f(0.03, -0.15);
-
-	glEnd();
-
-	// tear 2
-	x1 = 513, y1 = 517.5;
-	glBegin(GL_POLYGON);
-	glColor3f(0.48627, 0.839215, 0.890196);
-	drawCircle(x1, y1, 49.5, 58.5, 177, 354);
-
-	glEnd();
-}
+//void test1() {
+//	glClearColor(0.0745, 0.109803, 0.129411, 0);
+//	glClear(GL_COLOR_BUFFER_BIT);
+//
+//	float x1, y1, x2, y2;
+//	float angle;
+//
+//	// head
+//	x1 = 450, y1 = 450;
+//	glBegin(GL_POLYGON);
+//	glColor3f(0.97647, 0.709804, 0.152941);
+//	drawCircle(x1, y1, 180, 180, 0, 371);
+//
+//	glEnd();
+//
+//	// smile 1
+//	x1 = 450, y1 = 472.5;
+//	glLineWidth(2);
+//	glBegin(GL_POLYGON);
+//	glColor3f(0.45098, 0.28627, 0.054902);
+//	drawCircle(x1, y1, 90, 67.5, 200, 330);
+//
+//	glEnd();
+//
+//	// smile 1 cover
+//	x1 = 450, y1 = 472.5;
+//	glLineWidth(2);
+//	glBegin(GL_POLYGON);
+//	glColor3f(0.97647, 0.709804, 0.152941);
+//	drawCircle(x1, y1, 90, 58.5, 200, 330);
+//
+//	glEnd();
+//
+//	// eye 1
+//	x1 = 387, y1 = 405;
+//	glBegin(GL_POLYGON);
+//	glColor3f(0.45098, 0.28627, 0.054902);
+//	drawCircle(x1, y1, 22.5, 22.5, 0, 371);
+//
+//	glEnd();
+//
+//	x1 = 513, y1 = 405;
+//	glBegin(GL_POLYGON);
+//	glColor3f(0.45098, 0.28627, 0.054902);
+//	drawCircle(x1, y1, 22.5, 22.5, 0, 371);
+//
+//	glEnd();
+//
+//	// eye 2
+//	x1 = 387, y1 = 396;
+//	glBegin(GL_POLYGON);
+//	glColor3f(1, 1, 1);
+//	drawCircle(x1, y1, 9, 9, 0, 371);
+//
+//	glEnd();
+//
+//	x1 = 513, y1 = 396;
+//	glBegin(GL_POLYGON);
+//	glColor3f(1, 1, 1);
+//	drawCircle(x1, y1, 9, 9, 0, 371);
+//
+//	glEnd();
+//
+//	// tear 1
+//	glBegin(GL_POLYGON);
+//	glColor3f(1, 1, 1);
+//	glVertex2f(0.14, 0.05);
+//	glColor3f(0.48627, 0.839215, 0.890196);
+//	glVertex2f(0.25, -0.15);
+//	glVertex2f(0.03, -0.15);
+//
+//	glEnd();
+//
+//	// tear 2
+//	x1 = 513, y1 = 517.5;
+//	glBegin(GL_POLYGON);
+//	glColor3f(0.48627, 0.839215, 0.890196);
+//	drawCircle(x1, y1, 49.5, 58.5, 177, 354);
+//
+//	glEnd();
+//}
 
 void test2() {
 	//glLoadIdentity();
@@ -726,69 +716,177 @@ void body() {
 
 }
 
-void pahangFlag() {
+void upperChest() {
+	// upper chest
+	//glPushMatrix();
+	//glTranslatef(0, yP(225.142857), 0);
+	//glRotatef(90, 1, 0, 0);
+	//drawSphere(55, 60, 55, 400, 225.142857, 0, 25, 50, 0, 50);
+	//glPopMatrix();
 
-	glClearColor(255, 255, 255, 255);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glPushMatrix();
+	//glLoadIdentity();
+	//glLineWidth(3);
+	/*glBegin(GL_LINE_STRIP);
+	glVertex3f(xC(400), yC(0), 0);
+	glVertex3f(xC(400), yC(800), 0);
+	glEnd();*/
+	//glRotatef(-1, 0, 1, 0);
 
-	// flag shape
-	glLineWidth(1);
-	glBegin(GL_LINE_LOOP);
-	glColor3f(0, 0, 0);
+	//glLoadIdentity();
+	//glTranslatef(xP(170), 0, 0);
 
-	//glVertex2f(-0.8, 0.5);
-	//glVertex2f(0.8, 0.5);
-	//glVertex2f(0.8, -0.5);
-	//glVertex2f(-0.8, -0.5);
-
-	// white
-	glVertex2f(xC(90), yC(200));
-	glVertex2f(xC(810), yC(200));
-	glVertex2f(xC(810), yC(600));
-	glVertex2f(xC(90), yC(600));
-	glEnd();
-
-	// black
+	// front
+	glColor3f(0, 1, 0);
 	glBegin(GL_POLYGON);
-	glColor3f(0, 0, 0);
-	glVertex2f(-0.8, 0);
-	glVertex2f(0.8, 0);
-	glVertex2f(0.8, -0.5);
-	glVertex2f(-0.8, -0.5);
-
-	glEnd();
-}
-
-void japanFlag() {
-
-	glClearColor(255, 255, 255, 255);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	// flag shape
-	glLineWidth(1);
-	glBegin(GL_LINE_LOOP);
-	glColor3f(0, 0, 0);
-
-	glVertex2f(-0.8, 0.5);
-	glVertex2f(0.8, 0.5);
-	glVertex2f(0.8, -0.5);
-	glVertex2f(-0.8, -0.5);
-
+	glVertex3f(xC(385.856426), yC(200), zC(22));
+	glVertex3f(xC(364.642857), yC(225.142857), zC(44));
+	glVertex3f(xC(435.357143), yC(225.142857), zC(44));
+	glVertex3f(xC(414.143574), yC(200), zC(22));
 	glEnd();
 
-	// circle
-	float x1, y1, x2, y2;
-	float angle;
-	double radius = 0.3;
-
-	x1 = 450.0, y1 = 450.0;
+	// left
 	glColor3f(1, 0, 0);
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(385.856426), yC(200), zC(-37.714286));
+	glVertex3f(xC(364.642857), yC(225.142857), zC(-55));
+	glVertex3f(xC(364.642857), yC(225.142857), zC(44));
+	glVertex3f(xC(385.856426), yC(200), zC(22));
+	glEnd();
 
-	glBegin(GL_TRIANGLE_FAN);
-	drawCircle(x1, y1, 100, 100, 0, 371);
+	// right
+	glColor3f(1, 0, 1);
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(414.143574), yC(200), zC(22));
+	glVertex3f(xC(435.357143), yC(225.142857), zC(44));
+	glVertex3f(xC(435.357143), yC(225.142857), zC(-55));
+	glVertex3f(xC(414.143574), yC(200), zC(-37.714286));
+	glEnd();
 
+	// back
+	glColor3f(0, 1, 1);
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(385.856426), yC(200), zC(-37.714286));
+	glVertex3f(xC(364.642857), yC(225.142857), zC(-55));
+	glVertex3f(xC(435.357143), yC(225.142857), zC(-55));
+	glVertex3f(xC(414.143574), yC(200), zC(-37.714286));
+	glEnd();
+
+}
+
+void lowerChest() {
+
+	// front 
+	glColor3f(0.3, 0.3, 0);
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(364.642857), yC(225.142857), zC(44));
+	glVertex3f(xC(367), yC(253.430005), zC(55));
+	glVertex3f(xC(433), yC(253.430005), zC(55));
+	glVertex3f(xC(435.357143), yC(225.142857), zC(44));
+	glEnd();
+
+	// left
+	glColor3f(0.5, 0, 0);
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(364.642857), yC(225.142857), zC(-55));
+	glVertex3f(xC(367), yC(253.430005), zC(-47.142858));
+	glVertex3f(xC(367), yC(253.430005), zC(55));
+	glVertex3f(xC(364.642857), yC(225.142857), zC(44));
+	glEnd();
+
+	// right
+	glColor3f(0.5, 0.5, 0.5);
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(435.357143), yC(225.142857), zC(44));
+	glVertex3f(xC(433), yC(253.430005), zC(55));
+	glVertex3f(xC(433), yC(253.430005), zC(-47.142858));
+	glVertex3f(xC(435.357143), yC(225.142857), zC(-55));
+	glEnd();
+
+	// back
+	glColor3f(0.3, 0.3, 0.3);
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(364.642857), yC(225.142857), zC(-55));
+	glVertex3f(xC(367), yC(253.430005), zC(-47.142858));
+	glVertex3f(xC(433), yC(253.430005), zC(-47.142858));
+	glVertex3f(xC(435.357143), yC(225.142857), zC(-55));
 	glEnd();
 }
+
+void abdomen() {
+	// front
+	glColor3f(0.3, 1, 0.6);
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(367), yC(253.430005), zC(55));
+	glVertex3f(xC(372.5), yC(350), zC(44));
+	glVertex3f(xC(427.5), yC(350), zC(44));
+	glVertex3f(xC(433), yC(253.430005), zC(55));
+	glEnd();
+}
+
+//void pahangFlag() {
+//
+//	glClearColor(255, 255, 255, 255);
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//
+//	// flag shape
+//	glLineWidth(1);
+//	glBegin(GL_LINE_LOOP);
+//	glColor3f(0, 0, 0);
+//
+//	//glVertex2f(-0.8, 0.5);
+//	//glVertex2f(0.8, 0.5);
+//	//glVertex2f(0.8, -0.5);
+//	//glVertex2f(-0.8, -0.5);
+//
+//	// white
+//	glVertex2f(xC(90), yC(200));
+//	glVertex2f(xC(810), yC(200));
+//	glVertex2f(xC(810), yC(600));
+//	glVertex2f(xC(90), yC(600));
+//	glEnd();
+//
+//	// black
+//	glBegin(GL_POLYGON);
+//	glColor3f(0, 0, 0);
+//	glVertex2f(-0.8, 0);
+//	glVertex2f(0.8, 0);
+//	glVertex2f(0.8, -0.5);
+//	glVertex2f(-0.8, -0.5);
+//
+//	glEnd();
+//}
+//
+//void japanFlag() {
+//
+//	glClearColor(255, 255, 255, 255);
+//	glClear(GL_COLOR_BUFFER_BIT);
+//
+//	// flag shape
+//	glLineWidth(1);
+//	glBegin(GL_LINE_LOOP);
+//	glColor3f(0, 0, 0);
+//
+//	glVertex2f(-0.8, 0.5);
+//	glVertex2f(0.8, 0.5);
+//	glVertex2f(0.8, -0.5);
+//	glVertex2f(-0.8, -0.5);
+//
+//	glEnd();
+//
+//	// circle
+//	float x1, y1, x2, y2;
+//	float angle;
+//	double radius = 0.3;
+//
+//	x1 = 450.0, y1 = 450.0;
+//	glColor3f(1, 0, 0);
+//
+//	glBegin(GL_TRIANGLE_FAN);
+//	drawCircle(x1, y1, 100, 100, 0, 371);
+//
+//	glEnd();
+//}
 
 void head() {
 	//drawSphere(0.1, 400, 140, 36, 30, 30);
@@ -848,6 +946,12 @@ void head() {
 	glEnd();
 }
 
+void dannyWork() {
+	upperChest();
+	lowerChest();
+	abdomen();
+}
+
 void display()
 {
 	glClearColor(0, 0, 0, 0);
@@ -879,15 +983,22 @@ void display()
 		robotDraft();
 		break;
 	case 5:
-		glRotatef(1, 1, 0, 0);
+		glRotatef(1, 0, 0, 1);
 		body();
 		break;
+	case 6:
+		//glLoadIdentity();
+		glRotatef(1, 0, 1, 0);
+		dannyWork();
+
+		break;
 	case 61:
+		glLoadIdentity();
 		glRotatef(1, 0, 1, 0);
 		drawSphere2(100, 150, 100, 400, 400, 36, 2, 1, 1);
 		break;
 	default:
-		pahangFlag();
+		//pahangFlag();
 		break;
 	}
 }
