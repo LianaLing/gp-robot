@@ -1,6 +1,7 @@
 
 #include <Windows.h>
 #include <gl/GL.h>
+#include <gl/GLU.h>
 #include <math.h>
 #include <iostream>
 
@@ -14,7 +15,7 @@
 #define DEPTH VALUE
 #define M_PI 3.141593
 
-int qNo = 4;
+int qNo = 3;
 
 float xC(float x) {
 	float xCoor, width = WIDTH / 2;
@@ -204,11 +205,10 @@ void drawSphere(float xradius, float yradius, float zradius, int xaxis, int yaxi
 
 			glColor3f(1, 1, 1);
 			//glNormal3f(x2 + x * zr0, y2 + y * zr0, z2 + z0);
-
 			glVertex3f(x2 + xr * x * zr0, y2 + yr * y * zr0, z2 + zr * z0);
-			//glColor3f(1, 0, 0);
-			//glNormal3f(x2 + x * zr1, y2 + y * zr1, z2 + z1);
 
+			glColor3f(1, 0, 0);
+			//glNormal3f(x2 + x * zr1, y2 + y * zr1, z2 + z1);
 			glVertex3f(x2 + xr * x * zr1, y2 + yr * y * zr1, z2 + zr * z1);
 		}
 		glEnd();
@@ -873,7 +873,7 @@ void display()
 	case 3:
 		//test3();
 		glRotatef(1, 1, 0, 0);
-		drawSphere(200, 200, 200, 400, 400, 36, 125, 500, 125, 500);
+		drawSphere(200, 200, 200, 400, 400, 36, 250, 500, 125, 500);
 		break;
 	case 4:
 		robotDraft();
