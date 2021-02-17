@@ -15,7 +15,7 @@
 #define DEPTH VALUE
 #define M_PI 3.141593
 
-int qNo = 3;
+int qNo = 1;
 
 float xC(float x) {
 	float xCoor, width = WIDTH / 2;
@@ -792,7 +792,7 @@ void japanFlag() {
 
 void head() {
 	//drawSphere(0.1, 400, 140, 36, 30, 30);
-	drawSphere(40, 60, 40, 400, 140, 36, 0, 500, 0, 500);
+	drawSphere(40, 40, 40, 400, 140, 36, 0, 500, 0, 500);
 	//Front face
 	glColor3f(0, 1, 0);
 	glBegin(GL_QUADS);
@@ -856,9 +856,9 @@ void display()
 
 	switch (qNo) {
 	case 1:
-		//glLoadIdentity();
+		glLoadIdentity();
 		//glPushMatrix();
-		glRotatef(1, 0, 1, 0);
+		glRotatef(90, 0, 1, 0);
 		head();
 		//glPopMatrix();
 		//glPushMatrix();
@@ -872,8 +872,8 @@ void display()
 		break;
 	case 3:
 		//test3();
-		glRotatef(1, 1, 0, 0);
-		drawSphere(200, 200, 200, 400, 400, 36, 250, 500, 125, 500);
+		//glRotatef(1, 1, 1, 0);
+		drawSphere(200, 300, 200, 400, 400, 36, 0, 50, 0, 100);
 		break;
 	case 4:
 		robotDraft();
