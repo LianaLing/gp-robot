@@ -207,7 +207,7 @@ void drawSphere(float xradius, float yradius, float zradius, int xaxis, int yaxi
 			//glNormal3f(x2 + x * zr0, y2 + y * zr0, z2 + z0);
 			glVertex3f(x2 + xr * x * zr0, y2 + yr * y * zr0, z2 + zr * z0);
 
-			glColor3f(1, 0, 0);
+			//glColor3f(1, 0, 0);
 			//glNormal3f(x2 + x * zr1, y2 + y * zr1, z2 + z1);
 			glVertex3f(x2 + xr * x * zr1, y2 + yr * y * zr1, z2 + zr * z1);
 		}
@@ -792,60 +792,61 @@ void japanFlag() {
 
 void head() {
 	//drawSphere(0.1, 400, 140, 36, 30, 30);
-	drawSphere(40, 60, 40, 400, 140, 36, 0, 500, 0, 500);
-	//Front face
-	glColor3f(0, 1, 0);
-	glBegin(GL_QUADS);
-		glVertex3f(xC(360), yC(130), zC(40));
-		glVertex3f(xC(375), yC(200), zC(40));
-		glVertex3f(xC(425), yC(200), zC(40));
-		glVertex3f(xC(440), yC(130), zC(40));
-	glEnd();
+	drawSphere(100, 120, 10, 400, 140, 36, 0, 500, 0, 500);
 
-	//Right face
-	glColor3f(1, 0, 0);
-	glBegin(GL_QUADS);
-		glVertex3f(xC(425), yC(200), zC(40));
-		glVertex3f(xC(425), yC(200), zC(0));
-		glVertex3f(xC(440), yC(130), zC(0));
-		glVertex3f(xC(440), yC(130), zC(40));
-	glEnd();
+	////Front face
+	//glColor3f(0, 1, 0);
+	//glBegin(GL_QUADS);
+	//	glVertex3f(xC(360), yC(130), zC(40));
+	//	glVertex3f(xC(375), yC(200), zC(40));
+	//	glVertex3f(xC(425), yC(200), zC(40));
+	//	glVertex3f(xC(440), yC(130), zC(40));
+	//glEnd();
 
-	//Left face
-	glColor3f(0, 0, 1);
-	glBegin(GL_QUADS);
-		glVertex3f(xC(360), yC(130), zC(40));
-		glVertex3f(xC(360), yC(130), zC(0));
-		glVertex3f(xC(375), yC(200), zC(0));
-		glVertex3f(xC(375), yC(200), zC(40));
-	glEnd();
+	////Right face
+	//glColor3f(1, 0, 0);
+	//glBegin(GL_QUADS);
+	//	glVertex3f(xC(425), yC(200), zC(40));
+	//	glVertex3f(xC(425), yC(200), zC(0));
+	//	glVertex3f(xC(440), yC(130), zC(0));
+	//	glVertex3f(xC(440), yC(130), zC(40));
+	//glEnd();
 
-	//Back face
-	glColor3f(1, 1, 1);
-	glBegin(GL_QUADS);
-		glVertex3f(xC(360), yC(130), zC(0));
-		glVertex3f(xC(375), yC(200), zC(0));
-		glVertex3f(xC(425), yC(200), zC(0));
-		glVertex3f(xC(440), yC(130), zC(0));
-	glEnd();
-	
-	//Top face
-	glColor3f(1, 1, 0);
-	glBegin(GL_QUADS);
-		glVertex3f(xC(360), yC(130), zC(40));
-		glVertex3f(xC(360), yC(130), zC(0));
-		glVertex3f(xC(440), yC(130), zC(0));
-		glVertex3f(xC(440), yC(130), zC(40));		
-	glEnd();
+	////Left face
+	//glColor3f(0, 0, 1);
+	//glBegin(GL_QUADS);
+	//	glVertex3f(xC(360), yC(130), zC(40));
+	//	glVertex3f(xC(360), yC(130), zC(0));
+	//	glVertex3f(xC(375), yC(200), zC(0));
+	//	glVertex3f(xC(375), yC(200), zC(40));
+	//glEnd();
 
-	//Bottom face
-	glColor3f(0, 1, 1);
-	glBegin(GL_QUADS);
-		glVertex3f(xC(375), yC(200), zC(40));
-		glVertex3f(xC(375), yC(200), zC(0));
-		glVertex3f(xC(425), yC(200), zC(0));
-		glVertex3f(xC(425), yC(200), zC(40));		
-	glEnd();
+	////Back face
+	//glColor3f(1, 1, 1);
+	//glBegin(GL_QUADS);
+	//	glVertex3f(xC(360), yC(130), zC(0));
+	//	glVertex3f(xC(375), yC(200), zC(0));
+	//	glVertex3f(xC(425), yC(200), zC(0));
+	//	glVertex3f(xC(440), yC(130), zC(0));
+	//glEnd();
+	//
+	////Top face
+	//glColor3f(1, 1, 0);
+	//glBegin(GL_QUADS);
+	//	glVertex3f(xC(360), yC(130), zC(40));
+	//	glVertex3f(xC(360), yC(130), zC(0));
+	//	glVertex3f(xC(440), yC(130), zC(0));
+	//	glVertex3f(xC(440), yC(130), zC(40));		
+	//glEnd();
+
+	////Bottom face
+	//glColor3f(0, 1, 1);
+	//glBegin(GL_QUADS);
+	//	glVertex3f(xC(375), yC(200), zC(40));
+	//	glVertex3f(xC(375), yC(200), zC(0));
+	//	glVertex3f(xC(425), yC(200), zC(0));
+	//	glVertex3f(xC(425), yC(200), zC(40));		
+	//glEnd();
 }
 
 void display()
