@@ -891,6 +891,7 @@ void abdomen() {
 void head() {
 	/*glLoadIdentity();
 	glRotatef(90,0,1,0);*/
+	//glLoadIdentity();
 	glRotatef(1, 0, 1, 0);
 
 	//Right face
