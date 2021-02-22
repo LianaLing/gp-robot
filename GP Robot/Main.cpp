@@ -14,7 +14,7 @@
 #define DEPTH VALUE
 #define M_PI 3.141593
 
-int qNo = 4;
+int qNo = 6;
 //Convert pixels to coordinate
 float xC(float x) {
 	float xCoor, width = WIDTH / 2;
@@ -192,7 +192,7 @@ void drawSphere(float xradius, float yradius, float zradius, int xaxis, int yaxi
 			float x = cos(lng);
 			float y = sin(lng);
 
-			glColor3f(1, 1, 1);
+			//glColor3f(1, 1, 1);
 			//glNormal3f(x2 + x * zr0, y2 + y * zr0, z2 + z0);
 			glVertex3f(x2 + xr * x * zr0, y2 + yr * y * zr0, z2 + zr * z0);
 
@@ -266,111 +266,166 @@ void body() {
 }
 
 void upperChest() {
-	// upper chest
-	//glPushMatrix();
-	//glTranslatef(0, yP(225.142857), 0);
-	//glRotatef(90, 1, 0, 0);
-	//drawSphere(55, 60, 55, 400, 225.142857, 0, 25, 50, 0, 50);
-	//glPopMatrix();
+	
+	// front top
+	glColor3f(1, 0.7, 0.3);
+	glBegin(GL_QUADS);
+	glVertex3f(xC(378.75), yC(180), zC(25));
+	glVertex3f(xC(356.25), yC(185), zC(30));
+	glVertex3f(xC(443.75), yC(185), zC(30));
+	glVertex3f(xC(421.25), yC(180), zC(25));
+	glEnd();
 
-	//glPushMatrix();
-	//glLoadIdentity();
-	//glLineWidth(3);
-	/*glBegin(GL_LINE_STRIP);
-	glVertex3f(xC(400), yC(0), 0);
-	glVertex3f(xC(400), yC(800), 0);
-	glEnd();*/
-	//glRotatef(-1, 0, 1, 0);
+	// front btm
+	glColor3f(1, 0, 0.5);
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(356.25), yC(185), zC(30));
+	glVertex3f(xC(340), yC(222.5), zC(50));
+	glVertex3f(xC(460), yC(222.5), zC(50));
+	glVertex3f(xC(443.75), yC(185), zC(30));
+	glEnd();
 
-	//glLoadIdentity();
-	//glTranslatef(xP(170), 0, 0);
+	// left top
+	glColor3f(1, 1, 1);
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(378.75), yC(180), zC(-37.5));
+	glVertex3f(xC(356.25), yC(185), zC(-42.5));
+	glVertex3f(xC(356.25), yC(185), zC(30));
+	glVertex3f(xC(378.75), yC(180), zC(25));
+	glEnd();
 
-	// front
+	// left btm
 	glColor3f(0, 1, 0);
 	glBegin(GL_POLYGON);
-	glVertex3f(xC(385.856426), yC(200), zC(22));
-	glVertex3f(xC(364.642857), yC(225.142857), zC(44));
-	glVertex3f(xC(435.357143), yC(225.142857), zC(44));
-	glVertex3f(xC(414.143574), yC(200), zC(22));
+	glVertex3f(xC(356.25), yC(185), zC(-42.5));
+	glVertex3f(xC(340), yC(222.5), zC(-60));
+	glVertex3f(xC(340), yC(222.5), zC(50));
+	glVertex3f(xC(356.25), yC(185), zC(30));
 	glEnd();
 
-	// left
-	glColor3f(1, 0, 0);
-	glBegin(GL_POLYGON);
-	glVertex3f(xC(385.856426), yC(200), zC(-37.714286));
-	glVertex3f(xC(364.642857), yC(225.142857), zC(-55));
-	glVertex3f(xC(364.642857), yC(225.142857), zC(44));
-	glVertex3f(xC(385.856426), yC(200), zC(22));
-	glEnd();
-
-	// right
+	// right top
 	glColor3f(1, 0, 1);
 	glBegin(GL_POLYGON);
-	glVertex3f(xC(414.143574), yC(200), zC(22));
-	glVertex3f(xC(435.357143), yC(225.142857), zC(44));
-	glVertex3f(xC(435.357143), yC(225.142857), zC(-55));
-	glVertex3f(xC(414.143574), yC(200), zC(-37.714286));
+	glVertex3f(xC(421.25), yC(180), zC(25));
+	glVertex3f(xC(443.75), yC(185), zC(30));
+	glVertex3f(xC(443.75), yC(185), zC(-42.5));
+	glVertex3f(xC(421.25), yC(180), zC(-37.5));
 	glEnd();
 
-	// back
-	glColor3f(0, 1, 1);
+	// right btm
+	glColor3f(0.2, 1, 0.5);
 	glBegin(GL_POLYGON);
-	glVertex3f(xC(385.856426), yC(200), zC(-37.714286));
-	glVertex3f(xC(364.642857), yC(225.142857), zC(-55));
-	glVertex3f(xC(435.357143), yC(225.142857), zC(-55));
-	glVertex3f(xC(414.143574), yC(200), zC(-37.714286));
+	glVertex3f(xC(443.75), yC(185), zC(-42.5));
+	glVertex3f(xC(460), yC(222.5), zC(-60));
+	glVertex3f(xC(460), yC(222.5), zC(50));
+	glVertex3f(xC(443.75), yC(185), zC(30));
 	glEnd();
+
+	// back top
+	glColor3f(0, 0.7, 0.3);
+	glBegin(GL_QUADS);
+	glVertex3f(xC(378.75), yC(180), zC(-37.5));
+	glVertex3f(xC(356.25), yC(185), zC(-42.5));
+	glVertex3f(xC(443.75), yC(185), zC(-42.5));
+	glVertex3f(xC(421.25), yC(180), zC(-37.5));
+	glEnd();
+
+	// back btm
+	glColor3f(0.5, 0.3, 1);
+	glBegin(GL_POLYGON);
+	glVertex3f(xC(356.25), yC(185), zC(-42.5));
+	glVertex3f(xC(340), yC(222.5), zC(-60));
+	glVertex3f(xC(460), yC(222.5), zC(-60));
+	glVertex3f(xC(443.75), yC(185), zC(-42.5));
+	glEnd();
+
 
 }
 
 void lowerChest() {
-
-	// front 
-	glColor3f(0.3, 0.3, 0);
-	glBegin(GL_POLYGON);
-	glVertex3f(xC(364.642857), yC(225.142857), zC(44));
-	glVertex3f(xC(367), yC(253.430005), zC(55));
-	glVertex3f(xC(433), yC(253.430005), zC(55));
-	glVertex3f(xC(435.357143), yC(225.142857), zC(44));
+	// front top
+	glColor3f(0.7, 0.7, 1);
+	glBegin(GL_QUADS);
+	glVertex3f(xC(340), yC(222.5), zC(50));
+	glVertex3f(xC(343.75), yC(242.5), zC(57.5));
+	glVertex3f(xC(456.25), yC(242.5), zC(57.5));
+	glVertex3f(xC(460), yC(222.5), zC(50));
 	glEnd();
 
-	// left
-	glColor3f(0.5, 0, 0);
-	glBegin(GL_POLYGON);
-	glVertex3f(xC(364.642857), yC(225.142857), zC(-55));
-	glVertex3f(xC(367), yC(253.430005), zC(-47.142858));
-	glVertex3f(xC(367), yC(253.430005), zC(55));
-	glVertex3f(xC(364.642857), yC(225.142857), zC(44));
+	// middle light (back)
+
+
+	// middle light
+	glColor3f(1, 1, 1);
+	drawSphere(13, 13, 13, 400, 235, 45, 0, 100, 0, 100);
+
+	// front btm
+	glColor3f(0.7, 0.7, 0.7);
+	glBegin(GL_QUADS);
+	glVertex3f(xC(343.75), yC(242.5), zC(57.5));
+	glVertex3f(xC(346.25), yC(267.5), zC(52.5));
+	glVertex3f(xC(453.75), yC(267.5), zC(52.5));
+	glVertex3f(xC(456.25), yC(242.5), zC(57.5));
+	glEnd();
+	
+	// left top
+	glColor3f(0.7, 1, 0.7);
+	glBegin(GL_QUADS);
+	glVertex3f(xC(340), yC(222.5), zC(-60));
+	glVertex3f(xC(343.75), yC(242.5), zC(-60));
+	glVertex3f(xC(343.75), yC(242.5), zC(57.5));
+	glVertex3f(xC(340), yC(222.5), zC(50));
 	glEnd();
 
-	// right
-	glColor3f(0.5, 0.5, 0.5);
-	glBegin(GL_POLYGON);
-	glVertex3f(xC(435.357143), yC(225.142857), zC(44));
-	glVertex3f(xC(433), yC(253.430005), zC(55));
-	glVertex3f(xC(433), yC(253.430005), zC(-47.142858));
-	glVertex3f(xC(435.357143), yC(225.142857), zC(-55));
+	// left btm
+	glColor3f(1, 0.7, 0.7);
+	glBegin(GL_QUADS);
+	glVertex3f(xC(343.75), yC(242.5), zC(-60));
+	glVertex3f(xC(346.25), yC(267.5), zC(-47.5));
+	glVertex3f(xC(346.25), yC(267.5), zC(52.5));
+	glVertex3f(xC(343.75), yC(242.5), zC(57.5));
 	glEnd();
 
-	// back
-	glColor3f(0.3, 0.3, 0.3);
-	glBegin(GL_POLYGON);
-	glVertex3f(xC(364.642857), yC(225.142857), zC(-55));
-	glVertex3f(xC(367), yC(253.430005), zC(-47.142858));
-	glVertex3f(xC(433), yC(253.430005), zC(-47.142858));
-	glVertex3f(xC(435.357143), yC(225.142857), zC(-55));
+	// right top
+	glColor3f(0.3, 0.5, 0.3);
+	glBegin(GL_QUADS);
+	glVertex3f(xC(460), yC(222.5), zC(50));
+	glVertex3f(xC(456.25), yC(242.5), zC(57.5));
+	glVertex3f(xC(456.25), yC(242.5), zC(-60));
+	glVertex3f(xC(460), yC(222.5), zC(-60));
 	glEnd();
+
+	// right btm
+	glColor3f(1, 0.7, 1);
+	glBegin(GL_QUADS);
+	glVertex3f(xC(456.25), yC(242.5), zC(-60));
+	glVertex3f(xC(453.75), yC(267.5), zC(-47.5));
+	glVertex3f(xC(453.75), yC(267.5), zC(52.5));
+	glVertex3f(xC(456.25), yC(242.5), zC(57.5));
+	glEnd();
+
+	// back top
+	glColor3f(0.7, 0.5, 0.3);
+	glBegin(GL_QUADS);
+	glVertex3f(xC(340), yC(222.5), zC(-60));
+	glVertex3f(xC(343.75), yC(242.5), zC(-60));
+	glVertex3f(xC(456.25), yC(242.5), zC(-60));
+	glVertex3f(xC(460), yC(222.5), zC(-60));
+	glEnd();
+
+	// back btm
+	glColor3f(0.5, 0, 1);
+	glBegin(GL_QUADS);
+	glVertex3f(xC(343.75), yC(242.5), zC(-60));
+	glVertex3f(xC(346.25), yC(267.5), zC(-47.5));
+	glVertex3f(xC(453.75), yC(267.5), zC(-47.5));
+	glVertex3f(xC(456.25), yC(242.5), zC(-60));
+	glEnd();
+
 }
 
 void abdomen() {
-	// front
-	glColor3f(0.3, 1, 0.6);
-	glBegin(GL_POLYGON);
-	glVertex3f(xC(367), yC(253.430005), zC(55));
-	glVertex3f(xC(372.5), yC(350), zC(44));
-	glVertex3f(xC(427.5), yC(350), zC(44));
-	glVertex3f(xC(433), yC(253.430005), zC(55));
-	glEnd();
+	
 }
 
 void head() {
@@ -851,7 +906,6 @@ void display()
 		//glLoadIdentity();
 		glRotatef(1, 0, 1, 0);
 		dannyWork();
-
 		break;
 	case 61:
 
