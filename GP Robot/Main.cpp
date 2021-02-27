@@ -13,53 +13,8 @@
 #define HEIGHT VALUE
 #define DEPTH VALUE
 #define M_PI 3.141593
-
+// glVertex3f(xC(), yC(), zC());
 int qNo = 6;
-//Convert pixels to coordinate
-float xC(float x) {
-	float xCoor, width = WIDTH / 2;
-	if (x < width) {
-		xCoor = (x / width) - 1;
-	}
-	else if (x > width) {
-		xCoor = (x - width) / width;
-	}
-	else if (x == width) {
-		xCoor = 0.0;
-	}
-	return xCoor;
-}
-
-float yC(float y) {
-	float yCoor, height = HEIGHT / 2;
-	if (y < height) {
-		yCoor = 1 - (y / height);
-	}
-	else if (y > height) {
-		yCoor = 0 - ((y - height) / height);
-	}
-	else if (y == height) {
-		yCoor = 0.0;
-	}
-	return yCoor;
-}
-
-float zC(float z) {
-	return ((- z) / (DEPTH / 2));
-}
-
-float xP(float x) {
-	return (x / (WIDTH / 2));
-}
-
-float yP(float y) {
-	return (y / (HEIGHT / 2));
-}
-
-float zP(float z) {
-	return (z / (DEPTH / 2));
-}
-
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
@@ -163,6 +118,52 @@ bool initPixelFormat(HDC hdc)
 }
 //--------------------------------------------------------------------
 
+//Convert pixels to coordinate
+float xC(float x) {
+	float xCoor, width = WIDTH / 2;
+	if (x < width) {
+		xCoor = (x / width) - 1;
+	}
+	else if (x > width) {
+		xCoor = (x - width) / width;
+	}
+	else if (x == width) {
+		xCoor = 0.0;
+	}
+	return xCoor;
+}
+
+float yC(float y) {
+	float yCoor, height = HEIGHT / 2;
+	if (y < height) {
+		yCoor = 1 - (y / height);
+	}
+	else if (y > height) {
+		yCoor = 0 - ((y - height) / height);
+	}
+	else if (y == height) {
+		yCoor = 0.0;
+	}
+	return yCoor;
+}
+
+float zC(float z) {
+	return ((- z) / (DEPTH / 2));
+}
+
+float xP(float x) {
+	return (x / (WIDTH / 2));
+}
+
+float yP(float y) {
+	return (y / (HEIGHT / 2));
+}
+
+float zP(float z) {
+	return (z / (DEPTH / 2));
+}
+
+//---------------------------FUNCTION---------------------------------
 void drawCircle(float x1, float y1, float x, float y, float min, float max) {
 	for (float i = min; i < max; i++)
 	{
@@ -203,6 +204,7 @@ void drawSphere(float xradius, float yradius, float zradius, int xaxis, int yaxi
 		glEnd();
 	}
 }
+//--------------------------------------------------------------------
 
 void body() {
 	/*glClearColor(0.5, 0.5, 0.5, 0);
@@ -425,7 +427,13 @@ void lowerChest() {
 }
 
 void abdomen() {
-	
+	// front 0
+	glBegin(GL_QUADS);
+	glVertex3f(xC(346.25), yC(267.5), zC(52.5));
+	glVertex3f(xC(302.5), yC(315), zC());
+	glVertex3f(xC(497.5), yC(315), zC());
+	glVertex3f(xC(453.75), yC(267.5), zC());
+	glEnd();
 }
 
 void head() {
