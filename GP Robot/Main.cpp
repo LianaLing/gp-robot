@@ -426,15 +426,15 @@ void lowerChest() {
 
 }
 
-void abdomen() {
-	// front 0
-	glBegin(GL_QUADS);
-	glVertex3f(xC(346.25), yC(267.5), zC(52.5));
-	glVertex3f(xC(302.5), yC(315), zC());
-	glVertex3f(xC(497.5), yC(315), zC());
-	glVertex3f(xC(453.75), yC(267.5), zC());
-	glEnd();
-}
+//void abdomen() {
+//	// front 0
+//	glBegin(GL_QUADS);
+//	glVertex3f(xC(346.25), yC(267.5), zC(52.5));
+//	glVertex3f(xC(302.5), yC(315), zC());
+//	glVertex3f(xC(497.5), yC(315), zC());
+//	glVertex3f(xC(453.75), yC(267.5), zC());
+//	glEnd();
+//}
 
 void head() {
 //Points
@@ -874,7 +874,7 @@ void head() {
 void dannyWork() {
 	upperChest();
 	lowerChest();
-	abdomen();
+	//abdomen();
 }
 
 void display()
