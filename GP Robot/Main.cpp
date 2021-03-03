@@ -423,7 +423,6 @@ void lowerChest() {
 	glVertex3f(xC(453.75), yC(267.5), zC(-47.5));
 	glVertex3f(xC(456.25), yC(242.5), zC(-60));
 	glEnd();
-
 }
 
 //void abdomen() {
