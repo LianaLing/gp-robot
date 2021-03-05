@@ -3,17 +3,21 @@
 #include <gl/GLU.h>
 #include <math.h>
 #include <iostream>
+#include "Function.h"
+
+using namespace N;
+using namespace std;
 
 #pragma comment (lib, "OpenGL32.lib")
 
 #define WINDOW_TITLE "IRON-MAN MK47"
-#define CW_USEDEFAULT 10
+#define CW 10
 #define VALUE 800.0
 #define WIDTH VALUE
 #define HEIGHT VALUE
 #define DEPTH VALUE
-#define M_PI 3.141593
-// glVertex3f(xC(), yC(), zC());
+
+function fh;
 int qNo = 6;
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -114,94 +118,6 @@ bool initPixelFormat(HDC hdc)
 	else
 	{
 		return false;
-	}
-}
-//--------------------------------------------------------------------
-
-//Convert pixels to coordinate
-float xC(float x) {
-	float xCoor, width = WIDTH / 2;
-	if (x < width) {
-		xCoor = (x / width) - 1;
-	}
-	else if (x > width) {
-		xCoor = (x - width) / width;
-	}
-	else if (x == width) {
-		xCoor = 0.0;
-	}
-	return xCoor;
-}
-
-float yC(float y) {
-	float yCoor, height = HEIGHT / 2;
-	if (y < height) {
-		yCoor = 1 - (y / height);
-	}
-	else if (y > height) {
-		yCoor = 0 - ((y - height) / height);
-	}
-	else if (y == height) {
-		yCoor = 0.0;
-	}
-	return yCoor;
-}
-
-float zC(float z) {
-	return ((- z) / (DEPTH / 2));
-}
-
-float xP(float x) {
-	return (x / (WIDTH / 2));
-}
-
-float yP(float y) {
-	return (y / (HEIGHT / 2));
-}
-
-float zP(float z) {
-	return (z / (DEPTH / 2));
-}
-
-//---------------------------FUNCTION---------------------------------
-void drawCircle(float x1, float y1, float x, float y, float min, float max) {
-	for (float i = min; i < max; i++)
-	{
-		float x2 = xC(x1) + cos(i * M_PI / 180.f) * xP(x);
-		float y2 = yC(y1) + sin(i * M_PI / 180.f) * yP(y);
-		glVertex2f(x2, y2);
-	}
-}
-
-void drawSphere(float xradius, float yradius, float zradius, int xaxis, int yaxis, float zaxis, float xmin, float xmax, float ymin, float ymax) {
-	float i, j, lats = 100, longs = 100;
-	float x2 = xC(xaxis), y2 = yC(yaxis), z2 = zC(zaxis);
-	float xr = xP(xradius), yr = yP(yradius), zr = zP(zradius);
-
-	for (i = xmin; i <= xmax; i++) {
-		float lat0 = M_PI * (-0.5 + (i - 1) / lats);
-		float z0 = sin(lat0);
-		float zr0 = cos(lat0);
-
-		float lat1 = M_PI * (-0.5 + i / lats);
-		float z1 = sin(lat1);
-		float zr1 = cos(lat1);
-
-		glBegin(GL_QUAD_STRIP);
-		for (j = ymin; j <= ymax; j++) {
-			float lng = 2 * M_PI * (j - 1.0) / longs;
-			float x = cos(lng);
-			float y = sin(lng);
-
-			//glColor3f(1, 1, 1);
-			//glNormal3f(x2 + x * zr0, y2 + y * zr0, z2 + z0);
-			glVertex3f(x2 + xr * x * zr0, y2 + yr * y * zr0, z2 + zr * z0);
-
-			//glColor3f(1, 0, 0);
-			//glNormal3f(x2 + x * zr1, y2 + y * zr1, z2 + z1);
-			glVertex3f(x2 + xr * x * zr1, y2 + yr * y * zr1, z2 + zr * z1);
-		}
-		glEnd();
 	}
 }
 //--------------------------------------------------------------------
@@ -937,7 +853,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 	if (!RegisterClassEx(&wc)) return false;
 
 	HWND hWnd = CreateWindow(WINDOW_TITLE, WINDOW_TITLE, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, WIDTH, HEIGHT,
+		CW, CW, WIDTH, HEIGHT,
 		NULL, NULL, wc.hInstance, NULL);
 
 	//--------------------------------
