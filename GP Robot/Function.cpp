@@ -72,6 +72,10 @@ float function::cC(float color) {
 	return (color / 255);
 }
 
+void function::v3(float x, float y, float z){
+	glVertex3f(xC(x), yC(y), zC(z));
+}
+
 void function::drawSphere(float xradius, float yradius, float zradius, int xaxis, int yaxis, float zaxis, float xmin, float xmax, float ymin, float ymax) {
 	float i, j, lats = 100, longs = 100;
 	float x2 = xC(xaxis), y2 = yC(yaxis), z2 = zC(zaxis);
