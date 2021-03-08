@@ -16,7 +16,10 @@ using namespace std;
 
 float function::xC(float x) {
 	float xCoor, width = WIDTH / 2;
-	if (x < width) {
+	if (x >= -1 && x <= 1) {
+		xCoor = x;
+	}
+	else if (x > 1 && x < width) {
 		xCoor = (x / width) - 1;
 	}
 	else if (x > width) {
@@ -30,21 +33,22 @@ float function::xC(float x) {
 
 float function::zC(float z) {
 	float zCoor, depth = DEPTH / 2;
-	/*if (z < 0) {
-		zCoor = (z / depth);
+
+	if (z >= -1 && z <= 1) {
+		zCoor = z;
 	}
-	else if (z > depth) {
-		zCoor = (z - depth) / depth;
+	else {
+		zCoor = z / depth;
 	}
-	else if (z == depth) {
-		zCoor = 0;
-	}*/
-	return (z / depth);
+	return zCoor;
 }
 
 float function::yC(float y) {
 	float yCoor, height = HEIGHT / 2;
-	if (y < height) {
+	if (y >= -1 && y <= 1) {
+		yCoor = y;
+	}
+	else if (y > 1 && y < height) {
 		yCoor = 1 - (y / height);
 	}
 	else if (y > height) {
@@ -72,11 +76,15 @@ float function::cC(float color) {
 	return (color / 255);
 }
 
-void function::v3(float x, float y, float z){
+void function::v3(float x, float y, float z) {
 	glVertex3f(xC(x), yC(y), zC(z));
 }
 
-void function::drawSphere(float xradius, float yradius, float zradius, int xaxis, int yaxis, float zaxis, float xmin, float xmax, float ymin, float ymax) {
+void function::v2(float x, float y) {
+	glVertex2f(xC(x), yC(y));
+}
+
+void function::drawSphere(GLenum type, float xradius, float yradius, float zradius, int xaxis, int yaxis, float zaxis, float xmin, float xmax, float ymin, float ymax, float r, float g, float b) {
 	float i, j, lats = 100, longs = 100;
 	float x2 = xC(xaxis), y2 = yC(yaxis), z2 = zC(zaxis);
 	float xr = xP(xradius), yr = yP(yradius), zr = zP(zradius);
@@ -90,17 +98,17 @@ void function::drawSphere(float xradius, float yradius, float zradius, int xaxis
 		float z1 = sin(lat1);
 		float zr1 = cos(lat1);
 
-		glBegin(GL_POLYGON);
+		glBegin(type);
 		for (j = ymin; j <= ymax; j++) {
 			float lng = 2 * M_PI * (j - 1.0) / longs;
 			float x = cos(lng);
 			float y = sin(lng);
 
-			glColor3f(1, 1, 1);
+			glColor3f(r, g, b);
 			//glNormal3f(x2 + x * zr0, y2 + y * zr0, z2 + z0);
 			glVertex3f(x2 + xr * x * zr0, y2 + yr * y * zr0, z2 + zr * z0);
 
-			glColor3f(1, 0, 0);
+			//glColor3f(1, 0, 0);
 			//glNormal3f(x2 + x * zr1, y2 + y * zr1, z2 + z1);
 			glVertex3f(x2 + xr * x * zr1, y2 + yr * y * zr1, z2 + zr * z1);
 		}
@@ -132,7 +140,6 @@ void function::bezierQuad(float x1, float x2, float x3, float x4, float y1, floa
 	const int numberOfPoints = 500;
 	float t;
 	double xt[numberOfPoints], yt[numberOfPoints], xt2[numberOfPoints], yt2[numberOfPoints];
-	float xD = 0, yD = 0;
 	int i;
 
 	float x5 = -x1, x6 = -x2, x7 = -x3, x8 = -x4;
