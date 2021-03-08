@@ -13,13 +13,11 @@ using namespace std;
 #define HEIGHT VALUE
 #define DEPTH VALUE
 #define M_PI 3.141593
+function fh;
 
 float function::xC(float x) {
-	float xCoor, width = WIDTH / 2;
-	if (x >= -1 && x <= 1) {
-		xCoor = x;
-	}
-	else if (x > 1 && x < width) {
+	float xCoor = 0, width = WIDTH / 2;
+	if (x >= 0 && x < width) {
 		xCoor = (x / width) - 1;
 	}
 	else if (x > width) {
@@ -31,24 +29,9 @@ float function::xC(float x) {
 	return xCoor;
 }
 
-float function::zC(float z) {
-	float zCoor, depth = DEPTH / 2;
-
-	if (z >= -1 && z <= 1) {
-		zCoor = z;
-	}
-	else {
-		zCoor = z / depth;
-	}
-	return zCoor;
-}
-
 float function::yC(float y) {
-	float yCoor, height = HEIGHT / 2;
-	if (y >= -1 && y <= 1) {
-		yCoor = y;
-	}
-	else if (y > 1 && y < height) {
+	float yCoor = 0, height = HEIGHT / 2;
+	if (y >= 0 && y < height) {
 		yCoor = 1 - (y / height);
 	}
 	else if (y > height) {
@@ -58,6 +41,12 @@ float function::yC(float y) {
 		yCoor = 0.0;
 	}
 	return yCoor;
+}
+
+float function::zC(float z) {
+	float zCoor, depth = DEPTH / 2;
+	zCoor = z / depth;
+	return -zCoor;
 }
 
 float function::xP(float x) {
@@ -76,15 +65,15 @@ float function::cC(float color) {
 	return (color / 255);
 }
 
-void function::v3(float x, float y, float z) {
+void function::v3f(float x, float y, float z) {
 	glVertex3f(xC(x), yC(y), zC(z));
 }
 
-void function::v2(float x, float y) {
+void function::v2f(float x, float y) {
 	glVertex2f(xC(x), yC(y));
 }
 
-void function::drawSphere(GLenum type, float xradius, float yradius, float zradius, int xaxis, int yaxis, float zaxis, float xmin, float xmax, float ymin, float ymax, float r, float g, float b) {
+void function::sphere(GLenum type, float xradius, float yradius, float zradius, int xaxis, int yaxis, float zaxis, float xmin, float xmax, float ymin, float ymax, float r, float g, float b) {
 	float i, j, lats = 100, longs = 100;
 	float x2 = xC(xaxis), y2 = yC(yaxis), z2 = zC(zaxis);
 	float xr = xP(xradius), yr = yP(yradius), zr = zP(zradius);
@@ -116,7 +105,7 @@ void function::drawSphere(GLenum type, float xradius, float yradius, float zradi
 	}
 }
 
-void function::drawCircle(float x, float y, float xr, float yr, float min, float max) {
+void function::circle(float x, float y, float xr, float yr, float min, float max) {
 	//float z2;
 	for (float i = min; i < max; i++)
 	{
@@ -124,6 +113,111 @@ void function::drawCircle(float x, float y, float xr, float yr, float min, float
 		float y2 = yC(y) + sin(i * M_PI / 180.f) * yP(yr);
 		glVertex2f(x2, y2);
 	}
+}
+
+void function::triangle(GLenum type, float base, float height, int lineWidth) {
+	int xStartCoor = 400, yStartCoor = 400;
+	glLineWidth(lineWidth);
+	glBegin(type);
+		v2f(xStartCoor, yStartCoor);
+		v2f(xStartCoor + base, yStartCoor);
+		v2f(xStartCoor + (base / 2), yStartCoor - height);
+	glEnd();
+}
+
+void function::quad(GLenum type, float length, float height, int lineWidth) {
+	int xStartCoor = 400, yStartCoor = 400;
+	glLineWidth(lineWidth);
+	glBegin(type);
+		v2f(xStartCoor, yStartCoor - height);
+		v2f(xStartCoor, yStartCoor);
+		v2f(xStartCoor + length, yStartCoor);
+		v2f(xStartCoor + length, yStartCoor - height);
+	glEnd();
+}
+
+//for 3D objects, size value follows openGL coordinates, so use xC/yC/zC if you need it in pixels
+void function::pyramid(GLenum type, float size, int lineWidth) {
+	float x = xC(size), y = yC(size), z = zC(size);
+	glBegin(type);
+      //front
+      glVertex3f(0, y, 0);
+      glVertex3f(-x, -y, z);
+      glVertex3f(x, -y, z);
+ 
+      //right
+      glVertex3f(0, y, 0);
+      glVertex3f(x, -y, z);
+      glVertex3f(x, -y, -z);
+ 
+      //back
+      glVertex3f(0, y, 0);
+      glVertex3f(x, -y, -z);
+      glVertex3f(-x, -y, -z);
+ 
+      //left
+      glVertex3f( 0, y, 0);
+      glVertex3f(-x,-y,-z);
+      glVertex3f(-x,-y, z);
+   glEnd();
+
+   glBegin(type);
+      glVertex3f(-x, -y, z);
+      glVertex3f(x, -y, z);
+	  glVertex3f(x, -y, z);
+	  glVertex3f(x, -y, -z);
+	  glVertex3f(x, -y, -z);
+	  glVertex3f(-x, -y, -z);
+	  glVertex3f(-x, -y, -z);
+	  glVertex3f(-x, -y, z);
+   glEnd();
+}
+
+void function::cube(GLenum type, float size, int lineWidth) {
+	float x = xC(size), y = yC(size), z = zC(size);
+	glLineWidth(lineWidth);
+	//top
+	glBegin(type);
+		glVertex3f(0,y,z);
+		glVertex3f(0,0,z);
+		glVertex3f(x,0,z);
+		glVertex3f(x,y,z);
+	glEnd();
+	//right
+	glBegin(type);
+		glVertex3f(x,y,z);
+		glVertex3f(x,0,z);
+		glVertex3f(x,0,0);
+		glVertex3f(x,y,0);
+	glEnd();
+	//left
+	glBegin(type);
+		glVertex3f(0,y,z);
+		glVertex3f(0,0,z);
+		glVertex3f(0,0,0);
+		glVertex3f(0,y,0);
+	glEnd();
+	//front
+	glBegin(type);
+		glVertex3f(0,0,z);
+		glVertex3f(x,0,z);
+		glVertex3f(x,0,0);
+		glVertex3f(0,0,0);
+	glEnd();
+	//back
+	glBegin(type);
+		glVertex3f(0,y,z);
+		glVertex3f(x,y,z);
+		glVertex3f(x,y,0);
+		glVertex3f(0,y,0);
+	glEnd();
+	//bottom
+	glBegin(type);
+		glVertex3f(0,y,0);
+		glVertex3f(x,y,0);
+		glVertex3f(x,0,0);
+		glVertex3f(0,0,0);
+	glEnd();
 }
 
 void function::quad(GLenum gltype, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
@@ -172,7 +266,7 @@ void function::bezierQuad(float x1, float x2, float x3, float x4, float y1, floa
 	glEnd();
 }
 
-void function::drawBezier(GLenum type, float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4) {
+void function::bezier(GLenum type, float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4) {
 	float smoothness = 0.02;
 	const int numberOfPoints = 500;
 	double xt[numberOfPoints], yt[numberOfPoints];
