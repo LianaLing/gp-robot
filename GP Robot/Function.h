@@ -18,13 +18,17 @@ namespace N {
 		float yP(float y);
 		float zP(float z);
 		float cC(float color);
-		void v3(float x, float y, float z);
-		void v2(float x, float y);
-		void drawSphere(GLenum type, float xradius, float yradius, float zradius, int xaxis, int yaxis, float zaxis, float xmin, float xmax, float ymin, float ymax, float r, float g, float b);
-		void drawCircle(float x, float y, float xr, float yr, float min, float max);
+		void v3f(float x, float y, float z);
+		void v2f(float x, float y);
+		void sphere(GLenum type, float xradius, float yradius, float zradius, int xaxis, int yaxis, float zaxis, float xmin, float xmax, float ymin, float ymax, float r, float g, float b);
+		void circle(float x, float y, float xr, float yr, float min, float max);
+		void triangle(GLenum type, float base, float height, int lineWidth);
+		void quad(GLenum type, float length, float height, int lineWidth);
+		void pyramid(GLenum type, float size, int lineWidth);
+		void cube(GLenum type, float size, int lineWidth);
 		void quad(GLenum gltype, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
 		void bezierQuad(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4, float r, float g, float b);
-		void drawBezier(GLenum type, float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4);
+		void bezier(GLenum type, float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4);
 	};
 }
 
