@@ -815,7 +815,7 @@ void display()
 	case 3:
 		//test3();
 		//glRotatef(1, 1, 1, 0);
-		fh.drawSphere(GL_LINE_STRIP, 200, 200, 200, 400, 400, 36, 0, 100, 0, 100, 1, 0, 0);
+		fh.sphere(GL_LINE_STRIP, 200, 200, 200, 400, 400, 36, 0, 100, 0, 100, 1, 0, 0);
 		break;
 	case 4:
 		head();
