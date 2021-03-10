@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Function.cpp
 C:\Users\Liana Ling\OneDrive\Documents\GitHub\gp-robot\GP Robot\Function.cpp(53,12): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
 C:\Users\Liana Ling\OneDrive\Documents\GitHub\gp-robot\GP Robot\Function.cpp(57,12): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
@@ -45,3 +46,8 @@ C:\Users\Liana Ling\OneDrive\Documents\GitHub\gp-robot\GP Robot\Main.cpp(850,6):
 C:\Users\Liana Ling\OneDrive\Documents\GitHub\gp-robot\GP Robot\Function.h(12): message : see declaration of 'N::function'
 C:\Users\Liana Ling\OneDrive\Documents\GitHub\gp-robot\GP Robot\Main.cpp(871,1): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   Generating Code...
+=======
+﻿  Main.cpp
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(854,1): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  GP Robot.vcxproj -> D:\Users\ADMIN\Documents\gp-robot\x64\Debug\GP Robot.exe
+>>>>>>> parent of 0238507 (Merge branch 'main' of https://github.com/LianaLing/gp-robot into main)
