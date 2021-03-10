@@ -74,6 +74,22 @@ void function::v2f(float x, float y) {
 	glVertex2f(xC(x), yC(y));
 }
 
+void function::color(char smallLetterColorChar) {
+	float on = 1.0, off = 0;
+	float red = off, green = off, blue = off;
+
+	switch (smallLetterColorChar) {
+	case 'r': red = on; break;
+	case 'g': green = on; break;
+	case 'b': blue = on; break;
+	case 'w': red = on, green = on, blue = on; break;
+	case 'y': red = on, green = on, blue = off; break; //yellow
+	case 'c': red = off, green = on, blue = on; break; //cyan
+	case 'o': red = off, green = off, blue = off; //others - stands for black
+	}
+	glColor3f(red, green, blue);
+}
+
 void function::poly3(GLenum type, float* array, int num) {
 	int noEmpty = 0, empty = 0;
 	for (int i = 0; i < num; i++) {
@@ -125,6 +141,22 @@ void function::sphere(GLenum type, float xradius, float yradius, float zradius, 
 		}
 		glEnd();
 	}
+}
+
+void function::sphere(GLenum type, float radius, int slices, int stacks) {
+	GLUquadricObj* sphere = NULL;
+	sphere = gluNewQuadric();
+	gluQuadricDrawStyle(sphere, type);
+	gluSphere(sphere, radius, slices, stacks);
+	gluDeleteQuadric(sphere);
+}
+
+void function::cylinder(GLenum type, float baseRadius, float topRadius, float height, int slices, int stacks) {
+	GLUquadricObj *cylinder = NULL;
+	cylinder = gluNewQuadric();
+	gluQuadricDrawStyle(cylinder, type);
+	gluCylinder(cylinder, baseRadius, topRadius, height, slices, stacks);
+	gluDeleteQuadric(cylinder);
 }
 
 void function::circle(float x, float y, float xr, float yr, float min, float max) {
@@ -239,6 +271,58 @@ void function::cube(GLenum type, float size, int lineWidth) {
 	glVertex3f(x, y, 0);
 	glVertex3f(x, 0, 0);
 	glVertex3f(0, 0, 0);
+	glEnd();
+}
+
+void function::cuboid(GLenum type, float size, float ratio, int lineWidth) {
+	glLineWidth(lineWidth);
+	//front
+	//fh.color('b');
+	glBegin(type);
+		glVertex3f(0, size, size);
+		glVertex3f(0, 0, size);
+		glVertex3f(size * ratio, 0, size);
+		glVertex3f(size * ratio, size, size);
+	glEnd();
+	//right
+	//fh.color('g');
+	glBegin(type);
+		glVertex3f(size * ratio, size, size);
+		glVertex3f(size * ratio, 0, size);
+		glVertex3f(size * ratio, 0, 0);
+		glVertex3f(size * ratio, size, 0);
+	glEnd();
+	//left
+	//fh.color('w');
+	glBegin(type);
+		glVertex3f(0, size, size);
+		glVertex3f(0, 0, size);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, size, 0);
+	glEnd();
+	//bottom
+	//fh.color('g');
+	glBegin(type);
+		glVertex3f(0, 0, size);
+		glVertex3f(size * ratio, 0, size);
+		glVertex3f(size * ratio, 0, 0);
+		glVertex3f(0, 0, 0);
+	glEnd();
+	//top
+	glColor3f(1.0, 1.0, 0.0);
+	glBegin(type);
+		glVertex3f(0, size, size);
+		glVertex3f(size * ratio, size, size);
+		glVertex3f(size * ratio, size, 0);
+		glVertex3f(0, size, 0);
+	glEnd();
+	//back
+	glColor3f(0, 1.0, 1.0);
+	glBegin(type);
+		glVertex3f(0, size, 0);
+		glVertex3f(size * ratio, size, 0);
+		glVertex3f(size * ratio, 0, 0);
+		glVertex3f(0, 0, 0);
 	glEnd();
 }
 

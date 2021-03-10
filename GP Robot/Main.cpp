@@ -8,7 +8,8 @@
 using namespace N;
 using namespace std;
 
-#pragma comment (lib, "OpenGL32.lib")
+//#pragma comment (lib, "OpenGL32.lib")
+//dependencies included in project properties - linker - input
 
 #define WINDOW_TITLE "IRON-MAN MK47"
 #define CW 10
@@ -19,9 +20,13 @@ using namespace std;
 #define SIZE 15
 
 function fh;
-int qNo = 61;
+int qNo = 4;
 float C[SIZE];
-
+//============== LIANA ==============
+float armRotate = 0, armRSpeed = 0, armx = 0, army = 0, armz = 0, armDirection = 0, armAngle = 0;
+float armx2 = 0, army2 = 0, armz2 = 0;
+boolean armTurn = false, armUp = false, armDown  = false;
+//===================================
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
@@ -35,8 +40,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			PostQuitMessage(0);
 		}
 		else if (wParam == 0x31) {
-			// press 1
-			qNo = 1;
+			// press 1.0
+			qNo = 1.0;
 			break;
 		}
 		else if (wParam == 0x32) {
@@ -80,9 +85,27 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			break;
 		}
 		else if (wParam == 0x61) {
-			// press numpad 1
+			// press numpad 1.0
 			qNo = 61;
 			break;
+		}
+		else if (wParam == VK_UP && qNo == 4) {
+			armx = 1.0, army = 0, armz = 0, armRSpeed = 0.5, armUp = true, armDown = false;
+		}
+		else if (wParam == VK_DOWN && qNo == 4) {
+			armx = 1.0, army = 0, armz = 0, armUp = false, armDown = true;
+		}
+		else if (wParam == VK_LEFT && qNo == 4) {
+			armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = +1.0, armRSpeed = 0.5, armTurn = true;
+		}
+		else if (wParam == VK_RIGHT && qNo == 4) {
+			armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = -1.0, armRSpeed = 0.5, armTurn = true;
+		}
+		else if (wParam == VK_SPACE) {
+			glLoadIdentity();
+			armx = 1.00, army = 0, armz = 0, armx2 = 0, army2 = 0, armz2 = 0;
+			armRSpeed = 0, armAngle = 0, armRotate = 0, armDirection = 0;
+			armUp = false, armDown = false, armTurn = false;
 		}
 		break;
 	default:
@@ -124,6 +147,11 @@ bool initPixelFormat(HDC hdc)
 	}
 }
 //--------------------------------------------------------------------
+
+void init() {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0, 0, 0, 0);
+}
 
 void body() {
 	/*glClearColor(0.5, 0.5, 0.5, 0);
@@ -344,7 +372,7 @@ void lowerChest() {
 	//glEnd();
 }
 
-//void abdomen() {
+void abdomen() {
 //	// front 0
 //	glBegin(GL_QUADS);
 //	glVertex3f(xC(346.25), yC(267.5), zC(52.5));
@@ -352,7 +380,7 @@ void lowerChest() {
 //	glVertex3f(xC(497.5), yC(315), zC());
 //	glVertex3f(xC(453.75), yC(267.5), zC());
 //	glEnd();
-//}
+}
 
 void head() {
 	////Points
@@ -789,17 +817,124 @@ void head() {
 	//	//glEnd();
 }
 
+//============================= LIANA =================================
+
+void palm(GLenum type, float size, float size2, int lineWidth) {
+	glPushMatrix();
+	glTranslatef(size * 2 / 3 + 0.1, size, 0);
+	glRotatef(90, 0, 0, 1);
+	fh.cuboid(GL_POLYGON, size / 3.0, 1, lineWidth);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(size * 2 / 3 - 0.07, size + 0.30, 0.2);
+	//fh.color('r');
+	fh.sphere(GLU_LINE, size / 6.0, 10, 10);
+	glPopMatrix();
+
+	glLineWidth(lineWidth);
+	//front
+	fh.color('w');
+	glBegin(type);
+		glVertex3f(0, size, size2);
+		glVertex3f(0, 0, size2);
+		glVertex3f(size, 0, size2);
+		glVertex3f(size, size, size2);
+	glEnd();
+	//right
+	fh.color('w');
+	glBegin(type);
+		glVertex3f(size, size, size2);
+		glVertex3f(size, 0, size2);
+		glVertex3f(size, 0, 0);
+		glVertex3f(size, size, 0);
+	glEnd();
+	//left
+	fh.color('w');
+	glBegin(type);
+		glVertex3f(0, size, size2);
+		glVertex3f(0, 0, size2);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, size, 0);
+	glEnd();
+	//bottom
+	fh.color('w');
+	glBegin(type);
+		glVertex3f(0, 0, size2);
+		glVertex3f(0, 0, 0);
+		glVertex3f(size, 0, 0);
+		glVertex3f(size, 0, size2);
+	glEnd();
+	//top
+	fh.color('w');
+	glBegin(type);
+		glVertex3f(0, size, size2);
+		glVertex3f(0, size, 0);
+		glVertex3f(size, size, 0);
+		glVertex3f(size, size, size2);
+	glEnd();
+	//back
+	fh.color('w');
+	glBegin(type);
+		glVertex3f(0, size, 0);
+		glVertex3f(0, 0, 0);
+		glVertex3f(size, 0, 0);
+		glVertex3f(size, size, 0);
+	glEnd();
+}
+
+void arm() {
+	float uaBaseRadius = 0.05, uaTopRadius = uaBaseRadius - 0.005, height = 0.35, slices = 30, stacks = 30;
+	float laBaseRadius = uaTopRadius, laTopRadius = laBaseRadius - 0.01;
+	float sRadius = uaTopRadius;
+	float palmSize = uaBaseRadius + 0.05;
+
+	glPushMatrix();
+	glRotatef(90, 0.0, 1.0, 0.0);
+	
+	glPushMatrix();
+	glTranslatef(0, 0, -height);
+	fh.color('g');
+	fh.cylinder(GLU_LINE, uaBaseRadius, uaTopRadius, height, slices, stacks); //upperarm
+	glPopMatrix();
+	
+	glPushMatrix();
+	//glRotatef(-90, 1.0, 0, 0);
+	//glTranslatef(0, 0, height);
+	
+	glPushMatrix();
+	fh.color('y');
+	fh.sphere(GLU_LINE, sRadius, slices, stacks); //elbow
+	glPopMatrix();
+	
+	glPushMatrix();
+	if(armUp || armDown)
+		glRotatef(-armAngle, armx, army, armz);
+	//glRotatef(-90, 1.0, 0.0, 0.0);
+	//glRotatef(-armAngle, 1.0, 0.0, 0.0);
+	fh.color('r');
+	fh.cylinder(GLU_LINE, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
+	glPopMatrix();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glScalef(palmSize, palmSize, palmSize);
+	palm(GL_LINE_LOOP, 1.0, 0.5, 2);
+	glPopMatrix();
+	glPopMatrix();
+
+}
+
+//============================= LIANA =================================
 void dannyWork() {
 	upperChest();
 	lowerChest();
-	//abdomen();
+	abdomen();
 }
 
 void display()
 {
-	glClearColor(0, 0, 0, 0);
-	//glEnable(GL_DEPTH_TEST);
-	glClear(GL_COLOR_BUFFER_BIT/* | GL_DEPTH_BUFFER_BIT*/);
+	init();
 
 	switch (qNo) {
 	case 1:
@@ -822,6 +957,22 @@ void display()
 		break;
 	case 4:
 		head();
+		if ((armUp && armAngle > 110) || (armDown && armAngle >= 0)) //raise hand
+			armAngle -= armRSpeed;
+		else
+			armAngle += armRSpeed;
+
+		if (armDirection == 1 && armRotate <= 30) //arm rotate
+			armRotate += armRSpeed;
+		else
+			if(armRotate >= -30)
+				armRotate -= armRSpeed;
+
+		glPushMatrix();
+		if (armTurn)
+			glRotatef(armRotate, armx2, army2, armz2);
+		arm();
+		glPopMatrix();
 		break;
 	case 5:
 		glRotatef(1, 0, 0, 1);
