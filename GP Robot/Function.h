@@ -20,6 +20,7 @@ namespace N {
 		float cC(float color);
 		void v3f(float x, float y, float z);
 		void v2f(float x, float y);
+		void poly3(GLenum type, float* array, int num);
 		void sphere(GLenum type, float xradius, float yradius, float zradius, int xaxis, int yaxis, float zaxis, float xmin, float xmax, float ymin, float ymax, float r, float g, float b);
 		void circle(float x, float y, float xr, float yr, float min, float max);
 		void triangle(GLenum type, float base, float height, int lineWidth);

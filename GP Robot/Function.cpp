@@ -13,7 +13,6 @@ using namespace std;
 #define HEIGHT VALUE
 #define DEPTH VALUE
 #define M_PI 3.141593
-function fh;
 
 float function::xC(float x) {
 	float xCoor = 0, width = WIDTH / 2;
@@ -29,9 +28,17 @@ float function::xC(float x) {
 	return xCoor;
 }
 
+float function::zC(float z) {
+	float zCoor, depth = DEPTH / 2;
+
+	zCoor = z / depth;
+
+	return zCoor;
+}
+
 float function::yC(float y) {
-	float yCoor = 0, height = HEIGHT / 2;
-	if (y >= 0 && y < height) {
+	float yCoor, height = HEIGHT / 2;
+	if (y > 0 && y < height) {
 		yCoor = 1 - (y / height);
 	}
 	else if (y > height) {
@@ -41,12 +48,6 @@ float function::yC(float y) {
 		yCoor = 0.0;
 	}
 	return yCoor;
-}
-
-float function::zC(float z) {
-	float zCoor, depth = DEPTH / 2;
-	zCoor = z / depth;
-	return -zCoor;
 }
 
 float function::xP(float x) {
@@ -71,6 +72,27 @@ void function::v3f(float x, float y, float z) {
 
 void function::v2f(float x, float y) {
 	glVertex2f(xC(x), yC(y));
+}
+
+void function::poly3(GLenum type, float* array, int num) {
+	int noEmpty = 0, empty = 0;
+	for (int i = 0; i < num; i++) {
+		if (array[i] == 1000000) {
+			empty++;
+		}
+	}
+
+	noEmpty = num - empty;
+
+	glBegin(type);
+	for (int i = 0; i < noEmpty; i += 3) {
+		glVertex3f(array[i], array[i + 1], array[i + 2]);
+	}
+	glEnd();
+
+	for (int i = 0; i < noEmpty; i++) {
+		array[i] = 1000000;
+	}
 }
 
 void function::sphere(GLenum type, float xradius, float yradius, float zradius, int xaxis, int yaxis, float zaxis, float xmin, float xmax, float ymin, float ymax, float r, float g, float b) {

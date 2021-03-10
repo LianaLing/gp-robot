@@ -16,9 +16,12 @@ using namespace std;
 #define WIDTH VALUE
 #define HEIGHT VALUE
 #define DEPTH VALUE
+#define SIZE 15
 
 function fh;
-int qNo = 6;
+int qNo = 61;
+float C[SIZE];
+
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
@@ -830,7 +833,21 @@ void display()
 		dannyWork();
 		break;
 	case 61:
-
+		for (int i = 0; i < SIZE; i++) {
+			C[i] = 1000000;
+		}
+		C[0] = 0, C[1] = 0, C[2] = 0;
+		C[3] = 0.2, C[4] = 0, C[5] = 0;
+		C[6] = 0.2, C[7] = 0.2, C[8] = 0;
+		glColor3f(1, 1, 1);
+		glLineWidth(3);
+		glRotatef(1, 0, 1, 0);
+		fh.poly3(GL_LINE_STRIP, C, SIZE);
+		C[0] = 0, C[1] = 0, C[2] = 0;
+		C[3] = -0.2, C[4] = 0, C[5] = 0;
+		C[6] = -0.2, C[7] = 0.2, C[8] = 0;
+		glColor3f(1, 0, 0);
+		fh.poly3(GL_LINE_STRIP, C, SIZE);
 		break;
 	default:
 		head();
