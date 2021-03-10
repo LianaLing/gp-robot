@@ -1,3 +1,9 @@
 ﻿  Main.cpp
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(854,1): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(840,13): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(841,13): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(841,25): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(847,14): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(848,14): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(848,26): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(871,1): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   GP Robot.vcxproj -> D:\Users\ADMIN\Documents\gp-robot\x64\Debug\GP Robot.exe
