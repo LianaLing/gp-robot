@@ -161,8 +161,9 @@ bool initPixelFormat(HDC hdc)
 //--------------------------------------------------------------------
 
 void init() {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0, 0, 0, 0);
+	glEnable(GL_DEPTH_TEST);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void body() {
@@ -227,161 +228,158 @@ void body() {
 }
 
 void upperChest() {
+	// front top
+	glColor3f(1, 0.7, 0.3);
+	glBegin(GL_QUADS);
+	fh.v3f(378.75, 180, 25);
+	fh.v3f(356.25, 185, 30);
+	fh.v3f(443.75, 185, 30);
+	fh.v3f(421.25, 180, 25);
+	glEnd();
 
-	//// front top
-	//glColor3f(1, 0.7, 0.3);
-	//glBegin(GL_QUADS);
-	//glVertex3f(xC(378.75), yC(180), zC(25));
-	//glVertex3f(xC(356.25), yC(185), zC(30));
-	//glVertex3f(xC(443.75), yC(185), zC(30));
-	//glVertex3f(xC(421.25), yC(180), zC(25));
-	//glEnd();
+	// front btm
+	glColor3f(1, 0, 0.5);
+	glBegin(GL_POLYGON);
+	fh.v3f(356.25, 185, 30);
+	fh.v3f(340, 222.5, 50);
+	fh.v3f(460, 222.5, 50);
+	fh.v3f(443.75, 185, 30);
+	glEnd();
 
-	//// front btm
-	//glColor3f(1, 0, 0.5);
-	//glBegin(GL_POLYGON);
-	//glVertex3f(xC(356.25), yC(185), zC(30));
-	//glVertex3f(xC(340), yC(222.5), zC(50));
-	//glVertex3f(xC(460), yC(222.5), zC(50));
-	//glVertex3f(xC(443.75), yC(185), zC(30));
-	//glEnd();
+	// left top
+	glColor3f(1, 1, 1);
+	glBegin(GL_POLYGON);
+	fh.v3f(378.75, 180, -37.5);
+	fh.v3f(356.25, 185, -42.5);
+	fh.v3f(356.25, 185, 30);
+	fh.v3f(378.75, 180, 25);
+	glEnd();
 
-	//// left top
-	//glColor3f(1, 1, 1);
-	//glBegin(GL_POLYGON);
-	//glVertex3f(xC(378.75), yC(180), zC(-37.5));
-	//glVertex3f(xC(356.25), yC(185), zC(-42.5));
-	//glVertex3f(xC(356.25), yC(185), zC(30));
-	//glVertex3f(xC(378.75), yC(180), zC(25));
-	//glEnd();
+	// left btm
+	glColor3f(0, 1, 0);
+	glBegin(GL_POLYGON);
+	fh.v3f(356.25, 185, -42.5);
+	fh.v3f(340, 222.5, -60);
+	fh.v3f(340, 222.5, 50);
+	fh.v3f(356.25, 185, 30);
+	glEnd();
 
-	//// left btm
-	//glColor3f(0, 1, 0);
-	//glBegin(GL_POLYGON);
-	//glVertex3f(xC(356.25), yC(185), zC(-42.5));
-	//glVertex3f(xC(340), yC(222.5), zC(-60));
-	//glVertex3f(xC(340), yC(222.5), zC(50));
-	//glVertex3f(xC(356.25), yC(185), zC(30));
-	//glEnd();
+	// right top
+	glColor3f(1, 0, 1);
+	glBegin(GL_POLYGON);
+	fh.v3f(421.25, 180, 25);
+	fh.v3f(443.75, 185, 30);
+	fh.v3f(443.75, 185, -42.5);
+	fh.v3f(421.25, 180, -37.5);
+	glEnd();
 
-	//// right top
-	//glColor3f(1, 0, 1);
-	//glBegin(GL_POLYGON);
-	//glVertex3f(xC(421.25), yC(180), zC(25));
-	//glVertex3f(xC(443.75), yC(185), zC(30));
-	//glVertex3f(xC(443.75), yC(185), zC(-42.5));
-	//glVertex3f(xC(421.25), yC(180), zC(-37.5));
-	//glEnd();
+	// right btm
+	glColor3f(0.2, 1, 0.5);
+	glBegin(GL_POLYGON);
+	fh.v3f(443.75, 185, -42.5);
+	fh.v3f(460, 222.5, -60);
+	fh.v3f(460, 222.5, 50);
+	fh.v3f(443.75, 185, 30);
+	glEnd();
 
-	//// right btm
-	//glColor3f(0.2, 1, 0.5);
-	//glBegin(GL_POLYGON);
-	//glVertex3f(xC(443.75), yC(185), zC(-42.5));
-	//glVertex3f(xC(460), yC(222.5), zC(-60));
-	//glVertex3f(xC(460), yC(222.5), zC(50));
-	//glVertex3f(xC(443.75), yC(185), zC(30));
-	//glEnd();
+	// back top
+	glColor3f(0, 0.7, 0.3);
+	glBegin(GL_QUADS);
+	fh.v3f(378.75, 180, -37.5);
+	fh.v3f(356.25, 185, -42.5);
+	fh.v3f(443.75, 185, -42.5);
+	fh.v3f(421.25, 180, -37.5);
+	glEnd();
 
-	//// back top
-	//glColor3f(0, 0.7, 0.3);
-	//glBegin(GL_QUADS);
-	//glVertex3f(xC(378.75), yC(180), zC(-37.5));
-	//glVertex3f(xC(356.25), yC(185), zC(-42.5));
-	//glVertex3f(xC(443.75), yC(185), zC(-42.5));
-	//glVertex3f(xC(421.25), yC(180), zC(-37.5));
-	//glEnd();
-
-	//// back btm
-	//glColor3f(0.5, 0.3, 1);
-	//glBegin(GL_POLYGON);
-	//glVertex3f(xC(356.25), yC(185), zC(-42.5));
-	//glVertex3f(xC(340), yC(222.5), zC(-60));
-	//glVertex3f(xC(460), yC(222.5), zC(-60));
-	//glVertex3f(xC(443.75), yC(185), zC(-42.5));
-	//glEnd();
-
-
+	// back btm
+	glColor3f(0.5, 0.3, 1);
+	glBegin(GL_POLYGON);
+	fh.v3f(356.25, 185, -42.5);
+	fh.v3f(340, 222.5, -60);
+	fh.v3f(460, 222.5, -60);
+	fh.v3f(443.75, 185, -42.5);
+	glEnd();
 }
 
 void lowerChest() {
-	//// front top
-	//glColor3f(0.7, 0.7, 1);
-	//glBegin(GL_QUADS);
-	//glVertex3f(xC(340), yC(222.5), zC(50));
-	//glVertex3f(xC(343.75), yC(242.5), zC(57.5));
-	//glVertex3f(xC(456.25), yC(242.5), zC(57.5));
-	//glVertex3f(xC(460), yC(222.5), zC(50));
-	//glEnd();
+	// front top
+	glColor3f(0.7, 0.7, 1);
+	glBegin(GL_QUADS);
+	fh.v3f(340, 222.5, 50);
+	fh.v3f(343.75, 242.5, 57.5);
+	fh.v3f(456.25, 242.5, 57.5);
+	fh.v3f(460, 222.5, 50);
+	glEnd();
 
-	//// middle light (back)
+	// middle light (back)
 
 
-	//// middle light
-	//glColor3f(1, 1, 1);
-	//drawSphere(13, 13, 13, 400, 235, 45, 0, 100, 0, 100);
+	// middle light
+	glColor3f(1, 1, 1);
+	fh.sphere(GL_POLYGON, 13, 13, 13, 400, 235, 45, 0, 100, 0, 100, 1, 1, 1);
 
-	//// front btm
-	//glColor3f(0.7, 0.7, 0.7);
-	//glBegin(GL_QUADS);
-	//glVertex3f(xC(343.75), yC(242.5), zC(57.5));
-	//glVertex3f(xC(346.25), yC(267.5), zC(52.5));
-	//glVertex3f(xC(453.75), yC(267.5), zC(52.5));
-	//glVertex3f(xC(456.25), yC(242.5), zC(57.5));
-	//glEnd();
-	//
-	//// left top
-	//glColor3f(0.7, 1, 0.7);
-	//glBegin(GL_QUADS);
-	//glVertex3f(xC(340), yC(222.5), zC(-60));
-	//glVertex3f(xC(343.75), yC(242.5), zC(-60));
-	//glVertex3f(xC(343.75), yC(242.5), zC(57.5));
-	//glVertex3f(xC(340), yC(222.5), zC(50));
-	//glEnd();
+	// front btm
+	glColor3f(0.7, 0.7, 0.7);
+	glBegin(GL_QUADS);
+	fh.v3f(343.75, 242.5, 57.5);
+	fh.v3f(346.25, 267.5, 52.5);
+	fh.v3f(453.75, 267.5, 52.5);
+	fh.v3f(456.25, 242.5, 57.5);
+	glEnd();
 
-	//// left btm
-	//glColor3f(1, 0.7, 0.7);
-	//glBegin(GL_QUADS);
-	//glVertex3f(xC(343.75), yC(242.5), zC(-60));
-	//glVertex3f(xC(346.25), yC(267.5), zC(-47.5));
-	//glVertex3f(xC(346.25), yC(267.5), zC(52.5));
-	//glVertex3f(xC(343.75), yC(242.5), zC(57.5));
-	//glEnd();
+	// left top
+	glColor3f(0.7, 1, 0.7);
+	glBegin(GL_QUADS);
+	fh.v3f(340, 222.5, -60);
+	fh.v3f(343.75, 242.5, -60);
+	fh.v3f(343.75, 242.5, 57.5);
+	fh.v3f(340, 222.5, 50);
+	glEnd();
 
-	//// right top
-	//glColor3f(0.3, 0.5, 0.3);
-	//glBegin(GL_QUADS);
-	//glVertex3f(xC(460), yC(222.5), zC(50));
-	//glVertex3f(xC(456.25), yC(242.5), zC(57.5));
-	//glVertex3f(xC(456.25), yC(242.5), zC(-60));
-	//glVertex3f(xC(460), yC(222.5), zC(-60));
-	//glEnd();
+	// left btm
+	glColor3f(1, 0.7, 0.7);
+	glBegin(GL_QUADS);
+	fh.v3f(343.75, 242.5, -60);
+	fh.v3f(346.25, 267.5, -47.5);
+	fh.v3f(346.25, 267.5, 52.5);
+	fh.v3f(343.75, 242.5, 57.5);
+	glEnd();
 
-	//// right btm
-	//glColor3f(1, 0.7, 1);
-	//glBegin(GL_QUADS);
-	//glVertex3f(xC(456.25), yC(242.5), zC(-60));
-	//glVertex3f(xC(453.75), yC(267.5), zC(-47.5));
-	//glVertex3f(xC(453.75), yC(267.5), zC(52.5));
-	//glVertex3f(xC(456.25), yC(242.5), zC(57.5));
-	//glEnd();
+	// right top
+	glColor3f(0.3, 0.5, 0.3);
+	glBegin(GL_QUADS);
+	fh.v3f(460, 222.5, 50);
+	fh.v3f(456.25, 242.5, 57.5);
+	fh.v3f(456.25, 242.5, -60);
+	fh.v3f(460, 222.5, -60);
+	glEnd();
 
-	//// back top
-	//glColor3f(0.7, 0.5, 0.3);
-	//glBegin(GL_QUADS);
-	//glVertex3f(xC(340), yC(222.5), zC(-60));
-	//glVertex3f(xC(343.75), yC(242.5), zC(-60));
-	//glVertex3f(xC(456.25), yC(242.5), zC(-60));
-	//glVertex3f(xC(460), yC(222.5), zC(-60));
-	//glEnd();
+	// right btm
+	glColor3f(1, 0.7, 1);
+	glBegin(GL_QUADS);
+	fh.v3f(456.25, 242.5, -60);
+	fh.v3f(453.75, 267.5, -47.5);
+	fh.v3f(453.75, 267.5, 52.5);
+	fh.v3f(456.25, 242.5, 57.5);
+	glEnd();
 
-	//// back btm
-	//glColor3f(0.5, 0, 1);
-	//glBegin(GL_QUADS);
-	//glVertex3f(xC(343.75), yC(242.5), zC(-60));
-	//glVertex3f(xC(346.25), yC(267.5), zC(-47.5));
-	//glVertex3f(xC(453.75), yC(267.5), zC(-47.5));
-	//glVertex3f(xC(456.25), yC(242.5), zC(-60));
-	//glEnd();
+	// back top
+	glColor3f(0.7, 0.5, 0.3);
+	glBegin(GL_QUADS);
+	fh.v3f(340, 222.5, -60);
+	fh.v3f(343.75, 242.5, -60);
+	fh.v3f(456.25, 242.5, -60);
+	fh.v3f(460, 222.5, -60);
+	glEnd();
+
+	// back btm
+	glColor3f(0.5, 0, 1);
+	glBegin(GL_QUADS);
+	fh.v3f(343.75, 242.5, -60);
+	fh.v3f(346.25, 267.5, -47.5);
+	fh.v3f(453.75, 267.5, -47.5);
+	fh.v3f(456.25, 242.5, -60);
+	glEnd();
 }
 
 void abdomen() {
@@ -1035,7 +1033,9 @@ void dannyWork() {
 void display()
 {
 	init();
-
+	for (int i = 0; i < SIZE; i++) {
+		C[i] = 1000000;
+	}
 	switch (qNo) {
 	case 1:
 		//glLoadIdentity();
@@ -1048,7 +1048,12 @@ void display()
 		//glPopMatrix();
 		break;
 	case 2:
-		fh.bezierQuad(-350, -200, -120, 5, -150, 50, 150, 230, 0, 0.5, 0);
+		
+		glRotatef(1, 0, 1, 0);
+		glPushMatrix();
+		glScalef(1.5, 1.5, 1.5);
+		dannyWork();
+		glPopMatrix();
 		break;
 	case 3:
 		//test3();
@@ -1090,9 +1095,7 @@ void display()
 		dannyWork();
 		break;
 	case 61:
-		for (int i = 0; i < SIZE; i++) {
-			C[i] = 1000000;
-		}
+		
 		C[0] = 0, C[1] = 0, C[2] = 0;
 		C[3] = 0.2, C[4] = 0, C[5] = 0;
 		C[6] = 0.2, C[7] = 0.2, C[8] = 0;
