@@ -309,7 +309,7 @@ void function::cuboid(GLenum type, float size, float ratio, int lineWidth) {
 		glVertex3f(0, 0, 0);
 	glEnd();
 	//top
-	glColor3f(1.0, 1.0, 0.0);
+	//glColor3f(1.0, 1.0, 0.0);
 	glBegin(type);
 		glVertex3f(0, size, size);
 		glVertex3f(size * ratio, size, size);
@@ -317,7 +317,7 @@ void function::cuboid(GLenum type, float size, float ratio, int lineWidth) {
 		glVertex3f(0, size, 0);
 	glEnd();
 	//back
-	glColor3f(0, 1.0, 1.0);
+	//glColor3f(0, 1.0, 1.0);
 	glBegin(type);
 		glVertex3f(0, size, 0);
 		glVertex3f(size * ratio, size, 0);

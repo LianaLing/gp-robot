@@ -26,6 +26,10 @@ float C[SIZE];
 float armRotate = 0, armRSpeed = 0, armx = 0, army = 0, armz = 0, armDirection = 0, armAngle = 0;
 float armx2 = 0, army2 = 0, armz2 = 0;
 boolean armTurn = false, armUp = false, armDown  = false;
+float fingerRotate = 0, fingerRSpeed = 0, fx = 0, fy = 0, fz = 0 /*, fingerDirection = 0, fingerAngle = 0*/;
+float fx2 = 0, fy2 = 0, fz2 = 0;
+int fCount = 0;
+boolean fingerBend = false;
 //===================================
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -106,6 +110,14 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			armx = 1.00, army = 0, armz = 0, armx2 = 0, army2 = 0, armz2 = 0;
 			armRSpeed = 0, armAngle = 0, armRotate = 0, armDirection = 0;
 			armUp = false, armDown = false, armTurn = false;
+			fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0;
+			fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount = 0;
+		}
+		else if (wParam == 0x46 && qNo == 4) { //f
+			if(fCount % 2 == 0)
+				fx = 1, fy = 0, fz = 0, fx2 = 0, fy2 = 1, fz2 = 0, fingerRSpeed = 0.5, fingerBend = true, fCount++;
+			else
+				fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0, fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount++;
 		}
 		break;
 	default:
@@ -822,22 +834,37 @@ void head() {
 void finger(GLenum type, float size, float size2, int lineWidth) {
 	glPushMatrix();
 	glTranslatef(-size / 3.0 * 2, size, 0);
+	if (fingerBend) {
+		glTranslatef(-size / 3.0 + 0.3, size, 0.8);
+		glRotatef(fingerRotate * 2, fx2, fy2, fz2);
+		glTranslatef(-(-size / 3.0 * 2), -size, 0);
+	}
 	glRotatef(-90, 0, 0, 1);
-	//fh.color('w');
+	fh.color('r');
 	fh.cuboid(type, size / 3.0, size2, lineWidth);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-size / 3.0, size, 0);
+	if (fingerBend) {
+		glTranslatef(-size / 3.0, size, 0.3);
+		glRotatef(fingerRotate, fx2, fy2, fz2);
+		glTranslatef(-(-size / 3.0), -size, 0);
+	}
 	glRotatef(-90, 0, 0, 1);
-	//fh.color('w');
+	fh.color('g');
 	fh.cuboid(type, size / 3.0, size2, lineWidth);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-size / 3.0 * 2.0, size - 0.15, size / 5.0);
+	if (fingerBend) {
+		glTranslatef(-size / 3.0 * 2.0, size - 0.15, size / 5.0 - 0.5);
+		glRotatef(-fingerRotate, fx2, fy2, fz2);
+		glTranslatef(-(-size / 3.0 * 2.0), -(size - 0.15), -size / 5.0);
+	}
 	//glTranslatef(0, 0, 0);
-	//fh.color('r');
+	fh.color('y');
 	fh.sphere(GLU_LINE, size / 8.0, 10, 10);
 	glPopMatrix();
 }
@@ -900,12 +927,22 @@ void palm(GLenum type, float size, float size2, int lineWidth) {
 	//--------------------thumb--------------------
 	glPushMatrix();
 	glTranslatef(size * 2 / 3.0 + 0.1, size, 0);
+	if (fingerBend) {
+		glTranslatef(size * 2 / 3.0 + 0.1, size - 0.5, -0.75);
+		glRotatef(-fingerRotate, fx, fy, fz);
+		glTranslatef(-(size * 2 / 3.0 + 0.1), -size, 0);
+	}
 	glRotatef(90, 0, 0, 1);
 	fh.cuboid(type, size / 2.5, 1, lineWidth);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(size * 2 / 3.0 - 0.1, size + 0.4, 0.2);
+	if (fingerBend) {
+		glTranslatef(size * 2 / 3.0 - 0.1, (size + 0.4) - 0.3, -1.3);
+		glRotatef(-fingerRotate, fx, fy, fz);
+		glTranslatef(-(size * 2 / 3.0 - 0.1), -(size + 0.4), -0.2);
+	}
 	//fh.color('r');
 	fh.sphere(GLU_LINE, size / 5.0, 10, 10);
 	glPopMatrix();
@@ -1028,8 +1065,13 @@ void display()
 		if (armDirection == 1 && armRotate <= 30) //arm rotate
 			armRotate += armRSpeed;
 		else
-			if(armRotate >= -30)
+			if(armRotate >= -90)
 				armRotate -= armRSpeed;
+
+		if (fingerBend && fingerRotate <= 45)
+			fingerRotate += fingerRSpeed;
+		else
+			fingerRotate -= fingerRSpeed;
 		
 		//glRotatef(0.3, 0, 1.0, 0);
 		glPushMatrix();
