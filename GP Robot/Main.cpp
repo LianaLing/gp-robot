@@ -819,68 +819,125 @@ void head() {
 
 //============================= LIANA =================================
 
-void palm(GLenum type, float size, float size2, int lineWidth) {
+void finger(GLenum type, float size, float size2, int lineWidth) {
 	glPushMatrix();
-	glTranslatef(size * 2 / 3 + 0.1, size, 0);
-	glRotatef(90, 0, 0, 1);
-	fh.cuboid(GL_POLYGON, size / 3.0, 1, lineWidth);
+	glTranslatef(-size / 3.0 * 2, size, 0);
+	glRotatef(-90, 0, 0, 1);
+	//fh.color('w');
+	fh.cuboid(type, size / 3.0, size2, lineWidth);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(size * 2 / 3 - 0.07, size + 0.30, 0.2);
+	glTranslatef(-size / 3.0, size, 0);
+	glRotatef(-90, 0, 0, 1);
+	//fh.color('w');
+	fh.cuboid(type, size / 3.0, size2, lineWidth);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-size / 3.0 * 2.0, size - 0.15, size / 5.0);
+	//glTranslatef(0, 0, 0);
 	//fh.color('r');
-	fh.sphere(GLU_LINE, size / 6.0, 10, 10);
+	fh.sphere(GLU_LINE, size / 8.0, 10, 10);
 	glPopMatrix();
+}
 
+void palm(GLenum type, float size, float size2, int lineWidth) {
+	//--------------------palm--------------------
+	glPushMatrix();
+	glTranslatef(0, 0, -0.25);
 	glLineWidth(lineWidth);
 	//front
 	fh.color('w');
 	glBegin(type);
-		glVertex3f(0, size, size2);
-		glVertex3f(0, 0, size2);
-		glVertex3f(size, 0, size2);
-		glVertex3f(size, size, size2);
+	glVertex3f(0, size, size2);
+	glVertex3f(0, 0, size2);
+	glVertex3f(size, 0, size2);
+	glVertex3f(size, size, size2);
 	glEnd();
 	//right
 	fh.color('w');
 	glBegin(type);
-		glVertex3f(size, size, size2);
-		glVertex3f(size, 0, size2);
-		glVertex3f(size, 0, 0);
-		glVertex3f(size, size, 0);
+	glVertex3f(size, size, size2);
+	glVertex3f(size, 0, size2);
+	glVertex3f(size, 0, 0);
+	glVertex3f(size, size, 0);
 	glEnd();
 	//left
 	fh.color('w');
 	glBegin(type);
-		glVertex3f(0, size, size2);
-		glVertex3f(0, 0, size2);
-		glVertex3f(0, 0, 0);
-		glVertex3f(0, size, 0);
+	glVertex3f(0, size, size2);
+	glVertex3f(0, 0, size2);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, size, 0);
 	glEnd();
 	//bottom
 	fh.color('w');
 	glBegin(type);
-		glVertex3f(0, 0, size2);
-		glVertex3f(0, 0, 0);
-		glVertex3f(size, 0, 0);
-		glVertex3f(size, 0, size2);
+	glVertex3f(0, 0, size2);
+	glVertex3f(0, 0, 0);
+	glVertex3f(size, 0, 0);
+	glVertex3f(size, 0, size2);
 	glEnd();
 	//top
 	fh.color('w');
 	glBegin(type);
-		glVertex3f(0, size, size2);
-		glVertex3f(0, size, 0);
-		glVertex3f(size, size, 0);
-		glVertex3f(size, size, size2);
+	glVertex3f(0, size, size2);
+	glVertex3f(0, size, 0);
+	glVertex3f(size, size, 0);
+	glVertex3f(size, size, size2);
 	glEnd();
 	//back
 	fh.color('w');
 	glBegin(type);
-		glVertex3f(0, size, 0);
-		glVertex3f(0, 0, 0);
-		glVertex3f(size, 0, 0);
-		glVertex3f(size, size, 0);
+	glVertex3f(0, size, 0);
+	glVertex3f(0, 0, 0);
+	glVertex3f(size, 0, 0);
+	glVertex3f(size, size, 0);
 	glEnd();
+	glPopMatrix();
+
+	//--------------------thumb--------------------
+	glPushMatrix();
+	glTranslatef(size * 2 / 3.0 + 0.1, size, 0);
+	glRotatef(90, 0, 0, 1);
+	fh.cuboid(type, size / 2.5, 1, lineWidth);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(size * 2 / 3.0 - 0.1, size + 0.4, 0.2);
+	//fh.color('r');
+	fh.sphere(GLU_LINE, size / 5.0, 10, 10);
+	glPopMatrix();
+
+	//--------------------1st Finger--------------------
+	float fSize = size;
+	size2 = 0.8;
+	finger(type, fSize, size2, lineWidth);
+
+	//--------------------2nd Finger--------------------
+	float fty = 0.25;
+	glPushMatrix();
+	glTranslatef(0, -fty, 0);
+	glScalef(1.25, 1.0, 1.0);
+	finger(type, fSize, size2, lineWidth);
+	glPopMatrix();
+
+	//--------------------3rd Finger--------------------
+	fty += 0.25;
+	glPushMatrix();
+	glTranslatef(0, -fty, 0);
+	glScalef(1.15, 1.0, 1.0);
+	finger(type, fSize, size2, lineWidth);
+	glPopMatrix();
+
+	//--------------------4th Finger--------------------
+	fty += 0.25;
+	glPushMatrix();
+	glTranslatef(0, -fty, 0);
+	glScalef(0.8, 1.0, 1.0);
+	finger(type, fSize, size2, lineWidth);
+	glPopMatrix();
 }
 
 void arm() {
@@ -907,6 +964,7 @@ void arm() {
 	fh.sphere(GLU_LINE, sRadius, slices, stacks); //elbow
 	glPopMatrix();
 	
+	height -= 0.01;
 	glPushMatrix();
 	if(armUp || armDown)
 		glRotatef(-armAngle, armx, army, armz);
@@ -918,6 +976,11 @@ void arm() {
 	glPopMatrix();
 	
 	glPushMatrix();
+	if (armUp || armDown)
+		glRotatef(-armAngle, armx, army, armz);
+	glTranslatef(0, -laTopRadius - 0.01, height + palmSize);
+	//glRotatef(90, 1.0, 0, 0);
+	glRotatef(90, 0, 1.0, 0);
 	glScalef(palmSize, palmSize, palmSize);
 	palm(GL_LINE_LOOP, 1.0, 0.5, 2);
 	glPopMatrix();
@@ -967,7 +1030,8 @@ void display()
 		else
 			if(armRotate >= -30)
 				armRotate -= armRSpeed;
-
+		
+		//glRotatef(0.3, 0, 1.0, 0);
 		glPushMatrix();
 		if (armTurn)
 			glRotatef(armRotate, armx2, army2, armz2);
