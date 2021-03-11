@@ -20,7 +20,7 @@ using namespace std;
 #define SIZE 15
 
 function fh;
-int qNo = 2;
+int qNo = 4;
 float C[SIZE];
 //============== LIANA ==============
 float armRotate = 0, armRSpeed = 0, armx = 0, army = 0, armz = 0, armDirection = 0, armAngle = 0;
