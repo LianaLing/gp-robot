@@ -1131,30 +1131,34 @@ void palm(GLenum type, float size, float size2, int lineWidth) {
 
 	//--------------------thumb--------------------
 	glPushMatrix();
-	/*if (fingerBend)
-		glRotatef(fingerRotate, fx, fy, fz);*/
+	if (fingerBend) {
+		glTranslatef(0, 0, -0.5);
+		glRotatef(fingerRotate, fx, fy, fz);
+	}
 	glPushMatrix();
 	glTranslatef(size * 2 / 3.0 + 0.1, size, 0);
-	if (fingerBend) {
+	/*if (fingerBend) {
 		glTranslatef(size * 2 / 3.0 + 0.1, size - 0.5, -0.75);
-		glRotatef(-fingerRotate, fx, fy, fz);
+		glRotatef(fingerRotate, fx, fy, fz);
 		glTranslatef(-(size * 2 / 3.0 + 0.1), -size, 0);
-	}
+	}*/
 	glRotatef(90, 0, 0, 1);
 	fh.cuboid(type, size / 2.5, 1, lineWidth);
 	glPopMatrix();
 	glPopMatrix();
 
 	glPushMatrix();
-	/*if (fingerBend)
-		glRotatef(fingerRotate, fx, fy, fz);*/
+	if (fingerBend) {
+		glTranslatef(0, 0, -0.5);
+		glRotatef(fingerRotate, fx, fy, fz);
+	}
 	glPushMatrix();
 	glTranslatef(size * 2 / 3.0 - 0.1, size + 0.4, 0.2);
-	if (fingerBend) {
+	/*if (fingerBend) {
 		glTranslatef(size * 2 / 3.0 - 0.1, (size + 0.4) - 0.5, -1.3 + 0.5);
 		glRotatef(-fingerRotate, fx, fy, fz);
 		glTranslatef(-(size * 2 / 3.0 - 0.1), -(size + 0.4), -0.2);
-	}
+	}*/
 	//fh.color('r');
 	fh.sphere(GLU_LINE, size / 5.0, 10, 10);
 	glPopMatrix();
@@ -1362,7 +1366,10 @@ void display()
 		glPushMatrix();
 		if (armTurn)
 			glRotatef(armRotate, armx2, army2, armz2);
+		glPushMatrix();
+		glScalef(zoom, zoom, zoom);
 		arm();
+			glPopMatrix();
 		glPopMatrix();
 		break;
 	case 5:
