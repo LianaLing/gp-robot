@@ -101,38 +101,42 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			qNo = 61;
 			break;
 		}
-		else if (wParam == VK_DOWN) {
-			str = "down";
-		}
 		else if (wParam == VK_UP) {
-			str = "up";
+			if(qNo == 1)
+				str = "up";
+			if(qNo == 4)
+				armx = 1.0, army = 0, armz = 0, armRSpeed = 0.5, armUp = true, armDown = false;
 		}
-		else if (wParam == VK_UP && qNo == 4) {
-			armx = 1.0, army = 0, armz = 0, armRSpeed = 0.5, armUp = true, armDown = false;
+		else if (wParam == VK_DOWN) {
+			if(qNo == 1)
+				str = "down";
+			if(qNo == 4)
+				armx = 1.0, army = 0, armz = 0, armUp = false, armDown = true;
 		}
-		else if (wParam == VK_DOWN && qNo == 4) {
-			armx = 1.0, army = 0, armz = 0, armUp = false, armDown = true;
-			
+		else if (wParam == VK_LEFT) {
+			if(qNo == 4)
+				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = +1.0, armRSpeed = 0.5, armTurn = true;
 		}
-		else if (wParam == VK_LEFT && qNo == 4) {
-			armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = +1.0, armRSpeed = 0.5, armTurn = true;
-		}
-		else if (wParam == VK_RIGHT && qNo == 4) {
-			armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = -1.0, armRSpeed = 0.5, armTurn = true;
+		else if (wParam == VK_RIGHT) {
+			if(qNo == 4)
+				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = -1.0, armRSpeed = 0.5, armTurn = true;
 		}
 		else if (wParam == VK_SPACE) {
-			glLoadIdentity();
-			armx = 1.00, army = 0, armz = 0, armx2 = 0, army2 = 0, armz2 = 0;
-			armRSpeed = 0, armAngle = 0, armRotate = 0, armDirection = 0;
-			armUp = false, armDown = false, armTurn = false;
-			fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0;
-			fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount = 0;
+			if (qNo == 4) {
+				glLoadIdentity();
+				armx = 1.00, army = 0, armz = 0, armx2 = 0, army2 = 0, armz2 = 0;
+				armRSpeed = 0, armAngle = 0, armRotate = 0, armDirection = 0;
+				armUp = false, armDown = false, armTurn = false;
+				fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0;
+				fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount = 0;
+			}
 		}
-		else if (wParam == 0x46 && qNo == 4) { //f
-			if(fCount % 2 == 0)
-				fx = 1, fy = 0, fz = 0, fx2 = 0, fy2 = 1, fz2 = 0, fingerRSpeed = 0.5, fingerBend = true, fCount++;
-			else
-				fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0, fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount++;
+		else if (wParam == 0x46) { //f
+			if(qNo == 4)
+				if(fCount % 2 == 0)
+					fx = 1, fy = 0, fz = 0, fx2 = 0, fy2 = 1, fz2 = 0, fingerRSpeed = 0.5, fingerBend = true, fCount++;
+				else
+					fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0, fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount++;
 		}
 		break;
 	default:
