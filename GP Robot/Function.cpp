@@ -33,7 +33,7 @@ float function::zC(float z) {
 
 	zCoor = z / depth;
 
-	return zCoor;
+	return -zCoor;
 }
 
 float function::yC(float y) {

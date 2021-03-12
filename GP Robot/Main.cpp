@@ -24,6 +24,12 @@ function fh;
 int qNo = 4;
 std::string str = " ";
 float C[SIZE];
+float zoom = 1.5;
+//============== Danny ==============
+float AR = 0, AR1 = 0, AR2 = 0, AR3 = 0, AR4 = 0, AR0 = 0, AR01 = 0, AR5 = 0;
+
+//===================================
+// 
 //============== LIANA ==============
 float armRotate = 0, armRSpeed = 0, armx = 0, army = 0, armz = 0, armDirection = 0, armAngle = 0;
 float armx2 = 0, army2 = 0, armz2 = 0;
@@ -95,11 +101,18 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			qNo = 61;
 			break;
 		}
+		else if (wParam == VK_DOWN) {
+			str = "down";
+		}
+		else if (wParam == VK_UP) {
+			str = "up";
+		}
 		else if (wParam == VK_UP && qNo == 4) {
 			armx = 1.0, army = 0, armz = 0, armRSpeed = 0.5, armUp = true, armDown = false;
 		}
 		else if (wParam == VK_DOWN && qNo == 4) {
 			armx = 1.0, army = 0, armz = 0, armUp = false, armDown = true;
+			
 		}
 		else if (wParam == VK_LEFT && qNo == 4) {
 			armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = +1.0, armRSpeed = 0.5, armTurn = true;
@@ -168,149 +181,89 @@ void init() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void body() {
-	/*glClearColor(0.5, 0.5, 0.5, 0);
-	glEnable(GL_DEPTH_TEST);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);*/
-	//glRotatef(1, 0, 1, 0);
-	// front
-	glBegin(GL_POLYGON);
-	glColor3f(1, 0, 0);
-	glVertex3f(fh.xC(340), fh.yC(200), fh.zC(55));
-	glVertex3f(fh.xC(355), fh.yC(350), fh.zC(44));
-	glVertex3f(fh.xC(445), fh.yC(350), fh.zC(44));
-	glVertex3f(fh.xC(460), fh.yC(200), fh.zC(55));
-	glEnd();
-
-	//// top
-	//glBegin(GL_POLYGON);
-	//glColor3f(0, 1, 0);
-	//glVertex3f(xC(340), yC(200), zC(-55));
-	//glVertex3f(xC(340), yC(200), zC(55));
-	//glVertex3f(xC(460), yC(200), zC(55));
-	//glVertex3f(xC(460), yC(200), zC(-55));
-	//glEnd();
-
-	//// back
-	//glBegin(GL_POLYGON);
-	//glColor3f(0, 0, 1);
-	//glVertex3f(xC(340), yC(200), zC(-55));
-	//glVertex3f(xC(355), yC(350), zC(-44));
-	//glVertex3f(xC(445), yC(350), zC(-44));
-	//glVertex3f(xC(460), yC(200), zC(-55));
-	//glEnd();
-
-	//// left
-	//glBegin(GL_POLYGON);
-	//glColor3f(1, 1, 0);
-	//glVertex3f(xC(340), yC(200), zC(-55));
-	//glVertex3f(xC(355), yC(350), zC(-44));
-	//glVertex3f(xC(355), yC(350), zC(44));
-	//glVertex3f(xC(340), yC(200), zC(55));
-	//glEnd();
-
-	//// right
-	//glBegin(GL_POLYGON);
-	//glColor3f(1, 0, 1);
-	//glVertex3f(xC(460), yC(200), zC(55));
-	//glVertex3f(xC(445), yC(350), zC(44));
-	//glVertex3f(xC(445), yC(350), zC(-44));
-	//glVertex3f(xC(460), yC(200), zC(-55));
-	//glEnd();
-
-	//// btm
-	//glBegin(GL_POLYGON);
-	//glColor3f(0, 1, 1);
-	//glVertex3f(xC(355), yC(350), zC(-44));
-	//glVertex3f(xC(355), yC(350), zC(44));
-	//glVertex3f(xC(445), yC(350), zC(44));
-	//glVertex3f(xC(445), yC(350), zC(-44));
-	//glEnd();
-
-}
-
-void upperChest() {
+//============================= DANNY =================================
+void upperChest(GLenum gltype) {
 	// front top
 	glColor3f(1, 0.7, 0.3);
-	glBegin(GL_QUADS);
-	fh.v3f(378.75, 180, 25);
-	fh.v3f(356.25, 185, 30);
-	fh.v3f(443.75, 185, 30);
-	fh.v3f(421.25, 180, 25);
+	glBegin(gltype);
+	fh.v3f(378.75, 265, 25);
+	fh.v3f(356.25, 270, 30);
+	fh.v3f(443.75, 270, 30);
+	fh.v3f(421.25, 265, 25);
 	glEnd();
 
 	// front btm
 	glColor3f(1, 0, 0.5);
-	glBegin(GL_POLYGON);
-	fh.v3f(356.25, 185, 30);
-	fh.v3f(340, 222.5, 50);
-	fh.v3f(460, 222.5, 50);
-	fh.v3f(443.75, 185, 30);
+	glBegin(gltype);
+	fh.v3f(356.25, 270, 30);
+	fh.v3f(340, 307.5, 50);
+	fh.v3f(460, 307.5, 50);
+	fh.v3f(443.75, 270, 30);
 	glEnd();
 
 	// left top
 	glColor3f(1, 1, 1);
-	glBegin(GL_POLYGON);
-	fh.v3f(378.75, 180, -37.5);
-	fh.v3f(356.25, 185, -42.5);
-	fh.v3f(356.25, 185, 30);
-	fh.v3f(378.75, 180, 25);
+	glBegin(gltype);
+	fh.v3f(378.75, 265, -37.5);
+	fh.v3f(356.25, 270, -42.5);
+	fh.v3f(356.25, 270, 30);
+	fh.v3f(378.75, 265, 25);
 	glEnd();
 
 	// left btm
 	glColor3f(0, 1, 0);
-	glBegin(GL_POLYGON);
-	fh.v3f(356.25, 185, -42.5);
-	fh.v3f(340, 222.5, -60);
-	fh.v3f(340, 222.5, 50);
-	fh.v3f(356.25, 185, 30);
+	glBegin(gltype);
+	fh.v3f(356.25, 270, -42.5);
+	fh.v3f(340, 307.5, -60);
+	fh.v3f(340, 307.5, 50);
+	fh.v3f(356.25, 270, 30);
 	glEnd();
 
 	// right top
 	glColor3f(1, 0, 1);
-	glBegin(GL_POLYGON);
-	fh.v3f(421.25, 180, 25);
-	fh.v3f(443.75, 185, 30);
-	fh.v3f(443.75, 185, -42.5);
-	fh.v3f(421.25, 180, -37.5);
+	glBegin(gltype);
+	fh.v3f(421.25, 265, 25);
+	fh.v3f(443.75, 270, 30);
+	fh.v3f(443.75, 270, -42.5);
+	fh.v3f(421.25, 265, -37.5);
 	glEnd();
 
 	// right btm
 	glColor3f(0.2, 1, 0.5);
-	glBegin(GL_POLYGON);
-	fh.v3f(443.75, 185, -42.5);
-	fh.v3f(460, 222.5, -60);
-	fh.v3f(460, 222.5, 50);
-	fh.v3f(443.75, 185, 30);
+	glBegin(gltype);
+	fh.v3f(443.75, 270, -42.5);
+	fh.v3f(460, 307.5, -60);
+	fh.v3f(460, 307.5, 50);
+	fh.v3f(443.75, 270, 30);
 	glEnd();
 
 	// back top
 	glColor3f(0, 0.7, 0.3);
-	glBegin(GL_QUADS);
-	fh.v3f(378.75, 180, -37.5);
-	fh.v3f(356.25, 185, -42.5);
-	fh.v3f(443.75, 185, -42.5);
-	fh.v3f(421.25, 180, -37.5);
+	glBegin(gltype);
+	fh.v3f(378.75, 265, -37.5);
+	fh.v3f(356.25, 270, -42.5);
+	fh.v3f(443.75, 270, -42.5);
+	fh.v3f(421.25, 265, -37.5);
 	glEnd();
 
 	// back btm
 	glColor3f(0.5, 0.3, 1);
-	glBegin(GL_POLYGON);
-	fh.v3f(356.25, 185, -42.5);
-	fh.v3f(340, 222.5, -60);
-	fh.v3f(460, 222.5, -60);
-	fh.v3f(443.75, 185, -42.5);
+	glBegin(gltype);
+	fh.v3f(356.25, 270, -42.5);
+	fh.v3f(340, 307.5, -60);
+	fh.v3f(460, 307.5, -60);
+	fh.v3f(443.75, 270, -42.5);
 	glEnd();
 }
 
-void lowerChest() {
+void lowerChest(GLenum gltype) {
 	// front top
 	glColor3f(0.7, 0.7, 1);
-	glBegin(GL_QUADS);
-	fh.v3f(340, 222.5, 50);
-	fh.v3f(343.75, 242.5, 57.5);
-	fh.v3f(456.25, 242.5, 57.5);
-	fh.v3f(460, 222.5, 50);
+	glBegin(gltype);
+	fh.v3f(340, 307.5, 50);
+	fh.v3f(343.75, 327.5, 57.5);
+	fh.v3f(456.25, 327.5, 57.5);
+	fh.v3f(460, 307.5, 50);
 	glEnd();
 
 	// middle light (back)
@@ -318,80 +271,314 @@ void lowerChest() {
 
 	// middle light
 	glColor3f(1, 1, 1);
-	fh.sphere(GL_POLYGON, 13, 13, 13, 400, 235, 45, 0, 100, 0, 100, 1, 1, 1);
+	fh.sphere(GL_POLYGON, 13, 13, 13, 400, 321, 45, 0, 100, 0, 100, 1, 1, 1);
 
 	// front btm
 	glColor3f(0.7, 0.7, 0.7);
-	glBegin(GL_QUADS);
-	fh.v3f(343.75, 242.5, 57.5);
-	fh.v3f(346.25, 267.5, 52.5);
-	fh.v3f(453.75, 267.5, 52.5);
-	fh.v3f(456.25, 242.5, 57.5);
+	glBegin(gltype);
+	fh.v3f(343.75, 327.5, 57.5);
+	fh.v3f(346.25, 352.5, 52.5);
+	fh.v3f(453.75, 352.5, 52.5);
+	fh.v3f(456.25, 327.5, 57.5);
 	glEnd();
 
 	// left top
 	glColor3f(0.7, 1, 0.7);
-	glBegin(GL_QUADS);
-	fh.v3f(340, 222.5, -60);
-	fh.v3f(343.75, 242.5, -60);
-	fh.v3f(343.75, 242.5, 57.5);
-	fh.v3f(340, 222.5, 50);
+	glBegin(gltype);
+	fh.v3f(340, 307.5, -60);
+	fh.v3f(343.75, 327.5, -60);
+	fh.v3f(343.75, 327.5, 57.5);
+	fh.v3f(340, 307.5, 50);
 	glEnd();
 
 	// left btm
 	glColor3f(1, 0.7, 0.7);
-	glBegin(GL_QUADS);
-	fh.v3f(343.75, 242.5, -60);
-	fh.v3f(346.25, 267.5, -47.5);
-	fh.v3f(346.25, 267.5, 52.5);
-	fh.v3f(343.75, 242.5, 57.5);
+	glBegin(gltype);
+	fh.v3f(343.75, 327.5, -60);
+	fh.v3f(346.25, 352.5, -47.5);
+	fh.v3f(346.25, 352.5, 52.5);
+	fh.v3f(343.75, 327.5, 57.5);
 	glEnd();
 
 	// right top
 	glColor3f(0.3, 0.5, 0.3);
-	glBegin(GL_QUADS);
-	fh.v3f(460, 222.5, 50);
-	fh.v3f(456.25, 242.5, 57.5);
-	fh.v3f(456.25, 242.5, -60);
-	fh.v3f(460, 222.5, -60);
+	glBegin(gltype);
+	fh.v3f(460, 307.5, 50);
+	fh.v3f(456.25, 327.5, 57.5);
+	fh.v3f(456.25, 327.5, -60);
+	fh.v3f(460, 307.5, -60);
 	glEnd();
 
 	// right btm
 	glColor3f(1, 0.7, 1);
-	glBegin(GL_QUADS);
-	fh.v3f(456.25, 242.5, -60);
-	fh.v3f(453.75, 267.5, -47.5);
-	fh.v3f(453.75, 267.5, 52.5);
-	fh.v3f(456.25, 242.5, 57.5);
+	glBegin(gltype);
+	fh.v3f(456.25, 327.5, -60);
+	fh.v3f(453.75, 352.5, -47.5);
+	fh.v3f(453.75, 352.5, 52.5);
+	fh.v3f(456.25, 327.5, 57.5);
 	glEnd();
 
 	// back top
 	glColor3f(0.7, 0.5, 0.3);
-	glBegin(GL_QUADS);
-	fh.v3f(340, 222.5, -60);
-	fh.v3f(343.75, 242.5, -60);
-	fh.v3f(456.25, 242.5, -60);
-	fh.v3f(460, 222.5, -60);
+	glBegin(gltype);
+	fh.v3f(340, 307.5, -60);
+	fh.v3f(343.75, 327.5, -60);
+	fh.v3f(456.25, 327.5, -60);
+	fh.v3f(460, 307.5, -60);
 	glEnd();
 
 	// back btm
 	glColor3f(0.5, 0, 1);
-	glBegin(GL_QUADS);
-	fh.v3f(343.75, 242.5, -60);
-	fh.v3f(346.25, 267.5, -47.5);
-	fh.v3f(453.75, 267.5, -47.5);
-	fh.v3f(456.25, 242.5, -60);
+	glBegin(gltype);
+	fh.v3f(343.75, 327.5, -60);
+	fh.v3f(346.25, 352.5, -47.5);
+	fh.v3f(453.75, 352.5, -47.5);
+	fh.v3f(456.25, 327.5, -60);
 	glEnd();
 }
 
-void abdomen() {
-//	// front 0
-//	glBegin(GL_QUADS);
-//	glVertex3f(xC(346.25), yC(267.5), zC(52.5));
-//	glVertex3f(xC(302.5), yC(315), zC());
-//	glVertex3f(xC(497.5), yC(315), zC());
-//	glVertex3f(xC(453.75), yC(267.5), zC());
-//	glEnd();
+void chest(GLenum gltype) {
+	upperChest(gltype);
+	lowerChest(gltype);
+}
+
+void adomen0(GLenum gltype) {
+	//GLenum type = GL_POLYGON;
+
+	// front
+	glColor3f(1, 1, 1);
+	glBegin(gltype);
+	fh.v3f(346.25, 352.5, 52.5);
+	fh.v3f(351.25, 400, 50);
+	fh.v3f(448.75, 400, 50);
+	fh.v3f(453.75, 352.5, 52.5);
+	glEnd();
+
+	// back
+	glColor3f(1, 1, 1);
+	glBegin(gltype);
+	fh.v3f(346.25, 352.5, -47.5);
+	fh.v3f(351.25, 400, -36.25);
+	fh.v3f(448.75, 400, -36.25);
+	fh.v3f(453.75, 352.5, -47.5);
+	glEnd();
+
+	// left
+	glBegin(gltype);
+	fh.v3f(346.25, 352.5, -47.5);
+	fh.v3f(351.25, 400, -36.25);
+	fh.v3f(351.25, 400, 50);
+	fh.v3f(346.25, 352.5, 52.5);
+	glEnd();
+
+	// right
+	glBegin(gltype);
+	fh.v3f(453.75, 352.5, -47.5);
+	fh.v3f(448.75, 400, -36.25);
+	fh.v3f(448.75, 400, 50);
+	fh.v3f(453.75, 352.5, 52.5);
+	glEnd();
+}
+
+void adomen1(GLenum gltype) {
+	//GLenum type = GL_POLYGON;
+
+	glColor3f(1, 1, 1);
+	// front
+	glBegin(gltype);
+	fh.v3f(351.25, 387.5, 50);
+	fh.v3f(353.75, 400, 50);
+	fh.v3f(446.25, 400, 50);
+	fh.v3f(448.75, 387.5, 50);
+	glEnd();
+
+	// back
+	glBegin(gltype);
+	fh.v3f(351.25, 387.5, -36.25);
+	fh.v3f(353.75, 400, -36.25);
+	fh.v3f(446.25, 400, -36.25);
+	fh.v3f(448.75, 387.5, -36.25);
+	glEnd();
+
+	// left
+	glBegin(gltype);
+	fh.v3f(351.25, 387.5, -36.25);
+	fh.v3f(353.75, 400, -36.25);
+	fh.v3f(353.75, 400, 50);
+	fh.v3f(351.25, 387.5, 50);
+	glEnd();
+
+	// right
+	glBegin(gltype);
+	fh.v3f(448.75, 387.5, -36.25);
+	fh.v3f(446.25, 400, -36.25);
+	fh.v3f(446.25, 400, 50);
+	fh.v3f(448.75, 387.5, 50);
+	glEnd();
+}
+
+void adomen2(GLenum gltype) {
+	//GLenum type = GL_POLYGON;
+
+	// front
+	glColor3f(1, 1, 1);
+	glBegin(gltype);
+	fh.v3f(353.75, 387.5, 50);
+	fh.v3f(356.25, 400, 50);
+	fh.v3f(443.75, 400, 50);
+	fh.v3f(446.25, 387.5, 50);
+	glEnd();
+
+	// back
+	glBegin(gltype);
+	fh.v3f(353.75, 387.5, -36.25);
+	fh.v3f(356.25, 400, -36.25);
+	fh.v3f(443.75, 400, -36.25);
+	fh.v3f(446.25, 387.5, -36.25);
+	glEnd();
+
+	// left
+	glBegin(gltype);
+	fh.v3f(353.75, 387.5, -36.25);
+	fh.v3f(356.25, 400, -36.25);
+	fh.v3f(356.25, 400, 50);
+	fh.v3f(353.75, 387.5, 50);
+	glEnd();
+
+	// right
+	glBegin(gltype);
+	fh.v3f(446.25, 387.5, -36.25);
+	fh.v3f(443.75, 400, -36.25);
+	fh.v3f(443.75, 400, 50);
+	fh.v3f(446.25, 387.5, 50);
+	glEnd();
+}
+
+void adomen3(GLenum gltype) {
+	//GLenum type = GL_POLYGON;
+
+	// front
+	glBegin(gltype);
+	fh.v3f(356.25, 387.5, 50);
+	fh.v3f(357.5, 400, 50);
+	fh.v3f(442.5, 400, 50);
+	fh.v3f(443.75, 387.5, 50);
+	glEnd();
+
+	// front
+	glBegin(gltype);
+	fh.v3f(356.25, 387.5, -36.25);
+	fh.v3f(357.5, 400, -36.25);
+	fh.v3f(442.5, 400, -36.25);
+	fh.v3f(443.75, 387.5, -36.25);
+	glEnd();
+
+	// left
+	glBegin(gltype);
+	fh.v3f(356.25, 387.5, -36.25);
+	fh.v3f(357.5, 400, -36.25);
+	fh.v3f(357.5, 400, 50);
+	fh.v3f(356.25, 387.5, 50);
+	glEnd();
+
+	// right
+	glBegin(gltype);
+	fh.v3f(443.75, 387.5, -36.25);
+	fh.v3f(442.5, 400, -36.25);
+	fh.v3f(442.5, 400, 50);
+	fh.v3f(443.75, 387.5, 50);
+	glEnd();
+
+}
+
+void below(GLenum gltype) {
+	// front
+	glBegin(gltype);
+	fh.v3f(357.5, 400, 50);
+	fh.v3f(378.75, 427.5, 50);
+	fh.v3f(391.25, 457.5, 50);
+	fh.v3f(408.75, 457.5, 50);
+	fh.v3f(421.25, 427.5, 50);
+	fh.v3f(442.5, 400, 50);
+	glEnd();
+
+	// back
+	glBegin(gltype);
+	fh.v3f(357.5, 400, -36.25);
+	fh.v3f(378.75, 427.5, -45);
+	fh.v3f(391.25, 457.5, -36.25);
+	fh.v3f(408.75, 457.5, -36.25);
+	fh.v3f(421.25, 427.5, -45);
+	fh.v3f(442.5, 400, -36.25);
+	glEnd();
+
+	// left
+	glBegin(gltype);
+	fh.v3f(357.5, 400, -36.25);
+	fh.v3f(378.75, 427.5, -45);
+	fh.v3f(391.25, 457.5, -36.25);
+	fh.v3f(391.25, 457.5, 50);
+	fh.v3f(378.75, 427.5, 50);
+	fh.v3f(357.5, 400, 50);
+	glEnd();
+
+	// right
+	glBegin(gltype);
+	fh.v3f(442.5, 400, -36.25);
+	fh.v3f(421.25, 427.5, -45);
+	fh.v3f(408.75, 457.5, -36.25);
+	fh.v3f(408.75, 457.5, 50);
+	fh.v3f(421.25, 427.5, 50);
+	fh.v3f(442.5, 400, 50);
+	glEnd();
+
+	// btm
+	glBegin(gltype);
+	fh.v3f(391.25, 457.5, -36.25);
+	fh.v3f(391.25, 457.5, 50);
+	fh.v3f(408.75, 457.5, 50);
+	fh.v3f(408.75, 457.5, -36.25);
+	glEnd();
+}
+
+void body(GLenum gltype) {
+	// adomen 0 + chest
+	glPushMatrix();
+	glRotatef(-AR4, 1, 0, 0);
+	glTranslatef(0, fh.yP(85), 0);
+	glRotatef(-AR2, 1, 0, 0);
+	chest(gltype);
+	adomen0(gltype);
+	glPopMatrix();
+
+	// adomen 1
+	glPushMatrix();
+	glRotatef(-AR3, 1, 0, 0);
+	glTranslatef(0, fh.yP(72.5), 0);
+	glRotatef(-AR, 1, 0, 0);
+	adomen1(gltype);
+	glPopMatrix();
+
+	// adomen 2
+	glPushMatrix();
+	glRotatef(-AR0, 1, 0, 0);
+	glTranslatef(0, fh.yP(60), 0);
+	glRotatef(0, 1, 0, 0);
+	adomen2(gltype);
+	glPopMatrix();
+
+	// adomen 3
+	glPushMatrix();
+	glRotatef(-AR1, 1, 0, 0);
+	glTranslatef(0, fh.yP(47.5), 0);
+	adomen3(gltype);
+	glPopMatrix();
+
+	// below
+	glPushMatrix();
+	glTranslatef(0, fh.yP(47.5), 0);
+	below(gltype);
+	glPopMatrix();
 }
 
 void head() {
@@ -828,6 +1015,7 @@ void head() {
 	//	//	glVertex3f(xC(408.5), yC(174), zC(25));
 	//	//glEnd();
 }
+//============================= DANNY =================================
 
 //============================= LIANA =================================
 
@@ -1026,11 +1214,6 @@ void arm() {
 }
 
 //============================= LIANA =================================
-void dannyWork() {
-	upperChest();
-	lowerChest();
-	abdomen();
-}
 
 void display()
 {
@@ -1038,29 +1221,99 @@ void display()
 	for (int i = 0; i < SIZE; i++) {
 		C[i] = 1000000;
 	}
+	//==================== body =========================
+	{
+		int angle = 10, angle2 = angle + 1, angle3 = angle2 + 1, angle4 = angle - 5, an = 5;
+		float zoom = 1.5;
+
+		// press 'D' to curve the body
+		if (str == "down") {
+			if (AR1 < angle4) {
+				AR1 += 0.1;
+			}
+			if (AR1 == angle4) {
+				AR1 = angle4;
+			}
+
+			if (AR0 < angle) {
+				AR0 += 0.1;
+			}
+			if (AR0 == angle) {
+				AR0 = angle;
+			}
+
+			if (AR3 < angle2) {
+				AR3 += 0.1;
+				if (AR < an) {
+					AR += 0.1;
+				}
+			}
+			if (AR3 == angle2) {
+				AR3 = angle2;
+			}
+
+			if (AR4 < angle3) {
+				AR4 += 0.1;
+				if (AR2 < (an + an)) {
+					AR2 += 0.1;
+				}
+			}
+			if (AR4 == angle3) {
+				AR4 = angle3;
+			}
+		}
+
+		// press 'U' to rift the body
+		if (str == "up") {
+			if (AR1 >= 0) {
+				AR1 -= 0.1;
+			}
+			if (AR1 == 0) {
+				AR1 = 0;
+			}
+
+			if (AR0 >= 0) {
+				AR0 -= 0.1;
+			}
+			if (AR0 == 0) {
+				AR0 = 0;
+			}
+
+			if (AR3 >= 0) {
+				AR3 -= 0.1;
+				if (AR >= 0) {
+					AR -= 0.1;
+				}
+			}
+			if (AR3 == 0) {
+				AR3 = 0;
+			}
+
+			if (AR4 >= 0) {
+				AR4 -= 0.1;
+				if (AR2 >= 0) {
+					AR2 -= 0.1;
+				}
+			}
+			if (AR4 == 0) {
+				AR4 = 0;
+			}
+		}
+	}
+	//===================================================
+
 	switch (qNo) {
 	case 1:
-		//glLoadIdentity();
-		//glPushMatrix();
-		//glRotatef(90, 0, 1, 0);
-		head();
-		//glPopMatrix();
-		//glPushMatrix();
-		body();
-		//glPopMatrix();
-		break;
-	case 2:
-		
-		glRotatef(1, 0, 1, 0);
+		// body 
 		glPushMatrix();
-		glScalef(1.5, 1.5, 1.5);
-		dannyWork();
+		glRotatef(-90, 0, 1, 0);
+		glScalef(zoom, zoom, zoom);
+		body(GL_LINE_LOOP);
 		glPopMatrix();
 		break;
+	case 2:
+		break;
 	case 3:
-		//test3();
-		//glRotatef(1, 1, 1, 0);
-		fh.sphere(GL_LINE_STRIP, 200, 200, 200, 400, 400, 36, 0, 100, 0, 100, 1, 0, 0);
 		break;
 	case 4:
 		head();
@@ -1088,16 +1341,10 @@ void display()
 		glPopMatrix();
 		break;
 	case 5:
-		glRotatef(1, 0, 0, 1);
-		body();
 		break;
 	case 6:
-		//glLoadIdentity();
-		glRotatef(1, 0, 1, 0);
-		dannyWork();
 		break;
 	case 61:
-		
 		C[0] = 0, C[1] = 0, C[2] = 0;
 		C[3] = 0.2, C[4] = 0, C[5] = 0;
 		C[6] = 0.2, C[7] = 0.2, C[8] = 0;
