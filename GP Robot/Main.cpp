@@ -1025,29 +1025,39 @@ void head() {
 
 void finger(GLenum type, float size, float size2, int lineWidth) {
 	glPushMatrix();
+	if(fingerBend)
+		glRotatef(fingerRotate * 2, fx2, fy2, fz2);
+	glPushMatrix();
 	glTranslatef(-size / 3.0 * 2, size, 0);
-	if (fingerBend) {
+	/*if (fingerBend) {
 		glTranslatef(-size / 3.0 + 0.3, size, 0.8);
 		glRotatef(fingerRotate * 2, fx2, fy2, fz2);
 		glTranslatef(-(-size / 3.0 * 2), -size, 0);
-	}
+	}*/
 	glRotatef(-90, 0, 0, 1);
 	fh.color('r');
 	fh.cuboid(type, size / 3.0, size2, lineWidth);
 	glPopMatrix();
 
 	glPushMatrix();
+	if(fingerBend)
+		glRotatef(fingerRotate, fx2, fy2, fz2);
+	glPushMatrix();
 	glTranslatef(-size / 3.0, size, 0);
-	if (fingerBend) {
+	/*if (fingerBend) {
 		glTranslatef(-size / 3.0, size, 0.3);
 		glRotatef(fingerRotate, fx2, fy2, fz2);
 		glTranslatef(-(-size / 3.0), -size, 0);
-	}
+	}*/
 	glRotatef(-90, 0, 0, 1);
 	fh.color('g');
 	fh.cuboid(type, size / 3.0, size2, lineWidth);
 	glPopMatrix();
+	glPopMatrix();
 
+	glPushMatrix();
+	/*if (fingerBend)
+		glRotatef(-fingerRotate, fx2, fy2, fz2);*/
 	glPushMatrix();
 	glTranslatef(-size / 3.0 * 2.0, size - 0.15, size / 5.0);
 	if (fingerBend) {
@@ -1058,6 +1068,9 @@ void finger(GLenum type, float size, float size2, int lineWidth) {
 	//glTranslatef(0, 0, 0);
 	fh.color('y');
 	fh.sphere(GLU_LINE, size / 8.0, 10, 10);
+	glPopMatrix();
+	glPopMatrix();
+
 	glPopMatrix();
 }
 
@@ -1118,6 +1131,9 @@ void palm(GLenum type, float size, float size2, int lineWidth) {
 
 	//--------------------thumb--------------------
 	glPushMatrix();
+	/*if (fingerBend)
+		glRotatef(fingerRotate, fx, fy, fz);*/
+	glPushMatrix();
 	glTranslatef(size * 2 / 3.0 + 0.1, size, 0);
 	if (fingerBend) {
 		glTranslatef(size * 2 / 3.0 + 0.1, size - 0.5, -0.75);
@@ -1127,16 +1143,21 @@ void palm(GLenum type, float size, float size2, int lineWidth) {
 	glRotatef(90, 0, 0, 1);
 	fh.cuboid(type, size / 2.5, 1, lineWidth);
 	glPopMatrix();
+	glPopMatrix();
 
+	glPushMatrix();
+	/*if (fingerBend)
+		glRotatef(fingerRotate, fx, fy, fz);*/
 	glPushMatrix();
 	glTranslatef(size * 2 / 3.0 - 0.1, size + 0.4, 0.2);
 	if (fingerBend) {
-		glTranslatef(size * 2 / 3.0 - 0.1, (size + 0.4) - 0.3, -1.3);
+		glTranslatef(size * 2 / 3.0 - 0.1, (size + 0.4) - 0.5, -1.3 + 0.5);
 		glRotatef(-fingerRotate, fx, fy, fz);
 		glTranslatef(-(size * 2 / 3.0 - 0.1), -(size + 0.4), -0.2);
 	}
 	//fh.color('r');
 	fh.sphere(GLU_LINE, size / 5.0, 10, 10);
+	glPopMatrix();
 	glPopMatrix();
 
 	//--------------------1st Finger--------------------
