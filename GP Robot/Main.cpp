@@ -3,10 +3,11 @@
 #include <gl/GLU.h>
 #include <math.h>
 #include <iostream>
+#include <string>
 #include "Function.h"
 
 using namespace N;
-using namespace std;
+// using namespace std;
 
 //#pragma comment (lib, "OpenGL32.lib")
 //dependencies included in project properties - linker - input
@@ -21,6 +22,7 @@ using namespace std;
 
 function fh;
 int qNo = 4;
+std::string str = " ";
 float C[SIZE];
 //============== LIANA ==============
 float armRotate = 0, armRSpeed = 0, armx = 0, army = 0, armz = 0, armDirection = 0, armAngle = 0;
