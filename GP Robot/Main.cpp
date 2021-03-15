@@ -23,13 +23,13 @@ using namespace N;
 function fh;
 int qNo = 4;
 std::string str = " ";
-float C[SIZE];
+float C[SIZE], zoom;
 float zoom = 1.5;
 //============== Danny ==============
 float AR = 0, AR1 = 0, AR2 = 0, AR3 = 0, AR4 = 0, AR0 = 0, AR01 = 0, AR5 = 0;
 
 //===================================
-// 
+
 //============== LIANA ==============
 float armRotate = 0, armRSpeed = 0, armx = 0, army = 0, armz = 0, armDirection = 0, armAngle = 0;
 float armx2 = 0, army2 = 0, armz2 = 0;
@@ -137,6 +137,12 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 					fx = 1, fy = 0, fz = 0, fx2 = 0, fy2 = 1, fz2 = 0, fingerRSpeed = 0.5, fingerBend = true, fCount++;
 				else
 					fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0, fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount++;
+		}
+		else if (wParam == VK_ADD) {
+			zoom += 0.2;
+		}
+		else if (wParam == VK_SUBTRACT) {
+			zoom -= 0.2;
 		}
 		break;
 	default:
@@ -1253,7 +1259,6 @@ void display()
 	//==================== body =========================
 	{
 		int angle = 10, angle2 = angle + 1, angle3 = angle2 + 1, angle4 = angle - 5, an = 5;
-		float zoom = 1.5;
 
 		// press 'D' to curve the body
 		if (str == "down") {
