@@ -23,11 +23,12 @@ using namespace N;
 function fh;
 int qNo = 4;
 std::string str = " ";
-float C[SIZE], zoom;
-float zoom = 1.5;
+float C[SIZE];
+float zoom = 1.0;
 //============== Danny ==============
 float AR = 0, AR1 = 0, AR2 = 0, AR3 = 0, AR4 = 0, AR0 = 0, AR01 = 0, AR5 = 0;
-
+float rotate = 0;
+float xR = 0, yR = 0, zR = 0, xT = 0, yT = 0, zT = 0;
 //===================================
 
 //============== LIANA ==============
@@ -122,8 +123,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = -1.0, armRSpeed = 0.5, armTurn = true;
 		}
 		else if (wParam == VK_SPACE) {
+			str = "space";
+			glLoadIdentity();
 			if (qNo == 4) {
-				glLoadIdentity();
 				armx = 1.00, army = 0, armz = 0, armx2 = 0, army2 = 0, armz2 = 0;
 				armRSpeed = 0, armAngle = 0, armRotate = 0, armDirection = 0;
 				armUp = false, armDown = false, armTurn = false;
@@ -138,10 +140,26 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				else
 					fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0, fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount++;
 		}
-		else if (wParam == VK_ADD) {
+		else if (wParam == 0x57) { // W
+			xR = 1, yR = 0, zR = 0;
+			str = "upRotate";
+		}
+		else if (wParam == 0x53) { // S
+			xR = 1, yR = 0, zR = 0;
+			str = "downRotate";
+		}
+		else if (wParam == 0x41) { // A
+			xR = 0, yR = 1, zR = 0;
+			str = "leftRotate";
+		}
+		else if (wParam == 0x44) { // D
+			xR = 0, yR = 1, zR = 0;
+			str = "rightRotate";
+		}
+		else if (wParam == VK_ADD || wParam == 0xBB) {
 			zoom += 0.2;
 		}
-		else if (wParam == VK_SUBTRACT) {
+		else if (wParam == VK_SUBTRACT || wParam == 0xBD) {
 			zoom -= 0.2;
 		}
 		break;
@@ -192,6 +210,8 @@ void init() {
 }
 
 //============================= DANNY =================================
+
+// body
 void upperChest(GLenum gltype) {
 	// front top
 	glColor3f(1, 0.7, 0.3);
@@ -591,440 +611,402 @@ void body(GLenum gltype) {
 	glPopMatrix();
 }
 
-void head() {
-	////Points
-	//	float CT_X = 400, CT_Y = 400, CT_Z = 0;
-	//	float ax = 400, ay = 105, az = 0;
-	//	float bx = 410, by = 107, bz = 5;
-	//	float cx = 422.5, cy = 112.5, cz = 10;
-	//	float dx = 428.75, dy = 140, dz = 5;
-	//	float ex = 430, ey = 177.5, ez = 32.5;
-	//	float fx = 406, fy = 182.5, fz = 25;
-	//	float gx = 394, gy = 182.5, gz = 25;
-	//	float hx = 370, hy = 177.5, hz = 32.5;
-	//	float ix = 371.25, iy = 140, iz = 5;
-	//	float jx = 377.5, jy = 112.5, jz = 15;
-	//	float kx = 390, ky = 107, kz = 5;
-	//	float lx = 412.5, ly = 112.5, lz = 25;
-	//	float mx = 422.5, my = 120, mz = 15;
-	//	float nx = 422, ny = 140, nz = 20;
-	//	float ox = 422.5, oy = 147.5, oz = 12.5;
-	//	float px = 420, py = 167, pz = 17;
-	//	float qx = 422.5, qy = 170, qz = 18;
-	//	float rx = 408.5, ry = 174, rz = 25;
-	//	float sx = 407, sy = 172.5, sz = 33.5;
-	//	float tx = 393, ty = 172.5, tz = 33.5;
-	//	float ux = 391.5, uy = 174, uz = 25;
-	//	float vx = 377.5, vy = 170, vz = 18;
-	//	float wx = 380, wy = 167, wz = 17;
-	//	float xx = 377.5, xy = 147.5, xz = 12.5;
-	//	float yx = 378, yy = 140, yz = 20;
-	//	float zx = 377.5, zy = 120, zz = 25;
-	//	float aax = 390, aay = 112.5, aaz = 25;
-	//	float bbx = 387.5, bby = 118.75, bbz = 30;
-	//	float ccx = 410, ccy = 118.75, ccz = 30;
-	//	float ddx = 428.5, ddy = 157.5, ddz = 0;
-	//	float eex = 430, eey = 177.5, eez = 32.5;
-	//
-	//	//Right face
-	//	glColor3f(1.0, 0, 0);
-	//	//lkacm
-	//	glBegin(GL_POLYGON);
-	//		glVertex3f(xC(lx), yC(ly), zC(lz));
-	//		glVertex3f(xC(kx), yC(ky), zC(kz));
-	//		glVertex3f(xC(ax), yC(ay), zC(az));
-	//		glVertex3f(xC(cx), yC(cy), zC(cz));
-	//		glVertex3f(xC(mx), yC(my), zC(mz));
-	//	glEnd();
-	//
-	//	//mcn
-	//	glBegin(GL_TRIANGLES);
-	//		glVertex3f(xC(mx), yC(my), zC(mz));
-	//		glVertex3f(xC(cx), yC(cy), zC(cz));
-	//		glVertex3f(xC(nx), yC(ny), zC(nz));
-	//	glEnd();
-	//
-	//	//ncdo
-	//	glBegin(GL_QUADS);
-	//		glVertex3f(xC(nx), yC(ny), zC(nz));
-	//		glVertex3f(xC(cx), yC(cy), zC(cz));
-	//		glVertex3f(xC(dx), yC(dy), zC(dz));
-	//		glVertex3f(xC(ox), yC(oy), zC(oz));
-	//	glEnd();
-	//
-	//	//o(dd)(ee)p
-	//	glBegin(GL_QUADS);
-	//		glVertex3f(xC(ox), yC(oy), zC(oz));
-	//		glVertex3f(xC(ddx), yC(ddy), zC(ddz));
-	//		glVertex3f(xC(eex), yC(eey), zC(eez));
-	//		glVertex3f(xC(px), yC(py), zC(pz));
-	//	glEnd();
-	//
-	//	//glColor3f(0, 0, 1.0);
-	//	//p(ee)q
-	//	glBegin(GL_TRIANGLES);
-	//		glVertex3f(xC(px), yC(py), zC(pz));
-	//		glVertex3f(xC(eex), yC(eey), zC(eez));
-	//		glVertex3f(xC(qx), yC(qy), zC(qz));
-	//	glEnd();
-	//
-	//	//glColor3f(0, 1.0, 0);
-	//	//q(ee)fr
-	//	glBegin(GL_QUADS);
-	//		glVertex3f(xC(422.5), yC(170), zC(18));
-	//		glVertex3f(xC(428.5), yC(157.5), zC(0));
-	//		glVertex3f(xC(406), yC(182.5), zC(25));
-	//		glVertex3f(xC(408.5), yC(174), zC(25));
-	//	glEnd();
-	//
-	//	//glColor3f(1.0, 1.0, 0);
-	//	//srfe
-	//	glBegin(GL_QUADS);
-	//		glVertex3f(xC(sx), yC(sy), zC(sz));
-	//		glVertex3f(xC(rx), yC(ry), zC(rz));
-	//		glVertex3f(xC(fx), yC(fy), zC(fz));
-	//		glVertex3f(xC(ex), yC(ey), zC(ez));
-	//	glEnd();
-	//
-	//	//Front face
-	//	//abl(cc)(CT_X, ccy)
-	//	glColor3f(1.0, 1.0, 1.0);
-	//	glBegin(GL_POLYGON);
-	//		glVertex3f(xC(ax), yC(ay), zC(az));
-	//		glVertex3f(xC(bx), yC(by), zC(bz));
-	//		glVertex3f(xC(lx), yC(ly), zC(lz));
-	//		glVertex3f(xC(ccx), yC(ccy), zC(ccz));
-	//		glVertex3f(xC(CT_X), yC(ccy), zC(ccz));
-	//	glEnd();
-	//
-	//	//lm(cc)
-	//	glBegin(GL_TRIANGLES);
-	//		glVertex3f(xC(lx), yC(ly), zC(lz));
-	//		glVertex3f(xC(mx), yC(my), zC(mz));
-	//		glVertex3f(xC(ccx), yC(ccy), zC(ccz));
-	//	glEnd();
-	//
-	//	//m(cc)n
-	//	glBegin(GL_TRIANGLES);
-	//		glVertex3f(xC(mx), yC(my), zC(mz));
-	//		glVertex3f(xC(ccx), yC(ccy), zC(ccz));
-	//		glVertex3f(xC(nx), yC(ny), zC(nz));
-	//	glEnd();
-	//
-	//	//(CT_X, ccy)(cc)n(CT_X, ny)
-	//	glBegin(GL_QUADS);
-	//		glVertex3f(xC(CT_X), yC(ccy), zC(ccz));
-	//		glVertex3f(xC(ccx), yC(ccy), zC(ccz));
-	//		glVertex3f(xC(nx), yC(ny), zC(nz));
-	//		glVertex3f(xC(CT_X), yC(ny), zC(nz));
-	//	glEnd();
-	//
-	//	//(CT_X, ny)nop(CT_X, py)
-	//	glBegin(GL_POLYGON);
-	//		glVertex3f(xC(CT_X), yC(ny), zC(nz));
-	//		glVertex3f(xC(nx), yC(ny), zC(nz));
-	//		glVertex3f(xC(ox), yC(oy), zC(oz));
-	//		glVertex3f(xC(px), yC(py), zC(pz));
-	//		glVertex3f(xC(CT_X), yC(py), zC(pz));
-	//	glEnd();
-	//
-	//	//(CT_X, py)ps(CT_X, sy)
-	//	glBegin(GL_QUADS);
-	//		glVertex3f(xC(CT_X), yC(py), zC(pz));
-	//		glVertex3f(xC(px), yC(py), zC(pz));
-	//		glVertex3f(xC(sx), yC(sy), zC(sz));
-	//		glVertex3f(xC(CT_X), yC(sy), zC(sz));
-	//	glEnd();
-	//
-	//	//spqr
-	//	glBegin(GL_QUADS);
-	//		glVertex3f(xC(sx), yC(sy), zC(sz));
-	//		glVertex3f(xC(px), yC(py), zC(pz));
-	//		glVertex3f(xC(qx), yC(qy), zC(qz));
-	//		glVertex3f(xC(rx), yC(ry), zC(rz));
-	//	glEnd();
-	//
-	//	////Right face
-	//	////bacl
-	//	//glColor3f(1, 0, 0);
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(410), yC(105), zC(0));
-	//	//	glVertex3f(xC(410), yC(107.5), zC(12.5));
-	//	//	glVertex3f(xC(410), yC(112.5), zC(25));
-	//	//	glVertex3f(xC(422.5), yC(112.5), zC(10));
-	//	//glEnd();
-	//
-	//	////lc?m
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(410), yC(112.5), zC(25));
-	//	//	glVertex3f(xC(422.5), yC(112.5), zC(10));
-	//	//	glVertex3f(xC(425), yC(115), zC(-32.5));
-	//	//	glVertex3f(xC(422.5), yC(120), zC(15));
-	//	//glEnd();
-	//
-	//	////m??n
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(422.5), yC(120), zC(15));
-	//	//	glVertex3f(xC(425), yC(115), zC(-32.5));
-	//	//	glVertex3f(xC(425), yC(127.5), zC(-37.5));
-	//	//	glVertex3f(xC(422), yC(140), zC(20));
-	//	//glEnd();
-	//
-	//	////n?o
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(422), yC(140), zC(20));
-	//	//	glVertex3f(xC(425), yC(127.5), zC(-37.5));
-	//	//	glVertex3f(xC(422.4), yC(147.5), zC(-12.5));
-	//	//glEnd();
-	//
-	//	////o???
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(422.4), yC(147.5), zC(-12.5));
-	//	//	glVertex3f(xC(425), yC(127.5), zC(-37.5));
-	//	//	glVertex3f(xC(425), yC(147.5), zC(-33.75));
-	//	//	glVertex3f(xC(428.75), yC(157.5), zC(0));
-	//	//glEnd();
-	//
-	//	////???
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(425), yC(127.5), zC(-37.5));
-	//	//	glVertex3f(xC(425), yC(147.5), zC(-33.75));
-	//	//	glVertex3f(xC(425), yC(150), zC(-37.5));
-	//	//glEnd();
-	//
-	//	////o??p
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(422.4), yC(147.5), zC(-12.5));
-	//	//	glVertex3f(xC(428.75), yC(157.5), zC(0));
-	//	//	glVertex3f(xC(426), yC(172.5), zC(5));
-	//	//	glVertex3f(xC(420), yC(167), zC(17));
-	//	//glEnd();
-	//
-	//	////p?q
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(420), yC(167), zC(17));
-	//	//	glVertex3f(xC(426), yC(172.5), zC(5));
-	//	//	glVertex3f(xC(422.5), yC(170), zC(18));
-	//	//glEnd();
-	//
-	//	////q?fr
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(422.5), yC(170), zC(18));
-	//	//	glVertex3f(xC(430), yC(177.5), zC(32));
-	//	//	glVertex3f(xC(406), yC(182.5), zC(25));
-	//	//	glVertex3f(xC(408.5), yC(174), zC(25));
-	//	//glEnd();
-	//
-	//	////srfe
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(407), yC(172.5), zC(33.5));
-	//	//	glVertex3f(xC(408.5), yC(174), zC(25));
-	//	//	glVertex3f(xC(406), yC(182.5), zC(25));
-	//	//	glVertex3f(xC(407), yC(171.5), zC(32.5));
-	//	//glEnd();
-	//
-	//	////Left face
-	//	////z??v
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(377.5), yC(120), zC(25));
-	//	//	glVertex3f(xC(425 - 57.5), yC(115), zC(-32.5));
-	//	//	glVertex3f(xC(425), yC(127.5), zC(-37.5));
-	//	//	glVertex3f(xC(377.5), yC(170), zC(18));
-	//	//glEnd();
-	//
-	//	////v?x
-	//	//glBegin(GL_POLYGON);
-	//	//glVertex3f(xC(377.5), yC(170), zC(18));
-	//	//glVertex3f(xC(425 - 57.5), yC(127.5), zC(-37.5));
-	//	//glVertex3f(xC(377.5), yC(147.5), zC(12.5));
-	//	//glEnd();
-	//
-	//	////x???
-	//	//glBegin(GL_POLYGON);
-	//	//glVertex3f(xC(377.5), yC(147.5), zC(12.5));
-	//	//glVertex3f(xC(425 - 57.5), yC(127.5), zC(-37.5));
-	//	//glVertex3f(xC(425 - 57.5), yC(147.5), zC(-33.75));
-	//	//glVertex3f(xC(428.75 - 57.5), yC(157.5), zC(0));
-	//	//glEnd();
-	//
-	//	////???
-	//	//glBegin(GL_POLYGON);
-	//	//glVertex3f(xC(425 - 57.5), yC(127.5), zC(-37.5));
-	//	//glVertex3f(xC(425 - 57.5), yC(147.5), zC(-33.75));
-	//	//glVertex3f(xC(425 - 57.5), yC(150), zC(-37.5));
-	//	//glEnd();
-	//
-	//	////x??w
-	//	//glBegin(GL_POLYGON);
-	//	//glVertex3f(xC(377.5), yC(147.5), zC(12.5));
-	//	//glVertex3f(xC(428.75 - 57.5), yC(157.5), zC(0));
-	//	//glVertex3f(xC(426 - 57.5), yC(172.5), zC(5));
-	//	//glVertex3f(xC(380), yC(167), zC(17));
-	//	//glEnd();
-	//
-	//	////w?v
-	//	//glBegin(GL_POLYGON);
-	//	//glVertex3f(xC(380), yC(167), zC(17));
-	//	//glVertex3f(xC(426 - 57.5), yC(172.5), zC(5));
-	//	//glVertex3f(xC(377.5), yC(170), zC(18));
-	//	//glEnd();
-	//
-	//	////v?hu
-	//	//glBegin(GL_POLYGON);
-	//	//glVertex3f(xC(377.5), yC(170), zC(18));
-	//	//glVertex3f(xC(426 - 57.5), yC(172.5), zC(5));
-	//	//glVertex3f(xC(370), yC(177.5), zC(32.5));
-	//	//glVertex3f(xC(391.5), yC(174), zC(25));
-	//	//glEnd();
-	//
-	//	////vugh
-	//	//glBegin(GL_POLYGON);
-	//	//glVertex3f(xC(377.5), yC(170), zC(18));
-	//	//glVertex3f(xC(391.5), yC(174), zC(25));
-	//	//glVertex3f(xC(394), yC(182.5), zC(25));
-	//	//glVertex3f(xC(370), yC(177.5), zC(32.5));
-	//	//glEnd();
-	//
-	//	////Front face
-	//	////kabl(cc)(bb)(aa)
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(390), yC(107), zC(5));
-	//	//	glVertex3f(xC(400), yC(105), zC(0));
-	//	//	glVertex3f(xC(410), yC(107), zC(5));
-	//	//	glVertex3f(xC(410), yC(112.5), zC(25));
-	//	//	glVertex3f(xC(412.5), yC(118.75), zC(30));
-	//	//	glVertex3f(xC(387.5), yC(118.75), zC(30));
-	//	//	glVertex3f(xC(390), yC(112.5), zC(25));
-	//	//glEnd();
-	//
-	//	////k(aa)zj
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(390), yC(107), zC(5));
-	//	//	glVertex3f(xC(390), yC(112.5), zC(25));
-	//	//	glVertex3f(xC(377.5), yC(120), zC(25));
-	//	//	glVertex3f(xC(377.5), yC(112.5), zC(15));
-	//	//glEnd();
-	//
-	//	////jzyi
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(377.5), yC(112.5), zC(15));
-	//	//	glVertex3f(xC(377.5), yC(120), zC(25));
-	//	//	glVertex3f(xC(378), yC(140), zC(20));
-	//	//	glVertex3f(xC(371.25), yC(140), zC(5));
-	//	//glEnd();
-	//
-	//	////iyx?
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(371.25), yC(140), zC(5));
-	//	//	glVertex3f(xC(378), yC(140), zC(20));
-	//	//	glVertex3f(xC(377.5), yC(147.5), zC(12.5));
-	//	//	glVertex3f(xC(374), yC(147.5), zC(5));
-	//	//glEnd();
-	//
-	//	////?xwv
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(374), yC(147.5), zC(5));
-	//	//	glVertex3f(xC(377.5), yC(147.5), zC(12.5));
-	//	//	glVertex3f(xC(380), yC(167), zC(17));
-	//	//	glVertex3f(xC(377.5), yC(170), zC(18));
-	//	//glEnd();
-	//
-	//	////?vh
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(374), yC(147.5), zC(5));
-	//	//	glVertex3f(xC(377.5), yC(170), zC(18));
-	//	//	glVertex3f(xC(370), yC(177.5), zC(32.5));
-	//	//glEnd();
-	//
-	//	////hvug
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(370), yC(177.5), zC(32.5));
-	//	//	glVertex3f(xC(377.5), yC(170), zC(18));
-	//	//	glVertex3f(xC(391.5), yC(174), zC(25));
-	//	//	glVertex3f(xC(394), yC(182.5), zC(25));
-	//	//glEnd();
-	//
-	//	////gutf
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(394), yC(182.5), zC(25));
-	//	//	glVertex3f(xC(391.5), yC(174), zC(25));
-	//	//	glVertex3f(xC(393), yC(172.5), zC(33.5));
-	//	//	glVertex3f(xC(406), yC(182.5), zC(25));
-	//	//glEnd();
-	//
-	//	////tfrs
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(393), yC(172.5), zC(33.5));
-	//	//	glVertex3f(xC(406), yC(182.5), zC(25));
-	//	//	glVertex3f(xC(408.5), yC(174), zC(25));
-	//	//	glVertex3f(xC(407), yC(172.5), zC(33.5));
-	//	//glEnd();
-	//
-	//	//glColor3f(1,1,1);
-	//	////(aa)(bb)zy
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(390), yC(112.5), zC(25));
-	//	//	glVertex3f(xC(387.5), yC(118.75), zC(30));
-	//	//	glVertex3f(xC(377.5), yC(120), zC(25));
-	//	//	glVertex3f(xC(378), yC(140), zC(20));
-	//	//glEnd();
-	//
-	//	////(bb)(cc)ny
-	//	//glBegin(GL_POLYGON);
-	//	//glVertex3f(xC(387.5), yC(118.75), zC(30));
-	//	//	glVertex3f(xC(412.5), yC(118.75), zC(30));
-	//	//	glVertex3f(xC(422), yC(140), zC(20));
-	//	//	glVertex3f(xC(378), yC(140), zC(20));
-	//	//glEnd();
-	//
-	//	////lmn(cc)
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(410), yC(112.5), zC(25));
-	//	//	glVertex3f(xC(422.5), yC(120), zC(15));
-	//	//	glVertex3f(xC(422), yC(140), zC(20));
-	//	//	glVertex3f(xC(412.5), yC(118.75), zC(30));
-	//	//glEnd();
-	//
-	//	////ynox
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(378), yC(140), zC(20));
-	//	//	glVertex3f(xC(378), yC(140), zC(20));
-	//	//	glVertex3f(xC(428.75), yC(140), zC(5));
-	//	//	glVertex3f(xC(377.5), yC(147.5), zC(12.5));
-	//	//glEnd();
-	//
-	//	////xopw
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(377.5), yC(147.5), zC(12.5));
-	//	//	glVertex3f(xC(428.75), yC(140), zC(5));
-	//	//	glVertex3f(xC(420), yC(167), zC(17));
-	//	//	glVertex3f(xC(380), yC(167), zC(17));
-	//	//glEnd();
-	//
-	//	////wpst
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(380), yC(167), zC(17));
-	//	//	glVertex3f(xC(420), yC(167), zC(17));
-	//	//	glVertex3f(xC(407), yC(172.5), zC(33.5));
-	//	//	glVertex3f(xC(393), yC(172.5), zC(33.5));
-	//	//glEnd();
-	//
-	//	////wtuv
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(380), yC(167), zC(17));
-	//	//	glVertex3f(xC(393), yC(172.5), zC(33.5));
-	//	//	glVertex3f(xC(391.5), yC(174), zC(25));
-	//	//	glVertex3f(xC(377.5), yC(170), zC(18));
-	//	//glEnd();
-	//
-	//	////spqr
-	//	//glBegin(GL_POLYGON);
-	//	//	glVertex3f(xC(407), yC(172.5), zC(33.5));
-	//	//	glVertex3f(xC(420), yC(167), zC(17));
-	//	//	glVertex3f(xC(422.5), yC(170), zC(18));
-	//	//	glVertex3f(xC(408.5), yC(174), zC(25));
-	//	//glEnd();
+// head
+void eye(GLenum gltype) {
+	glColor3f(1, 0, 0);
+	// right
+	glBegin(gltype);
+	fh.v3f(427.5, 400, 130);
+	fh.v3f(427.5, 415, 130);
+	fh.v3f(472.5, 415, 115);
+	fh.v3f(492.5, 400, 92.5);
+	fh.v3f(487.5, 387.5, 100);
+	glEnd();
+
+	// left
+	glBegin(gltype);
+	fh.v3f(372.5, 400, 130);
+	fh.v3f(372.5, 415, 130);
+	fh.v3f(327.5, 415, 115);
+	fh.v3f(307.5, 400, 92.5);
+	fh.v3f(312.5, 387.5, 100);
+	glEnd();
 }
+
+void rightTop(GLenum gltype) {
+	// front
+	glColor3f(0.5, 0.5, 0.5);
+	glBegin(gltype);
+	fh.v3f(427.5, 287.5, 115);
+	fh.v3f(447.5, 205, 50);
+	fh.v3f(502.5, 240, 40);
+	fh.v3f(522.5, 287.5, 72.5);
+	glEnd();
+
+	// side
+	glColor3f(0.7, 0.7, 0.7);
+	glBegin(gltype);
+	fh.v3f(502.5, 240, 40);
+	fh.v3f(522.5, 287.5, 55);
+	fh.v3f(522.5, 287.5, 72.5);
+	glEnd();
+
+	// side2
+	glColor3f(0.7, 0, 0.7);
+	glBegin(gltype);
+	fh.v3f(522.5, 287.5, 55);
+	fh.v3f(509.5, 375, 72.5);
+	fh.v3f(504, 387.5, 60);		// aa
+	//fh.v3f(502.5, 392, 92);		// ee
+	fh.v3f(492.5, 387.5, 105);	// dd
+	fh.v3f(522.5, 287.5, 72.5);
+	glEnd();
+
+	// side3
+	glColor3f(0.7, 0.7, 0);
+	glBegin(gltype);
+	fh.v3f(504, 387.5, 60);		// aa
+	fh.v3f(502.5, 392, 92);		// ee
+	fh.v3f(492.5, 387.5, 105);	// dd
+	glEnd();
+
+	// front2
+	glColor3f(0, 0.7, 0.7);
+	glBegin(gltype);
+	fh.v3f(427.5, 287.5, 115);
+	fh.v3f(522.5, 287.5, 72.5);
+	fh.v3f(492.5, 387.5, 105);	// dd
+	fh.v3f(427, 400, 130);
+	glEnd();
+
+	// front3
+	glColor3f(0, 0.7, 0);
+	glBegin(gltype);
+	fh.v3f(400, 287.5, 115);
+	fh.v3f(400, 400, 137.5);
+	fh.v3f(427, 400, 130);
+	fh.v3f(427.5, 287.5, 115);
+	glEnd();
+}
+
+void eyeMid(GLenum gltype) {
+
+	glColor3f(0.9, 0.3, 0.5);
+	glBegin(gltype);
+	fh.v3f(372.5, 400, 130);
+	fh.v3f(372.5, 415, 130);
+	fh.v3f(400, 415, 137);
+	fh.v3f(400, 400, 137);
+	glEnd();
+
+	glColor3f(0.9, 0.3, 0.5);
+	glBegin(gltype);
+	fh.v3f(427.5, 415, 130);
+	fh.v3f(427.5, 400, 130);
+	fh.v3f(400, 400, 137);
+	fh.v3f(400, 415, 137);
+	glEnd();
+}
+
+void leftTop(GLenum gltype) {
+	// front
+	glColor3f(0.5, 0.5, 0.5);
+	glBegin(gltype);
+	fh.v3f(372.5, 287.5, 115);
+	fh.v3f(352.5, 205, 50);
+	fh.v3f(297.5, 240, 40);
+	fh.v3f(277.5, 287.5, 72.5);
+	glEnd();
+
+	// side
+	glColor3f(0.7, 0.7, 0.7);
+	glBegin(gltype);
+	fh.v3f(297.5, 240, 40);
+	fh.v3f(277.5, 287.5, 55);
+	fh.v3f(277.5, 287.5, 72.5);
+	glEnd();
+
+	// side2
+	glColor3f(0.7, 0, 0.7);
+	glBegin(gltype);
+	fh.v3f(277.5, 287.5, 55);
+	fh.v3f(290.5, 375, 72.5);
+	fh.v3f(295, 387.5, 60);		// aa
+	//fh.v3f(502.5, 392, 92);		// ee
+	fh.v3f(307.5, 387.5, 105);	// dd
+	fh.v3f(277.5, 287.5, 72.5);
+	glEnd();
+
+	// side3
+	glColor3f(0.7, 0.7, 0);
+	glBegin(gltype);
+	fh.v3f(295, 387.5, 60);		// aa
+	fh.v3f(297, 392, 92);		// ee
+	fh.v3f(307.5, 387.5, 105);	// dd
+	glEnd();
+
+	// front2
+	glColor3f(0, 0.7, 0.7);
+	glBegin(gltype);
+	//fh.v3f(400, 287.5, 115);
+	fh.v3f(372.5, 287.5, 115);
+	fh.v3f(277.5, 287.5, 72.5);
+	fh.v3f(307.5, 387.5, 105);	// dd
+	fh.v3f(372.5, 400, 130);
+	glEnd();
+
+	// front3
+	glColor3f(0, 0.7, 0);
+	glBegin(gltype);
+	fh.v3f(400, 287.5, 115);
+	fh.v3f(400, 400, 137.5);
+	fh.v3f(372.5, 400, 130);
+	fh.v3f(372.5, 287.5, 115);
+	glEnd();
+}
+
+void rightBtm(GLenum gltype) {
+	// side top
+	glColor3f(1, 1, 1);
+	glBegin(gltype);
+	fh.v3f(509, 415, 40);		// cc
+	fh.v3f(504, 387.5, 60);		// aa
+	fh.v3f(502.5, 392, 92);		// ee
+	fh.v3f(509, 415, 92);
+	glEnd();
+
+	// front top
+	glColor3f(1, 0, 1);
+	glBegin(gltype);
+	fh.v3f(502.5, 392, 92);		// ee
+	fh.v3f(472.5, 415, 115);
+	fh.v3f(509, 415, 92);
+	glEnd();
+
+	// side top 2
+	glColor3f(1, 1, 0);
+	glBegin(gltype);
+	fh.v3f(509, 415, 40);		// cc
+	fh.v3f(509, 415, 92);
+	fh.v3f(495, 457.5, 92.5);	// a2
+	fh.v3f(509, 435, 45);		// z
+	glEnd();
+
+	// front top 2
+	glColor3f(0, 1, 1);
+	glBegin(gltype);
+	fh.v3f(509, 415, 92);
+	fh.v3f(495, 457.5, 92.5);	// a2
+	fh.v3f(472.5, 457.5, 115);
+	fh.v3f(472.5, 415, 115);
+	glEnd();
+
+	// front top 3
+	glColor3f(1, 1, 1);
+	glBegin(gltype);
+	fh.v3f(472.5, 457.5, 115);
+	fh.v3f(472.5, 415, 115);
+	fh.v3f(427.5, 415, 130);
+	fh.v3f(427.5, 457.5, 130);
+	glEnd();
+
+	// front top 4 (middle top)
+	glColor3f(1, 0.5, 0.5);
+	glBegin(gltype);
+	fh.v3f(427.5, 415, 130);
+	fh.v3f(427.5, 457.5, 130);
+	fh.v3f(400, 457.5, 137.5);
+	fh.v3f(400, 415, 137.5);
+	glEnd();
+
+	// front btm (middle btm)
+	glColor3f(0.5, 1, 0.5);
+	glBegin(gltype);
+	fh.v3f(427.5, 457.5, 130);
+	fh.v3f(400, 457.5, 137.5);
+	fh.v3f(400, 522.5, 115);
+	fh.v3f(435, 522.5, 115);
+	glEnd();
+
+	// front btm 2
+	glColor3f(0.5, 0.5, 1);
+	glBegin(gltype);
+	fh.v3f(472.5, 457.5, 115);
+	fh.v3f(427.5, 457.5, 130);
+	fh.v3f(435, 522.5, 115);
+	glEnd();
+
+	// front btm 3
+	glColor3f(0.7, 0.5, 0.3);
+	glBegin(gltype);
+	fh.v3f(472.5, 457.5, 115);
+	fh.v3f(435, 522.5, 115);
+	fh.v3f(495, 457.5, 92.5);	// a2
+	glEnd();
+
+	// side 1
+	glColor3f(0.5, 0.3, 0.7);
+	glBegin(gltype);
+	//fh.v3f(509, 415, 40);		// cc
+	fh.v3f(509, 435, 45);		// z
+	fh.v3f(495, 457.5, 68);		// a1
+	fh.v3f(495, 457.5, 92.5);	// a2
+	glEnd();
+
+	// side 2
+	glColor3f(0.5, 0.7, 0.3);
+	glBegin(gltype);
+	fh.v3f(495, 457.5, 68);		// a1
+	fh.v3f(470, 505, 77.5);		// bb
+	fh.v3f(435, 522.5, 115);
+	fh.v3f(495, 457.5, 92.5);	// a2
+	glEnd();
+
+	// side 2
+	glColor3f(1, 1, 0.7);
+	glBegin(gltype);
+	fh.v3f(470, 505, 77.5);		// bb
+	fh.v3f(467.5, 517.5, 75);	// y
+	fh.v3f(447.5, 530, 97.5);	// x
+	fh.v3f(435, 522.5, 115);
+	glEnd();
+
+	//// side
+	//glColor3f(0.5, 1, 1);
+	//glBegin(type);
+	//fh.v3f(509, 415, 40);		// cc
+	//fh.v3f(509, 435, 45);		// z
+	//fh.v3f(495, 457.5, 68);		// a1
+	//fh.v3f(470, 505, 77.5);		// bb
+	//fh.v3f(467.5, 517.5, 75);	// y
+	//fh.v3f(447.5, 530, 97.5);	// x
+	//fh.v3f(435, 522.5, 115);
+	//fh.v3f(495, 457.5, 92.5);	// a2
+	//glEnd();
+}
+
+void leftBtm(GLenum gltype) {
+	// side top
+	glColor3f(1, 1, 1);
+	glBegin(gltype);
+	fh.v3f(800 - 509, 415, 40);		// cc
+	fh.v3f(800 - 504, 387.5, 60);		// aa
+	fh.v3f(800 - 502.5, 392, 92);		// ee
+	fh.v3f(800 - 509, 415, 92);
+	glEnd();
+
+	// front top
+	glColor3f(1, 0, 1);
+	glBegin(gltype);
+	fh.v3f(800 - 502.5, 392, 92);		// ee
+	fh.v3f(800 - 472.5, 415, 115);
+	fh.v3f(800 - 509, 415, 92);
+	glEnd();
+
+	// side top 2
+	glColor3f(1, 1, 0);
+	glBegin(gltype);
+	fh.v3f(800 - 509, 415, 40);		// cc
+	fh.v3f(800 - 509, 415, 92);
+	fh.v3f(800 - 495, 457.5, 92.5);	// a2
+	fh.v3f(800 - 509, 435, 45);		// z
+	glEnd();
+
+	// front top 2
+	glColor3f(0, 1, 1);
+	glBegin(gltype);
+	fh.v3f(800 - 509, 415, 92);
+	fh.v3f(800 - 495, 457.5, 92.5);	// a2
+	fh.v3f(800 - 472.5, 457.5, 115);
+	fh.v3f(800 - 472.5, 415, 115);
+	glEnd();
+
+	// front top 3
+	glColor3f(1, 1, 1);
+	glBegin(gltype);
+	fh.v3f(800 - 472.5, 457.5, 115);
+	fh.v3f(800 - 472.5, 415, 115);
+	fh.v3f(800 - 427.5, 415, 130);
+	fh.v3f(800 - 427.5, 457.5, 130);
+	glEnd();
+
+	// front top 4 (middle top)
+	glColor3f(1, 0.5, 0.5);
+	glBegin(gltype);
+	fh.v3f(800 - 427.5, 415, 130);
+	fh.v3f(800 - 427.5, 457.5, 130);
+	fh.v3f(800 - 400, 457.5, 137.5);
+	fh.v3f(800 - 400, 415, 137.5);
+	glEnd();
+
+	// front btm (middle btm)
+	glColor3f(0.5, 1, 0.5);
+	glBegin(gltype);
+	fh.v3f(800 - 427.5, 457.5, 130);
+	fh.v3f(800 - 400, 457.5, 137.5);
+	fh.v3f(800 - 400, 522.5, 115);
+	fh.v3f(800 - 435, 522.5, 115);
+	glEnd();
+
+	// front btm 2
+	glColor3f(0.5, 0.5, 1);
+	glBegin(gltype);
+	fh.v3f(800 - 472.5, 457.5, 115);
+	fh.v3f(800 - 427.5, 457.5, 130);
+	fh.v3f(800 - 435, 522.5, 115);
+	glEnd();
+
+	// front btm 3
+	glColor3f(0.7, 0.5, 0.3);
+	glBegin(gltype);
+	fh.v3f(800 - 472.5, 457.5, 115);
+	fh.v3f(800 - 435, 522.5, 115);
+	fh.v3f(800 - 495, 457.5, 92.5);	// a2
+	glEnd();
+
+	// side 1
+	glColor3f(0.5, 0.3, 0.7);
+	glBegin(gltype);
+	//fh.v3f(509, 415, 40);		// cc
+	fh.v3f(800 - 509, 435, 45);		// z
+	fh.v3f(800 - 495, 457.5, 68);		// a1
+	fh.v3f(800 - 495, 457.5, 92.5);	// a2
+	glEnd();
+
+	// side 2
+	glColor3f(0.5, 0.7, 0.3);
+	glBegin(gltype);
+	fh.v3f(800 - 495, 457.5, 68);		// a1
+	fh.v3f(800 - 470, 505, 77.5);		// bb
+	fh.v3f(800 - 435, 522.5, 115);
+	fh.v3f(800 - 495, 457.5, 92.5);	// a2
+	glEnd();
+
+	// side 2
+	glColor3f(1, 1, 0.7);
+	glBegin(gltype);
+	fh.v3f(800 - 470, 505, 77.5);		// bb
+	fh.v3f(800 - 467.5, 517.5, 75);	// y
+	fh.v3f(800 - 447.5, 530, 97.5);	// x
+	fh.v3f(800 - 435, 522.5, 115);
+	glEnd();
+}
+
+void mask(GLenum gltype) {
+	eye(GL_LINE_LOOP);
+
+	rightTop(gltype);
+	leftTop(gltype);
+	eyeMid(gltype);
+
+	rightBtm(gltype);
+	leftBtm(gltype);
+}
+
+void head(GLenum gltype) {
+	mask(gltype);
+}
+
 //============================= DANNY =================================
 
 //============================= LIANA =================================
@@ -1256,6 +1238,18 @@ void display()
 	for (int i = 0; i < SIZE; i++) {
 		C[i] = 1000000;
 	}
+	//=================== rotate ========================
+	// press 'a'/'w'/'d'/'s' to rotate 
+	if (str == "leftRotate" || str == "upRotate") {
+		rotate++;
+	}
+	else if (str == "rightRotate" || str == "downRotate") {
+		rotate--;
+	}
+	else if (str == "space") {
+		glLoadIdentity();
+	}
+	//===================================================
 	//==================== body =========================
 	{
 		int angle = 10, angle2 = angle + 1, angle3 = angle2 + 1, angle4 = angle - 5, an = 5;
@@ -1346,11 +1340,17 @@ void display()
 		glPopMatrix();
 		break;
 	case 2:
+		// head
+		glPushMatrix();
+		glTranslatef(xT, yT, zT);
+		glRotatef(rotate, xR, yR, zR);
+		glScalef(zoom, zoom, zoom);
+		head(GL_POLYGON);
+		glPopMatrix();
 		break;
 	case 3:
 		break;
 	case 4:
-		head();
 		if ((armUp && armAngle > 110) || (armDown && armAngle >= 0)) //raise hand
 			armAngle -= armRSpeed;
 		else
@@ -1396,7 +1396,6 @@ void display()
 		fh.poly3(GL_LINE_STRIP, C, SIZE);
 		break;
 	default:
-		head();
 		break;
 	}
 }
