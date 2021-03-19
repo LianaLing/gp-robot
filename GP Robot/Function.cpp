@@ -192,7 +192,7 @@ void function::quad(GLenum type, float length, float height, int lineWidth) {
 
 //for 3D objects, size value follows openGL coordinates, so use xC/yC/zC if you need it in pixels
 void function::pyramid(GLenum type, float size, int lineWidth) {
-	float x = xC(size), y = yC(size), z = zC(size);
+	float x = size, y = size, z = size;
 	glBegin(type);
 	//front
 	glVertex3f(0, y, 0);

@@ -19,9 +19,11 @@ using namespace N;
 #define HEIGHT VALUE
 #define DEPTH VALUE
 #define SIZE 15
+#define ORTHO_VIEW 1.0
+#define FRUSTUM_VIEW 1.0
 
 function fh;
-int qNo = 4;
+int qNo = 3;
 std::string str = " ";
 float C[SIZE];
 float zoom = 1.0;
@@ -37,8 +39,15 @@ float armx2 = 0, army2 = 0, armz2 = 0;
 boolean armTurn = false, armUp = false, armDown  = false;
 float fingerRotate = 0, fingerRSpeed = 0, fx = 0, fy = 0, fz = 0 /*, fingerDirection = 0, fingerAngle = 0*/;
 float fx2 = 0, fy2 = 0, fz2 = 0;
-int fCount = 0;
+int fCount = 0, llCount = 0, lrCount = 0;
 boolean fingerBend = false;
+boolean sideView = true;
+boolean raiseLeftLeg = false, raiseRightLeg = false;
+GLenum nonGLUtype = GL_POLYGON;
+GLenum GLUtype = GLU_FILL;
+char view = 'p';
+int pCount = 0;
+float ry = 0, rSpeedP = 10.0;
 //===================================
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -132,14 +141,38 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0;
 				fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount = 0;
 			}
+			if (qNo == 3) {
+				sideView = false;
+			}
 		}
-		else if (wParam == 0x46) { //f
-			if(qNo == 4)
-				if(fCount % 2 == 0)
-					fx = 1, fy = 0, fz = 0, fx2 = 0, fy2 = 1, fz2 = 0, fingerRSpeed = 0.5, fingerBend = true, fCount++;
-				else
-					fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0, fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount++;
+		else if (wParam == 0x46) { // F
+			if(fCount % 2 == 0)
+				fx = 1, fy = 0, fz = 0, fx2 = 0, fy2 = 1, fz2 = 0, fingerRSpeed = 0.5, fingerBend = true, fCount++;
+			else
+				fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0, fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount++;
 		}
+		else if (wParam == 0x4C) { // L
+			if (llCount % 2 == 0)
+				raiseLeftLeg = true, llCount++;
+			else
+				raiseLeftLeg = false, llCount++;
+		}
+		else if (wParam == 0x4B) { // K
+			if (lrCount % 2 == 0)
+				raiseRightLeg = true, lrCount++;
+			else
+				raiseRightLeg = false, lrCount++;
+		}
+		else if (wParam == 0x50) {//P
+			if (pCount % 2 == 0)
+				view = 'o', pCount++;
+			else
+				view = 'p', pCount++;
+		}
+		else if (wParam == 0x52) //R - anti
+			ry += rSpeedP;
+		else if (wParam == 0x51) //Q - clockwise
+			ry -= rSpeedP;
 		else if (wParam == 0x57) { // W
 			xR = 1, yR = 0, zR = 0;
 			str = "upRotate";
@@ -147,6 +180,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == 0x53) { // S
 			xR = 1, yR = 0, zR = 0;
 			str = "downRotate";
+			if (qNo == 3)
+				sideView = true;
 		}
 		else if (wParam == 0x41) { // A
 			xR = 0, yR = 1, zR = 0;
@@ -1182,6 +1217,74 @@ void palm(GLenum type, float size, float size2, int lineWidth) {
 	glPopMatrix();
 }
 
+void leg() {
+	float thighBaseRadius = 0.1, thighTopRadius = thighBaseRadius - 0.02, height = 0.52, slices = 30, stacks = 30;
+	float calfBaseRadius = thighTopRadius, calfTopRadius = calfBaseRadius - 0.02;
+	float sRadius = thighTopRadius;
+	float footSize = thighBaseRadius + 0.05;
+
+	glPushMatrix();
+	glRotatef(90, 1.0, 0.0, 0.0);
+
+	glPushMatrix();
+	glTranslatef(0, 0, -height);
+	fh.color('g');
+	fh.cylinder(GLUtype, thighBaseRadius, thighTopRadius, height, slices, stacks); //thigh
+	glPopMatrix();
+
+	//glPushMatrix();
+	//glRotatef(-90, 1.0, 0, 0);
+	//glTranslatef(0, 0, height);
+
+	glPushMatrix();
+	fh.color('y');
+	fh.sphere(GLUtype, sRadius, slices, stacks); //knee
+	glPopMatrix();
+
+	height -= 0.01;
+	glPushMatrix();
+	/*if (armUp || armDown)
+		glRotatef(-armAngle, armx, army, armz);*/
+	//glRotatef(-90, 1.0, 0.0, 0.0);
+	//glRotatef(-armAngle, 1.0, 0.0, 0.0);
+	fh.color('r');
+	fh.cylinder(GLUtype, calfBaseRadius, calfTopRadius, height, slices, stacks); //calf
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+	fh.color('w');
+	//if (armUp || armDown)
+	//	glRotatef(-armAngle, armx, army, armz);
+	glTranslatef(/*-calfTopRadius - 0.02*/ 0.07, /*(-calfTopRadius - 0.01) * 2*/ -height - 0.07 /*- footSize*/, /*height + footSize*/ -footSize * 0.5);
+	////glRotatef(90, 1.0, 0, 0);
+	glRotatef(90, 0, 0, 1.0);
+	glScalef(footSize, footSize, footSize * 1.25); //foot
+	fh.cuboid(nonGLUtype, 1.0, 0.5, 2);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -height, footSize * 0.5);
+	glScalef(footSize * 0.5, footSize * 0.5, footSize * 0.5);
+	glRotatef(220, 1.0, 0, 0);
+	fh.pyramid(nonGLUtype, 0.5, 2); //ball of foot
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(0, -height - 0.035, footSize * 1.25);
+	glScalef(footSize, footSize * 0.5, footSize);
+	glRotatef(90, 1.0, 0, 0);
+	fh.pyramid(nonGLUtype, 0.5, 2); //ball of foot
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -height - 0.05, footSize * 1.3);
+	glScalef(2.0, 0.75, 2.5);
+	//glRotatef(90, 1.0, 0, 0);
+	fh.sphere(GLUtype, sRadius * 0.4, slices, stacks); //ball of foot
+	glPopMatrix();
+}
+
 void arm() {
 	float uaBaseRadius = 0.05, uaTopRadius = uaBaseRadius - 0.005, height = 0.35, slices = 30, stacks = 30;
 	float laBaseRadius = uaTopRadius, laTopRadius = laBaseRadius - 0.01;
@@ -1192,9 +1295,12 @@ void arm() {
 	glRotatef(90, 0.0, 1.0, 0.0);
 	
 	glPushMatrix();
-	glTranslatef(0, 0, -height);
+	if (raiseLeftLeg)
+		glTranslatef(0, 0, -height), glRotatef(-90, 0, 1.0, 0), glTranslatef(0, 0, height);
+	else
+		glTranslatef(0, 0, -height);
 	fh.color('g');
-	fh.cylinder(GLU_LINE, uaBaseRadius, uaTopRadius, height, slices, stacks); //upperarm
+	fh.cylinder(GLUtype, uaBaseRadius, uaTopRadius, height, slices, stacks); //upperarm
 	glPopMatrix();
 	
 	glPushMatrix();
@@ -1203,7 +1309,7 @@ void arm() {
 	
 	glPushMatrix();
 	fh.color('y');
-	fh.sphere(GLU_LINE, sRadius, slices, stacks); //elbow
+	fh.sphere(GLUtype, sRadius, slices, stacks); //elbow
 	glPopMatrix();
 	
 	height -= 0.01;
@@ -1213,7 +1319,7 @@ void arm() {
 	//glRotatef(-90, 1.0, 0.0, 0.0);
 	//glRotatef(-armAngle, 1.0, 0.0, 0.0);
 	fh.color('r');
-	fh.cylinder(GLU_LINE, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
+	fh.cylinder(GLUtype, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
 	glPopMatrix();
 	glPopMatrix();
 	
@@ -1224,7 +1330,7 @@ void arm() {
 	//glRotatef(90, 1.0, 0, 0);
 	glRotatef(90, 0, 1.0, 0);
 	glScalef(palmSize, palmSize, palmSize);
-	palm(GL_LINE_LOOP, 1.0, 0.5, 2);
+	palm(nonGLUtype, 1.0, 0.5, 2);
 	glPopMatrix();
 	glPopMatrix();
 
@@ -1232,9 +1338,26 @@ void arm() {
 
 //============================= LIANA =================================
 
+void switchView(char view) {
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	//glTranslatef(tx, ty, 0.0);
+	glRotatef(ry, 0.0, 1.0, 0);;
+	switch (view) {
+	case 'o':
+		glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);
+		break;
+	case 'p':
+		gluPerspective(60.0, 1.0, -1.0, 1.0);
+		glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
+		break;
+	}
+}
+
 void display()
 {
 	init();
+	switchView(view);
 	for (int i = 0; i < SIZE; i++) {
 		C[i] = 1000000;
 	}
@@ -1349,10 +1472,23 @@ void display()
 		glPopMatrix();
 		break;
 	case 3:
+		glPushMatrix();
+		/*if (raiseLeftLeg)
+			glRotatef(-90, 0, 0, 1.0);
+		else
+			glLoadIdentity();*/
+		/*if (sideView)
+			glRotatef(-90, 0, 1.0, 0);
+		else
+			glLoadIdentity();*/
+		leg();
+		glPopMatrix();
 		break;
 	case 4:
 		if ((armUp && armAngle > 110) || (armDown && armAngle >= 0)) //raise hand
 			armAngle -= armRSpeed;
+		else if (armAngle == 110)
+			armAngle = armAngle;
 		else
 			armAngle += armRSpeed;
 
@@ -1374,7 +1510,7 @@ void display()
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
 		arm();
-			glPopMatrix();
+		glPopMatrix();
 		glPopMatrix();
 		break;
 	case 5:
