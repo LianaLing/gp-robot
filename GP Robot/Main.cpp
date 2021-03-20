@@ -1318,6 +1318,10 @@ void arm() {
 		glRotatef(-armAngle, armx, army, armz);
 	//glRotatef(-90, 1.0, 0.0, 0.0);
 	//glRotatef(-armAngle, 1.0, 0.0, 0.0);
+	glPushMatrix();
+	glTranslatef(0, 0.05, 0);
+	fh.cylinder(GLU_LINE, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
+	glPopMatrix();
 	fh.color('r');
 	fh.cylinder(GLUtype, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
 	glPopMatrix();
@@ -1339,7 +1343,7 @@ void arm() {
 //============================= LIANA =================================
 
 void switchView(char view) {
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	//glTranslatef(tx, ty, 0.0);
 	glRotatef(ry, 0.0, 1.0, 0);;
@@ -1457,7 +1461,7 @@ void display()
 	case 1:
 		// body 
 		glPushMatrix();
-		glRotatef(-90, 0, 1, 0);
+		//glRotatef(-90, 0, 1, 0);
 		glScalef(zoom, zoom, zoom);
 		body(GL_LINE_LOOP);
 		glPopMatrix();
