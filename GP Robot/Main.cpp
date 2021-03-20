@@ -5,8 +5,11 @@
 #include <iostream>
 #include <string>
 #include "Function.h"
+#include "Body.h"
 
 using namespace N;
+using namespace B;
+
 // using namespace std;
 
 //#pragma comment (lib, "OpenGL32.lib")
@@ -23,10 +26,11 @@ using namespace N;
 #define FRUSTUM_VIEW 1.0
 
 function fh;
-int qNo = 3;
+body b;
+int qNo = 4;
 std::string str = " ";
 float C[SIZE];
-float zoom = 1.0;
+float zoom = 2.0;
 //============== Danny ==============
 float AR = 0, AR1 = 0, AR2 = 0, AR3 = 0, AR4 = 0, AR0 = 0, AR01 = 0, AR5 = 0;
 float rotate = 0;
@@ -36,16 +40,18 @@ float xR = 0, yR = 0, zR = 0, xT = 0, yT = 0, zT = 0;
 //============== LIANA ==============
 float armRotate = 0, armRSpeed = 0, armx = 0, army = 0, armz = 0, armDirection = 0, armAngle = 0;
 float armx2 = 0, army2 = 0, armz2 = 0;
-boolean armTurn = false, armUp = false, armDown  = false;
+boolean armTurnUp = false, armTurnDown = false, armUp = false, armDown  = false;
 float fingerRotate = 0, fingerRSpeed = 0, fx = 0, fy = 0, fz = 0 /*, fingerDirection = 0, fingerAngle = 0*/;
 float fx2 = 0, fy2 = 0, fz2 = 0;
 int fCount = 0, llCount = 0, lrCount = 0;
 boolean fingerBend = false;
 boolean sideView = true;
 boolean raiseLeftLeg = false, raiseRightLeg = false;
-GLenum nonGLUtype = GL_POLYGON;
-GLenum GLUtype = GLU_FILL;
-char view = 'p';
+//GLenum nonGLUtype = GL_POLYGON;
+GLenum nonGLUtype = GL_LINE_LOOP;
+//GLenum GLUtype = GLU_FILL;
+GLenum GLUtype = GLU_LINE;
+char view = 'o';
 int pCount = 0;
 float ry = 0, rSpeedP = 10.0;
 //===================================
@@ -125,11 +131,11 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		}
 		else if (wParam == VK_LEFT) {
 			if(qNo == 4)
-				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = +1.0, armRSpeed = 0.5, armTurn = true;
+				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = +1.0, armRSpeed = 2, armTurnUp = true, armTurnDown = false;
 		}
 		else if (wParam == VK_RIGHT) {
 			if(qNo == 4)
-				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = -1.0, armRSpeed = 0.5, armTurn = true;
+				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = -1.0, armRSpeed = 2, armTurnDown = true, armTurnUp = false;
 		}
 		else if (wParam == VK_SPACE) {
 			str = "space";
@@ -137,7 +143,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			if (qNo == 4) {
 				armx = 1.00, army = 0, armz = 0, armx2 = 0, army2 = 0, armz2 = 0;
 				armRSpeed = 0, armAngle = 0, armRotate = 0, armDirection = 0;
-				armUp = false, armDown = false, armTurn = false;
+				armUp = false, armDown = false, armTurnUp = false, armTurnDown = false;
 				fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0;
 				fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount = 0;
 			}
@@ -247,79 +253,7 @@ void init() {
 //============================= DANNY =================================
 
 // body
-void upperChest(GLenum gltype) {
-	// front top
-	glColor3f(1, 0.7, 0.3);
-	glBegin(gltype);
-	fh.v3f(378.75, 265, 25);
-	fh.v3f(356.25, 270, 30);
-	fh.v3f(443.75, 270, 30);
-	fh.v3f(421.25, 265, 25);
-	glEnd();
 
-	// front btm
-	glColor3f(1, 0, 0.5);
-	glBegin(gltype);
-	fh.v3f(356.25, 270, 30);
-	fh.v3f(340, 307.5, 50);
-	fh.v3f(460, 307.5, 50);
-	fh.v3f(443.75, 270, 30);
-	glEnd();
-
-	// left top
-	glColor3f(1, 1, 1);
-	glBegin(gltype);
-	fh.v3f(378.75, 265, -37.5);
-	fh.v3f(356.25, 270, -42.5);
-	fh.v3f(356.25, 270, 30);
-	fh.v3f(378.75, 265, 25);
-	glEnd();
-
-	// left btm
-	glColor3f(0, 1, 0);
-	glBegin(gltype);
-	fh.v3f(356.25, 270, -42.5);
-	fh.v3f(340, 307.5, -60);
-	fh.v3f(340, 307.5, 50);
-	fh.v3f(356.25, 270, 30);
-	glEnd();
-
-	// right top
-	glColor3f(1, 0, 1);
-	glBegin(gltype);
-	fh.v3f(421.25, 265, 25);
-	fh.v3f(443.75, 270, 30);
-	fh.v3f(443.75, 270, -42.5);
-	fh.v3f(421.25, 265, -37.5);
-	glEnd();
-
-	// right btm
-	glColor3f(0.2, 1, 0.5);
-	glBegin(gltype);
-	fh.v3f(443.75, 270, -42.5);
-	fh.v3f(460, 307.5, -60);
-	fh.v3f(460, 307.5, 50);
-	fh.v3f(443.75, 270, 30);
-	glEnd();
-
-	// back top
-	glColor3f(0, 0.7, 0.3);
-	glBegin(gltype);
-	fh.v3f(378.75, 265, -37.5);
-	fh.v3f(356.25, 270, -42.5);
-	fh.v3f(443.75, 270, -42.5);
-	fh.v3f(421.25, 265, -37.5);
-	glEnd();
-
-	// back btm
-	glColor3f(0.5, 0.3, 1);
-	glBegin(gltype);
-	fh.v3f(356.25, 270, -42.5);
-	fh.v3f(340, 307.5, -60);
-	fh.v3f(460, 307.5, -60);
-	fh.v3f(443.75, 270, -42.5);
-	glEnd();
-}
 
 void lowerChest(GLenum gltype) {
 	// front top
@@ -403,7 +337,7 @@ void lowerChest(GLenum gltype) {
 }
 
 void chest(GLenum gltype) {
-	upperChest(gltype);
+	b.upperChest(gltype);
 	lowerChest(gltype);
 }
 
@@ -606,7 +540,7 @@ void below(GLenum gltype) {
 	glEnd();
 }
 
-void body(GLenum gltype) {
+void robotBody(GLenum gltype) {
 	// adomen 0 + chest
 	glPushMatrix();
 	glRotatef(-AR4, 1, 0, 0);
@@ -1318,10 +1252,13 @@ void arm() {
 		glRotatef(-armAngle, armx, army, armz);
 	//glRotatef(-90, 1.0, 0.0, 0.0);
 	//glRotatef(-armAngle, 1.0, 0.0, 0.0);
-	glPushMatrix();
-	glTranslatef(0, 0.05, 0);
-	fh.cylinder(GLU_LINE, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
-	glPopMatrix();
+
+	// can add armor at here
+	//glPushMatrix();
+	//glTranslatef(0, 0.05, 0);
+	//fh.cylinder(GLU_LINE, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
+	//glPopMatrix();
+
 	fh.color('r');
 	fh.cylinder(GLUtype, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
 	glPopMatrix();
@@ -1463,7 +1400,7 @@ void display()
 		glPushMatrix();
 		//glRotatef(-90, 0, 1, 0);
 		glScalef(zoom, zoom, zoom);
-		body(GL_LINE_LOOP);
+		robotBody(GL_LINE_LOOP);
 		glPopMatrix();
 		break;
 	case 2:
@@ -1489,27 +1426,58 @@ void display()
 		glPopMatrix();
 		break;
 	case 4:
-		if ((armUp && armAngle > 110) || (armDown && armAngle >= 0)) //raise hand
-			armAngle -= armRSpeed;
-		else if (armAngle == 110)
-			armAngle = armAngle;
-		else
-			armAngle += armRSpeed;
+		//if ((armUp && armAngle > 110) || (armDown && armAngle > 0)) //raise hand
+		//	armAngle -= armRSpeed;
+		//else if (armAngle == 110)
+		//	armAngle = armAngle;
+		//else if (armAngle == 0)
+		//{ }
+		//	
+		//else
+		//	armAngle += armRSpeed;
 
-		if (armDirection == 1 && armRotate <= 30) //arm rotate
+		//---------- lower arm lift -----------
+		if (armAngle == 110) {
+			armAngle = 110;
+		}
+		else if (armAngle == 0) {
+			armAngle = 0;
+			armDown = false;
+		}
+
+		if (armUp == true && armAngle <= 110) {
+			armAngle += armRSpeed;
+		}
+		else if (armDown == true) {
+			armAngle -= armRSpeed;
+		}
+
+		//if (armDirection == 1 && armRotate <= 30) //arm rotate
+		//	armRotate += armRSpeed;
+		//else
+		//	if(armRotate >= -90)
+		//		armRotate -= armRSpeed;
+
+		//----------- arm rotate --------
+		
+		// for right hand rotate
+		if (armTurnUp && !armTurnDown && armRotate > -90) {
+			armRotate -= armRSpeed;
+		}
+		else if(armTurnDown && !armTurnUp && armRotate < 30){
 			armRotate += armRSpeed;
-		else
-			if(armRotate >= -90)
-				armRotate -= armRSpeed;
+		}
 
 		if (fingerBend && fingerRotate <= 45)
 			fingerRotate += fingerRSpeed;
-		else
+		else if (!fingerBend && fingerRotate > 45) {
 			fingerRotate -= fingerRSpeed;
+		}
+			
 		
 		//glRotatef(0.3, 0, 1.0, 0);
 		glPushMatrix();
-		if (armTurn)
+		if (armTurnUp || armTurnDown)
 			glRotatef(armRotate, armx2, army2, armz2);
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
