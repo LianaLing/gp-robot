@@ -27,12 +27,18 @@
     <ClCompile Include="Limb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Head.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Function.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Body.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Head.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
