@@ -29,7 +29,7 @@ float function::xC(float x) {
 }
 
 float function::zC(float z) {
-	float zCoor = 0, depth = DEPTH / 2;
+	float zCoor, depth = DEPTH / 2;
 
 	zCoor = z / depth;
 
@@ -37,7 +37,7 @@ float function::zC(float z) {
 }
 
 float function::yC(float y) {
-	float yCoor = 0, height = HEIGHT / 2;
+	float yCoor, height = HEIGHT / 2;
 	if (y > 0 && y < height) {
 		yCoor = 1 - (y / height);
 	}
