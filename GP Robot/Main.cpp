@@ -1478,7 +1478,6 @@ void display()
 			fingerRotate -= fingerRSpeed;
 		}
 			
-		
 		//glRotatef(0.3, 0, 1.0, 0);
 		glPushMatrix();
 		if (armTurnUp || armTurnDown)
