@@ -16,9 +16,9 @@ function fh_head;
 
 GLenum type = GL_LINE_LOOP, gltype = GL_POLYGON;
 void head::eye() {
-	glColor3f(1, 0, 0);
+	glColor3f(1, 1, 1);
 	// right
-	glBegin(type);
+	glBegin(gltype);
 	fh_head.v3f(427.5, 400, 130);
 	fh_head.v3f(427.5, 415, 130);
 	fh_head.v3f(472.5, 415, 115);
@@ -27,7 +27,7 @@ void head::eye() {
 	glEnd();
 
 	// left
-	glBegin(type);
+	glBegin(gltype);
 	fh_head.v3f(372.5, 400, 130);
 	fh_head.v3f(372.5, 415, 130);
 	fh_head.v3f(327.5, 415, 115);
@@ -192,7 +192,7 @@ void head::leftTop() {
 
 void head::rightBtm() {
 	// side top
-	glColor3f(1, 1, 1);
+	glColor3f(1, 0.6, 1);
 	glBegin(gltype);
 	fh_head.v3f(509, 415, 40);		// cc
 	fh_head.v3f(504, 387.5, 60);		// aa
@@ -227,7 +227,7 @@ void head::rightBtm() {
 	glEnd();
 
 	// front top 3
-	glColor3f(1, 1, 1);
+	glColor3f(1, 1, 0.3);
 	glBegin(gltype);
 	fh_head.v3f(472.5, 457.5, 115);
 	fh_head.v3f(472.5, 415, 115);
@@ -312,7 +312,7 @@ void head::rightBtm() {
 
 void head::leftBtm() {
 	// side top
-	glColor3f(1, 1, 1);
+	glColor3f(1, 0.6, 1);
 	glBegin(gltype);
 	fh_head.v3f(800 - 509, 415, 40);		// cc
 	fh_head.v3f(800 - 504, 387.5, 60);		// aa
@@ -347,7 +347,7 @@ void head::leftBtm() {
 	glEnd();
 
 	// front top 3
-	glColor3f(1, 1, 1);
+	glColor3f(1, 1, 0.3);
 	glBegin(gltype);
 	fh_head.v3f(800 - 472.5, 457.5, 115);
 	fh_head.v3f(800 - 472.5, 415, 115);

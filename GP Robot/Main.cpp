@@ -12,7 +12,6 @@ using namespace N;
 using namespace B;
 using namespace H;
 
-
 //#pragma comment (lib, "OpenGL32.lib")
 //dependencies included in project properties - linker - input
 
@@ -598,7 +597,6 @@ void robotBody(GLenum gltype) {
 }
 
 // head
-
 void helmet() {
 	glPushMatrix();
 
@@ -634,10 +632,16 @@ void helmet() {
 
 	// right
 	glTranslatef(fh.xP(-115), fh.yP(10), fh.zP(55));
-	for (int i = 0; i < 100; i++) {
-		glTranslatef(fh.xP(-0.005), 0, 0);
-		h.ear();
-	}
+	h.ear();
+
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	fh.cylinder(GLU_FILL, fh.yP(55), fh.yP(55), fh.yP(230), 50, 50);
+	glPopMatrix();
+
+	// right
+	glTranslatef(fh.xP(230), fh.yP(0), fh.zP(0));
+	h.ear();
 
 	glPopMatrix();
 }
