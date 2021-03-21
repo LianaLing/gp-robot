@@ -27,7 +27,7 @@ using namespace B;
 
 function fh;
 body b;
-int qNo = 4;
+int qNo = 3;
 std::string str = " ";
 float C[SIZE];
 float zoom = 2.0;
@@ -47,6 +47,7 @@ int fCount = 0, llCount = 0, lrCount = 0;
 boolean fingerBend = false;
 boolean sideView = true;
 boolean raiseLeftLeg = false, raiseRightLeg = false;
+float rLeftLeg = 0, rRightLeg = 0, legRSpeed = 0;
 //GLenum nonGLUtype = GL_POLYGON;
 GLenum nonGLUtype = GL_LINE_LOOP;
 //GLenum GLUtype = GLU_FILL;
@@ -149,6 +150,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 			if (qNo == 3) {
 				sideView = false;
+				llCount = 0;
+				rLeftLeg = 0, legRSpeed = 0;
 			}
 		}
 		else if (wParam == 0x46) { // F
@@ -159,9 +162,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		}
 		else if (wParam == 0x4C) { // L
 			if (llCount % 2 == 0)
-				raiseLeftLeg = true, llCount++;
+				raiseLeftLeg = true, llCount++, legRSpeed = 2;
 			else
-				raiseLeftLeg = false, llCount++;
+				raiseLeftLeg = false, llCount++, legRSpeed = -2;
 		}
 		else if (wParam == 0x4B) { // K
 			if (lrCount % 2 == 0)
@@ -1151,6 +1154,39 @@ void palm(GLenum type, float size, float size2, int lineWidth) {
 	glPopMatrix();
 }
 
+void shoe(float height, float footSize, float sRadius, float slices, float stacks) {
+	glPushMatrix();
+	glRotatef(-90, 1.0, 0, 0);
+	glPushMatrix();
+	fh.color('w');
+	glTranslatef(/*-calfTopRadius - 0.02*/ 0.07, /*(-calfTopRadius - 0.01) * 2*/ -height - 0.07 /*- footSize*/, /*height + footSize*/ -footSize * 0.5);
+	////glRotatef(90, 1.0, 0, 0);
+	glRotatef(90, 0, 0, 1.0);
+	glScalef(footSize, footSize, footSize * 1.25); //foot
+	fh.cuboid(nonGLUtype, 1.0, 0.5, 2);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -height, footSize * 0.5);
+	glScalef(footSize * 0.5, footSize * 0.5, footSize * 0.5);
+	glRotatef(220, 1.0, 0, 0);
+	fh.pyramid(nonGLUtype, 0.5, 2); //ball of foot
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -height - 0.035, footSize * 1.25);
+	glScalef(footSize, footSize * 0.5, footSize);
+	glRotatef(90, 1.0, 0, 0);
+	fh.pyramid(nonGLUtype, 0.5, 2); //ball of foot
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, -height - 0.05, footSize * 1.3);
+	glScalef(2.0, 0.75, 2.5);
+	fh.sphere(GLUtype, sRadius * 0.4, slices, stacks); //ball of foot
+	glPopMatrix();
+	glPopMatrix();
+}
 void leg() {
 	float thighBaseRadius = 0.1, thighTopRadius = thighBaseRadius - 0.02, height = 0.52, slices = 30, stacks = 30;
 	float calfBaseRadius = thighTopRadius, calfTopRadius = calfBaseRadius - 0.02;
@@ -1166,10 +1202,6 @@ void leg() {
 	fh.cylinder(GLUtype, thighBaseRadius, thighTopRadius, height, slices, stacks); //thigh
 	glPopMatrix();
 
-	//glPushMatrix();
-	//glRotatef(-90, 1.0, 0, 0);
-	//glTranslatef(0, 0, height);
-
 	glPushMatrix();
 	fh.color('y');
 	fh.sphere(GLUtype, sRadius, slices, stacks); //knee
@@ -1177,45 +1209,18 @@ void leg() {
 
 	height -= 0.01;
 	glPushMatrix();
-	/*if (armUp || armDown)
-		glRotatef(-armAngle, armx, army, armz);*/
-	//glRotatef(-90, 1.0, 0.0, 0.0);
-	//glRotatef(-armAngle, 1.0, 0.0, 0.0);
+	if (!(rLeftLeg < 0)) {
+		if (raiseLeftLeg && rLeftLeg < 90 || !raiseLeftLeg && rLeftLeg > 0)
+			rLeftLeg += legRSpeed;
+		glTranslatef(height, 0, 0), glRotatef(rLeftLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
+	}
+	
 	fh.color('r');
 	fh.cylinder(GLUtype, calfBaseRadius, calfTopRadius, height, slices, stacks); //calf
-	glPopMatrix();
-	glPopMatrix();
 
-	glPushMatrix();
-	fh.color('w');
-	//if (armUp || armDown)
-	//	glRotatef(-armAngle, armx, army, armz);
-	glTranslatef(/*-calfTopRadius - 0.02*/ 0.07, /*(-calfTopRadius - 0.01) * 2*/ -height - 0.07 /*- footSize*/, /*height + footSize*/ -footSize * 0.5);
-	////glRotatef(90, 1.0, 0, 0);
-	glRotatef(90, 0, 0, 1.0);
-	glScalef(footSize, footSize, footSize * 1.25); //foot
-	fh.cuboid(nonGLUtype, 1.0, 0.5, 2);
-	glPopMatrix();
+	shoe(height, footSize, sRadius, slices, stacks);
 
-	glPushMatrix();
-	glTranslatef(0, -height, footSize * 0.5);
-	glScalef(footSize * 0.5, footSize * 0.5, footSize * 0.5);
-	glRotatef(220, 1.0, 0, 0);
-	fh.pyramid(nonGLUtype, 0.5, 2); //ball of foot
 	glPopMatrix();
-	
-	glPushMatrix();
-	glTranslatef(0, -height - 0.035, footSize * 1.25);
-	glScalef(footSize, footSize * 0.5, footSize);
-	glRotatef(90, 1.0, 0, 0);
-	fh.pyramid(nonGLUtype, 0.5, 2); //ball of foot
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(0, -height - 0.05, footSize * 1.3);
-	glScalef(2.0, 0.75, 2.5);
-	//glRotatef(90, 1.0, 0, 0);
-	fh.sphere(GLUtype, sRadius * 0.4, slices, stacks); //ball of foot
 	glPopMatrix();
 }
 
@@ -1414,14 +1419,13 @@ void display()
 		break;
 	case 3:
 		glPushMatrix();
-		/*if (raiseLeftLeg)
-			glRotatef(-90, 0, 0, 1.0);
-		else
-			glLoadIdentity();*/
-		/*if (sideView)
-			glRotatef(-90, 0, 1.0, 0);
-		else
-			glLoadIdentity();*/
+		glScalef(zoom, zoom, zoom);
+		if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -35)
+			rLeftLeg += legRSpeed;
+		
+		glTranslatef(0, 0.52, 0);
+		glRotatef(-rLeftLeg, 1.0, 0, 0);
+		glTranslatef(0, -0.52, 0);
 		leg();
 		glPopMatrix();
 		break;
