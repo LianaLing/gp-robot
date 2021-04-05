@@ -28,7 +28,7 @@ using namespace H;
 function fh;
 body b;
 head h;
-int qNo = 1;
+int qNo = 5;
 std::string str = " ";
 float C[SIZE];
 float zoom = 1.5, cameraTranslateSpeed = 0.1;
@@ -663,6 +663,13 @@ void armArmour1(GLenum typeQ, GLenum typeT, GLenum typeP) {
 	fh.v3f(540, 33, direction * 94);
 	glEnd();
 
+	glBegin(typeQ);
+	fh.v3f(445, 33, direction * 94);
+	fh.v3f(540, 33, direction * 94);
+	fh.v3f(540, 75, direction * 152);
+	fh.v3f(445, 75, direction * 152);
+	glEnd();
+
 	//join tgt
 	glBegin(typeQ);
 	fh.v3f(445, 3, direction * 0);
@@ -878,12 +885,14 @@ void armArmour2(GLenum typeQ, GLenum typeT, GLenum typeP) {
 	fh.v3f(400, 33, direction * 94);
 	glEnd();
 
+	//fh.color('y');
 	glBegin(typeT);
 	fh.v3f(445, 3, direction * 0);
 	fh.v3f(445, 33, direction * 94);
 	fh.v3f(540, 33, direction * 94);
 	glEnd();
 
+	//fh.color('r');
 	glBegin(typeQ);
 	fh.v3f(400, 33, direction * 94);
 	fh.v3f(445, 33, direction * 94);
