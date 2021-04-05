@@ -165,7 +165,7 @@ void function::circle(float x, float y, float xr, float yr, float min, float max
 	{
 		float x2 = xC(x) + cos(i * M_PI / 180.f) * xP(xr);
 		float y2 = yC(y) + sin(i * M_PI / 180.f) * yP(yr);
-		glVertex2f(x2, y2);
+		glVertex3f(x2, y2, 0);
 	}
 }
 
