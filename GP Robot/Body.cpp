@@ -12,10 +12,11 @@ using namespace B;
 
 function fh2;
 
-void body::upperChest(GLenum gltype) {
+GLenum type2 = GL_LINE_LOOP, gltype2 = GL_POLYGON;
+void body::upperChest() {
 	// front top
 	glColor3f(1, 0.7, 0.3);
-	glBegin(gltype);
+	glBegin(gltype2);
 	fh2.v3f(378.75, 265, 25);
 	fh2.v3f(356.25, 270, 30);
 	fh2.v3f(443.75, 270, 30);
@@ -24,7 +25,7 @@ void body::upperChest(GLenum gltype) {
 
 	// front btm
 	glColor3f(1, 0, 0.5);
-	glBegin(gltype);
+	glBegin(gltype2);
 	fh2.v3f(356.25, 270, 30);
 	fh2.v3f(340, 307.5, 50);
 	fh2.v3f(460, 307.5, 50);
@@ -33,7 +34,7 @@ void body::upperChest(GLenum gltype) {
 
 	// left top
 	glColor3f(1, 1, 1);
-	glBegin(gltype);
+	glBegin(gltype2);
 	fh2.v3f(378.75, 265, -37.5);
 	fh2.v3f(356.25, 270, -42.5);
 	fh2.v3f(356.25, 270, 30);
@@ -42,7 +43,7 @@ void body::upperChest(GLenum gltype) {
 
 	// left btm
 	glColor3f(0, 1, 0);
-	glBegin(gltype);
+	glBegin(gltype2);
 	fh2.v3f(356.25, 270, -42.5);
 	fh2.v3f(340, 307.5, -60);
 	fh2.v3f(340, 307.5, 50);
@@ -51,7 +52,7 @@ void body::upperChest(GLenum gltype) {
 
 	// right top
 	glColor3f(1, 0, 1);
-	glBegin(gltype);
+	glBegin(gltype2);
 	fh2.v3f(421.25, 265, 25);
 	fh2.v3f(443.75, 270, 30);
 	fh2.v3f(443.75, 270, -42.5);
@@ -60,7 +61,7 @@ void body::upperChest(GLenum gltype) {
 
 	// right btm
 	glColor3f(0.2, 1, 0.5);
-	glBegin(gltype);
+	glBegin(gltype2);
 	fh2.v3f(443.75, 270, -42.5);
 	fh2.v3f(460, 307.5, -60);
 	fh2.v3f(460, 307.5, 50);
@@ -69,7 +70,7 @@ void body::upperChest(GLenum gltype) {
 
 	// back top
 	glColor3f(0, 0.7, 0.3);
-	glBegin(gltype);
+	glBegin(gltype2);
 	fh2.v3f(378.75, 265, -37.5);
 	fh2.v3f(356.25, 270, -42.5);
 	fh2.v3f(443.75, 270, -42.5);
@@ -78,10 +79,766 @@ void body::upperChest(GLenum gltype) {
 
 	// back btm
 	glColor3f(0.5, 0.3, 1);
-	glBegin(gltype);
+	glBegin(gltype2);
 	fh2.v3f(356.25, 270, -42.5);
 	fh2.v3f(340, 307.5, -60);
 	fh2.v3f(460, 307.5, -60);
 	fh2.v3f(443.75, 270, -42.5);
 	glEnd();
+}
+
+void body::lowerChest() {
+	// front top
+	glColor3f(0.7, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(340, 307.5, 50);
+	fh2.v3f(343.75, 327.5, 57.5);
+	fh2.v3f(456.25, 327.5, 57.5);
+	fh2.v3f(460, 307.5, 50);
+	glEnd();
+
+	// middle light (back)
+
+
+	// middle light
+	glColor3f(1, 1, 1);
+	fh2.sphere(GL_POLYGON, 13, 13, 13, 400, 321, 45, 0, 100, 0, 100, 1, 1, 1);
+
+	// front btm
+	glColor3f(0.7, 0.7, 0.7);
+	glBegin(gltype2);
+	fh2.v3f(343.75 + 20, 327.5, 57.5);
+	fh2.v3f(346.25 + 20, 352.5, 52.5);
+	fh2.v3f(453.75 - 20, 352.5, 52.5);
+	fh2.v3f(456.25 - 20, 327.5, 57.5);
+	glEnd();
+
+	// left top
+	glColor3f(0.7, 1, 0.7);
+	glBegin(gltype2);
+	fh2.v3f(340, 307.5, -60);
+	fh2.v3f(343.75, 327.5, -60);
+	fh2.v3f(343.75, 327.5, 57.5);
+	fh2.v3f(340, 307.5, 50);
+	glEnd();
+
+	// left btm
+	glColor3f(1, 0.7, 0.7);
+	glBegin(gltype2);
+	fh2.v3f(343.75, 327.5, -60 + 20);
+	fh2.v3f(346.25, 352.5, -47.5 + 20);
+	fh2.v3f(346.25, 352.5, 52.5 - 20);
+	fh2.v3f(343.75, 327.5, 57.5 - 20);
+	glEnd();
+
+	// right top
+	glColor3f(0.3, 0.5, 0.3);
+	glBegin(gltype2);
+	fh2.v3f(460, 307.5, 50);
+	fh2.v3f(456.25, 327.5, 57.5);
+	fh2.v3f(456.25, 327.5, -60);
+	fh2.v3f(460, 307.5, -60);
+	glEnd();
+
+	// right btm
+	glColor3f(1, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(456.25, 327.5, -60 + 20);
+	fh2.v3f(453.75, 352.5, -47.5 + 20);
+	fh2.v3f(453.75, 352.5, 52.5 - 20);
+	fh2.v3f(456.25, 327.5, 57.5 - 20);
+	glEnd();
+
+	// back top
+	glColor3f(0.7, 0.5, 0.3);
+	glBegin(gltype2);
+	fh2.v3f(340, 307.5, -60);
+	fh2.v3f(343.75, 327.5, -60);
+	fh2.v3f(456.25, 327.5, -60);
+	fh2.v3f(460, 307.5, -60);
+	glEnd();
+
+	// back btm
+	glColor3f(0.5, 0, 1);
+	glBegin(gltype2);
+	fh2.v3f(343.75 + 20, 327.5, -60);
+	fh2.v3f(346.25 + 20, 352.5, -47.5);
+	fh2.v3f(453.75 - 20, 352.5, -47.5);
+	fh2.v3f(456.25 - 20, 327.5, -60);
+	glEnd();
+}
+
+void body::neck() {
+	// front btm
+	glColor3f(0.7, 0.7, 0.2);
+	glBegin(gltype2);
+	fh2.v3f(382, 240, 15);
+	fh2.v3f(378.75, 265, 25);
+	fh2.v3f(421.25, 265, 25);
+	fh2.v3f(418, 240, 15);
+	glEnd();
+
+	// left btm
+	glColor3f(0.7, 0.4, 0.2);
+	glBegin(gltype2);
+	fh2.v3f(382, 240, -15);
+	fh2.v3f(378.75, 265, -25);
+	fh2.v3f(378.75, 265, 25);
+	fh2.v3f(382, 240, 15);
+	glEnd();
+
+	// right btm
+	glColor3f(0.3, 0.4, 0.6);
+	glBegin(gltype2);
+	fh2.v3f(800 - 382, 240, -15);
+	fh2.v3f(800 - 378.75, 265, -25);
+	fh2.v3f(800 - 378.75, 265, 25);
+	fh2.v3f(800 - 382, 240, 15);
+	glEnd();
+
+	// back btm
+	glColor3f(0.4, 0.1, 0.8);
+	glBegin(gltype2);
+	fh2.v3f(382, 240, -15);
+	fh2.v3f(378.75, 265, -25);
+	fh2.v3f(421.25, 265, -25);
+	fh2.v3f(418, 240, -15);
+	glEnd();
+
+	// front top
+	glColor3f(0.4, 0.1, 0.8);
+	glBegin(gltype2);
+	fh2.v3f(382, 210, 15);
+	fh2.v3f(382, 240, 15);
+	fh2.v3f(418, 240, 15);
+	fh2.v3f(418, 210, 15);
+	glEnd();
+
+	// left top
+	glColor3f(0.3, 0.4, 0.6);
+	glBegin(gltype2);
+	fh2.v3f(382, 210, -15);
+	fh2.v3f(382, 240, -15);
+	fh2.v3f(382, 240, 15);
+	fh2.v3f(382, 210, 15);
+	glEnd();
+
+	// right top
+	glColor3f(0.7, 0.4, 0.2);
+	glBegin(gltype2);
+	fh2.v3f(800 - 382, 210, -15);
+	fh2.v3f(800 - 382, 240, -15);
+	fh2.v3f(800 - 382, 240, 15);
+	fh2.v3f(800 - 382, 210, 15);
+	glEnd();
+
+	// back top
+	glColor3f(0.7, 0.7, 0.2);
+	glBegin(gltype2);
+	fh2.v3f(382, 210, -15);
+	fh2.v3f(382, 240, -15);
+	fh2.v3f(418, 240, -15);
+	fh2.v3f(418, 210, -15);
+	glEnd();
+}
+
+void body::chest() {
+	neck();
+	upperChest();
+	lowerChest();
+}
+
+void body::adomen0() {
+	//GLenum type2 = GL_POLYGON;
+
+	// front
+	glColor3f(1, 1, 1);
+	glBegin(gltype2);
+	fh2.v3f(346.25 + 20, 352.5, 52.5);
+	fh2.v3f(351.25 + 20, 400, 50);
+	fh2.v3f(448.75 - 20, 400, 50);
+	fh2.v3f(453.75 - 20, 352.5, 52.5);
+	glEnd();
+
+	// back
+	glColor3f(1, 0.5, 0.4);
+	glBegin(gltype2);
+	fh2.v3f(346.25 + 20, 352.5, -47.5);
+	fh2.v3f(351.25 + 20, 400, -36.25);
+	fh2.v3f(448.75 - 20, 400, -36.25);
+	fh2.v3f(453.75 - 20, 352.5, -47.5);
+	glEnd();
+
+	// left
+	fh2.color('r');
+	glBegin(gltype2);
+	fh2.v3f(346.25, 352.5, -47.5 + 20);
+	fh2.v3f(351.25, 400, -36.25 + 20);
+	fh2.v3f(351.25, 400, 50 - 20);
+	fh2.v3f(346.25, 352.5, 52.5 - 20);
+	glEnd();
+
+	// right
+	fh2.color('b');
+	glBegin(gltype2);
+	fh2.v3f(453.75, 352.5, -47.5 + 20);
+	fh2.v3f(448.75, 400, -36.25 + 20);
+	fh2.v3f(448.75, 400, 50 - 20);
+	fh2.v3f(453.75, 352.5, 52.5 - 20);
+	glEnd();
+
+	// front left
+	glColor3f(0.3, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(346.25 + 5, 352.5, 52.5 - 5);
+	fh2.v3f(351.25 + 5, 400, 50 - 5);
+	fh2.v3f(351.25 + 20, 400, 50);
+	fh2.v3f(346.25 + 20, 352.5, 52.5);
+	glEnd();
+
+	// left right
+	glColor3f(0.3, 0.7, 0.3);
+	glBegin(gltype2);
+	fh2.v3f(346.25, 352.5, 52.5 - 20);
+	fh2.v3f(351.25, 400, 50 - 20);
+	fh2.v3f(351.25 + 5, 400, 50 - 5);
+	fh2.v3f(346.25 + 5, 352.5, 52.5 - 5);
+	glEnd();
+
+	// front right
+	glColor3f(0.5, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(453.75 - 5, 352.5, 52.5 - 5);
+	fh2.v3f(448.75 - 5, 400, 50 - 5);
+	fh2.v3f(448.75 - 20, 400, 50);
+	fh2.v3f(453.75 - 20, 352.5, 52.5);
+	glEnd();
+
+	// right left
+	glColor3f(0.6, 0.2, 0.5);
+	glBegin(gltype2);
+	fh2.v3f(453.75 - 5, 352.5, 52.5 - 5);
+	fh2.v3f(448.75 - 5, 400, 50 - 5);
+	fh2.v3f(448.75, 400, 50 - 20);
+	fh2.v3f(453.75, 352.5, 52.5 - 20);
+	glEnd();
+
+	// back left
+	glColor3f(0.3, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(346.25 + 5, 352.5, -47.5 + 5);
+	fh2.v3f(351.25 + 5, 400, -36.25 + 5);
+	fh2.v3f(351.25 + 20, 400, -36.25);
+	fh2.v3f(346.25 + 20, 352.5, -47.5);
+	glEnd();
+
+	// left left
+	glColor3f(0.3, 0.7, 0.3);
+	glBegin(gltype2);
+	fh2.v3f(346.25 + 5, 352.5, -47.5 + 5);
+	fh2.v3f(351.25 + 5, 400, -36.25 + 5);
+	fh2.v3f(351.25, 400, -36.25 + 20);
+	fh2.v3f(346.25, 352.5, -47.5 + 20);
+	glEnd();
+
+	// back right
+	glColor3f(0.6, 0.5, 1);
+	glBegin(gltype2);
+	fh2.v3f(453.75 - 20, 352.5, -47.5);
+	fh2.v3f(448.75 - 20, 400, -36.25);
+	fh2.v3f(448.75 - 5, 400, -36.25 + 5);
+	fh2.v3f(453.75 - 5, 352.5, -47.5 + 5);
+	glEnd();
+
+	// right right
+	glColor3f(0.6, 0.9, 1);
+	glBegin(gltype2);
+	fh2.v3f(453.75 - 5, 352.5, -47.5 + 5);
+	fh2.v3f(448.75 - 5, 400, -36.25 + 5);
+	fh2.v3f(448.75, 400, -36.25 + 20);
+	fh2.v3f(453.75, 352.5, -47.5 + 20);
+	glEnd();
+}
+
+void body::adomen1() {
+	//GLenum type2 = GL_POLYGON;
+
+	glColor3f(1, 0, 1);
+	// front
+	glBegin(gltype2);
+	fh2.v3f(351.25 + 20, 387.5, 50);
+	fh2.v3f(353.75 + 20, 400, 50);
+	fh2.v3f(446.25 - 20, 400, 50);
+	fh2.v3f(448.75 - 20, 387.5, 50);
+	glEnd();
+
+	// back
+	fh2.color('r');
+	glBegin(gltype2);
+	fh2.v3f(351.25 + 20, 387.5, -36.25);
+	fh2.v3f(353.75 + 20, 400, -36.25);
+	fh2.v3f(446.25 - 20, 400, -36.25);
+	fh2.v3f(448.75 - 20, 387.5, -36.25);
+	glEnd();
+
+	// left
+	fh2.color('y');
+	glBegin(gltype2);
+	fh2.v3f(351.25, 387.5, -36.25 + 20);
+	fh2.v3f(353.75, 400, -36.25 + 20);
+	fh2.v3f(353.75, 400, 50 - 20);
+	fh2.v3f(351.25, 387.5, 50 - 20);
+	glEnd();
+
+	// right
+	fh2.color('c');
+	glBegin(gltype2);
+	fh2.v3f(448.75, 387.5, -36.25 + 20);
+	fh2.v3f(446.25, 400, -36.25 + 20);
+	fh2.v3f(446.25, 400, 50 - 20);
+	fh2.v3f(448.75, 387.5, 50 - 20);
+	glEnd();
+
+	// front left
+	glColor3f(0.3, 0.7, 0.5);
+	glBegin(gltype2);
+	fh2.v3f(351.25 + 5, 387.5, 50.0 - 5);
+	fh2.v3f(353.75 + 5, 400, 50 - 5);
+	fh2.v3f(353.75 + 20, 400, 50);
+	fh2.v3f(351.25 + 20, 387.5, 50.0);
+	glEnd();
+
+	// left right
+	glColor3f(0.5, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(351.25, 387.5, 50.0 - 20);
+	fh2.v3f(353.75, 400, 50 - 20);
+	fh2.v3f(353.75 + 5, 400, 50 - 5);
+	fh2.v3f(351.25 + 5, 387.5, 50.0 - 5);
+	glEnd();
+
+	// front right
+	glColor3f(0.3, 0.7, 0.3);
+	glBegin(gltype2);
+	fh2.v3f(448.75 - 5, 387.5, 50.0 - 5);
+	fh2.v3f(446.25 - 5, 400, 50 - 5);
+	fh2.v3f(446.25 - 20, 400, 50);
+	fh2.v3f(448.75 - 20, 387.5, 50.0);
+	glEnd();
+
+	// right left
+	glColor3f(0.3, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(448.75 - 5, 387.5, 50.0 - 5);
+	fh2.v3f(446.25 - 5, 400, 50 - 5);
+	fh2.v3f(446.25, 400, 50 - 20);
+	fh2.v3f(448.75, 387.5, 50.0 - 20);
+	glEnd();
+
+	// back left
+	glColor3f(0.6, 0.2, 0.5);
+	glBegin(gltype2);
+	fh2.v3f(351.25 + 5, 387.5, -36.25 + 5);
+	fh2.v3f(353.75 + 5, 400, -36.25 + 5);
+	fh2.v3f(353.75 + 20, 400, -36.25);
+	fh2.v3f(351.25 + 20, 387.5, -36.25);
+	glEnd();
+
+	// left left
+	glColor3f(0.3, 1, 0.3);
+	glBegin(gltype2);
+	fh2.v3f(351.25 + 5, 387.5, -36.25 + 5);
+	fh2.v3f(353.75 + 5, 400, -36.25 + 5);
+	fh2.v3f(353.75, 400, -36.25 + 20);
+	fh2.v3f(351.25, 387.5, -36.25 + 20);
+	glEnd();
+
+	// back right
+	glColor3f(0.6, 0.5, 0.5);
+	glBegin(gltype2);
+	fh2.v3f(448.75 - 20, 387.5, -36.25);
+	fh2.v3f(446.25 - 20, 400, -36.25);
+	fh2.v3f(446.25 - 5, 400, -36.25 + 5);
+	fh2.v3f(448.75 - 5, 387.5, -36.25 + 5);
+	glEnd();
+
+	// right right
+	glColor3f(0.3, 0.6, 0.4);
+	glBegin(gltype2);
+	fh2.v3f(448.75 - 5, 387.5, -36.25 + 5);
+	fh2.v3f(446.25 - 5, 400, -36.25 + 5);
+	fh2.v3f(446.25, 400, -36.25 + 20);
+	fh2.v3f(448.75, 387.5, -36.25 + 20);
+	glEnd();
+}
+
+void body::adomen2() {
+	//GLenum type2 = GL_POLYGON;
+
+	glColor3f(1, 1, 1);
+	// front
+	glBegin(gltype2);
+	fh2.v3f(353.75 + 20, 387.5, 50);
+	fh2.v3f(356.25 + 20, 400, 50);
+	fh2.v3f(443.75 - 20, 400, 50);
+	fh2.v3f(446.25 - 20, 387.5, 50);
+	glEnd();
+
+	// back
+	fh2.color('y');
+	glBegin(gltype2);
+	fh2.v3f(353.75 + 20, 387.5, -36.25);
+	fh2.v3f(356.25 + 20, 400, -36.25);
+	fh2.v3f(443.75 - 20, 400, -36.25);
+	fh2.v3f(446.25 - 20, 387.5, -36.25);
+	glEnd();
+
+	// left
+	fh2.color('b');
+	glBegin(gltype2);
+	fh2.v3f(353.75, 387.5, -36.25 + 20);
+	fh2.v3f(356.25, 400, -36.25 + 20);
+	fh2.v3f(356.25, 400, 50 - 20);
+	fh2.v3f(353.75, 387.5, 50 - 20);
+	glEnd();
+
+	// right
+	fh2.color('b');
+	glBegin(gltype2);
+	fh2.v3f(446.25, 387.5, -36.25 + 20);
+	fh2.v3f(443.75, 400, -36.25 + 20);
+	fh2.v3f(443.75, 400, 50 - 20);
+	fh2.v3f(446.25, 387.5, 50 - 20);
+	glEnd();
+
+	// front left
+	glColor3f(0.3, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(353.75 + 5, 387.5, 50.0 - 5);
+	fh2.v3f(356.25 + 5, 400, 50 - 5);
+	fh2.v3f(356.25 + 20, 400, 50);
+	fh2.v3f(353.75 + 20, 387.5, 50.0);
+	glEnd();
+
+	// left right
+	glColor3f(0.3, 0.7, 0.3);
+	glBegin(gltype2);
+	fh2.v3f(353.75, 387.5, 50.0 - 20);
+	fh2.v3f(356.25, 400, 50 - 20);
+	fh2.v3f(356.25 + 5, 400, 50 - 5);
+	fh2.v3f(353.75 + 5, 387.5, 50.0 - 5);
+	glEnd();
+
+	// front right
+	glColor3f(0.5, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(446.25 - 5, 387.5, 50.0 - 5);
+	fh2.v3f(443.75 - 5, 400, 50 - 5);
+	fh2.v3f(443.75 - 20, 400, 50);
+	fh2.v3f(446.25 - 20, 387.5, 50.0);
+	glEnd();
+
+	// right left
+	glColor3f(0.6, 0.2, 0.5);
+	glBegin(gltype2);
+	fh2.v3f(446.25 - 5, 387.5, 50.0 - 5);
+	fh2.v3f(443.75 - 5, 400, 50 - 5);
+	fh2.v3f(443.75, 400, 50 - 20);
+	fh2.v3f(446.25, 387.5, 50.0 - 20);
+	glEnd();
+
+	// back left
+	glColor3f(0.3, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(353.75 + 5, 387.5, -36.25 + 5);
+	fh2.v3f(356.25 + 5, 400, -36.25 + 5);
+	fh2.v3f(356.25 + 20, 400, -36.25);
+	fh2.v3f(353.75 + 20, 387.5, -36.25);
+	glEnd();
+
+	// left left
+	glColor3f(0.3, 0.7, 0.3);
+	glBegin(gltype2);
+	fh2.v3f(353.75 + 5, 387.5, -36.25 + 5);
+	fh2.v3f(356.25 + 5, 400, -36.25 + 5);
+	fh2.v3f(356.25, 400, -36.25 + 20);
+	fh2.v3f(353.75, 387.5, -36.25 + 20);
+	glEnd();
+
+	// back right
+	glColor3f(0.6, 0.5, 1);
+	glBegin(gltype2);
+	fh2.v3f(446.25 - 20, 387.5, -36.25);
+	fh2.v3f(443.75 - 20, 400, -36.25);
+	fh2.v3f(443.75 - 5, 400, -36.25 + 5);
+	fh2.v3f(446.25 - 5, 387.5, -36.25 + 5);
+	glEnd();
+
+	// right right
+	glColor3f(0.6, 0.9, 1);
+	glBegin(gltype2);
+	fh2.v3f(446.25 - 5, 387.5, -36.25 + 5);
+	fh2.v3f(443.75 - 5, 400, -36.25 + 5);
+	fh2.v3f(443.75, 400, -36.25 + 20);
+	fh2.v3f(446.25, 387.5, -36.25 + 20);
+	glEnd();
+}
+
+void body::adomen3() {
+	//GLenum type2 = GL_POLYGON;
+
+	glColor3f(1, 0, 1);
+	// front
+	glBegin(gltype2);
+	fh2.v3f(356.25 + 20, 387.5, 50);
+	fh2.v3f(357.5 + 20, 400, 50);
+	fh2.v3f(442.5 - 20, 400, 50);
+	fh2.v3f(443.75 - 20, 387.5, 50);
+	glEnd();
+
+	// back
+	fh2.color('r');
+	glBegin(gltype2);
+	fh2.v3f(356.25 + 20, 387.5, -36.25);
+	fh2.v3f(357.5 + 20, 400, -36.25);
+	fh2.v3f(442.5 - 20, 400, -36.25);
+	fh2.v3f(443.75 - 20, 387.5, -36.25);
+	glEnd();
+
+	// left
+	fh2.color('y');
+	glBegin(gltype2);
+	fh2.v3f(356.25, 387.5, -36.25 + 20);
+	fh2.v3f(357.5, 400, -36.25 + 20);
+	fh2.v3f(357.5, 400, 50 - 20);
+	fh2.v3f(356.25, 387.5, 50 - 20);
+	glEnd();
+
+	// right
+	fh2.color('c');
+	glBegin(gltype2);
+	fh2.v3f(443.75, 387.5, -36.25 + 20);
+	fh2.v3f(442.5, 400, -36.25 + 20);
+	fh2.v3f(442.5, 400, 50 - 20);
+	fh2.v3f(443.75, 387.5, 50 - 20);
+	glEnd();
+
+	// front left
+	glColor3f(0.3, 0.7, 0.5);
+	glBegin(gltype2);
+	fh2.v3f(356.25 + 5, 387.5, 50.0 - 5);
+	fh2.v3f(357.5 + 5, 400, 50 - 5);
+	fh2.v3f(357.5 + 20, 400, 50);
+	fh2.v3f(356.25 + 20, 387.5, 50.0);
+	glEnd();
+
+	// left right
+	glColor3f(0.5, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(356.25, 387.5, 50.0 - 20);
+	fh2.v3f(357.5, 400, 50 - 20);
+	fh2.v3f(357.5 + 5, 400, 50 - 5);
+	fh2.v3f(356.25 + 5, 387.5, 50.0 - 5);
+	glEnd();
+
+	// front right
+	glColor3f(0.3, 0.7, 0.3);
+	glBegin(gltype2);
+	fh2.v3f(443.75 - 5, 387.5, 50.0 - 5);
+	fh2.v3f(442.5 - 5, 400, 50 - 5);
+	fh2.v3f(442.5 - 20, 400, 50);
+	fh2.v3f(443.75 - 20, 387.5, 50.0);
+	glEnd();
+
+	// right left
+	glColor3f(0.3, 0.7, 1);
+	glBegin(gltype2);
+	fh2.v3f(443.75 - 5, 387.5, 50.0 - 5);
+	fh2.v3f(442.5 - 5, 400, 50 - 5);
+	fh2.v3f(442.5, 400, 50 - 20);
+	fh2.v3f(443.75, 387.5, 50.0 - 20);
+	glEnd();
+
+	// back left
+	glColor3f(0.6, 0.2, 0.5);
+	glBegin(gltype2);
+	fh2.v3f(356.25 + 5, 387.5, -36.25 + 5);
+	fh2.v3f(357.5 + 5, 400, -36.25 + 5);
+	fh2.v3f(357.5 + 20, 400, -36.25);
+	fh2.v3f(356.25 + 20, 387.5, -36.25);
+	glEnd();
+
+	// left left
+	glColor3f(0.3, 1, 0.3);
+	glBegin(gltype2);
+	fh2.v3f(356.25 + 5, 387.5, -36.25 + 5);
+	fh2.v3f(357.5 + 5, 400, -36.25 + 5);
+	fh2.v3f(357.5, 400, -36.25 + 20);
+	fh2.v3f(356.25, 387.5, -36.25 + 20);
+	glEnd();
+
+	// back right
+	glColor3f(0.6, 0.5, 0.5);
+	glBegin(gltype2);
+	fh2.v3f(443.75 - 20, 387.5, -36.25);
+	fh2.v3f(442.5 - 20, 400, -36.25);
+	fh2.v3f(442.5 - 5, 400, -36.25 + 5);
+	fh2.v3f(443.75 - 5, 387.5, -36.25 + 5);
+	glEnd();
+
+	// right right
+	glColor3f(0.3, 0.6, 0.4);
+	glBegin(gltype2);
+	fh2.v3f(443.75 - 5, 387.5, -36.25 + 5);
+	fh2.v3f(442.5 - 5, 400, -36.25 + 5);
+	fh2.v3f(442.5, 400, -36.25 + 20);
+	fh2.v3f(443.75, 387.5, -36.25 + 20);
+	glEnd();
+
+}
+
+void body::below() {
+	// front top
+	fh2.color('w');
+	glBegin(gltype2);
+	fh2.v3f(357.5 + 20, 400, 50);
+	fh2.v3f(378.75, 427.5, 50);
+	fh2.v3f(421.25, 427.5, 50);
+	fh2.v3f(442.5 - 20, 400, 50);
+	glEnd();
+
+	// front btm
+	fh2.color('b');
+	glBegin(gltype2);
+	fh2.v3f(378.75, 427.5, 50);
+	fh2.v3f(391.25, 457.5, 50 - 10);
+	fh2.v3f(408.75, 457.5, 50 - 10);
+	fh2.v3f(421.25, 427.5, 50);
+	glEnd();
+
+	// back top
+	fh2.color('g');
+	glBegin(gltype2);
+	fh2.v3f(357.5 + 20, 400, -36.25);
+	fh2.v3f(378.75, 427.5, -45);
+	fh2.v3f(421.25, 427.5, -45);
+	fh2.v3f(442.5 - 20, 400, -36.25);
+	glEnd();
+
+	// back btm
+	fh2.color('b');
+	glBegin(gltype2);
+	fh2.v3f(378.75, 427.5, -45);
+	fh2.v3f(391.25, 457.5, -36.25);
+	fh2.v3f(408.75, 457.5, -36.25);
+	fh2.v3f(421.25, 427.5, -45);
+	glEnd();
+
+	// left
+	fh2.color('c');
+	glBegin(gltype2);
+	fh2.v3f(357.5, 400, -36.25 + 20);
+	fh2.v3f(378.75, 427.5, -45);
+	fh2.v3f(391.25, 457.5, -36.25);
+	fh2.v3f(391.25, 457.5, 50 - 10);
+	fh2.v3f(378.75, 427.5, 50);
+	fh2.v3f(357.5, 400, 50 - 20);
+	glEnd();
+
+	// right
+	fh2.color('c');
+	glBegin(gltype2);
+	fh2.v3f(442.5, 400, -36.25 + 20);
+	fh2.v3f(421.25, 427.5, -45);
+	fh2.v3f(408.75, 457.5, -36.25);
+	fh2.v3f(408.75, 457.5, 50 - 10);
+	fh2.v3f(421.25, 427.5, 50);
+	fh2.v3f(442.5, 400, 50 - 20);
+	glEnd();
+
+	// btm
+	fh2.color('r');
+	glBegin(gltype2);
+	fh2.v3f(391.25, 457.5, -36.25);
+	fh2.v3f(391.25, 457.5, 50 - 10);
+	fh2.v3f(408.75, 457.5, 50 - 10);
+	fh2.v3f(408.75, 457.5, -36.25);
+	glEnd();
+
+	// front left
+	fh2.color('r');
+	glBegin(gltype2);
+	fh2.v3f(357.5 + 5, 400, 50 - 5);
+	fh2.v3f(378.75, 427.5, 50);
+	fh2.v3f(357.5 + 20, 400, 50);
+	glEnd();
+
+	// left right
+	fh2.color('g');
+	glBegin(gltype2);
+	fh2.v3f(357.5, 400, 50 - 20);
+	fh2.v3f(378.75, 427.5, 50);
+	fh2.v3f(357.5 + 5, 400, 50 - 5);
+	glEnd();
+
+	// front right
+	fh2.color('r');
+	glBegin(gltype2);
+	fh2.v3f(442.5 - 20, 400, 50);
+	fh2.v3f(421.25, 427.5, 50);
+	fh2.v3f(437.5, 400, 50 - 5);
+	glEnd();
+
+	// right left
+	fh2.color('g');
+	glBegin(gltype2);
+	fh2.v3f(437.5, 400, 50 - 5);
+	fh2.v3f(421.25, 427.5, 50);
+	fh2.v3f(442.5, 400, 50 - 20);
+	glEnd();
+
+	// back left
+	fh2.color('r');
+	glBegin(gltype2);
+	fh2.v3f(357.5 + 5, 400, -36.25 + 5);
+	fh2.v3f(378.75, 427.5, -45);
+	fh2.v3f(357.5 + 20, 400, -36.25);
+	glEnd();
+
+	// front right
+	fh2.color('r');
+	glBegin(gltype2);
+	fh2.v3f(442.5 - 20, 400, -36.25);
+	fh2.v3f(421.25, 427.5, -45);
+	fh2.v3f(437.5, 400, -36.25 + 5);
+	glEnd();
+
+	// left left
+	fh2.color('g');
+	glBegin(gltype2);
+	fh2.v3f(357.5 + 5, 400, -36.25 + 5);
+	fh2.v3f(378.75, 427.5, -45);
+	fh2.v3f(357.5, 400, -36.25 + 20);
+	glEnd();
+
+	// right right
+	fh2.color('g');
+	glBegin(gltype2);
+	fh2.v3f(437.5, 400, -36.25 + 5);
+	fh2.v3f(421.25, 427.5, -45);
+	fh2.v3f(442.5, 400, -36.25 + 20);
+	glEnd();
+}
+
+void body::upperChestArmor() {
+	//// front top
+	//glColor3f(1, 0, 0.5);
+	//glBegin(gltype2);
+	//fh2.v3f(356.25, 270, 30);
+	//fh2.v3f(340, 307.5, 50);
+	//fh2.v3f(460, 307.5, 50);
+	//fh2.v3f(443.75, 270, 30);
+	//glEnd();
+
+
 }

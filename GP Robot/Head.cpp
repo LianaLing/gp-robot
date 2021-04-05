@@ -1182,3 +1182,41 @@ void head::ear() {
 	gluDisk(disk, 0, fh_head.yP(55), 50, 50);
 	glPopMatrix();
 }
+
+void head::btmCover() {
+	// 1 (btm for left and right)
+	glColor3f(0.7, 0.2, 0.6);
+	glBegin(gltype);
+	fh_head.v3f(800 - 427.5, 572.5, 117.5);
+	fh_head.v3f(800 - 447.5, 587.5, 87.5);	// lowest
+	fh_head.v3f(447.5, 587.5, 87.5);			// lowest
+	fh_head.v3f(427.5, 572.5, 117.5);
+	glEnd();
+
+	// 2
+	glColor3f(0.7, 1, 0.6);
+	glBegin(gltype);
+	fh_head.v3f(800 - 492.5, 550, 27.5);		// rr
+	fh_head.v3f(800 - 447.5, 587.5, 87.5);	// lowest
+	fh_head.v3f(447.5, 587.5, 87.5);			// lowest
+	fh_head.v3f(492.5, 550, 27.5);			// rr
+	glEnd();
+
+	// 3
+	glColor3f(1, 0.4, 0.6);
+	glBegin(gltype);
+	fh_head.v3f(800 - 515, 487.5, 0);		// r
+	fh_head.v3f(800 - 492.5, 550, 27.5);		// rr
+	fh_head.v3f(492.5, 550, 27.5);			// rr
+	fh_head.v3f(515, 487.5, 0);				// r
+	glEnd();
+
+	// 3
+	glColor3f(0.2, 1, 0.7);
+	glBegin(gltype);
+	fh_head.v3f(800 - 509.5, 415, -127.5);
+	fh_head.v3f(800 - 515, 487.5, 0);		// r
+	fh_head.v3f(515, 487.5, 0);		// r
+	fh_head.v3f(509.5, 415, -127.5);
+	glEnd();
+}

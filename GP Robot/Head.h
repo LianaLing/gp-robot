@@ -32,6 +32,7 @@ namespace H {
 		void headLeftBack();
 		void headTop();
 		void ear();
+		void btmCover();
 	};
 }
 

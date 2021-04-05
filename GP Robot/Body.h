@@ -11,7 +11,16 @@
 namespace B {
 	class body {
 	public:
-		void upperChest(GLenum gltype);
+		void upperChest();
+		void lowerChest();
+		void neck();
+		void chest();
+		void adomen0();
+		void adomen1();
+		void adomen2();
+		void adomen3();
+		void below();
+		void upperChestArmor();
 	};
 }
 

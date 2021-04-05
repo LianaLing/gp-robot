@@ -33,7 +33,7 @@ float function::zC(float z) {
 
 	zCoor = z / depth;
 
-	return -zCoor;
+	return zCoor;
 }
 
 float function::yC(float y) {
@@ -152,7 +152,7 @@ void function::sphere(GLenum type, float radius, int slices, int stacks) {
 }
 
 void function::cylinder(GLenum type, float baseRadius, float topRadius, float height, int slices, int stacks) {
-	GLUquadricObj *cylinder = NULL;
+	GLUquadricObj* cylinder = NULL;
 	cylinder = gluNewQuadric();
 	gluQuadricDrawStyle(cylinder, type);
 	gluCylinder(cylinder, baseRadius, topRadius, height, slices, stacks);
@@ -289,50 +289,50 @@ void function::cuboid(GLenum type, float size, float ratio, int lineWidth) {
 	//front
 	//fh.color('b');
 	glBegin(type);
-		glVertex3f(0, size, size);
-		glVertex3f(0, 0, size);
-		glVertex3f(size * ratio, 0, size);
-		glVertex3f(size * ratio, size, size);
+	glVertex3f(0, size, size);
+	glVertex3f(0, 0, size);
+	glVertex3f(size * ratio, 0, size);
+	glVertex3f(size * ratio, size, size);
 	glEnd();
 	//right
 	//fh.color('g');
 	glBegin(type);
-		glVertex3f(size * ratio, size, size);
-		glVertex3f(size * ratio, 0, size);
-		glVertex3f(size * ratio, 0, 0);
-		glVertex3f(size * ratio, size, 0);
+	glVertex3f(size * ratio, size, size);
+	glVertex3f(size * ratio, 0, size);
+	glVertex3f(size * ratio, 0, 0);
+	glVertex3f(size * ratio, size, 0);
 	glEnd();
 	//left
 	//fh.color('w');
 	glBegin(type);
-		glVertex3f(0, size, size);
-		glVertex3f(0, 0, size);
-		glVertex3f(0, 0, 0);
-		glVertex3f(0, size, 0);
+	glVertex3f(0, size, size);
+	glVertex3f(0, 0, size);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, size, 0);
 	glEnd();
 	//bottom
 	//fh.color('g');
 	glBegin(type);
-		glVertex3f(0, 0, size);
-		glVertex3f(size * ratio, 0, size);
-		glVertex3f(size * ratio, 0, 0);
-		glVertex3f(0, 0, 0);
+	glVertex3f(0, 0, size);
+	glVertex3f(size * ratio, 0, size);
+	glVertex3f(size * ratio, 0, 0);
+	glVertex3f(0, 0, 0);
 	glEnd();
 	//top
 	//glColor3f(1.0, 1.0, 0.0);
 	glBegin(type);
-		glVertex3f(0, size, size);
-		glVertex3f(size * ratio, size, size);
-		glVertex3f(size * ratio, size, 0);
-		glVertex3f(0, size, 0);
+	glVertex3f(0, size, size);
+	glVertex3f(size * ratio, size, size);
+	glVertex3f(size * ratio, size, 0);
+	glVertex3f(0, size, 0);
 	glEnd();
 	//back
 	//glColor3f(0, 1.0, 1.0);
 	glBegin(type);
-		glVertex3f(0, size, 0);
-		glVertex3f(size * ratio, size, 0);
-		glVertex3f(size * ratio, 0, 0);
-		glVertex3f(0, 0, 0);
+	glVertex3f(0, size, 0);
+	glVertex3f(size * ratio, size, 0);
+	glVertex3f(size * ratio, 0, 0);
+	glVertex3f(0, 0, 0);
 	glEnd();
 }
 
