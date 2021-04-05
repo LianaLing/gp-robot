@@ -26,6 +26,7 @@ namespace N {
 		void sphere(GLenum type, float radius, int slices, int stacks);
 		void cylinder(GLenum type, float baseRadius, float topRadius, float height, int slices, int stacks);
 		void circle(float x, float y, float xr, float yr, float min, float max);
+		void circle(float x, float y, float z, float xr, float yr, float min, float max);
 		void triangle(GLenum type, float base, float height, int lineWidth);
 		void quad(GLenum type, float length, float height, int lineWidth);
 		void pyramid(GLenum type, float size, int lineWidth);

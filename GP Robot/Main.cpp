@@ -27,7 +27,7 @@ using namespace B;
 
 function fh;
 body b;
-int qNo = 3;
+int qNo = 5;
 std::string str = " ";
 float C[SIZE];
 float zoom = 2.0;
@@ -178,9 +178,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else
 				view = 'p', pCount++;
 		}
-		else if (wParam == 0x52) //R - anti
+		else if (wParam == 0x52) //R - clockwise
 			ry += rSpeedP;
-		else if (wParam == 0x51) //Q - clockwise
+		else if (wParam == 0x51) //Q - anti-clockwise
 			ry -= rSpeedP;
 		else if (wParam == 0x57) { // W
 			xR = 1, yR = 0, zR = 0;
@@ -1187,6 +1187,7 @@ void shoe(float height, float footSize, float sRadius, float slices, float stack
 	glPopMatrix();
 	glPopMatrix();
 }
+
 void leg() {
 	float thighBaseRadius = 0.1, thighTopRadius = thighBaseRadius - 0.02, height = 0.52, slices = 30, stacks = 30;
 	float calfBaseRadius = thighTopRadius, calfTopRadius = calfBaseRadius - 0.02;
@@ -1222,6 +1223,382 @@ void leg() {
 
 	glPopMatrix();
 	glPopMatrix();
+}
+
+void armArmour1(GLenum typeQ, GLenum typeT, GLenum typeP) {
+
+	int direction = 1;
+
+	fh.color('w');
+
+	glBegin(typeQ);
+		fh.v3f(400,3, direction * 0);
+		fh.v3f(445, 3, direction * 0);
+		fh.v3f(445, 33, direction * 94);
+		fh.v3f(400, 33, direction * 94);
+	glEnd();
+
+	glBegin(typeT);
+		fh.v3f(445, 3, direction * 0);
+		fh.v3f(445, 33, direction * 94);
+		fh.v3f(540, 33, direction * 94);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+		fh.v3f(445, 3, direction * 0);
+		fh.v3f(540, 33, direction * 94);
+		fh.v3f(540, 33, -direction * 94);
+		fh.v3f(445, 3, -direction * 0);
+	glEnd();
+
+	glBegin(typeQ);
+		fh.v3f(445, 3, direction * 0);
+		fh.v3f(445, 33, direction * 94);
+		fh.v3f(540, 33, direction * 94);
+	glEnd();
+
+	glBegin(typeQ);
+		fh.v3f(400, 33, direction * 94);
+		fh.v3f(445, 33, direction * 94);
+		fh.v3f(445, 75, direction *152);
+		fh.v3f(400, 75, direction *152);
+	glEnd();
+
+	glBegin(typeT);
+		fh.v3f(540, 33, direction * 94);
+		fh.v3f(540, 75, direction *152);
+		fh.v3f(604, 75, direction *152);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+		fh.v3f(540, 33, direction * 94);
+		fh.v3f(604, 75, direction *152);
+		fh.v3f(604, 75, -direction * 152);
+		fh.v3f(540, 33, -direction * 94);
+	glEnd();
+
+	glBegin(typeT);
+		fh.v3f(400, 75, direction *152);
+		fh.v3f(400, 100, direction *171);
+		fh.v3f(340, 100, direction *171);
+	glEnd();
+
+	glBegin(typeQ);
+		fh.v3f(400, 75, direction *152);
+		fh.v3f(604, 75, direction *152);
+		fh.v3f(604, 100, direction *171);
+		fh.v3f(400, 100, direction *171);
+	glEnd();
+
+	glBegin(typeT);
+		fh.v3f(604, 75, direction *152);
+		fh.v3f(604, 100, direction *171);
+		fh.v3f(630, 100, direction *171);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+		fh.v3f(604, 75, direction *152);
+		fh.v3f(630, 100, direction *171);
+		fh.v3f(630, 100, -direction * 171);
+		fh.v3f(604, 75, -direction * 152);
+	glEnd();
+
+	glBegin(typeQ);
+		fh.v3f(340, 100, direction *171);
+		fh.v3f(604, 100, direction *171);
+		fh.v3f(604, 170, direction *202);
+		fh.v3f(340, 170, direction *202);
+	glEnd();
+
+	glBegin(typeQ);
+		fh.v3f(604, 100, direction *171);
+		fh.v3f(630, 100, direction *171);
+		fh.v3f(685, 170, direction *202);
+		fh.v3f(604, 170, direction *202);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+		fh.v3f(630, 100, direction *171);
+		fh.v3f(685, 170, direction *202);
+		fh.v3f(685, 170, -direction * 202);
+		fh.v3f(630, 100, -direction * 171);
+	glEnd();
+
+	glBegin(typeQ);
+		fh.v3f(340, 170, direction *202);
+		fh.v3f(664, 170, direction *202);
+		fh.v3f(664, 253, direction *202);
+		fh.v3f(340, 253, direction *202);
+	glEnd();
+
+	glBegin(typeQ);
+		fh.v3f(664, 170, direction *202);
+		fh.v3f(685, 170, direction *202);
+		fh.v3f(703, 253, direction *202);
+		fh.v3f(664, 253, direction *202);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+		fh.v3f(685, 170, direction *202);
+		fh.v3f(703, 253, direction *202);
+		fh.v3f(703, 253, -direction * 202);
+		fh.v3f(685, 170, -direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+		fh.v3f(340, 253, direction *202);
+		fh.v3f(604, 253, direction *202);
+		fh.v3f(604, 292, direction *202);
+		fh.v3f(340, 292, direction *202);
+	glEnd();
+
+	glBegin(typeT);
+		fh.v3f(604, 253, direction *202);
+		fh.v3f(703, 253, direction *202);
+		fh.v3f(604, 292, direction *202);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+		fh.v3f(703, 253, direction *202);
+		fh.v3f(604, 292, direction *202);
+		fh.v3f(604, 292, -direction * 202);
+		fh.v3f(703, 253, -direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+		fh.v3f(340, 292, direction *202);
+		fh.v3f(540, 292, direction *202);
+		fh.v3f(540, 317, direction *202);
+		fh.v3f(340, 317, direction *202);
+	glEnd();
+
+	glBegin(typeT);
+		fh.v3f(540, 292, direction *202);
+		fh.v3f(604, 292, direction *202);
+		fh.v3f(540, 317, direction *202);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+		fh.v3f(604, 292, direction *202);
+		fh.v3f(540, 317, direction *202);
+		fh.v3f(540, 317, -direction * 202);
+		fh.v3f(604, 292, -direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+		fh.v3f(340, 317, direction *202);
+		fh.v3f(540, 317, direction *202);
+		fh.v3f(540, 400, direction *202);
+		fh.v3f(340, 400, direction *202);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+		fh.v3f(540, 317, direction *202);
+		fh.v3f(540, 400, direction *202);
+		fh.v3f(540, 400, -direction * 202);
+		fh.v3f(540, 317, -direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+		fh.v3f(470, 400, direction *202);
+		fh.v3f(540, 400, direction *202);
+		fh.v3f(540, 434, direction *202);
+		fh.v3f(445, 434, direction *202);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+		fh.v3f(540, 400, direction *202);
+		fh.v3f(540, 434, direction *202);
+		fh.v3f(540, 434, -direction * 202);
+		fh.v3f(540, 400, -direction * 202);
+	glEnd();
+
+	glBegin(typeT);
+		fh.v3f(340, 434, direction *202);
+		fh.v3f(540, 434, direction *202);
+		fh.v3f(340, 543, direction *202);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+		fh.v3f(540, 434, direction *202);
+		fh.v3f(340, 543, direction *202);
+		fh.v3f(340, 543, -direction * 202);
+		fh.v3f(540, 434, -direction * 202);
+	glEnd();
+
+	fh.color('r');
+	glBegin(typeP);
+	fh.circle(400, 400, direction * 204, 77, 77, 0, 360);
+	glEnd();
+	fh.color('g');
+	glBegin(typeP);
+	fh.circle(400, 400, direction * 206, 54, 54, 0, 360);
+	glEnd();
+}
+
+void armArmour2(GLenum typeQ, GLenum typeT, GLenum typeP) {
+
+	int direction = -1;
+
+	fh.color('w');
+
+	glBegin(typeQ);
+	fh.v3f(400, 3, direction * 0);
+	fh.v3f(445, 3, direction * 0);
+	fh.v3f(445, 33, direction * 94);
+	fh.v3f(400, 33, direction * 94);
+	glEnd();
+
+	glBegin(typeT);
+	fh.v3f(445, 3, direction* 0);
+	fh.v3f(445, 33, direction * 94);
+	fh.v3f(540, 33, direction * 94);
+	glEnd();
+
+	glBegin(typeQ);
+	fh.v3f(400, 33, direction * 94);
+	fh.v3f(445, 33, direction * 94);
+	fh.v3f(445, 75, direction * 152);
+	fh.v3f(400, 75, direction * 152);
+	glEnd();
+
+	glBegin(typeQ);
+	fh.v3f(445, 33, direction * 94);
+	fh.v3f(540, 33, direction * 94);
+	fh.v3f(540, 75, direction * 152);
+	fh.v3f(445, 75, direction * 152);
+	glEnd();
+
+	glBegin(typeT);
+	fh.v3f(540, 33, direction * 94);
+	fh.v3f(540, 75, direction * 152);
+	fh.v3f(604, 75, direction * 152);
+	glEnd();
+
+	glBegin(typeT);
+	fh.v3f(400, 75, direction * 152);
+	fh.v3f(400, 100, direction * 171);
+	fh.v3f(340, 100, direction * 171);
+	glEnd();
+
+	glBegin(typeQ);
+	fh.v3f(400, 75, direction * 152);
+	fh.v3f(604, 75, direction * 152);
+	fh.v3f(604, 100, direction * 171);
+	fh.v3f(400, 100, direction * 171);
+	glEnd();
+
+	glBegin(typeT);
+	fh.v3f(604, 75, direction * 152);
+	fh.v3f(604, 100, direction * 171);
+	fh.v3f(630, 100, direction * 171);
+	glEnd();
+
+	glBegin(typeQ);
+	fh.v3f(340, 100, direction * 171);
+	fh.v3f(604, 100, direction * 171);
+	fh.v3f(604, 170, direction * 202);
+	fh.v3f(340, 170, direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+	fh.v3f(604, 100, direction * 171);
+	fh.v3f(630, 100, direction * 171);
+	fh.v3f(685, 170, direction * 202);
+	fh.v3f(604, 170, direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+	fh.v3f(340, 170, direction * 202);
+	fh.v3f(664, 170, direction * 202);
+	fh.v3f(664, 253, direction * 202);
+	fh.v3f(340, 253, direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+	fh.v3f(664, 170, direction * 202);
+	fh.v3f(685, 170, direction * 202);
+	fh.v3f(703, 253, direction * 202);
+	fh.v3f(664, 253, direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+	fh.v3f(340, 253, direction * 202);
+	fh.v3f(604, 253, direction * 202);
+	fh.v3f(604, 292, direction * 202);
+	fh.v3f(340, 292, direction * 202);
+	glEnd();
+
+	glBegin(typeT);
+	fh.v3f(604, 253, direction * 202);
+	fh.v3f(703, 253, direction * 202);
+	fh.v3f(604, 292, direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+	fh.v3f(340, 292, direction * 202);
+	fh.v3f(540, 292, direction * 202);
+	fh.v3f(540, 317, direction * 202);
+	fh.v3f(340, 317, direction * 202);
+	glEnd();
+
+	glBegin(typeT);
+	fh.v3f(540, 292, direction * 202);
+	fh.v3f(604, 292, direction * 202);
+	fh.v3f(540, 317, direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+	fh.v3f(340, 317, direction * 202);
+	fh.v3f(540, 317, direction * 202);
+	fh.v3f(540, 400, direction * 202);
+	fh.v3f(340, 400, direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+	fh.v3f(470, 400, direction * 202);
+	fh.v3f(540, 400, direction * 202);
+	fh.v3f(540, 434, direction * 202);
+	fh.v3f(445, 434, direction * 202);
+	glEnd();
+
+	glBegin(typeT);
+	fh.v3f(340, 434, direction * 202);
+	fh.v3f(540, 434, direction * 202);
+	fh.v3f(340, 543, direction * 202);
+	glEnd();
+
+	fh.color('r');
+	glBegin(typeP);
+	fh.circle(400, 400, direction * 204, 77, 77, 0, 360);
+	glEnd();
+	fh.color('g');
+	glBegin(typeP);
+	fh.circle(400, 400, direction * 206, 54, 54, 0, 360);
+	glEnd();
+}
+
+void armArmour() {
+	/*GLenum typeQ = GL_LINE_LOOP;
+	GLenum typeT = GL_LINE_LOOP;
+	GLenum typeP = GL_LINE_LOOP;*/
+
+	GLenum typeQ = GL_QUADS;
+	GLenum typeT = GL_TRIANGLES;
+	GLenum typeP = GL_POLYGON;
+
+	armArmour1(typeQ, typeT, typeP);
+	armArmour2(typeQ, typeT, typeP);
 }
 
 void arm() {
@@ -1490,6 +1867,7 @@ void display()
 		glPopMatrix();
 		break;
 	case 5:
+		armArmour();
 		break;
 	case 6:
 		break;

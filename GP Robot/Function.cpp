@@ -169,6 +169,16 @@ void function::circle(float x, float y, float xr, float yr, float min, float max
 	}
 }
 
+void function::circle(float x, float y, float z, float xr, float yr, float min, float max) {
+	float z2 = zC(z);
+	for (float i = min; i < max; i++)
+	{
+		float x2 = xC(x) + cos(i * M_PI / 180.f) * xP(xr);
+		float y2 = yC(y) + sin(i * M_PI / 180.f) * yP(yr);
+		glVertex3f(x2, y2, z2);
+	}
+}
+
 void function::triangle(GLenum type, float base, float height, int lineWidth) {
 	int xStartCoor = 400, yStartCoor = 400;
 	glLineWidth(lineWidth);
