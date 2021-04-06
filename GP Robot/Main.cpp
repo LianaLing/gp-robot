@@ -12,10 +12,7 @@ using namespace N;
 using namespace B;
 using namespace H;
 
-//#pragma comment (lib, "OpenGL32.lib")
-//dependencies included in project properties - linker - input
-
-#define WINDOW_TITLE "IRON-MAN MK47"
+#define WINDOW_TITLE "IRON-MAN"
 #define CW 10
 #define VALUE 800.0
 #define WIDTH VALUE
@@ -28,36 +25,41 @@ using namespace H;
 function fh;
 body b;
 head h;
+
 int qNo = 1;
 std::string str = " ";
+std::string dir = " ";
 float C[SIZE];
 float zoom = 1.0, cameraTranslateSpeed = 0.1;
-char view = 'o';
+char view = 'o', rotation = ' ';
 //============== Danny ==============
 float AR = 0, AR1 = 0, AR2 = 0, AR3 = 0, AR4 = 0, AR0 = 0, AR01 = 0, AR5 = 0;
 float rotate = 0;
 float xR = 0, yR = 0, zR = 0, xT = 0, yT = 0, zT = 0;
 float maskRotate = 0, maskRotateSpeed = 0.5;
 float nodRotate = 0, nodRotateSpeed = 0.5;
-float bCount = 1, mCount = 1, nCount = 1;
-boolean openMask = false, bow = false, nod = false;
+int bCount = 1, mCount = 1, nCount = 1, wCount = 1, walkCount = 1, sCount = 1;
+boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false;
+float walkSpeed = 1;
+int testRotate = 0;
 //===================================
 
 //============== LIANA ==============
-float armRotate = 0, armRSpeed = 0, armx = 0, army = 0, armz = 0, armDirection = 0, armAngle = 0;
+float armLowerRotate = 0, armRSpeed = 2.0, armx = 0, army = 0, armz = 0, armDirection = 0, armAngle = 0;
 float armx2 = 0, army2 = 0, armz2 = 0;
-boolean armTurnUp = false, armTurnDown = false, armUp = false, armDown = false;
+float armUpperY = 0, armUpperZ = 0;
+boolean armTurnUp = false, armTurnDown = false, armUp = false, armDown = false, armUpperRotateZ = false, armUpperRotateY = false;
 float fingerRotate = 0, fingerRSpeed = 0, fx = 0, fy = 0, fz = 0 /*, fingerDirection = 0, fingerAngle = 0*/;
 float fx2 = 0, fy2 = 0, fz2 = 0;
-int fCount = 0, llCount = 0, lrCount = 0;
+int fCount = 0, llCount = 0, lrCount = 0, aZCount = 1, aYCount = 0;
 boolean fingerBend = false;
 boolean sideView = true;
 boolean raiseLeftLeg = false, raiseRightLeg = false;
 float rLeftLeg = 0, rRightLeg = 0, legLSpeed = 0, legRSpeed = 0;
-//GLenum nonGLUtype = GL_POLYGON;
-GLenum nonGLUtype = GL_LINE_LOOP;
-//GLenum GLUtype = GLU_FILL;
-GLenum GLUtype = GLU_LINE;
+GLenum nonGLUtype = GL_POLYGON;
+//GLenum nonGLUtype = GL_LINE_LOOP;
+GLenum GLUtype = GLU_FILL;
+//GLenum GLUtype = GLU_LINE;
 int pCount = 0;
 float ry = 0, rSpeedP = 10.0;
 //===================================
@@ -73,48 +75,39 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		if (wParam == VK_ESCAPE) {
 			PostQuitMessage(0);
 		}
-		else if (wParam == 0x31) {
-			// press 1.0
+		else if (wParam == 0x31) {	// press 1.0
 			qNo = 1.0;
 			break;
 		}
-		else if (wParam == 0x32) {
-			// press 2
+		else if (wParam == 0x32) {	// press 2
 			qNo = 2;
 			break;
 		}
-		else if (wParam == 0x33) {
-			// press 3
+		else if (wParam == 0x33) {	// press 3
 			qNo = 3;
 			break;
 		}
-		else if (wParam == 0x34) {
-			// press 4
+		else if (wParam == 0x34) {	// press 4
 			qNo = 4;
 			break;
 		}
-		else if (wParam == 0x35) {
-			// press 5
+		else if (wParam == 0x35) {	// press 5
 			qNo = 5;
 			break;
 		}
-		else if (wParam == 0x36) {
-			// press 6
+		else if (wParam == 0x36) {	// press 6
 			qNo = 6;
 			break;
 		}
-		else if (wParam == 0x37) {
-			// press 7
+		else if (wParam == 0x37) {	// press 7
 			qNo = 7;
 			break;
 		}
-		else if (wParam == 0x38) {
-			// press 8
+		else if (wParam == 0x38) {	// press 8
 			qNo = 8;
 			break;
 		}
-		else if (wParam == 0x39) {
-			// press 9
+		else if (wParam == 0x39) {	// press 9
 			qNo = 9;
 			break;
 		}
@@ -124,39 +117,65 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			break;
 		}
 		else if (wParam == VK_UP) {
+			stop = false;
 			if (qNo == 4) {
 				yT += cameraTranslateSpeed;
 			}
+			else if (qNo == 8) {
+				rotate++;
+			}
 			else
-				armx = 1.0, army = 0, armz = 0, armRSpeed = 0.5, armUp = true, armDown = false;
+				armx = 1.0, army = 0, armz = 0, armUp = true, armDown = false;
 		}
 		else if (wParam == VK_DOWN) {
+			stop = false;
 			if (qNo == 4) {
 				yT -= cameraTranslateSpeed;
+			}
+			else if (qNo == 8) {
+				rotate--;
 			}
 			else
 				armx = 1.0, army = 0, armz = 0, armUp = false, armDown = true;
 		}
 		else if (wParam == VK_LEFT) {
+			stop = false;
+			dir = "left";
 			if (qNo == 4) {
 				xT -= cameraTranslateSpeed;
 			}
-			else
-				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = +1.0, armRSpeed = 2, armTurnUp = true, armTurnDown = false;
+			else if (rotation == 'x') {
+				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = +1.0, armTurnUp = true, armTurnDown = false;
+			}
+			else if (rotation == 'y') {
+				armDirection = +1.0, armTurnDown = true, armTurnUp = false;
+			}
+			else if (rotation == 'z') {
+				armDirection = +1.0, armRSpeed = 2, armTurnDown = true, armTurnUp = false;
+			}
 		}
 		else if (wParam == VK_RIGHT) {
+			stop = false;
+			dir = "right";
 			if (qNo == 4) {
 				xT += cameraTranslateSpeed;
 			}
-			else
-				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = -1.0, armRSpeed = 2, armTurnDown = true, armTurnUp = false;
+			else if (rotation == 'x') {
+				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = -1.0, armTurnDown = true, armTurnUp = false;
+			}
+			else if (rotation == 'y') {
+				armDirection = -1.0, armTurnDown = true, armTurnUp = false;
+			}
+			else if (rotation == 'z') {
+				armDirection = -1.0, armTurnDown = true, armTurnUp = false;
+			}
 		}
 		else if (wParam == VK_SPACE) {
 			str = "space";
 
 			glLoadIdentity();
 			armx = 1.00, army = 0, armz = 0, armx2 = 0, army2 = 0, armz2 = 0;
-			armRSpeed = 0, armAngle = 0, armRotate = 0, armDirection = 0;
+			armRSpeed = 0, armAngle = 0, armLowerRotate = 0, armDirection = 0;
 			armUp = false, armDown = false, armTurnUp = false, armTurnDown = false;
 			fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0;
 			fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount = 0;
@@ -165,7 +184,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			llCount = 0, lrCount = 0;
 			rLeftLeg = 0, legLSpeed = 0;
 			rRightLeg = 0, legRSpeed = 0;
-			
+
+			rotation = ' ';
 		}
 		else if (wParam == 0x4D) { // m - open or close mask
 			mCount *= -1;
@@ -192,42 +212,59 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0, fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount++;
 		}
 		else if (wParam == 0x4C) { // L
-			if (llCount % 2 == 0)
-				raiseLeftLeg = true, raiseRightLeg = false, llCount++, legLSpeed = 2;
+			if (llCount % 2 == 0) {
+				raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
+			}
 			else
 				raiseLeftLeg = false, llCount++, legLSpeed = -2;
 		}
 		else if (wParam == 0x4B) { // K
 			if (lrCount % 2 == 0)
-				raiseRightLeg = true, raiseLeftLeg = false, lrCount++, legRSpeed = 2;
+				raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
 			else
 				raiseRightLeg = false, lrCount++, legRSpeed = -2;
 		}
-		else if (wParam == 0x50) {//P
+		else if (wParam == 0x50) { // P
 			if (pCount % 2 == 0)
 				view = 'o', pCount++;
 			else
 				view = 'p', pCount++;
 		}
-		else if (wParam == 0x52) { //R - anti
+		else if (wParam == 0x52) { // R - anti
 			ry += rSpeedP;
 		}
-		else if (wParam == 0x51) { //Q - clockwise
+		else if (wParam == 0x51) { // Q - clockwise
 			ry -= rSpeedP;
 		}
 		else if (wParam == 0x57) { // W
-			xR = 1, yR = 0, zR = 0;
-			str = "upRotate";
+			/*xR = 1, yR = 0, zR = 0;
+			str = "upRotate";*/
+			
+			if (wCount % 2 == 0) {
+				autoWalk = true, wCount++, walkCount++;
+			}
+			else {
+				autoWalk = false, wCount++;
+			}
 		}
 		else if (wParam == 0x53) { // S
-			xR = 1, yR = 0, zR = 0;
-			str = "downRotate";
+			/*xR = 1, yR = 0, zR = 0;
+			str = "downRotate";*/
 			if (qNo == 3)
 				sideView = true;
+			stop = true;
+			/*sCount *= -1;
+			if (sCount == -1) {
+				stop = true;
+				sCount *= -1;
+			}
+			else {
+				stop = false;
+			}*/
 		}
 		else if (wParam == 0x41) { // A
-			xR = 0, yR = 1, zR = 0;
-			str = "leftRotate";
+			/*xR = 0, yR = 1, zR = 0;
+			str = "leftRotate";*/
 		}
 		else if (wParam == 0x42) { // B to bow or straighten body
 			bCount *= -1;
@@ -239,8 +276,32 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 		}
 		else if (wParam == 0x44) { // D
-			xR = 0, yR = 1, zR = 0;
-			str = "rightRotate";
+			/*xR = 0, yR = 1, zR = 0;
+			str = "rightRotate";*/
+		}
+		else if (wParam == 0x58) { // X
+			rotation = 'x';
+		}
+		else if (wParam == 0x59) { // Y
+			rotation = 'y';
+			aYCount *= -1;
+			if (aYCount == -1) {
+				armUpperRotateY = true;
+			}
+			else {
+				armUpperRotateY = false;
+			}
+		}
+		else if (wParam == 0x5A) { // Z
+			rotation = 'z';
+			stop = false;
+			aZCount *= -1;
+			if (aZCount == -1) {
+				armUpperRotateZ = true;
+			}
+			else {
+				armUpperRotateZ = false;
+			}
 		}
 		else if (wParam == VK_ADD || wParam == 0xBB) {
 			zoom += 0.2;
@@ -379,6 +440,48 @@ void finger(GLenum type, float size, float size2, int lineWidth) {
 
 	glPushMatrix();
 	
+	glPushMatrix();
+	glTranslatef(-size / 3.0 * 2.0, size - 0.15, size / 5.0);
+	if (fingerBend) {
+		glTranslatef(-size / 3.0 * 2.0, size - 0.15, size / 5.0 - 0.5);
+		glRotatef(-fingerRotate, fx2, fy2, fz2);
+		glTranslatef(-(-size / 3.0 * 2.0), -(size - 0.15), -size / 5.0);
+	}
+	fh.color('y');
+	fh.sphere(GLU_LINE, size / 8.0, 10, 10);
+	glPopMatrix();
+
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+void finger2(GLenum type, float size, float size2, int lineWidth) {
+	glPushMatrix();
+	if (fingerBend)
+		glRotatef(-fingerRotate * 2, fx2, fy2, fz2);
+	glPushMatrix();
+	glTranslatef(-size / 3.0 * 2, size, 0);
+
+	glRotatef(-90, 0, 0, 1);
+	fh.color('r');
+	fh.cuboid(type, size / 3.0, size2, lineWidth);
+	glPopMatrix();
+
+	glPushMatrix();
+	if (fingerBend)
+		glRotatef(-fingerRotate, fx2, fy2, fz2);
+	glPushMatrix();
+	glTranslatef(-size / 3.0, size, 0);
+
+	glRotatef(-90, 0, 0, 1);
+	fh.color('g');
+	fh.cuboid(type, size / 3.0, size2, lineWidth);
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+
 	glPushMatrix();
 	glTranslatef(-size / 3.0 * 2.0, size - 0.15, size / 5.0);
 	if (fingerBend) {
@@ -564,8 +667,8 @@ void rightPalm(GLenum type, float size, float size2, int lineWidth) {
 	//--------------------thumb--------------------
 	glPushMatrix();
 	if (fingerBend) {
-		glTranslatef(0, 0, -0.5);
-		glRotatef(fingerRotate, fx, fy, fz);
+		glTranslatef(0, 0, 0.5);
+		glRotatef(-fingerRotate, fx, fy, fz);
 	}
 	glPushMatrix();
 	glTranslatef(size * 2 / 3.0 + 0.1, size, 0);
@@ -577,8 +680,8 @@ void rightPalm(GLenum type, float size, float size2, int lineWidth) {
 
 	glPushMatrix();
 	if (fingerBend) {
-		glTranslatef(0, 0, -0.5);
-		glRotatef(fingerRotate, fx, fy, fz);
+		glTranslatef(0, 0, 0.5);
+		glRotatef(-fingerRotate, fx, fy, fz);
 	}
 	glPushMatrix();
 	glTranslatef(size * 2 / 3.0 - 0.1, size + 0.4, 0.2);
@@ -590,14 +693,14 @@ void rightPalm(GLenum type, float size, float size2, int lineWidth) {
 	//--------------------1st Finger--------------------
 	float fSize = size;
 	size2 = 0.8;
-	finger(type, fSize, size2, lineWidth);
+	finger2(type, fSize, size2, lineWidth);
 
 	//--------------------2nd Finger--------------------
 	float fty = 0.25;
 	glPushMatrix();
 	glTranslatef(0, -fty, 0);
 	glScalef(1.25, 1.0, 1.0);
-	finger(type, fSize, size2, lineWidth);
+	finger2(type, fSize, size2, lineWidth);
 	glPopMatrix();
 
 	//--------------------3rd Finger--------------------
@@ -605,7 +708,7 @@ void rightPalm(GLenum type, float size, float size2, int lineWidth) {
 	glPushMatrix();
 	glTranslatef(0, -fty, 0);
 	glScalef(1.15, 1.0, 1.0);
-	finger(type, fSize, size2, lineWidth);
+	finger2(type, fSize, size2, lineWidth);
 	glPopMatrix();
 
 	//--------------------4th Finger--------------------
@@ -613,7 +716,7 @@ void rightPalm(GLenum type, float size, float size2, int lineWidth) {
 	glPushMatrix();
 	glTranslatef(0, -fty, 0);
 	glScalef(0.8, 1.0, 1.0);
-	finger(type, fSize, size2, lineWidth);
+	finger2(type, fSize, size2, lineWidth);
 	glPopMatrix();
 }
 
@@ -1113,12 +1216,15 @@ void armArmour() {
 }
 
 void leftArm() {
-	float uaBaseRadius = 0.05, uaTopRadius = uaBaseRadius - 0.005, height = 0.3, slices = 30, stacks = 30;
+	float uaBaseRadius = 0.05, uaTopRadius = uaBaseRadius - 0.005, height = 0.27, slices = 30, stacks = 30;
 	float laBaseRadius = uaTopRadius, laTopRadius = laBaseRadius - 0.01;
 	float sRadius = uaTopRadius;
 	float palmSize = uaBaseRadius + 0.05;
 
 	glPushMatrix();
+	if (armTurnUp || armTurnDown) {
+		glRotatef(armLowerRotate, armx2, army2, armz2);
+	}
 	glRotatef(90, 0.0, 1.0, 0.0);
 
 	glPushMatrix();
@@ -1162,12 +1268,15 @@ void leftArm() {
 }
 
 void rightArm() {
-	float uaBaseRadius = 0.05, uaTopRadius = uaBaseRadius - 0.005, height = 0.3, slices = 30, stacks = 30;
+	float uaBaseRadius = 0.05, uaTopRadius = uaBaseRadius - 0.005, height = 0.27, slices = 30, stacks = 30;
 	float laBaseRadius = uaTopRadius, laTopRadius = laBaseRadius - 0.01;
 	float sRadius = uaTopRadius;
 	float palmSize = uaBaseRadius + 0.05;
 
 	glPushMatrix();
+	if (armTurnUp || armTurnDown) {
+		glRotatef(-armLowerRotate, armx2, army2, armz2);
+	}
 	glRotatef(90, 0.0, 1.0, 0.0);
 
 	glPushMatrix();
@@ -1210,6 +1319,247 @@ void rightArm() {
 
 }
 
+void armUpperArmour3() {
+	float depth, height = 0.1, length, length2;
+	length = 108 / (WIDTH / 2);
+	length2 = (length / 3) * 2;
+	depth = height;
+
+	glPushMatrix();
+	glTranslatef(length, 0, 0);
+	glRotatef(180, 0, 1, 0);
+	glTranslatef(-length2, 0, 0);
+	// 1 (top)
+	fh.color('r');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, -depth / 2);
+	glVertex3f(length2, height / 2, depth / 2);
+	glVertex3f(length, height, depth / 2);
+	glVertex3f(length, height, -depth / 2);
+	glEnd();
+
+	// 2 (top back)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length, height / 2, depth);
+	glVertex3f(length, height, depth / 2);
+	glVertex3f(length2, height / 2, depth / 2);
+	glEnd();
+
+	// 3 (back)
+	fh.color('c');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, -depth / 2);
+	glVertex3f(length2, -height / 2, -depth / 2);
+	glVertex3f(length, -height / 2, -depth);
+	glVertex3f(length, height / 2, -depth);
+	glEnd();
+
+	// 4 (back btm)
+	fh.color('r');
+	glBegin(nonGLUtype);
+	glVertex3f(length, -height / 2, depth);
+	glVertex3f(length, -height, depth / 2);
+	glVertex3f(length2, -height / 2, depth / 2);
+	glEnd();
+
+	// 5 (btm)
+	fh.color('w');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height / 2, -depth / 2);
+	glVertex3f(length2, -height / 2, depth / 2);
+	glVertex3f(length, -height, depth / 2);
+	glVertex3f(length, -height, -depth / 2);
+	glEnd();
+
+	// 6 (front btm)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length, -height / 2, -depth);
+	glVertex3f(length, -height, -depth / 2);
+	glVertex3f(length2, -height / 2, -depth / 2);
+	glEnd();
+
+	// 7 (front)
+	fh.color('c');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, depth / 2);
+	glVertex3f(length2, -height / 2, depth / 2);
+	glVertex3f(length, -height / 2, depth);
+	glVertex3f(length, height / 2, depth);
+	glEnd();
+
+	// 8 (front top)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length, height / 2, -depth);
+	glVertex3f(length, height, -depth / 2);
+	glVertex3f(length2, height / 2, -depth / 2);
+	glEnd();
+	glPopMatrix();
+}
+
+void armUpperArmour2() {
+	float depth, height = 0.1, length, length2;
+	length = 108 / (WIDTH / 2);
+	length2 = length / 3;
+	depth = height;
+
+	// 1 (top)
+	fh.color('r');
+	glBegin(nonGLUtype);
+	glVertex3f(0, height / 2, -depth / 2);
+	glVertex3f(0, height / 2, depth / 2);
+	glVertex3f(length2, height, depth / 2);
+	glVertex3f(length2, height, -depth / 2);
+	glEnd();
+
+	// 2 (top back)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, -depth);
+	glVertex3f(length2, height, -depth / 2);
+	glVertex3f(0, height / 2, -depth / 2);
+	glEnd();
+
+	// 3 (back)
+	fh.color('c');
+	glBegin(nonGLUtype);
+	glVertex3f(0, height / 2, -depth / 2);
+	glVertex3f(0, -height / 2, -depth / 2);
+	glVertex3f(length2, -height / 2, -depth);
+	glVertex3f(length2, height / 2, -depth);
+	glEnd();
+
+	// 4 (back btm)
+	fh.color('r');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height / 2, -depth);
+	glVertex3f(length2, -height, -depth / 2);
+	glVertex3f(0, -height / 2, -depth / 2);
+	glEnd();
+
+	// 5 (btm)
+	fh.color('w');
+	glBegin(nonGLUtype);
+	glVertex3f(0, -height / 2, -depth / 2);
+	glVertex3f(0, -height / 2, depth / 2);
+	glVertex3f(length2, -height, depth / 2);
+	glVertex3f(length2, -height, -depth / 2);
+	glEnd();
+
+	// 6 (front btm)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height / 2, depth);
+	glVertex3f(length2, -height, depth / 2);
+	glVertex3f(0, -height / 2, depth / 2);
+	glEnd();
+
+	// 7 (front)
+	fh.color('c');
+	glBegin(nonGLUtype);
+	glVertex3f(0, height / 2, depth / 2);
+	glVertex3f(0, -height / 2, depth / 2);
+	glVertex3f(length2, -height / 2, depth);
+	glVertex3f(length2, height / 2, depth);
+	glEnd();
+
+	// 8 (front top)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, depth);
+	glVertex3f(length2, height, depth / 2);
+	glVertex3f(0, height / 2, depth / 2);
+	glEnd();
+}
+
+void armUpperArmour() {
+	// height = 0.27 or 108 pixel
+	float depth, height = 0.1, length, length2;
+	length = 108/(WIDTH / 2);
+	length2 = length / 3;
+	depth = height;
+	glPushMatrix();
+	glTranslatef(-0.27, 0, 0);
+	// 1 (top)
+	fh.color('r');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height, -depth / 2);
+	glVertex3f(length2, height, depth / 2);
+	glVertex3f(length2 + length2, height, depth / 2);
+	glVertex3f(length2 + length2, height, -depth / 2);
+	glEnd();
+
+	// 2 (top back)
+	fh.color('b');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, -depth);
+	glVertex3f(length2, height, -depth / 2);
+	glVertex3f(length2 + length2, height, -depth / 2);
+	glVertex3f(length2 + length2, height / 2, -depth);
+	glEnd();
+
+	// 3 (back)
+	fh.color('g');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, -depth);
+	glVertex3f(length2, -height / 2, -depth);
+	glVertex3f(length2 + length2, -height / 2, -depth);
+	glVertex3f(length2 + length2, height / 2, -depth);
+	glEnd();
+
+	// 4 (back btm)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height / 2, -depth);
+	glVertex3f(length2, -height, -depth / 2);
+	glVertex3f(length2 + length2,- height, -depth / 2);
+	glVertex3f(length2 + length2, -height / 2, -depth);
+	glEnd();
+
+	// 5 (btm)
+	fh.color('w');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height, -depth / 2);
+	glVertex3f(length2, -height, depth / 2);
+	glVertex3f(length2 + length2, -height, depth / 2);
+	glVertex3f(length2 + length2, -height, -depth / 2);
+	glEnd();
+
+	// 6 (front btm)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height / 2, depth);
+	glVertex3f(length2, -height, depth / 2);
+	glVertex3f(length2 + length2, -height, depth / 2);
+	glVertex3f(length2 + length2, -height / 2, depth);
+	glEnd();
+
+	// 7 (front)
+	fh.color('g');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, depth);
+	glVertex3f(length2, -height / 2, depth);
+	glVertex3f(length2 + length2, -height / 2, depth);
+	glVertex3f(length2 + length2, height / 2, depth);
+	glEnd();
+
+	// 8 (front top)
+	fh.color('b');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, depth);
+	glVertex3f(length2, height, depth / 2);
+	glVertex3f(length2 + length2, height, depth / 2);
+	glVertex3f(length2 + length2, height / 2, depth);
+	glEnd();
+
+	armUpperArmour2();
+	armUpperArmour3();
+
+	glPopMatrix();
+}
+
 void robotBody() {
 	// adomen 0 + chest
 	glPushMatrix();
@@ -1226,6 +1576,10 @@ void robotBody() {
 	helmet();
 	glPopMatrix();
 
+	//Arm
+	glPushMatrix();
+	
+		
 	//arm if dun put this, bugs will occur
 	glPushMatrix();
 	glScalef(0, 0, 0);
@@ -1234,18 +1588,39 @@ void robotBody() {
 
 	//arm right
 	glPushMatrix();
-	glTranslatef(fh.xP(170), fh.yP(180), fh.zP(0));
+	glTranslatef(fh.xP(170), fh.yP(110), fh.zP(0));
 	glScalef(0.9, 0.9, 0.9);
 	//glRotatef(180, 1.0, 0, 0);
+	glTranslatef(-0.3, 0, 0);
+	if (rotation == 'z') {
+		glRotatef(armUpperZ, 0, 0, 1);
+	}
+	if (rotation == 'y') {
+		glRotatef(armUpperY, 0, 1, 0);
+	}
+	glRotatef(-85, 0, 0, 1);
+	glTranslatef(0.3, 0, 0);
+	armUpperArmour();	// add here, jiayou
 	rightArm();
 	glPopMatrix();
 
 	//arm left
 	glPushMatrix();
 	glRotatef(180, 0, 1, 0);
-	glTranslatef(fh.xP(170), fh.yP(180), fh.zP(0));
+	glTranslatef(fh.xP(170), fh.yP(110), fh.zP(0));
 	glScalef(0.9, 0.9, 0.9);
+	glTranslatef(-0.3, 0, 0);
+	if (rotation == 'z') {
+		glRotatef(armUpperZ, 0, 0, 1);
+	}
+	if (rotation == 'y') {
+		glRotatef(armUpperY, 0, 1, 0);
+	}
+	glRotatef(-85, 0, 0, 1);
+	glTranslatef(0.3, 0, 0);
 	leftArm();
+	glPopMatrix();
+
 	glPopMatrix();
 
 	glPopMatrix();
@@ -1326,7 +1701,12 @@ void display()
 	for (int i = 0; i < SIZE; i++) {
 		C[i] = 1000000;
 	}
-
+	//==================== test =========================
+	{
+		
+	}
+	//===================================================
+	
 	//==================== body =========================
 	{
 		int angle = 10, angle2 = angle + 1, angle3 = angle2 + 1, angle4 = angle - 5, an = 5;
@@ -1427,20 +1807,34 @@ void display()
 
 	// =============== arm rotate =======================
 	{
-		if (armTurnUp || armTurnDown)
-			glRotatef(armRotate, armx2, army2, armz2);
+		if (rotation == 'z') {
+			if (armUpperRotateZ && armUpperZ < 145 && !stop) {
+				armUpperZ++;
+			}
+			else if (!armUpperRotateZ && armUpperZ >= 0 && !stop) {
+				armUpperZ--;
+			}
+		}
+		else if (rotation == 'y') {
+			if (armUpperRotateY && armUpperY < 110 && !stop) {
+				armUpperY++;
+			}
+			else if (!armUpperRotateY && armUpperY > 0 && !stop) {
+				armUpperY--;
+			}
+		}
 
 		// for right hand rotate
-		if (armTurnUp && !armTurnDown && armRotate > -90) {
-			armRotate -= armRSpeed;
+		if (armTurnUp && !armTurnDown && armLowerRotate > -180 && !stop) {
+			armLowerRotate -= armRSpeed;
 		}
-		else if (armTurnDown && !armTurnUp && armRotate < 30) {
-			armRotate += armRSpeed;
+		else if (armTurnDown && !armTurnUp && armLowerRotate < 30 && !stop) {
+			armLowerRotate += armRSpeed;
 		}
 
-		if (fingerBend && fingerRotate <= 45)
+		if (fingerBend && fingerRotate <= 45 && !stop)
 			fingerRotate += fingerRSpeed;
-		else if (!fingerBend && fingerRotate > 45) {
+		else if (!fingerBend && fingerRotate > 45 && !stop) {
 			fingerRotate -= fingerRSpeed;
 		}
 	}
@@ -1456,10 +1850,10 @@ void display()
 			armDown = false;
 		}
 
-		if (armUp == true && armAngle <= 110) {
+		if (armUp == true && armAngle <= 110 && !stop) {
 			armAngle += armRSpeed;
 		}
-		else if (armDown == true) {
+		else if (armDown == true && !stop) {
 			armAngle -= armRSpeed;
 		}
 	}
@@ -1468,9 +1862,34 @@ void display()
 	// ================== Leg ==========================
 	{
 		if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -35)
-			rLeftLeg += legRSpeed;
+			rLeftLeg += legLSpeed;
+		if (raiseRightLeg && rRightLeg < 45 || !raiseRightLeg && rRightLeg > -35)
+			rRightLeg += legRSpeed;
+
+		if (autoWalk) {
+			//walkCount++;
+		}
+		else {
+
+		}
+		if (walkCount == 1) {
+
+		}
+		else if (walkCount % 2 == 0) {
+			if (llCount % 2 == 0) {
+				raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
+			}
+			else
+				raiseLeftLeg = false, llCount++, legLSpeed = -2;
+		}
+		else {
+			if (lrCount % 2 == 0)
+				raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
+			else
+				raiseRightLeg = false, lrCount++, legRSpeed = -2;
+		}
+		
 	}
-	
 	// =================================================
 	switch (qNo) {
 	case 1:
@@ -1491,16 +1910,17 @@ void display()
 		glPopMatrix();
 		break;
 	case 3:
-		glPushMatrix();
-		glScalef(zoom, zoom, zoom);
-		if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -35)
-			rLeftLeg += legLSpeed;
+		//// leg
+		//glPushMatrix();
+		//glScalef(zoom, zoom, zoom);
+		//if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -35)
+		//	rLeftLeg += legLSpeed;
 
-		glTranslatef(0, 0.52, 0);
-		glRotatef(-rLeftLeg, 1.0, 0, 0);
-		glTranslatef(0, -0.52, 0);
-		leftLeg();
-		glPopMatrix();
+		//glTranslatef(0, 0.52, 0);
+		//glRotatef(-rLeftLeg, 1.0, 0, 0);
+		//glTranslatef(0, -0.52, 0);
+		//leftLeg();
+		//glPopMatrix();
 		break;
 	case 6:
 		//if ((armUp && armAngle > 110) || (armDown && armAngle > 0)) //raise hand
@@ -1529,11 +1949,11 @@ void display()
 			armAngle -= armRSpeed;
 		}
 
-		//if (armDirection == 1 && armRotate <= 30) //arm rotate
-		//	armRotate += armRSpeed;
+		//if (armDirection == 1 && armLowerRotate <= 30) //arm rotate
+		//	armLowerRotate += armRSpeed;
 		//else
-		//	if(armRotate >= -90)
-		//		armRotate -= armRSpeed;
+		//	if(armLowerRotate >= -90)
+		//		armLowerRotate -= armRSpeed;
 
 		
 
@@ -1541,7 +1961,7 @@ void display()
 		//glRotatef(0.3, 0, 1.0, 0);
 		glPushMatrix();
 		if (armTurnUp || armTurnDown)
-			glRotatef(armRotate, armx2, army2, armz2);
+			glRotatef(armLowerRotate, armx2, army2, armz2);
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
 		leftArm();
@@ -1552,6 +1972,21 @@ void display()
 		armArmour();
 		break;
 	case 7:
+		break;
+	case 8:
+		glPushMatrix();
+		glRotatef(rotate, 0, 0, 1);
+		if (armTurnUp || armTurnDown)
+			glRotatef(armLowerRotate, armx2, army2, armz2);
+		glPushMatrix();
+		glScalef(zoom, zoom, zoom);
+		leftArm();
+		glPushMatrix();
+		glTranslatef(-0.27, 0, 0);
+		armUpperArmour();
+		glPopMatrix();
+		glPopMatrix();
+		glPopMatrix();
 		break;
 	case 61:
 		C[0] = 0, C[1] = 0, C[2] = 0;
