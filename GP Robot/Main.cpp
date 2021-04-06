@@ -1300,7 +1300,7 @@ void rightArm() {
 	glPushMatrix();
 	if (armUp || armDown)
 		glRotatef(-armAngle, armx, army, armz);
-
+	
 	fh.color('r');
 	fh.cylinder(GLUtype, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
 	glPopMatrix();

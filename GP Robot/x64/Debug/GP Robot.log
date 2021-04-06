@@ -356,4 +356,5 @@ D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(2000,14): warning C4305: '='
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(2001,14): warning C4305: '=': truncation from 'double' to 'float'
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(2001,26): warning C4305: '=': truncation from 'double' to 'float'
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(2029,1): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  LINK : D:\Users\ADMIN\Documents\gp-robot\x64\Debug\GP Robot.exe not found or not built by the last incremental link; performing full link
   GP Robot.vcxproj -> D:\Users\ADMIN\Documents\gp-robot\x64\Debug\GP Robot.exe
