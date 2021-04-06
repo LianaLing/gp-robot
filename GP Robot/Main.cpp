@@ -31,7 +31,7 @@ head h;
 int qNo = 1;
 std::string str = " ";
 float C[SIZE];
-float zoom = 1.5, cameraTranslateSpeed = 0.1;
+float zoom = 1.0, cameraTranslateSpeed = 0.1;
 char view = 'o';
 //============== Danny ==============
 float AR = 0, AR1 = 0, AR2 = 0, AR3 = 0, AR4 = 0, AR0 = 0, AR01 = 0, AR5 = 0;
@@ -350,54 +350,6 @@ void helmet() {
 
 	glPopMatrix();
 }
-
-void robotBody() {
-	// adomen 0 + chest
-	glPushMatrix();
-	glRotatef(AR4, 1, 0, 0);
-	glTranslatef(0, fh.yP(85), 0);
-	glRotatef(AR2, 1, 0, 0);
-	b.chest();
-	b.adomen0();
-
-	// head
-	glPushMatrix();
-	glTranslatef(0, fh.yP(185), fh.zP(20));
-	glScalef(0.25, 0.25, 0.25);
-	helmet();
-	glPopMatrix();
-
-	glPopMatrix();
-
-	// adomen 1
-	glPushMatrix();
-	glRotatef(AR3, 1, 0, 0);
-	glTranslatef(0, fh.yP(72.5), 0);
-	glRotatef(AR, 1, 0, 0);
-	b.adomen1();
-	glPopMatrix();
-
-	// adomen 2
-	glPushMatrix();
-	glRotatef(AR0, 1, 0, 0);
-	glTranslatef(0, fh.yP(60), 0);
-	glRotatef(0, 1, 0, 0);
-	b.adomen2();
-	glPopMatrix();
-
-	// adomen 3
-	glPushMatrix();
-	glRotatef(AR1, 1, 0, 0);
-	glTranslatef(0, fh.yP(47.5), 0);
-	b.adomen3();
-	glPopMatrix();
-
-	// below
-	glPushMatrix();
-	glTranslatef(0, fh.yP(47.5), 0);
-	b.below();
-	glPopMatrix();
-}
 //============================= DANNY =================================
 
 //============================= LIANA =================================
@@ -608,7 +560,7 @@ void shoe(float height, float footSize, float sRadius, float slices, float stack
 }
 
 void leg() {
-	float thighBaseRadius = 0.1, thighTopRadius = thighBaseRadius - 0.02, height = 0.52, slices = 30, stacks = 30;
+	float thighBaseRadius = 0.08, thighTopRadius = thighBaseRadius - 0.01, height = 0.52, slices = 30, stacks = 30;
 	float calfBaseRadius = thighTopRadius, calfTopRadius = calfBaseRadius - 0.02;
 	float sRadius = thighTopRadius;
 	float footSize = thighBaseRadius + 0.05;
@@ -619,6 +571,7 @@ void leg() {
 	glPushMatrix();
 	glTranslatef(0, 0, -height);
 	fh.color('g');
+	fh.sphere(GLU_LINE, thighBaseRadius, slices, stacks);
 	fh.cylinder(GLUtype, thighBaseRadius, thighTopRadius, height, slices, stacks); //thigh
 	glPopMatrix();
 
@@ -1076,6 +1029,75 @@ void arm() {
 	glPopMatrix();
 	glPopMatrix();
 
+}
+
+void robotBody() {
+	// adomen 0 + chest
+	glPushMatrix();
+	glRotatef(AR4, 1, 0, 0);
+	glTranslatef(0, fh.yP(85), 0);
+	glRotatef(AR2, 1, 0, 0);
+	b.chest();
+	b.adomen0();
+
+	// head
+	glPushMatrix();
+	glTranslatef(0, fh.yP(185), fh.zP(20));
+	glScalef(0.25, 0.25, 0.25);
+	helmet();
+	glPopMatrix();
+
+	//arm
+	glPushMatrix();
+	glTranslatef(fh.xP(200), fh.yP(120), fh.zP(0));
+	glScalef(0.9, 0.9, 0.9);
+	arm();
+	glPopMatrix();
+
+	glPopMatrix();
+
+	// adomen 1
+	glPushMatrix();
+	glRotatef(AR3, 1, 0, 0);
+	glTranslatef(0, fh.yP(72.5), 0);
+	glRotatef(AR, 1, 0, 0);
+	b.adomen1();
+	glPopMatrix();
+
+	// adomen 2
+	glPushMatrix();
+	glRotatef(AR0, 1, 0, 0);
+	glTranslatef(0, fh.yP(60), 0);
+	glRotatef(0, 1, 0, 0);
+	b.adomen2();
+	glPopMatrix();
+
+	// adomen 3
+	glPushMatrix();
+	glRotatef(AR1, 1, 0, 0);
+	glTranslatef(0, fh.yP(47.5), 0);
+	b.adomen3();
+	glPopMatrix();
+
+	// below
+	glPushMatrix();
+	glTranslatef(0, fh.yP(47.5), 0);
+	b.below();
+	glPopMatrix();
+
+	//left leg
+	glPushMatrix();
+	glTranslatef(-fh.xP(35), -fh.yP(140), fh.zP(0));
+	glScalef(0.7, 0.7, 0.7);
+	leg();
+	glPopMatrix();
+
+	//right leg
+	glPushMatrix();
+	glTranslatef(fh.xP(35), -fh.yP(140), fh.zP(0));
+	glScalef(0.7, 0.7, 0.7);
+	leg();
+	glPopMatrix();
 }
 
 //============================= LIANA =================================
