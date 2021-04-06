@@ -124,44 +124,43 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			break;
 		}
 		else if (wParam == VK_UP) {
-			if (qNo == 1 || qNo == 2) {
+			if (qNo == 4) {
 				yT += cameraTranslateSpeed;
 			}
-			if (qNo == 4)
+			else
 				armx = 1.0, army = 0, armz = 0, armRSpeed = 0.5, armUp = true, armDown = false;
 		}
 		else if (wParam == VK_DOWN) {
-			if (qNo == 1 || qNo == 2) {
+			if (qNo == 4) {
 				yT -= cameraTranslateSpeed;
 			}
-			if (qNo == 4)
+			else
 				armx = 1.0, army = 0, armz = 0, armUp = false, armDown = true;
 		}
 		else if (wParam == VK_LEFT) {
-			if (qNo == 1 || qNo == 2) {
+			if (qNo == 4) {
 				xT -= cameraTranslateSpeed;
 			}
-			if (qNo == 4)
+			else
 				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = +1.0, armRSpeed = 2, armTurnUp = true, armTurnDown = false;
 		}
 		else if (wParam == VK_RIGHT) {
-			if (qNo == 1 || qNo == 2) {
+			if (qNo == 4) {
 				xT += cameraTranslateSpeed;
 			}
-			if (qNo == 4)
+			else
 				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = -1.0, armRSpeed = 2, armTurnDown = true, armTurnUp = false;
 		}
 		else if (wParam == VK_SPACE) {
 			str = "space";
 
 			glLoadIdentity();
-			if (qNo == 4) {
-				armx = 1.00, army = 0, armz = 0, armx2 = 0, army2 = 0, armz2 = 0;
-				armRSpeed = 0, armAngle = 0, armRotate = 0, armDirection = 0;
-				armUp = false, armDown = false, armTurnUp = false, armTurnDown = false;
-				fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0;
-				fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount = 0;
-			}
+			armx = 1.00, army = 0, armz = 0, armx2 = 0, army2 = 0, armz2 = 0;
+			armRSpeed = 0, armAngle = 0, armRotate = 0, armDirection = 0;
+			armUp = false, armDown = false, armTurnUp = false, armTurnDown = false;
+			fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0;
+			fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount = 0;
+			
 			if (qNo == 3) {
 				sideView = false;
 				llCount = 0;
@@ -992,9 +991,9 @@ void arm() {
 	glRotatef(90, 0.0, 1.0, 0.0);
 
 	glPushMatrix();
-	if (raiseLeftLeg)
+	/*if (raiseLeftLeg)
 		glTranslatef(0, 0, -height), glRotatef(-90, 0, 1.0, 0), glTranslatef(0, 0, height);
-	else
+	else*/
 		glTranslatef(0, 0, -height);
 	fh.color('g');
 	fh.cylinder(GLUtype, uaBaseRadius, uaTopRadius, height, slices, stacks); //upperarm
@@ -1096,6 +1095,7 @@ void robotBody() {
 
 	//left leg
 	glPushMatrix();
+	glRotatef(-rLeftLeg, 1.0, 0, 0);
 	glTranslatef(-fh.xP(35), -fh.yP(140), fh.zP(0));
 	glScalef(0.7, 0.7, 0.7);
 	leg();
@@ -1103,6 +1103,7 @@ void robotBody() {
 
 	//right leg
 	glPushMatrix();
+	glRotatef(-rLeftLeg, 1.0, 0, 0);
 	glTranslatef(fh.xP(35), -fh.yP(140), fh.zP(0));
 	glScalef(0.7, 0.7, 0.7);
 	leg();
@@ -1251,12 +1252,53 @@ void display()
 	}
 	// ==================================================
 
+	// =============== arm rotate =======================
+
+	if (armTurnUp || armTurnDown)
+		glRotatef(armRotate, armx2, army2, armz2);
+
+	// for right hand rotate
+	if (armTurnUp && !armTurnDown && armRotate > -90) {
+		armRotate -= armRSpeed;
+	}
+	else if (armTurnDown && !armTurnUp && armRotate < 30) {
+		armRotate += armRSpeed;
+	}
+
+	if (fingerBend && fingerRotate <= 45)
+		fingerRotate += fingerRSpeed;
+	else if (!fingerBend && fingerRotate > 45) {
+		fingerRotate -= fingerRSpeed;
+	}
+
+	// =================================================
+
+	// ============== Lower Arm rift ===================
+	if (armAngle == 110) {
+		armAngle = 110;
+	}
+	else if (armAngle == 0) {
+		armAngle = 0;
+		armDown = false;
+	}
+
+	if (armUp == true && armAngle <= 110) {
+		armAngle += armRSpeed;
+	}
+	else if (armDown == true) {
+		armAngle -= armRSpeed;
+	}
+	// =================================================
+
+	// ================== Leg ==========================
+	if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -35)
+		rLeftLeg += legRSpeed;
+	// =================================================
 	switch (qNo) {
 	case 1:
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
 		glTranslatef(xT, yT, zT);
-		// body 
 		glPushMatrix();
 		robotBody();
 		glPopMatrix();
@@ -1282,7 +1324,7 @@ void display()
 		leg();
 		glPopMatrix();
 		break;
-	case 4:
+	case 6:
 		//if ((armUp && armAngle > 110) || (armDown && armAngle > 0)) //raise hand
 		//	armAngle -= armRSpeed;
 		//else if (armAngle == 110)
@@ -1315,21 +1357,7 @@ void display()
 		//	if(armRotate >= -90)
 		//		armRotate -= armRSpeed;
 
-		//----------- arm rotate --------
-
-		// for right hand rotate
-		if (armTurnUp && !armTurnDown && armRotate > -90) {
-			armRotate -= armRSpeed;
-		}
-		else if (armTurnDown && !armTurnUp && armRotate < 30) {
-			armRotate += armRSpeed;
-		}
-
-		if (fingerBend && fingerRotate <= 45)
-			fingerRotate += fingerRSpeed;
-		else if (!fingerBend && fingerRotate > 45) {
-			fingerRotate -= fingerRSpeed;
-		}
+		
 
 
 		//glRotatef(0.3, 0, 1.0, 0);
@@ -1345,7 +1373,7 @@ void display()
 	case 5:
 		armArmour();
 		break;
-	case 6:
+	case 7:
 		break;
 	case 61:
 		C[0] = 0, C[1] = 0, C[2] = 0;
@@ -1362,6 +1390,12 @@ void display()
 		fh.poly3(GL_LINE_STRIP, C, SIZE);
 		break;
 	default:
+		glPushMatrix();
+		glScalef(zoom, zoom, zoom);
+		glTranslatef(xT, yT, zT);
+		glPushMatrix();
+		robotBody();
+		glPopMatrix();
 		break;
 	}
 }

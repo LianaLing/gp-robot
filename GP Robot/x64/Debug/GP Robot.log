@@ -1,483 +1,293 @@
-﻿  Body.cpp
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(18,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(63,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(72,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(81,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(90,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(98,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(106,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(114,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(122,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(130,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(138,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(146,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(156,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(172,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(181,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(190,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(199,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(208,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(217,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(235,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(244,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(253,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(262,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(271,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(280,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(289,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(298,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(307,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(316,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(334,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(343,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(352,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(361,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(370,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(382,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(391,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(400,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(409,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(418,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(427,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(436,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(445,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(473,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(500,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(509,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(518,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(527,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(536,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(545,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(554,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(563,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(612,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(621,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(630,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(639,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(648,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(657,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(666,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(675,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(724,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(733,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(742,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(751,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(760,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(769,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(778,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(787,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(836,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(845,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(854,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(863,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(872,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(881,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(890,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Body.cpp(899,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  Function.cpp
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(54,12): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(58,12): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(62,12): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(116,16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(116,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(120,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(124,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(130,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(166,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(167,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(176,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(177,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(184,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(186,18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(186,6): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(187,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(194,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(196,6): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(197,18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(197,6): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(198,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(242,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(288,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(349,25): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(369,44): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(369,28): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(370,47): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(370,29): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(378,36): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(378,21): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(380,37): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(380,22): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(352,70): warning C4101: 'yt2': unreferenced local variable
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(386,25): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(401,36): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Function.cpp(401,21): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-  Head.cpp
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(50,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(58,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(69,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(80,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(88,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(97,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(108,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(116,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(136,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(144,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(155,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(166,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(174,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(184,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(195,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(230,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(265,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(273,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(282,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(291,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(315,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(350,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(385,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(393,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(402,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(411,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(518,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(529,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(538,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(547,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(555,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(564,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(572,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(581,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(590,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(598,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(608,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(616,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(625,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(634,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(643,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(652,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(661,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(670,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(682,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(690,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(769,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(778,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(787,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(884,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(895,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(904,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(913,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(921,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(930,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(938,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(947,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(956,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(964,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(974,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(982,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(991,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1000,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1009,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1018,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1027,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1036,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1048,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1056,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1136,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1145,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1154,21): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1188,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1197,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1206,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Head.cpp(1215,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  Limb.cpp
-  Main.cpp
+﻿  Main.cpp
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(34,45): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(78,10): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(247,15): warning C4305: '+=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(250,15): warning C4305: '-=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(307,20): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(328,26): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(330,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(362,27): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(370,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(377,21): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(385,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(393,52): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(393,39): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(393,27): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(395,59): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(395,40): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(395,28): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(397,60): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(397,38): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(397,16): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(401,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(412,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(470,30): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(477,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(487,52): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(487,42): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(487,30): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(494,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(500,13): warning C4305: '=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(515,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(523,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(533,142): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(533,87): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(533,147): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(536,40): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(246,15): warning C4305: '+=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(249,15): warning C4305: '-=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(306,20): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(327,26): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(329,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(361,27): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(369,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(376,21): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(384,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(392,52): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(392,39): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(392,27): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(394,59): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(394,40): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(394,28): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(396,60): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(396,38): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(396,16): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(400,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(411,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(469,30): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(476,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(486,52): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(486,42): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(486,30): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(493,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(499,13): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(514,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(522,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(532,142): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(532,87): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(532,147): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(535,40): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(540,36): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(541,52): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(541,36): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(542,52): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(542,36): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(542,20): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(548,44): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(548,26): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(549,30): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(555,43): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(555,26): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(557,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(557,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(557,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(563,30): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(563,47): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(563,86): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(564,55): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(566,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(574,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(574,39): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(575,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(575,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(580,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(580,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(583,16): warning C4305: '-=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(592,70): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(592,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(541,20): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(547,44): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(547,26): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(548,30): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(554,43): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(554,26): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(556,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(556,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(556,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(562,30): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(562,47): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(562,86): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(563,55): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(565,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(573,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(573,39): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(574,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(574,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(579,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(579,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(582,16): warning C4305: '-=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(591,70): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(591,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(606,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(607,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(608,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(608,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(609,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(610,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(614,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(613,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(614,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(615,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(616,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(619,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(620,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(621,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(622,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(623,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(628,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(629,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(630,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(631,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(635,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(627,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(628,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(629,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(630,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(634,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(635,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(636,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(637,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(640,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(641,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(642,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(643,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(644,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(647,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(648,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(649,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(650,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(654,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(655,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(656,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(656,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(657,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(658,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(662,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(661,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(662,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(663,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(664,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(667,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(668,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(669,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(669,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(670,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(671,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(675,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(674,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(675,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(676,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(677,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(682,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(683,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(684,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(685,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(681,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(682,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(683,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(684,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(688,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(689,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(690,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(691,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(692,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(695,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(696,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(697,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(698,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(699,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(703,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(704,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(705,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(705,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(706,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(707,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(710,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(711,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(712,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(713,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(714,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(717,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(718,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(719,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(720,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(721,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(725,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(726,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(727,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(727,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(728,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(729,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(732,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(733,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(734,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(735,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(736,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(739,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(740,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(741,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(742,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(746,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(747,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(748,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(748,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(749,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(750,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(753,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(754,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(755,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(756,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(757,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(760,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(761,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(762,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(763,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(767,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(768,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(769,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(769,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(770,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(771,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(774,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(775,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(776,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(777,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(778,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(782,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(783,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(784,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(784,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(785,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(786,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(789,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(790,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(791,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(792,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(793,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(797,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(798,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(799,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(799,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(800,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(801,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(804,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(805,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(806,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(807,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(811,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(812,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(813,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(813,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(814,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(815,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(820,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(824,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(819,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(823,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(834,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(835,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(836,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(836,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(837,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(838,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(843,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(842,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(843,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(844,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(845,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(849,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(850,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(851,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(852,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(853,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(856,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(857,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(858,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(859,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(860,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(863,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(864,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(865,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(866,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(870,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(869,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(870,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(871,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(872,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(875,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(876,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(877,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(877,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(878,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(879,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(883,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(882,28): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(883,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(884,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(885,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(888,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(889,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(890,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(891,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(892,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(895,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(896,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(897,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(898,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(899,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(902,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(903,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(904,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(905,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(906,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(909,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(910,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(911,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(912,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(913,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(916,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(917,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(918,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(919,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(920,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(923,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(924,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(925,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(926,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(929,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(930,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(931,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(932,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(933,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(936,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(937,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(938,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(939,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(942,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(943,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(944,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(945,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(946,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(949,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(950,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(951,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(952,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(953,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(956,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(957,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(958,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(959,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(964,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(968,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(986,27): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(986,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(986,78): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(987,48): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(989,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1000,66): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1000,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1009,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1009,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1012,16): warning C4305: '-=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1026,66): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1026,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1033,31): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1062,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(963,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(967,32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(985,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(985,41): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(985,78): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(986,48): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(988,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(999,66): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(999,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1008,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1008,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1011,16): warning C4305: '-=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1025,66): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1025,58): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1032,31): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1061,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1100,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1107,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1163,15): warning C4305: '+=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1166,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1170,15): warning C4305: '+=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1173,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1177,15): warning C4305: '+=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1179,15): warning C4305: '+=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1183,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1187,15): warning C4305: '+=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1189,16): warning C4305: '+=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1193,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1199,15): warning C4305: '-=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1206,15): warning C4305: '-=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1213,15): warning C4305: '-=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1215,15): warning C4305: '-=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1223,15): warning C4305: '-=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1225,16): warning C4305: '-=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1279,26): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1281,27): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1305,16): warning C4805: '==': unsafe mix of type 'boolean' and type 'bool' in operation
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1308,23): warning C4805: '==': unsafe mix of type 'boolean' and type 'bool' in operation
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1352,13): warning C4305: '=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1353,13): warning C4305: '=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1353,25): warning C4305: '=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1359,14): warning C4305: '=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1360,14): warning C4305: '=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1360,26): warning C4305: '=': truncation from 'double' to 'float'
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1382,1): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1108,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1164,15): warning C4305: '+=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1167,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1171,15): warning C4305: '+=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1174,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1178,15): warning C4305: '+=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1180,15): warning C4305: '+=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1184,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1188,15): warning C4305: '+=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1190,16): warning C4305: '+=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1194,11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1200,15): warning C4305: '-=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1207,15): warning C4305: '-=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1214,15): warning C4305: '-=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1216,15): warning C4305: '-=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1224,15): warning C4305: '-=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1226,16): warning C4305: '-=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1285,15): warning C4805: '==': unsafe mix of type 'boolean' and type 'bool' in operation
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1288,22): warning C4805: '==': unsafe mix of type 'boolean' and type 'bool' in operation
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1321,26): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1323,27): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1347,16): warning C4805: '==': unsafe mix of type 'boolean' and type 'bool' in operation
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1350,23): warning C4805: '==': unsafe mix of type 'boolean' and type 'bool' in operation
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1380,13): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1381,13): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1381,25): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1387,14): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1388,14): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1388,26): warning C4305: '=': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(1416,1): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   GP Robot.vcxproj -> D:\Users\ADMIN\Documents\gp-robot\x64\Debug\GP Robot.exe
