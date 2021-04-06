@@ -53,7 +53,7 @@ int fCount = 0, llCount = 0, lrCount = 0;
 boolean fingerBend = false;
 boolean sideView = true;
 boolean raiseLeftLeg = false, raiseRightLeg = false;
-float rLeftLeg = 0, rRightLeg = 0, legRSpeed = 0;
+float rLeftLeg = 0, rRightLeg = 0, legLSpeed = 0, legRSpeed = 0;
 //GLenum nonGLUtype = GL_POLYGON;
 GLenum nonGLUtype = GL_LINE_LOOP;
 //GLenum GLUtype = GLU_FILL;
@@ -164,7 +164,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			if (qNo == 3) {
 				sideView = false;
 				llCount = 0;
-				rLeftLeg = 0, legRSpeed = 0;
+				rLeftLeg = 0, legLSpeed = 0;
 			}
 		}
 		else if (wParam == 0x4D) { // m - open or close mask
@@ -193,15 +193,15 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		}
 		else if (wParam == 0x4C) { // L
 			if (llCount % 2 == 0)
-				raiseLeftLeg = true, llCount++, legRSpeed = 2;
+				raiseLeftLeg = true, llCount++, legLSpeed = 2;
 			else
-				raiseLeftLeg = false, llCount++, legRSpeed = -2;
+				raiseLeftLeg = false, llCount++, legLSpeed = -2;
 		}
 		else if (wParam == 0x4B) { // K
 			if (lrCount % 2 == 0)
-				raiseRightLeg = true, lrCount++;
+				raiseRightLeg = true, lrCount++, legRSpeed = 2;
 			else
-				raiseRightLeg = false, lrCount++;
+				raiseRightLeg = false, lrCount++, legRSpeed = -2;
 		}
 		else if (wParam == 0x50) {//P
 			if (pCount % 2 == 0)
@@ -558,7 +558,7 @@ void shoe(float height, float footSize, float sRadius, float slices, float stack
 	glPopMatrix();
 }
 
-void leg() {
+void leftLeg() {
 	float thighBaseRadius = 0.08, thighTopRadius = thighBaseRadius - 0.01, height = 0.52, slices = 30, stacks = 30;
 	float calfBaseRadius = thighTopRadius, calfTopRadius = calfBaseRadius - 0.02;
 	float sRadius = thighTopRadius;
@@ -583,8 +583,46 @@ void leg() {
 	glPushMatrix();
 	if (!(rLeftLeg < 0)) {
 		if (raiseLeftLeg && rLeftLeg < 90 || !raiseLeftLeg && rLeftLeg > 0)
-			rLeftLeg += legRSpeed;
+			rLeftLeg += legLSpeed;
 		glTranslatef(height, 0, 0), glRotatef(rLeftLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
+	}
+
+	fh.color('r');
+	fh.cylinder(GLUtype, calfBaseRadius, calfTopRadius, height, slices, stacks); //calf
+
+	shoe(height, footSize, sRadius, slices, stacks);
+
+	glPopMatrix();
+	glPopMatrix();
+}
+
+void rightLeg() {
+	float thighBaseRadius = 0.08, thighTopRadius = thighBaseRadius - 0.01, height = 0.52, slices = 30, stacks = 30;
+	float calfBaseRadius = thighTopRadius, calfTopRadius = calfBaseRadius - 0.02;
+	float sRadius = thighTopRadius;
+	float footSize = thighBaseRadius + 0.05;
+
+	glPushMatrix();
+	glRotatef(90, 1.0, 0.0, 0.0);
+
+	glPushMatrix();
+	glTranslatef(0, 0, -height);
+	fh.color('g');
+	fh.sphere(GLU_LINE, thighBaseRadius, slices, stacks);
+	fh.cylinder(GLUtype, thighBaseRadius, thighTopRadius, height, slices, stacks); //thigh
+	glPopMatrix();
+
+	glPushMatrix();
+	fh.color('y');
+	fh.sphere(GLUtype, sRadius, slices, stacks); //knee
+	glPopMatrix();
+
+	height -= 0.01;
+	glPushMatrix();
+	if (!(rRightLeg < 0)) {
+		if (raiseRightLeg && rRightLeg < 90 || !raiseRightLeg && rRightLeg > 0)
+			rRightLeg += legRSpeed;
+		glTranslatef(height, 0, 0), glRotatef(rRightLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
 	}
 
 	fh.color('r');
@@ -1098,7 +1136,7 @@ void robotBody() {
 	glRotatef(-rLeftLeg, 1.0, 0, 0);
 	glTranslatef(-fh.xP(35), -fh.yP(140), fh.zP(0));
 	glScalef(0.7, 0.7, 0.7);
-	leg();
+	leftLeg();
 	glPopMatrix();
 
 	//right leg
@@ -1106,7 +1144,7 @@ void robotBody() {
 	glRotatef(-rLeftLeg, 1.0, 0, 0);
 	glTranslatef(fh.xP(35), -fh.yP(140), fh.zP(0));
 	glScalef(0.7, 0.7, 0.7);
-	leg();
+	rightLeg();
 	glPopMatrix();
 }
 
@@ -1292,7 +1330,7 @@ void display()
 
 	// ================== Leg ==========================
 	if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -35)
-		rLeftLeg += legRSpeed;
+		rLeftLeg += legLSpeed;
 	// =================================================
 	switch (qNo) {
 	case 1:
@@ -1316,12 +1354,12 @@ void display()
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
 		if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -35)
-			rLeftLeg += legRSpeed;
+			rLeftLeg += legLSpeed;
 
 		glTranslatef(0, 0.52, 0);
 		glRotatef(-rLeftLeg, 1.0, 0, 0);
 		glTranslatef(0, -0.52, 0);
-		leg();
+		leftLeg();
 		glPopMatrix();
 		break;
 	case 6:
