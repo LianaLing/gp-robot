@@ -28,7 +28,7 @@ using namespace H;
 function fh;
 body b;
 head h;
-int qNo = 5;
+int qNo = 1;
 std::string str = " ";
 float C[SIZE];
 float zoom = 1.0, cameraTranslateSpeed = 0.1;
