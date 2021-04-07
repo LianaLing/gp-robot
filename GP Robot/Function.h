@@ -35,6 +35,7 @@ namespace N {
 		void quad(GLenum gltype, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
 		void bezierQuad(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4, float r, float g, float b);
 		void bezier(GLenum type, float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4);
+		void disk(GLenum type, float innerRadius, float outerRadius, int slices, int loop);
 	};
 }
 

@@ -7,10 +7,12 @@
 #include "Function.h"
 #include "Body.h"
 #include "Head.h"
+#include "Weapon.h"
 
 using namespace N;
 using namespace B;
 using namespace H;
+using namespace W;
 
 #define WINDOW_TITLE "IRON-MAN"
 #define CW 10
@@ -25,8 +27,9 @@ using namespace H;
 function fh;
 body b;
 head h;
+weapon w;
 
-int actionKeyNo = 1;
+int actionKeyNo = 8;
 std::string str = " ";
 std::string dir = " ";
 float C[SIZE];
@@ -40,7 +43,8 @@ float diff[] = { 1.0, 0.0, 0.0 };
 float diffM[] = { 1.0, 0.0, 0.0 };
 float posDX = 0, posDY = 0, posDZ = 0;
 float posD[] = { posDX, posDY, posDZ };
-boolean lightOn = true;
+boolean lightOn = false;
+float lightCount = 1;
 
 //============== Danny ==============
 float AR = 0, AR1 = 0, AR2 = 0, AR3 = 0, AR4 = 0, AR0 = 0, AR01 = 0, AR5 = 0;
@@ -51,7 +55,7 @@ float nodRotate = 0, nodRotateSpeed = 0.5;
 int bCount = 1, mCount = 1, nCount = 1, wCount = 1, walkCount = 1, sCount = 1;
 boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false;
 float walkSpeed = 1;
-int testRotate = 0;
+float gunRotating = 0;
 //===================================
 
 //============== LIANA ==============
@@ -131,6 +135,15 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			if (actionKeyNo == 4) {
 				yT -= cameraTranslateSpeed;
 			}
+			else if (actionKeyNo == 5) {
+				lightCount *= -1;
+				if (lightCount == -1) {
+					lightOn = true;
+				}
+				else {
+					lightOn = false;
+				}
+			}
 			else if (actionKeyNo == 8) {
 				rotate++;
 			}
@@ -180,7 +193,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_SPACE) {
 			str = "space";
 			armx = 1.00, army = 0, armz = 0, armx2 = 0, army2 = 0, armz2 = 0;
-			armRSpeed = 0, armAngle = 0, armLowerRotate = 0, armDirection = 0;
+			armAngle = 0, armLowerRotate = 0, armDirection = 0;
 			armUp = false, armDown = false, armTurnUp = false, armTurnDown = false;
 			fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0;
 			fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount = 0;
@@ -189,6 +202,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			llCount = 0, lrCount = 0;
 			rLeftLeg = 0, legLSpeed = 0;
 			rRightLeg = 0, legRSpeed = 0;
+
+			armUpperZ = 0;
 
 			rotation = ' ';
 		}
@@ -1145,7 +1160,7 @@ void armArmour() {
 }
 
 void armUpperArmour3() {
-	float depth, height = 0.1, length, length2;
+	float depth, height = 0.08, length, length2;
 	length = 108 / (WIDTH / 2);
 	length2 = (length / 3) * 2;
 	depth = height;
@@ -1225,7 +1240,7 @@ void armUpperArmour3() {
 }
 
 void armUpperArmour2() {
-	float depth, height = 0.1, length, length2;
+	float depth, height = 0.08, length, length2;
 	length = 108 / (WIDTH / 2);
 	length2 = length / 3;
 	depth = height;
@@ -1301,7 +1316,7 @@ void armUpperArmour2() {
 
 void armUpperArmour() {
 	// height = 0.27 or 108 pixel
-	float depth, height = 0.1, length, length2;
+	float depth, height = 0.08, length, length2;
 	length = 108/(WIDTH / 2);
 	length2 = length / 3;
 	depth = height;
@@ -2006,8 +2021,7 @@ void switchView(char view) {
 	}
 }
 
-void display()
-{
+void display(){
 	init();
 	switchView(view);
 	for (int i = 0; i < SIZE; i++) {
@@ -2203,9 +2217,16 @@ void display()
 		
 	}
 	// =================================================
+
+	// ================== Gun ==========================
+	{
+		gunRotating++;
+	}	
+	// =================================================
+	lighting();
 	switch (actionKeyNo) {
 	case 1:
-		lighting();
+		
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
 		glTranslatef(xT, yT, zT);
@@ -2281,23 +2302,15 @@ void display()
 		glPopMatrix();
 		glPopMatrix();
 		break;
-	case 5:
-		armArmour();
-		break;
 	case 7:
 		break;
 	case 8:
 		glPushMatrix();
-		glRotatef(rotate, 0, 0, 1);
-		if (armTurnUp || armTurnDown)
-			glRotatef(armLowerRotate, armx2, army2, armz2);
-		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
-		leftArm();
+		//glTranslatef(xT, yT, zT);
+		//glRotatef(90, 0, 1, 0);
 		glPushMatrix();
-		glTranslatef(-0.27, 0, 0);
-		armUpperArmour();
-		glPopMatrix();
+		w.gun(gunRotating);
 		glPopMatrix();
 		glPopMatrix();
 		break;

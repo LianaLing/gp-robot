@@ -238,7 +238,7 @@ void function::pyramid(GLenum type, float size, int lineWidth) {
 }
 
 void function::cube(GLenum type, float size, int lineWidth) {
-	float x = xC(size), y = yC(size), z = zC(size);
+	float x = (size), y = (size), z = (size);
 	glLineWidth(lineWidth);
 	//top
 	glBegin(type);
@@ -401,4 +401,12 @@ void function::bezier(GLenum type, float x1, float x2, float x3, float x4, float
 		glVertex2f((xt[i] / 600), (yt[i] / 600));
 	}
 	glEnd();
+}
+
+void function::disk(GLenum type, float innerRadius, float outerRadius, int slices, int loop) {
+	GLUquadricObj* disk = NULL;
+	disk = gluNewQuadric();
+	gluQuadricDrawStyle(disk, type);
+	gluDisk(disk, innerRadius, outerRadius, slices, loop);
+	gluDeleteQuadric(disk);
 }
