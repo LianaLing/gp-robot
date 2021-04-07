@@ -26,12 +26,22 @@ function fh;
 body b;
 head h;
 
-int qNo = 1;
+int actionKeyNo = 1;
 std::string str = " ";
 std::string dir = " ";
 float C[SIZE];
 float zoom = 1.0, cameraTranslateSpeed = 0.1;
 char view = 'o', rotation = ' ';
+
+//LIGHTING
+float lightDir = 0;
+float lightRX = 0, lightRY = 0, lightRZ = 0;
+float diff[] = { 1.0, 0.0, 0.0 };
+float diffM[] = { 1.0, 0.0, 0.0 };
+float posDX = 0, posDY = 0, posDZ = 0;
+float posD[] = { posDX, posDY, posDZ };
+boolean lightOn = true;
+
 //============== Danny ==============
 float AR = 0, AR1 = 0, AR2 = 0, AR3 = 0, AR4 = 0, AR0 = 0, AR01 = 0, AR5 = 0;
 float rotate = 0;
@@ -76,52 +86,52 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			PostQuitMessage(0);
 		}
 		else if (wParam == 0x31) {	// press 1.0
-			qNo = 1.0;
+			actionKeyNo = 1.0;
 			break;
 		}
 		else if (wParam == 0x32) {	// press 2
-			qNo = 2;
+			actionKeyNo = 2;
 			break;
 		}
 		else if (wParam == 0x33) {	// press 3
-			qNo = 3;
+			actionKeyNo = 3;
 			break;
 		}
 		else if (wParam == 0x34) {	// press 4
-			qNo = 4;
+			actionKeyNo = 4;
 			break;
 		}
 		else if (wParam == 0x35) {	// press 5
-			qNo = 5;
+			actionKeyNo = 5;
 			break;
 		}
 		else if (wParam == 0x36) {	// press 6
-			qNo = 6;
+			actionKeyNo = 6;
 			break;
 		}
 		else if (wParam == 0x37) {	// press 7
-			qNo = 7;
+			actionKeyNo = 7;
 			break;
 		}
 		else if (wParam == 0x38) {	// press 8
-			qNo = 8;
+			actionKeyNo = 8;
 			break;
 		}
 		else if (wParam == 0x39) {	// press 9
-			qNo = 9;
+			actionKeyNo = 9;
 			break;
 		}
 		else if (wParam == 0x61) {
 			// press numpad 1.0
-			qNo = 61;
+			actionKeyNo = 61;
 			break;
 		}
 		else if (wParam == VK_UP) {
 			stop = false;
-			if (qNo == 4) {
-				yT += cameraTranslateSpeed;
+			if (actionKeyNo == 4) {
+				yT -= cameraTranslateSpeed;
 			}
-			else if (qNo == 8) {
+			else if (actionKeyNo == 8) {
 				rotate++;
 			}
 			else
@@ -129,10 +139,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		}
 		else if (wParam == VK_DOWN) {
 			stop = false;
-			if (qNo == 4) {
-				yT -= cameraTranslateSpeed;
+			if (actionKeyNo == 4) {
+				yT += cameraTranslateSpeed;
 			}
-			else if (qNo == 8) {
+			else if (actionKeyNo == 8) {
 				rotate--;
 			}
 			else
@@ -141,7 +151,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_LEFT) {
 			stop = false;
 			dir = "left";
-			if (qNo == 4) {
+			if (actionKeyNo == 4) {
 				xT -= cameraTranslateSpeed;
 			}
 			else if (rotation == 'x') {
@@ -157,7 +167,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_RIGHT) {
 			stop = false;
 			dir = "right";
-			if (qNo == 4) {
+			if (actionKeyNo == 4) {
 				xT += cameraTranslateSpeed;
 			}
 			else if (rotation == 'x') {
@@ -166,14 +176,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else if (rotation == 'y') {
 				armDirection = -1.0, armTurnDown = true, armTurnUp = false;
 			}
-			else if (rotation == 'z') {
-				armDirection = -1.0, armTurnDown = true, armTurnUp = false;
-			}
 		}
 		else if (wParam == VK_SPACE) {
 			str = "space";
-
-			glLoadIdentity();
 			armx = 1.00, army = 0, armz = 0, armx2 = 0, army2 = 0, armz2 = 0;
 			armRSpeed = 0, armAngle = 0, armLowerRotate = 0, armDirection = 0;
 			armUp = false, armDown = false, armTurnUp = false, armTurnDown = false;
@@ -250,7 +255,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == 0x53) { // S
 			/*xR = 1, yR = 0, zR = 0;
 			str = "downRotate";*/
-			if (qNo == 3)
+			if (actionKeyNo == 3)
 				sideView = true;
 			stop = true;
 			/*sCount *= -1;
@@ -754,82 +759,6 @@ void shoe(float height, float footSize, float sRadius, float slices, float stack
 	glPopMatrix();
 }
 
-void leftLeg() {
-	float thighBaseRadius = 0.08, thighTopRadius = thighBaseRadius - 0.01, height = 0.52, slices = 30, stacks = 30;
-	float calfBaseRadius = thighTopRadius, calfTopRadius = calfBaseRadius - 0.02;
-	float sRadius = thighTopRadius;
-	float footSize = thighBaseRadius + 0.05;
-
-	glPushMatrix();
-	glRotatef(90, 1.0, 0.0, 0.0);
-
-	glPushMatrix();
-	glTranslatef(0, 0, -height);
-	fh.color('g');
-	fh.sphere(GLU_LINE, thighBaseRadius, slices, stacks);
-	fh.cylinder(GLUtype, thighBaseRadius, thighTopRadius, height, slices, stacks); //thigh
-	glPopMatrix();
-
-	glPushMatrix();
-	fh.color('y');
-	fh.sphere(GLUtype, sRadius, slices, stacks); //knee
-	glPopMatrix();
-
-	height -= 0.01;
-	glPushMatrix();
-	if (!(rLeftLeg < 0)) {
-		if (raiseLeftLeg && rLeftLeg < 90 || !raiseLeftLeg && rLeftLeg > 0)
-			rLeftLeg += legLSpeed;
-		glTranslatef(height, 0, 0), glRotatef(rLeftLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
-	}
-
-	fh.color('r');
-	fh.cylinder(GLUtype, calfBaseRadius, calfTopRadius, height, slices, stacks); //calf
-
-	shoe(height, footSize, sRadius, slices, stacks);
-
-	glPopMatrix();
-	glPopMatrix();
-}
-
-void rightLeg() {
-	float thighBaseRadius = 0.08, thighTopRadius = thighBaseRadius - 0.01, height = 0.52, slices = 30, stacks = 30;
-	float calfBaseRadius = thighTopRadius, calfTopRadius = calfBaseRadius - 0.02;
-	float sRadius = thighTopRadius;
-	float footSize = thighBaseRadius + 0.05;
-
-	glPushMatrix();
-	glRotatef(90, 1.0, 0.0, 0.0);
-
-	glPushMatrix();
-	glTranslatef(0, 0, -height);
-	fh.color('g');
-	fh.sphere(GLU_LINE, thighBaseRadius, slices, stacks);
-	fh.cylinder(GLUtype, thighBaseRadius, thighTopRadius, height, slices, stacks); //thigh
-	glPopMatrix();
-
-	glPushMatrix();
-	fh.color('y');
-	fh.sphere(GLUtype, sRadius, slices, stacks); //knee
-	glPopMatrix();
-
-	height -= 0.01;
-	glPushMatrix();
-	if (!(rRightLeg < 0)) {
-		if (raiseRightLeg && rRightLeg < 90 || !raiseRightLeg && rRightLeg > 0)
-			rRightLeg += legRSpeed;
-		glTranslatef(height, 0, 0), glRotatef(rRightLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
-	}
-
-	fh.color('r');
-	fh.cylinder(GLUtype, calfBaseRadius, calfTopRadius, height, slices, stacks); //calf
-
-	shoe(height, footSize, sRadius, slices, stacks);
-
-	glPopMatrix();
-	glPopMatrix();
-}
-
 void armArmour1(GLenum typeQ, GLenum typeT, GLenum typeP) {
 
 	int direction = 1;
@@ -1215,110 +1144,6 @@ void armArmour() {
 	armArmour2(typeQ, typeT, typeP);
 }
 
-void leftArm() {
-	float uaBaseRadius = 0.05, uaTopRadius = uaBaseRadius - 0.005, height = 0.27, slices = 30, stacks = 30;
-	float laBaseRadius = uaTopRadius, laTopRadius = laBaseRadius - 0.01;
-	float sRadius = uaTopRadius;
-	float palmSize = uaBaseRadius + 0.05;
-
-	glPushMatrix();
-	if (armTurnUp || armTurnDown) {
-		glRotatef(armLowerRotate, armx2, army2, armz2);
-	}
-	glRotatef(90, 0.0, 1.0, 0.0);
-
-	glPushMatrix();
-	
-	glTranslatef(0, 0, -height);
-	fh.color('g');
-	fh.sphere(GLUtype, sRadius, slices, stacks);
-	fh.cylinder(GLUtype, uaBaseRadius, uaTopRadius, height, slices, stacks); //upperarm
-	glPopMatrix();
-
-	glPushMatrix();
-	//glRotatef(-90, 1.0, 0, 0);
-	//glTranslatef(0, 0, height);
-
-	glPushMatrix();
-	fh.color('y');
-	fh.sphere(GLUtype, sRadius, slices, stacks); //elbow
-	glPopMatrix();
-
-	height -= 0.01;
-	glPushMatrix();
-	if (armUp || armDown)
-		glRotatef(-armAngle, armx, army, armz);
-	
-	fh.color('r');
-	fh.cylinder(GLUtype, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
-	glPopMatrix();
-	glPopMatrix();
-
-	glPushMatrix();
-	if (armUp || armDown)
-		glRotatef(-armAngle, armx, army, armz);
-	glTranslatef(0, -laTopRadius - 0.01, height + palmSize);
-	//glRotatef(90, 1.0, 0, 0);
-	glRotatef(90, 0, 1.0, 0);
-	glScalef(palmSize, palmSize, palmSize);
-	leftPalm(nonGLUtype, 1.0, 0.5, 2);
-	glPopMatrix();
-	glPopMatrix();
-
-}
-
-void rightArm() {
-	float uaBaseRadius = 0.05, uaTopRadius = uaBaseRadius - 0.005, height = 0.27, slices = 30, stacks = 30;
-	float laBaseRadius = uaTopRadius, laTopRadius = laBaseRadius - 0.01;
-	float sRadius = uaTopRadius;
-	float palmSize = uaBaseRadius + 0.05;
-
-	glPushMatrix();
-	if (armTurnUp || armTurnDown) {
-		glRotatef(-armLowerRotate, armx2, army2, armz2);
-	}
-	glRotatef(90, 0.0, 1.0, 0.0);
-
-	glPushMatrix();
-
-	glTranslatef(0, 0, -height);
-	fh.color('g');
-	fh.sphere(GLUtype, sRadius, slices, stacks);
-	fh.cylinder(GLUtype, uaBaseRadius, uaTopRadius, height, slices, stacks); //upperarm
-	glPopMatrix();
-
-	glPushMatrix();
-	//glRotatef(-90, 1.0, 0, 0);
-	//glTranslatef(0, 0, height);
-
-	glPushMatrix();
-	fh.color('y');
-	fh.sphere(GLUtype, sRadius, slices, stacks); //elbow
-	glPopMatrix();
-
-	height -= 0.01;
-	glPushMatrix();
-	if (armUp || armDown)
-		glRotatef(-armAngle, armx, army, armz);
-	
-	fh.color('r');
-	fh.cylinder(GLUtype, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
-	glPopMatrix();
-	glPopMatrix();
-
-	glPushMatrix();
-	if (armUp || armDown)
-		glRotatef(-armAngle, armx, army, armz);
-	glTranslatef(0, -laTopRadius - 0.01, height + palmSize);
-	//glRotatef(90, 1.0, 0, 0);
-	glRotatef(90, 0, 1.0, 0);
-	glScalef(palmSize, palmSize, palmSize);
-	rightPalm(nonGLUtype, 1.0, 0.5, 2);
-	glPopMatrix();
-	glPopMatrix();
-
-}
-
 void armUpperArmour3() {
 	float depth, height = 0.1, length, length2;
 	length = 108 / (WIDTH / 2);
@@ -1560,6 +1385,464 @@ void armUpperArmour() {
 	glPopMatrix();
 }
 
+void legUpperArmour3() {
+	float depth, height = 0.1, length, length2;
+	length = 0.52;
+	length2 = (length / 3) * 2;
+	depth = height;
+
+	glPushMatrix();
+	glTranslatef(length, 0, 0);
+	glRotatef(180, 0, 1, 0);
+	glTranslatef(-length2, 0, 0);
+	// 1 (top)
+	fh.color('r');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, -depth / 2);
+	glVertex3f(length2, height / 2, depth / 2);
+	glVertex3f(length, height, depth / 2);
+	glVertex3f(length, height, -depth / 2);
+	glEnd();
+
+	// 2 (top back)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length, height / 2, depth);
+	glVertex3f(length, height, depth / 2);
+	glVertex3f(length2, height / 2, depth / 2);
+	glEnd();
+
+	// 3 (back)
+	fh.color('c');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, -depth / 2);
+	glVertex3f(length2, -height / 2, -depth / 2);
+	glVertex3f(length, -height / 2, -depth);
+	glVertex3f(length, height / 2, -depth);
+	glEnd();
+
+	// 4 (back btm)
+	fh.color('r');
+	glBegin(nonGLUtype);
+	glVertex3f(length, -height / 2, depth);
+	glVertex3f(length, -height, depth / 2);
+	glVertex3f(length2, -height / 2, depth / 2);
+	glEnd();
+
+	// 5 (btm)
+	fh.color('w');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height / 2, -depth / 2);
+	glVertex3f(length2, -height / 2, depth / 2);
+	glVertex3f(length, -height, depth / 2);
+	glVertex3f(length, -height, -depth / 2);
+	glEnd();
+
+	// 6 (front btm)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length, -height / 2, -depth);
+	glVertex3f(length, -height, -depth / 2);
+	glVertex3f(length2, -height / 2, -depth / 2);
+	glEnd();
+
+	// 7 (front)
+	fh.color('c');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, depth / 2);
+	glVertex3f(length2, -height / 2, depth / 2);
+	glVertex3f(length, -height / 2, depth);
+	glVertex3f(length, height / 2, depth);
+	glEnd();
+
+	// 8 (front top)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length, height / 2, -depth);
+	glVertex3f(length, height, -depth / 2);
+	glVertex3f(length2, height / 2, -depth / 2);
+	glEnd();
+	glPopMatrix();
+}
+
+void legUpperArmour2() {
+	float depth, height = 0.1, length, length2;
+	length = 0.52;
+	length2 = length / 3;
+	depth = height;
+
+	// 1 (top)
+	fh.color('r');
+	glBegin(nonGLUtype);
+	glVertex3f(0, height / 2, -depth / 2);
+	glVertex3f(0, height / 2, depth / 2);
+	glVertex3f(length2, height, depth / 2);
+	glVertex3f(length2, height, -depth / 2);
+	glEnd();
+
+	// 2 (top back)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, -depth);
+	glVertex3f(length2, height, -depth / 2);
+	glVertex3f(0, height / 2, -depth / 2);
+	glEnd();
+
+	// 3 (back)
+	fh.color('c');
+	glBegin(nonGLUtype);
+	glVertex3f(0, height / 2, -depth / 2);
+	glVertex3f(0, -height / 2, -depth / 2);
+	glVertex3f(length2, -height / 2, -depth);
+	glVertex3f(length2, height / 2, -depth);
+	glEnd();
+
+	// 4 (back btm)
+	fh.color('r');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height / 2, -depth);
+	glVertex3f(length2, -height, -depth / 2);
+	glVertex3f(0, -height / 2, -depth / 2);
+	glEnd();
+
+	// 5 (btm)
+	fh.color('w');
+	glBegin(nonGLUtype);
+	glVertex3f(0, -height / 2, -depth / 2);
+	glVertex3f(0, -height / 2, depth / 2);
+	glVertex3f(length2, -height, depth / 2);
+	glVertex3f(length2, -height, -depth / 2);
+	glEnd();
+
+	// 6 (front btm)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height / 2, depth);
+	glVertex3f(length2, -height, depth / 2);
+	glVertex3f(0, -height / 2, depth / 2);
+	glEnd();
+
+	// 7 (front)
+	fh.color('c');
+	glBegin(nonGLUtype);
+	glVertex3f(0, height / 2, depth / 2);
+	glVertex3f(0, -height / 2, depth / 2);
+	glVertex3f(length2, -height / 2, depth);
+	glVertex3f(length2, height / 2, depth);
+	glEnd();
+
+	// 8 (front top)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, depth);
+	glVertex3f(length2, height, depth / 2);
+	glVertex3f(0, height / 2, depth / 2);
+	glEnd();
+}
+
+void legUpperArmour() {
+	// height = 0.27 or 108 pixel
+	float depth, height = 0.1, length, length2;
+	length = 0.52;
+	length2 = length / 3;
+	depth = height;
+	glPushMatrix();
+	glTranslatef(-0.27, 0, 0);
+	// 1 (top)
+	fh.color('r');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height, -depth / 2);
+	glVertex3f(length2, height, depth / 2);
+	glVertex3f(length2 + length2, height, depth / 2);
+	glVertex3f(length2 + length2, height, -depth / 2);
+	glEnd();
+
+	// 2 (top back)
+	fh.color('b');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, -depth);
+	glVertex3f(length2, height, -depth / 2);
+	glVertex3f(length2 + length2, height, -depth / 2);
+	glVertex3f(length2 + length2, height / 2, -depth);
+	glEnd();
+
+	// 3 (back)
+	fh.color('g');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, -depth);
+	glVertex3f(length2, -height / 2, -depth);
+	glVertex3f(length2 + length2, -height / 2, -depth);
+	glVertex3f(length2 + length2, height / 2, -depth);
+	glEnd();
+
+	// 4 (back btm)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height / 2, -depth);
+	glVertex3f(length2, -height, -depth / 2);
+	glVertex3f(length2 + length2, -height, -depth / 2);
+	glVertex3f(length2 + length2, -height / 2, -depth);
+	glEnd();
+
+	// 5 (btm)
+	fh.color('w');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height, -depth / 2);
+	glVertex3f(length2, -height, depth / 2);
+	glVertex3f(length2 + length2, -height, depth / 2);
+	glVertex3f(length2 + length2, -height, -depth / 2);
+	glEnd();
+
+	// 6 (front btm)
+	fh.color('y');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, -height / 2, depth);
+	glVertex3f(length2, -height, depth / 2);
+	glVertex3f(length2 + length2, -height, depth / 2);
+	glVertex3f(length2 + length2, -height / 2, depth);
+	glEnd();
+
+	// 7 (front)
+	fh.color('g');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, depth);
+	glVertex3f(length2, -height / 2, depth);
+	glVertex3f(length2 + length2, -height / 2, depth);
+	glVertex3f(length2 + length2, height / 2, depth);
+	glEnd();
+
+	// 8 (front top)
+	fh.color('b');
+	glBegin(nonGLUtype);
+	glVertex3f(length2, height / 2, depth);
+	glVertex3f(length2, height, depth / 2);
+	glVertex3f(length2 + length2, height, depth / 2);
+	glVertex3f(length2 + length2, height / 2, depth);
+	glEnd();
+
+	legUpperArmour2();
+	legUpperArmour3();
+
+	glPopMatrix();
+}
+
+void leftArm() {
+	float uaBaseRadius = 0.05, uaTopRadius = uaBaseRadius - 0.005, height = 0.27, slices = 30, stacks = 30;
+	float laBaseRadius = uaTopRadius, laTopRadius = laBaseRadius - 0.01;
+	float sRadius = uaTopRadius;
+	float palmSize = uaBaseRadius + 0.05;
+
+	glPushMatrix();
+	if (armTurnUp || armTurnDown) {
+		glRotatef(armLowerRotate, armx2, army2, armz2);
+	}
+	armUpperArmour();
+	glRotatef(90, 0.0, 1.0, 0.0);
+
+	glPushMatrix();
+
+	glTranslatef(0, 0, -height);
+	fh.color('g');
+	fh.sphere(GLUtype, sRadius, slices, stacks);
+	fh.cylinder(GLUtype, uaBaseRadius, uaTopRadius, height, slices, stacks); //upperarm
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(-90, 1.0, 0, 0);
+	//glTranslatef(0, 0, height);
+
+	glPushMatrix();
+	fh.color('y');
+	fh.sphere(GLUtype, sRadius, slices, stacks); //elbow
+	glPopMatrix();
+
+	height -= 0.01;
+	glPushMatrix();
+	if (armUp || armDown)
+		glRotatef(-armAngle, armx, army, armz);
+
+	fh.color('r');
+	fh.cylinder(GLUtype, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+	if (armUp || armDown)
+		glRotatef(-armAngle, armx, army, armz);
+
+	glPushMatrix();
+	glRotatef(-90, 0.0, 1.0, 0.0);
+	glTranslatef(0.27, 0, 0);
+	armUpperArmour();
+	glPopMatrix();
+
+	glTranslatef(0, -laTopRadius - 0.01, height + palmSize);
+	//glRotatef(90, 1.0, 0, 0);
+	glRotatef(90, 0, 1.0, 0);
+	glScalef(palmSize, palmSize, palmSize);
+	leftPalm(nonGLUtype, 1.0, 0.5, 2);
+	glPopMatrix();
+	glPopMatrix();
+
+}
+
+void rightArm() {
+	float uaBaseRadius = 0.05, uaTopRadius = uaBaseRadius - 0.005, height = 0.27, slices = 30, stacks = 30;
+	float laBaseRadius = uaTopRadius, laTopRadius = laBaseRadius - 0.01;
+	float sRadius = uaTopRadius;
+	float palmSize = uaBaseRadius + 0.05;
+
+	glPushMatrix();
+	if (armTurnUp || armTurnDown) {
+		glRotatef(-armLowerRotate, armx2, army2, armz2);
+	}
+	armUpperArmour();	// add here, jiayou
+	glRotatef(90, 0.0, 1.0, 0.0);
+
+	glPushMatrix();
+
+	glTranslatef(0, 0, -height);
+	fh.color('g');
+	fh.sphere(GLUtype, sRadius, slices, stacks);
+	fh.cylinder(GLUtype, uaBaseRadius, uaTopRadius, height, slices, stacks); //upperarm
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(-90, 1.0, 0, 0);
+	//glTranslatef(0, 0, height);
+
+	glPushMatrix();
+	fh.color('y');
+	fh.sphere(GLUtype, sRadius, slices, stacks); //elbow
+	glPopMatrix();
+
+	height -= 0.01;
+	glPushMatrix();
+	if (armUp || armDown)
+		glRotatef(-armAngle, armx, army, armz);
+
+	fh.color('r');
+	fh.cylinder(GLUtype, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
+	glPopMatrix();
+	glPopMatrix();
+
+	glPushMatrix();
+	if (armUp || armDown)
+		glRotatef(-armAngle, armx, army, armz);
+
+	glPushMatrix();
+	glRotatef(-90, 0.0, 1.0, 0.0);
+	glTranslatef(0.27, 0, 0);
+	armUpperArmour();
+	glPopMatrix();
+	glTranslatef(0, -laTopRadius - 0.01, height + palmSize);
+	//glRotatef(90, 1.0, 0, 0);
+	glRotatef(90, 0, 1.0, 0);
+	glScalef(palmSize, palmSize, palmSize);
+	rightPalm(nonGLUtype, 1.0, 0.5, 2);
+	glPopMatrix();
+	glPopMatrix();
+
+}
+
+void leftLeg() {
+	float thighBaseRadius = 0.08, thighTopRadius = thighBaseRadius - 0.01, height = 0.52, slices = 30, stacks = 30;
+	float calfBaseRadius = thighTopRadius, calfTopRadius = calfBaseRadius - 0.02;
+	float sRadius = thighTopRadius;
+	float footSize = thighBaseRadius + 0.05;
+
+	glPushMatrix();
+	glPushMatrix();
+	glTranslatef(0, 0.25, 0);
+	glRotatef(-90, 0.0, 0.0, 1.0);
+	legUpperArmour();
+	glPopMatrix();
+	glRotatef(90, 1.0, 0.0, 0.0);
+
+	glPushMatrix();
+	glTranslatef(0, 0, -height);
+	fh.color('g');
+	fh.sphere(GLU_LINE, thighBaseRadius, slices, stacks);
+	fh.cylinder(GLUtype, thighBaseRadius, thighTopRadius, height, slices, stacks); //thigh
+	glPopMatrix();
+
+	glPushMatrix();
+	fh.color('y');
+	fh.sphere(GLUtype, sRadius, slices, stacks); //knee
+	glPopMatrix();
+
+	height -= 0.01;
+	glPushMatrix();
+	if (!(rLeftLeg < 0)) {
+		if (raiseLeftLeg && rLeftLeg < 90 || !raiseLeftLeg && rLeftLeg > 0)
+			rLeftLeg += legLSpeed;
+		glTranslatef(height, 0, 0), glRotatef(rLeftLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
+	}
+	glPushMatrix();
+	glRotatef(-90, 0.0, 1.0, 0.0);
+	glTranslatef(0.25, 0, 0);
+	legUpperArmour();
+	glPopMatrix();
+
+	fh.color('r');
+	fh.cylinder(GLUtype, calfBaseRadius, calfTopRadius, height, slices, stacks); //calf
+
+	shoe(height, footSize, sRadius, slices, stacks);
+
+	glPopMatrix();
+	glPopMatrix();
+}
+
+void rightLeg() {
+	float thighBaseRadius = 0.08, thighTopRadius = thighBaseRadius - 0.01, height = 0.52, slices = 30, stacks = 30;
+	float calfBaseRadius = thighTopRadius, calfTopRadius = calfBaseRadius - 0.02;
+	float sRadius = thighTopRadius;
+	float footSize = thighBaseRadius + 0.05;
+
+	glPushMatrix();
+	glPushMatrix();
+	glTranslatef(0, 0.25, 0);
+	glRotatef(-90, 0.0, 0.0, 1.0);
+	legUpperArmour();
+	glPopMatrix();
+
+	glRotatef(90, 1.0, 0.0, 0.0);
+
+	glPushMatrix();
+	glTranslatef(0, 0, -height);
+	fh.color('g');
+	fh.sphere(GLU_LINE, thighBaseRadius, slices, stacks);
+	fh.cylinder(GLUtype, thighBaseRadius, thighTopRadius, height, slices, stacks); //thigh
+	glPopMatrix();
+
+	glPushMatrix();
+	fh.color('y');
+	fh.sphere(GLUtype, sRadius, slices, stacks); //knee
+	glPopMatrix();
+
+	height -= 0.01;
+	glPushMatrix();
+	if (!(rRightLeg < 0)) {
+		if (raiseRightLeg && rRightLeg < 90 || !raiseRightLeg && rRightLeg > 0)
+			rRightLeg += legRSpeed;
+		glTranslatef(height, 0, 0), glRotatef(rRightLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
+	}
+
+	glPushMatrix();
+	glRotatef(-90, 0.0, 1.0, 0.0);
+	glTranslatef(0.25, 0, 0);
+	legUpperArmour();
+	glPopMatrix();
+
+	fh.color('r');
+	fh.cylinder(GLUtype, calfBaseRadius, calfTopRadius, height, slices, stacks); //calf
+
+	shoe(height, footSize, sRadius, slices, stacks);
+
+	glPopMatrix();
+	glPopMatrix();
+}
+
 void robotBody() {
 	// adomen 0 + chest
 	glPushMatrix();
@@ -1578,8 +1861,6 @@ void robotBody() {
 
 	//Arm
 	glPushMatrix();
-	
-		
 	//arm if dun put this, bugs will occur
 	glPushMatrix();
 	glScalef(0, 0, 0);
@@ -1598,9 +1879,13 @@ void robotBody() {
 	if (rotation == 'y') {
 		glRotatef(armUpperY, 0, 1, 0);
 	}
+	glPushMatrix();
+	glTranslatef(0, -0.05, 0);
+	glScalef(0.15, 0.15, 0.15);
+	armArmour();
+	glPopMatrix();
 	glRotatef(-85, 0, 0, 1);
 	glTranslatef(0.3, 0, 0);
-	armUpperArmour();	// add here, jiayou
 	rightArm();
 	glPopMatrix();
 
@@ -1616,6 +1901,11 @@ void robotBody() {
 	if (rotation == 'y') {
 		glRotatef(armUpperY, 0, 1, 0);
 	}
+	glPushMatrix();
+	glTranslatef(0, -0.05, 0);
+	glScalef(0.15, 0.15, 0.15);
+	armArmour();
+	glPopMatrix();
 	glRotatef(-85, 0, 0, 1);
 	glTranslatef(0.3, 0, 0);
 	leftArm();
@@ -1673,11 +1963,33 @@ void robotBody() {
 
 //============================= LIANA =================================
 
+void lighting() {
+	//glEnable(GL_LIGHTING);
+	//glLightfv(GL_LIGHT0, GL_AMBIENT, amb); //configure light0, default position at origin
+	//glEnable(GL_LIGHT0); //turn on light
+	//glLightfv(GL_LIGHT0, GL_POSITION, posA); //configure light0 position
+	posD[0] = posDX;
+	posD[1] = posDY;
+	posD[2] = posDZ;
+
+	if (lightOn)
+		glEnable(GL_LIGHTING);
+	else
+		glDisable(GL_LIGHTING);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, diff);
+	glEnable(GL_LIGHT1);
+	glLightfv(GL_LIGHT1, GL_POSITION, posD);
+
+	glRotatef(lightDir, 0, lightRY, 0);
+	//glMaterialfv(GL_FRONT, GL_AMBIENT, ambM);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffM);
+}
+
 void switchView(char view) {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	//glTranslatef(tx, ty, 0.0);
-	if (qNo == 2) {
+	if (actionKeyNo == 2) {
 		glRotatef(ry, 1.0, 0.0, 0);
 	}
 	else {
@@ -1808,7 +2120,7 @@ void display()
 	// =============== arm rotate =======================
 	{
 		if (rotation == 'z') {
-			if (armUpperRotateZ && armUpperZ < 145 && !stop) {
+			if (armUpperRotateZ && armUpperZ < 90 && !stop) {
 				armUpperZ++;
 			}
 			else if (!armUpperRotateZ && armUpperZ >= 0 && !stop) {
@@ -1840,7 +2152,7 @@ void display()
 	}
 	// =================================================
 
-	// ============== Lower Arm rift ===================
+	// ============== Lower Arm lift ===================
 	{
 		if (armAngle == 110) {
 			armAngle = 110;
@@ -1891,8 +2203,9 @@ void display()
 		
 	}
 	// =================================================
-	switch (qNo) {
+	switch (actionKeyNo) {
 	case 1:
+		lighting();
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
 		glTranslatef(xT, yT, zT);
