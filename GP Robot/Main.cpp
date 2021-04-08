@@ -122,15 +122,6 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			if (actionKeyNo == 4) {
 				yT += cameraTranslateSpeed;
 			}
-			else if (actionKeyNo == 5) {
-				lightCount *= -1;
-				if (lightCount == -1) {
-					lightOn = true;
-				}
-				else {
-					lightOn = false;
-				}
-			}
 			else if (actionKeyNo == 8) {
 				rotate++;
 			}
@@ -194,9 +185,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 			rotation = ' ';
 
-			wCount = 0, walkCount = 0, autoWalk = false;
+			wCount = 1, walkCount = 1, autoWalk = false;
 		}
-		else if (wParam == 0x4D) { // m - open or close mask
+		else if (wParam == 0x4D) { // M - open or close mask
 			mCount *= -1;
 			if (mCount == -1) {
 				openMask = true;
@@ -205,7 +196,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				openMask = false;
 			}
 		}
-		else if (wParam == 0x4E) { // n - nod or lift
+		else if (wParam == 0x4E) { // N - nod or lift
 			nCount *= -1;
 			if (nCount == -1) {
 				nod = true;
@@ -256,6 +247,18 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 			else {
 				autoWalk = false, wCount++;
+			}
+		}
+		else if (wParam == 0x4F) {
+			
+			if (actionKeyNo == 5) {
+				lightCount *= -1;
+				if (lightCount == -1) {
+					lightOn = true;
+				}
+				else {
+					lightOn = false;
+				}
 			}
 		}
 		else if (wParam == 0x53) { // S
@@ -1797,7 +1800,7 @@ void leftLeg() {
 
 	height -= 0.01;
 	glPushMatrix();
-	if (!(rLeftLeg < 0)) {
+	if (!(rLeftLeg < 0) || (autoWalk && walkCount % 2 == 0)) {
 		if (raiseLeftLeg && rLeftLeg < 90 || !raiseLeftLeg && rLeftLeg > 0)
 			rLeftLeg += legLSpeed;
 		glTranslatef(height, 0, 0), glRotatef(rLeftLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
@@ -2047,15 +2050,13 @@ void switchView(char view) {
 	}
 }
 
-void display(){
-	init();
-	switchView(view);
+void animation() {
 	//==================== test =========================
 	{
-		
+
 	}
 	//===================================================
-	
+
 	//==================== body =========================
 	{
 		int angle = 10, angle2 = angle + 1, angle3 = angle2 + 1, angle4 = angle - 5, an = 5;
@@ -2217,28 +2218,31 @@ void display(){
 			rRightLeg += legRSpeed;
 
 		if (autoWalk) {
-			walkCount++;
-			if (walkCount == 0) { //by default turned off
-			}
-			else if (walkCount % 2 == 0) {
-				if (llCount % 2 == 0) {
-					raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
-				}
-				else
-					raiseLeftLeg = false, llCount++, legLSpeed = -2;
-
-			}
-			else {
-				if (lrCount % 2 == 0)
-					raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
-				else
-					raiseRightLeg = false, lrCount++, legRSpeed = -2;
-			}
+			walkCount++;			
+			//if (walkCount == 1) { //by default turned off
+			//}
+			//else if (walkCount % 2 == 0) {
+			//	llCount = 0;
+			//	for(int i = 0; i < 2; i++)
+			//		if (llCount++ % 2 == 0) {
+			//			raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
+			//		}
+			//		else
+			//			raiseLeftLeg = false, llCount++, legLSpeed = -2;
+			//}
+			//else {
+			//	lrCount = 0;
+			//	for (int i = 0; i < 2; i++)
+			//		if (lrCount % 2 == 0)
+			//			raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
+			//		else
+			//			raiseRightLeg = false, lrCount++, legRSpeed = -2;
+			//}
 		}
 		else
 			wCount = 0, walkCount = 0, autoWalk = false;
 
-		
+
 	}
 	// =================================================
 
@@ -2247,12 +2251,17 @@ void display(){
 		if (weaponFireOn) {
 			gunRotating++;
 		}
-	}	
+	}
 	// =================================================
+}
+
+void display(){
+	init();
+	switchView(view);
+	animation();
 	lighting();
 	switch (actionKeyNo) {
 	case 1:
-		
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
 		glTranslatef(xT, yT, zT);
