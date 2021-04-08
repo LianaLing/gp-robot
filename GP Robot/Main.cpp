@@ -20,7 +20,6 @@ using namespace W;
 #define WIDTH VALUE
 #define HEIGHT VALUE
 #define DEPTH VALUE
-#define SIZE 15
 #define ORTHO_VIEW 1.0
 #define FRUSTUM_VIEW 1.0
 
@@ -32,7 +31,6 @@ weapon w;
 int actionKeyNo = 1;
 std::string str = " ";
 std::string dir = " ";
-float C[SIZE];
 float zoom = 1.0, cameraTranslateSpeed = 0.1;
 char view = 'o', rotation = ' ';
 
@@ -52,8 +50,8 @@ float rotate = 0;
 float xR = 0, yR = 0, zR = 0, xT = 0, yT = 0, zT = 0;
 float maskRotate = 0, maskRotateSpeed = 0.5;
 float nodRotate = 0, nodRotateSpeed = 0.5;
-int bCount = 1, mCount = 1, nCount = 1, wCount = 0, walkCount = 0, sCount = 1;
-boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false;
+int bCount = 1, mCount = 1, nCount = 1, wCount = 1, walkCount = 1, sCount = 1, weaponCount = 1, weaponFireCount = 1;
+boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false, weaponOn = false, weaponFireOn = false;
 float walkSpeed = 1;
 float gunRotating = 0;
 //===================================
@@ -91,49 +89,38 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		}
 		else if (wParam == 0x31) {	// press 1.0
 			actionKeyNo = 1.0;
-			break;
 		}
 		else if (wParam == 0x32) {	// press 2
 			actionKeyNo = 2;
-			break;
 		}
 		else if (wParam == 0x33) {	// press 3
 			actionKeyNo = 3;
-			break;
 		}
 		else if (wParam == 0x34) {	// press 4
 			actionKeyNo = 4;
-			break;
 		}
 		else if (wParam == 0x35) {	// press 5
 			actionKeyNo = 5;
-			break;
 		}
 		else if (wParam == 0x36) {	// press 6
 			actionKeyNo = 6;
-			break;
 		}
 		else if (wParam == 0x37) {	// press 7
 			actionKeyNo = 7;
-			break;
 		}
 		else if (wParam == 0x38) {	// press 8
 			actionKeyNo = 8;
-			break;
 		}
 		else if (wParam == 0x39) {	// press 9
 			actionKeyNo = 9;
-			break;
 		}
-		else if (wParam == 0x61) {
-			// press numpad 1.0
+		else if (wParam == 0x61) {	// press numpad 1.0
 			actionKeyNo = 61;
-			break;
 		}
 		else if (wParam == VK_UP) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				yT -= cameraTranslateSpeed;
+				yT += cameraTranslateSpeed;
 			}
 			else if (actionKeyNo == 5) {
 				lightCount *= -1;
@@ -153,7 +140,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_DOWN) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				yT += cameraTranslateSpeed;
+				yT -= cameraTranslateSpeed;
 			}
 			else if (actionKeyNo == 8) {
 				rotate--;
@@ -332,6 +319,24 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		}
 		else if (wParam == VK_SUBTRACT || wParam == 0xBD) {
 			zoom -= 0.2;
+		}
+		else if (wParam == VK_F1) {	// F1
+			weaponCount *= -1;
+			if (weaponCount == -1) {
+				weaponOn = true;
+			}
+			else {
+				weaponOn = false;
+			}
+		}
+		else if (wParam == VK_F2) {	// F2
+			weaponFireCount *= -1;
+			if (weaponFireCount == -1) {
+				weaponFireOn = true;
+			}
+			else {
+				weaponFireOn = false;
+			}
 		}
 		break;
 	default:
@@ -1890,19 +1895,27 @@ void robotBody() {
 	glPushMatrix();
 	glTranslatef(fh.xP(170), fh.yP(110), fh.zP(0));
 	glScalef(0.9, 0.9, 0.9);
-	//glRotatef(180, 1.0, 0, 0);
 	glTranslatef(-0.3, 0, 0);
+
+	// arm armour
+	glPushMatrix();
+	glTranslatef(0, -0.05, 0);
+	glScalef(0.15, 0.15, 0.15);
+	armArmour();
+	glPopMatrix();
+
 	if (rotation == 'z') {
 		glRotatef(armUpperZ, 0, 0, 1);
 	}
 	if (rotation == 'y') {
 		glRotatef(armUpperY, 0, 1, 0);
 	}
-	glPushMatrix();
-	glTranslatef(0, -0.05, 0);
-	glScalef(0.15, 0.15, 0.15);
-	armArmour();
-	glPopMatrix();
+	//// arm armour
+	//glPushMatrix();
+	//glTranslatef(0, -0.05, 0);
+	//glScalef(0.15, 0.15, 0.15);
+	//armArmour();
+	//glPopMatrix();
 	glRotatef(-85, 0, 0, 1);
 	glTranslatef(0.3, 0, 0);
 	rightArm();
@@ -1914,17 +1927,26 @@ void robotBody() {
 	glTranslatef(fh.xP(170), fh.yP(110), fh.zP(0));
 	glScalef(0.9, 0.9, 0.9);
 	glTranslatef(-0.3, 0, 0);
+
+	// arm armour
+	glPushMatrix();
+	glTranslatef(0, -0.05, 0);
+	glScalef(0.15, 0.15, 0.15);
+	armArmour();
+	glPopMatrix();
+
 	if (rotation == 'z') {
 		glRotatef(armUpperZ, 0, 0, 1);
 	}
 	if (rotation == 'y') {
 		glRotatef(armUpperY, 0, 1, 0);
 	}
-	glPushMatrix();
-	glTranslatef(0, -0.05, 0);
-	glScalef(0.15, 0.15, 0.15);
-	armArmour();
-	glPopMatrix();
+	//// arm armour
+	//glPushMatrix();
+	//glTranslatef(0, -0.05, 0);
+	//glScalef(0.15, 0.15, 0.15);
+	//armArmour();
+	//glPopMatrix();
 	glRotatef(-85, 0, 0, 1);
 	glTranslatef(0.3, 0, 0);
 	leftArm();
@@ -2028,9 +2050,6 @@ void switchView(char view) {
 void display(){
 	init();
 	switchView(view);
-	for (int i = 0; i < SIZE; i++) {
-		C[i] = 1000000;
-	}
 	//==================== test =========================
 	{
 		
@@ -2138,7 +2157,7 @@ void display(){
 	// =============== arm rotate =======================
 	{
 		if (rotation == 'z') {
-			if (armUpperRotateZ && armUpperZ < 90 && !stop) {
+			if (armUpperRotateZ && armUpperZ < 60 && !stop) {
 				armUpperZ++;
 			}
 			else if (!armUpperRotateZ && armUpperZ >= 0 && !stop) {
@@ -2155,13 +2174,14 @@ void display(){
 		}
 
 		// for right hand rotate
-		if (armTurnUp && !armTurnDown && armLowerRotate > -180 && !stop) {
+		if (armTurnUp && !armTurnDown && armLowerRotate > -90 && !stop) {
 			armLowerRotate -= armRSpeed;
 		}
 		else if (armTurnDown && !armTurnUp && armLowerRotate < 30 && !stop) {
 			armLowerRotate += armRSpeed;
 		}
 
+		// finger animation
 		if (fingerBend && fingerRotate <= 45 && !stop)
 			fingerRotate += fingerRSpeed;
 		else if (!fingerBend && fingerRotate > 45 && !stop) {
@@ -2201,18 +2221,18 @@ void display(){
 			if (walkCount == 0) { //by default turned off
 			}
 			else if (walkCount % 2 == 0) {
-				/*if (llCount % 2 == 0) {
+				if (llCount % 2 == 0) {
 					raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
 				}
 				else
-					raiseLeftLeg = false, llCount++, legLSpeed = -2;*/
+					raiseLeftLeg = false, llCount++, legLSpeed = -2;
 
 			}
 			else {
-				/*if (lrCount % 2 == 0)
+				if (lrCount % 2 == 0)
 					raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
 				else
-					raiseRightLeg = false, lrCount++, legRSpeed = -2;*/
+					raiseRightLeg = false, lrCount++, legRSpeed = -2;
 			}
 		}
 		else
@@ -2224,7 +2244,9 @@ void display(){
 
 	// ================== Gun ==========================
 	{
-		gunRotating++;
+		if (weaponFireOn) {
+			gunRotating++;
+		}
 	}	
 	// =================================================
 	lighting();
@@ -2236,6 +2258,9 @@ void display(){
 		glTranslatef(xT, yT, zT);
 		glPushMatrix();
 		robotBody();
+		if (weaponOn) {
+			w.gun(gunRotating);
+		}
 		glPopMatrix();
 		break;
 	case 2:
@@ -2306,8 +2331,6 @@ void display(){
 		glPopMatrix();
 		glPopMatrix();
 		break;
-	case 7:
-		break;
 	case 8:
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
@@ -2317,20 +2340,6 @@ void display(){
 		w.gun(gunRotating);
 		glPopMatrix();
 		glPopMatrix();
-		break;
-	case 61:
-		C[0] = 0, C[1] = 0, C[2] = 0;
-		C[3] = 0.2, C[4] = 0, C[5] = 0;
-		C[6] = 0.2, C[7] = 0.2, C[8] = 0;
-		glColor3f(1, 1, 1);
-		glLineWidth(3);
-		glRotatef(1, 0, 1, 0);
-		fh.poly3(GL_LINE_STRIP, C, SIZE);
-		C[0] = 0, C[1] = 0, C[2] = 0;
-		C[3] = -0.2, C[4] = 0, C[5] = 0;
-		C[6] = -0.2, C[7] = 0.2, C[8] = 0;
-		glColor3f(1, 0, 0);
-		fh.poly3(GL_LINE_STRIP, C, SIZE);
 		break;
 	default:
 		glPushMatrix();

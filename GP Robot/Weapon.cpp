@@ -18,7 +18,7 @@ GLenum type3 = GL_LINE_LOOP, gltype3 = GL_POLYGON;
 GLenum glutype = GLU_FILL, glutype2 = GLU_LINE;
 float baseRadius = 0.2, topRadius = baseRadius, height = 0.5, slice = 30, stack = slice;
 float baseRadius2 = 0.18, topRadius2 = baseRadius2;
-float wZoom = 0.6;
+float wZoom = 0.2;
 void weapon::frontGun() {
 	// outer surface
 	glColor3f(0.2, 0.6, 0.8);
