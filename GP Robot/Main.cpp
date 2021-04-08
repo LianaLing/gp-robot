@@ -37,22 +37,20 @@ char view = 'o', rotation = ' ';
 //LIGHTING
 float lightDir = 0;
 float lightRX = 0, lightRY = 0, lightRZ = 0;
-char lightType = ' ';
+GLenum lightType = GL_SPECULAR;
 
 float amb[] = {1.0, 0, 0}; //ambient
-float posAX = 0, posAY = 0, posAZ = 0;
-float posA[] = { posAX, posAY, posAZ };
+//float posDX = lightRX, posDY = light, posDY = 0;
+float posA[] = { lightRX, lightRY, lightRZ};
 float diffA[] = { 1.0, 0.0, 0.0 };
 
-float diff[] = { 1.0, 0.0, 0.0 }; //diffuse
-float diffM[] = { 1.0, 0.0, 0.0 };
-float posDX = 0, posDY = 0, posDZ = 0;
-float posD[] = { posDX, posDY, posDZ };
+float diff[] = { 0.0, 1.0, 0.0 }; //diffuse
+float diffM[] = { 0.0, 1.0, 0.0 };
+float posD[] = { lightRX, lightRY, lightRZ};
 
-float spec[] = { 1.0, 0.0, 0.0 }; //specular
+float spec[] = { 0.0, 0.0, 1.0 }; //specular
 float specM[] = { 1.0, 0.0, 0.0 };
-float posSX = 0, posSY = 0, posSZ = 0;
-float posS[] = { posSX, posSY, posSZ };
+float posS[] = { lightRX, lightRY, lightRZ};
 boolean lightOn = false;
 float lightCount = 1;
 
@@ -137,7 +135,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 			else if (actionKeyNo == 5) {
 				//lighting
-
+				lightRX = 0, lightRY = 1.0, lightRZ = 0;
 			}
 			else if (actionKeyNo == 8) {
 				rotate++;
@@ -150,6 +148,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			if (actionKeyNo == 4) {
 				yT -= cameraTranslateSpeed;
 			}
+			else if (actionKeyNo == 5) {
+				//lighting
+				lightRX = 0, lightRY = -1.0, lightRZ = 0;
+			}
 			else if (actionKeyNo == 8) {
 				rotate--;
 			}
@@ -161,6 +163,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			dir = "left";
 			if (actionKeyNo == 4) {
 				xT += cameraTranslateSpeed;
+			}
+			else if (actionKeyNo == 5) {
+				//lighting
+				lightRX = -1.0, lightRY = 0, lightRZ = 0;
 			}
 			else if (rotation == 'x') {
 				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = +1.0, armTurnUp = true, armTurnDown = false;
@@ -177,6 +183,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			dir = "right";
 			if (actionKeyNo == 4) {
 				xT -= cameraTranslateSpeed;
+			}
+			else if (actionKeyNo == 5) {
+				//lighting
+				lightRX = 1.0, lightRY = 0, lightRZ = 0;
 			}
 			else if (rotation == 'x') {
 				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = -1.0, armTurnDown = true, armTurnUp = false;
@@ -202,11 +212,13 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 			rotation = ' ';
 
-			wCount = 1, walkCount = 1, autoWalk = false, walkForward = false;
+			wCount = 1, walkCount = 1, autoWalk = false;
 		}
 		else if (wParam == 0x41) { // A
 			/*xR = 0, yR = 1, zR = 0;
 			str = "leftRotate";*/
+			if (actionKeyNo == 5)
+				lightType = GL_AMBIENT;
 		} // A
 		else if (wParam == 0x42) { // B to bow or straighten body
 			bCount *= -1;
@@ -220,6 +232,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == 0x44) { // D
 			/*xR = 0, yR = 1, zR = 0;
 			str = "rightRotate";*/
+			if (actionKeyNo == 5)
+				lightType = GL_DIFFUSE;
 		} // D
 		else if (wParam == 0x46) { // F
 			if (fCount % 2 == 0)
@@ -242,25 +256,34 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				raiseLeftLeg = false, llCount++, legLSpeed = -2;
 			autoWalk = false;
 		} // L
-		else if (wParam == 0x4D) { // M - open or close mask
-			mCount *= -1;
-			if (mCount == -1) {
-				openMask = true;
-			}
+		else if (wParam == 0x4D) { // M
+			if (actionKeyNo == 5)
+				lightRX = 0, lightRY = 0, lightRZ = 1.0;
 			else {
-				openMask = false;
+				mCount *= -1;
+				if (mCount == -1) {
+					openMask = true;
+				}
+				else {
+					openMask = false;
+				}
 			}
 		} // M
-		else if (wParam == 0x4E) { // N - nod or lift
-			nCount *= -1;
-			if (nCount == -1) {
-				nod = true;
-			}
+		else if (wParam == 0x4E) { // N
+
+			if (actionKeyNo == 5)
+				lightRX = 0, lightRY = 0, lightRZ = -1.0;
 			else {
-				nod = false;
+				nCount *= -1;
+				if (nCount == -1) {
+					nod = true;
+				}
+				else {
+					nod = false;
+				}
 			}
 		} // N
-		else if (wParam == 0x4F){ //O
+		else if (wParam == 0x4F){ // O
 			
 			if (actionKeyNo == 5) {
 				lightCount *= -1;
@@ -278,10 +301,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else
 				view = 'p', pCount++;
 		} // P
-		else if (wParam == 0x51) { // Q - clockwise
+		else if (wParam == 0x51) { // Q
 		ry -= rSpeedP;
 		} // Q
-		else if (wParam == 0x52) { // R - anti
+		else if (wParam == 0x52) { // R
 		ry += rSpeedP;
 		} // R
 		else if (wParam == 0x53) { // S
@@ -289,7 +312,6 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			str = "downRotate";*/
 			if (actionKeyNo == 3)
 				sideView = true;
-			stop = true;
 			/*sCount *= -1;
 			if (sCount == -1) {
 				stop = true;
@@ -298,6 +320,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else {
 				stop = false;
 			}*/
+			else if (actionKeyNo == 5)
+				lightType = GL_SPECULAR;
+			else
+				stop = true;
 		} // S
 		else if (wParam == 0x57) { // W
 			/*xR = 1, yR = 0, zR = 0;
@@ -2077,21 +2103,71 @@ void lighting() {
 	//glLightfv(GL_LIGHT0, GL_AMBIENT, amb); //configure light0, default position at origin
 	//glEnable(GL_LIGHT0); //turn on light
 	//glLightfv(GL_LIGHT0, GL_POSITION, posA); //configure light0 position
-	posD[0] = posDX;
-	posD[1] = posDY;
-	posD[2] = posDZ;
+	/*float params_[3];
+	if (lightType == GL_AMBIENT)
+		params_[0] = amb[0], params_[1] = amb[1], params_[2] = amb[2];
+	else if (lightType == GL_DIFFUSE)
+		params_[0] = diff[0], params_[1] = diff[1], params_[2] = diff[2];
+	else
+		params_[0] = spec[0], params_[1] = spec[1], params_[2] = spec[2];*/
+
+	posA[0] = lightRX;
+	posA[1] = lightRY;
+	posA[2] = lightRZ;
+
+	posD[0] = lightRX;
+	posD[1] = lightRY;
+	posD[2] = lightRZ;
+
+	posS[0] = lightRX;
+	posS[1] = lightRY;
+	posS[2] = lightRZ;
 
 	if (lightOn)
 		glEnable(GL_LIGHTING);
 	else
 		glDisable(GL_LIGHTING);
+	/*glLightfv(GL_LIGHT0, lightType, params_);
+	glLightfv(GL_LIGHT0, GL_POSITION, posD);
+	glEnable(lightType);
+
+	glLightfv(GL_LIGHT0, lightType, params_);
+	glEnable(GL_LIGHT0);
+	glLightfv(GL_LIGHT0, GL_POSITION, posD);*/
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
+	glLightfv(GL_LIGHT0, GL_POSITION, posA);
+
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, diff);
-	glEnable(GL_LIGHT1);
 	glLightfv(GL_LIGHT1, GL_POSITION, posD);
 
-	glRotatef(lightDir, 0, lightRY, 0);
-	//glMaterialfv(GL_FRONT, GL_AMBIENT, ambM);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffM);
+	glLightfv(GL_LIGHT2, GL_SPECULAR, spec);
+	glLightfv(GL_LIGHT2, GL_POSITION, posS);
+
+
+	if (lightType == GL_AMBIENT) {
+		fh.color('r');
+		glEnable(GL_LIGHT0);
+		glDisable(GL_LIGHT1);
+		glDisable(GL_LIGHT2);
+		//glMaterialfv(GL_FRONT, GL_AMBIENT, diffM);
+	}
+	else if (lightType == GL_DIFFUSE) {
+		fh.color('g');
+		glEnable(GL_LIGHT1);
+		glDisable(GL_LIGHT0);
+		glDisable(GL_LIGHT2);
+		//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffM);
+	}
+	else {
+		fh.color('b');
+		glEnable(GL_LIGHT2);
+		glDisable(GL_LIGHT0);
+		glDisable(GL_LIGHT1);
+		//glMaterialfv(GL_FRONT, GL_SPECULAR, diffM);
+	}
+
+	//glMaterialfv(GL_FRONT, lightType, diffM);
 }
 
 void switchView(char view) {
