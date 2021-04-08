@@ -29,7 +29,7 @@ body b;
 head h;
 weapon w;
 
-int actionKeyNo = 8;
+int actionKeyNo = 1;
 std::string str = " ";
 std::string dir = " ";
 float C[SIZE];
@@ -52,7 +52,7 @@ float rotate = 0;
 float xR = 0, yR = 0, zR = 0, xT = 0, yT = 0, zT = 0;
 float maskRotate = 0, maskRotateSpeed = 0.5;
 float nodRotate = 0, nodRotateSpeed = 0.5;
-int bCount = 1, mCount = 1, nCount = 1, wCount = 1, walkCount = 1, sCount = 1;
+int bCount = 1, mCount = 1, nCount = 1, wCount = 0, walkCount = 0, sCount = 1;
 boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false;
 float walkSpeed = 1;
 float gunRotating = 0;
@@ -206,6 +206,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			armUpperZ = 0;
 
 			rotation = ' ';
+
+			wCount = 0, walkCount = 0, autoWalk = false;
 		}
 		else if (wParam == 0x4D) { // m - open or close mask
 			mCount *= -1;
@@ -237,12 +239,14 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 			else
 				raiseLeftLeg = false, llCount++, legLSpeed = -2;
+			autoWalk = false;
 		}
 		else if (wParam == 0x4B) { // K
 			if (lrCount % 2 == 0)
 				raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
 			else
 				raiseRightLeg = false, lrCount++, legRSpeed = -2;
+			autoWalk = false;
 		}
 		else if (wParam == 0x50) { // P
 			if (pCount % 2 == 0)
@@ -2193,27 +2197,27 @@ void display(){
 			rRightLeg += legRSpeed;
 
 		if (autoWalk) {
-			//walkCount++;
-		}
-		else {
-
-		}
-		if (walkCount == 1) {
-
-		}
-		else if (walkCount % 2 == 0) {
-			if (llCount % 2 == 0) {
-				raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
+			walkCount++;
+			if (walkCount == 0) { //by default turned off
 			}
-			else
-				raiseLeftLeg = false, llCount++, legLSpeed = -2;
+			else if (walkCount % 2 == 0) {
+				/*if (llCount % 2 == 0) {
+					raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
+				}
+				else
+					raiseLeftLeg = false, llCount++, legLSpeed = -2;*/
+
+			}
+			else {
+				/*if (lrCount % 2 == 0)
+					raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
+				else
+					raiseRightLeg = false, lrCount++, legRSpeed = -2;*/
+			}
 		}
-		else {
-			if (lrCount % 2 == 0)
-				raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
-			else
-				raiseRightLeg = false, lrCount++, legRSpeed = -2;
-		}
+		else
+			wCount = 0, walkCount = 0, autoWalk = false;
+
 		
 	}
 	// =================================================
