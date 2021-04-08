@@ -37,10 +37,22 @@ char view = 'o', rotation = ' ';
 //LIGHTING
 float lightDir = 0;
 float lightRX = 0, lightRY = 0, lightRZ = 0;
-float diff[] = { 1.0, 0.0, 0.0 };
+char lightType = ' ';
+
+float amb[] = {1.0, 0, 0}; //ambient
+float posAX = 0, posAY = 0, posAZ = 0;
+float posA[] = { posAX, posAY, posAZ };
+float diffA[] = { 1.0, 0.0, 0.0 };
+
+float diff[] = { 1.0, 0.0, 0.0 }; //diffuse
 float diffM[] = { 1.0, 0.0, 0.0 };
 float posDX = 0, posDY = 0, posDZ = 0;
 float posD[] = { posDX, posDY, posDZ };
+
+float spec[] = { 1.0, 0.0, 0.0 }; //specular
+float specM[] = { 1.0, 0.0, 0.0 };
+float posSX = 0, posSY = 0, posSZ = 0;
+float posS[] = { posSX, posSY, posSZ };
 boolean lightOn = false;
 float lightCount = 1;
 
@@ -51,7 +63,7 @@ float xR = 0, yR = 0, zR = 0, xT = 0, yT = 0, zT = 0;
 float maskRotate = 0, maskRotateSpeed = 0.5;
 float nodRotate = 0, nodRotateSpeed = 0.5;
 int bCount = 1, mCount = 1, nCount = 1, wCount = 1, walkCount = 1, sCount = 1, weaponCount = 1, weaponFireCount = 1;
-boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false, weaponOn = false, weaponFireOn = false;
+boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false, weaponOn = false, weaponFireOn = false, walkForward = false;
 float walkSpeed = 1;
 float gunRotating = 0;
 //===================================
@@ -89,38 +101,42 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		}
 		else if (wParam == 0x31) {	// press 1.0
 			actionKeyNo = 1.0;
-		}
+		} // 1
 		else if (wParam == 0x32) {	// press 2
 			actionKeyNo = 2;
-		}
+		} // 2
 		else if (wParam == 0x33) {	// press 3
 			actionKeyNo = 3;
-		}
+		} // 3
 		else if (wParam == 0x34) {	// press 4
 			actionKeyNo = 4;
-		}
+		} // 4
 		else if (wParam == 0x35) {	// press 5
 			actionKeyNo = 5;
-		}
+		} // 5
 		else if (wParam == 0x36) {	// press 6
 			actionKeyNo = 6;
-		}
+		} // 6
 		else if (wParam == 0x37) {	// press 7
 			actionKeyNo = 7;
-		}
+		} // 7
 		else if (wParam == 0x38) {	// press 8
 			actionKeyNo = 8;
-		}
+		} // 8
 		else if (wParam == 0x39) {	// press 9
 			actionKeyNo = 9;
-		}
+		} // 9
 		else if (wParam == 0x61) {	// press numpad 1.0
 			actionKeyNo = 61;
-		}
+		} // numpad 1
 		else if (wParam == VK_UP) {
 			stop = false;
 			if (actionKeyNo == 4) {
 				yT += cameraTranslateSpeed;
+			}
+			else if (actionKeyNo == 5) {
+				//lighting
+
 			}
 			else if (actionKeyNo == 8) {
 				rotate++;
@@ -143,7 +159,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			stop = false;
 			dir = "left";
 			if (actionKeyNo == 4) {
-				xT -= cameraTranslateSpeed;
+				xT += cameraTranslateSpeed;
 			}
 			else if (rotation == 'x') {
 				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = +1.0, armTurnUp = true, armTurnDown = false;
@@ -159,7 +175,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			stop = false;
 			dir = "right";
 			if (actionKeyNo == 4) {
-				xT += cameraTranslateSpeed;
+				xT -= cameraTranslateSpeed;
 			}
 			else if (rotation == 'x') {
 				armx2 = 1.0, army2 = 0, armz2 = 0, armDirection = -1.0, armTurnDown = true, armTurnUp = false;
@@ -185,8 +201,46 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 			rotation = ' ';
 
-			wCount = 1, walkCount = 1, autoWalk = false;
+			wCount = 1, walkCount = 1, autoWalk = false, walkForward = false;
 		}
+		else if (wParam == 0x41) { // A
+			/*xR = 0, yR = 1, zR = 0;
+			str = "leftRotate";*/
+		} // A
+		else if (wParam == 0x42) { // B to bow or straighten body
+			bCount *= -1;
+			if (bCount == -1) {
+				bow = true;
+			}
+			else {
+				bow = false;
+			}
+		} // B
+		else if (wParam == 0x44) { // D
+			/*xR = 0, yR = 1, zR = 0;
+			str = "rightRotate";*/
+		} // D
+		else if (wParam == 0x46) { // F
+			if (fCount % 2 == 0)
+				fx = 1, fy = 0, fz = 0, fx2 = 0, fy2 = 1, fz2 = 0, fingerRSpeed = 0.5, fingerBend = true, fCount++;
+			else
+				fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0, fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount++;
+		} // F
+		else if (wParam == 0x4B) { // K
+			if (lrCount % 2 == 0)
+				raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
+			else
+				raiseRightLeg = false, lrCount++, legRSpeed = -2;
+			autoWalk = false;
+		} // K
+		else if (wParam == 0x4C) { // L
+			if (llCount % 2 == 0) {
+				raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
+			}
+			else
+				raiseLeftLeg = false, llCount++, legLSpeed = -2;
+			autoWalk = false;
+		} // L
 		else if (wParam == 0x4D) { // M - open or close mask
 			mCount *= -1;
 			if (mCount == -1) {
@@ -195,7 +249,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else {
 				openMask = false;
 			}
-		}
+		} // M
 		else if (wParam == 0x4E) { // N - nod or lift
 			nCount *= -1;
 			if (nCount == -1) {
@@ -204,52 +258,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else {
 				nod = false;
 			}
-		}
-		else if (wParam == 0x46) { // F
-			if (fCount % 2 == 0)
-				fx = 1, fy = 0, fz = 0, fx2 = 0, fy2 = 1, fz2 = 0, fingerRSpeed = 0.5, fingerBend = true, fCount++;
-			else
-				fx = 0, fy = 0, fz = 0, fx2 = 0, fy2 = 0, fz2 = 0, fingerRotate = 0, fingerRSpeed = 0, fingerBend = false, fCount++;
-		}
-		else if (wParam == 0x4C) { // L
-			if (llCount % 2 == 0) {
-				raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
-			}
-			else
-				raiseLeftLeg = false, llCount++, legLSpeed = -2;
-			autoWalk = false;
-		}
-		else if (wParam == 0x4B) { // K
-			if (lrCount % 2 == 0)
-				raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
-			else
-				raiseRightLeg = false, lrCount++, legRSpeed = -2;
-			autoWalk = false;
-		}
-		else if (wParam == 0x50) { // P
-			if (pCount % 2 == 0)
-				view = 'o', pCount++;
-			else
-				view = 'p', pCount++;
-		}
-		else if (wParam == 0x52) { // R - anti
-			ry += rSpeedP;
-		}
-		else if (wParam == 0x51) { // Q - clockwise
-			ry -= rSpeedP;
-		}
-		else if (wParam == 0x57) { // W
-			/*xR = 1, yR = 0, zR = 0;
-			str = "upRotate";*/
-			
-			if (wCount % 2 == 0) {
-				autoWalk = true, wCount++, walkCount++;
-			}
-			else {
-				autoWalk = false, wCount++;
-			}
-		}
-		else if (wParam == 0x4F) {
+		} // N
+		else if (wParam == 0x4F){ //O
 			
 			if (actionKeyNo == 5) {
 				lightCount *= -1;
@@ -260,7 +270,19 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 					lightOn = false;
 				}
 			}
-		}
+		} // O
+		else if (wParam == 0x50) { // P
+			if (pCount % 2 == 0)
+				view = 'o', pCount++;
+			else
+				view = 'p', pCount++;
+		} // P
+		else if (wParam == 0x51) { // Q - clockwise
+		ry -= rSpeedP;
+		} // Q
+		else if (wParam == 0x52) { // R - anti
+		ry += rSpeedP;
+		} // R
 		else if (wParam == 0x53) { // S
 			/*xR = 1, yR = 0, zR = 0;
 			str = "downRotate";*/
@@ -275,27 +297,21 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else {
 				stop = false;
 			}*/
-		}
-		else if (wParam == 0x41) { // A
-			/*xR = 0, yR = 1, zR = 0;
-			str = "leftRotate";*/
-		}
-		else if (wParam == 0x42) { // B to bow or straighten body
-			bCount *= -1;
-			if (bCount == -1) {
-				bow = true;
+		} // S
+		else if (wParam == 0x57) { // W
+			/*xR = 1, yR = 0, zR = 0;
+			str = "upRotate";*/
+
+			if (wCount % 2 == 0) {
+				autoWalk = true, wCount++, walkCount++;
 			}
 			else {
-				bow = false;
+				autoWalk = false, wCount++;
 			}
-		}
-		else if (wParam == 0x44) { // D
-			/*xR = 0, yR = 1, zR = 0;
-			str = "rightRotate";*/
-		}
+		} // W
 		else if (wParam == 0x58) { // X
 			rotation = 'x';
-		}
+		} //X
 		else if (wParam == 0x59) { // Y
 			rotation = 'y';
 			aYCount *= -1;
@@ -305,7 +321,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else {
 				armUpperRotateY = false;
 			}
-		}
+		} // Y
 		else if (wParam == 0x5A) { // Z
 			rotation = 'z';
 			stop = false;
@@ -316,7 +332,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else {
 				armUpperRotateZ = false;
 			}
-		}
+		} // Z
 		else if (wParam == VK_ADD || wParam == 0xBB) {
 			zoom += 0.2;
 		}
@@ -1772,6 +1788,23 @@ void rightArm() {
 
 }
 
+//void leftLegWalk(float height) {
+//	if(autoWalk && walkCount % 2 == 0){
+//		if (raiseLeftLeg && rLeftLeg < 90 || !raiseLeftLeg && rLeftLeg > 0)
+//			rLeftLeg += legLSpeed;
+//		glTranslatef(height, 0, 0), glRotatef(rLeftLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
+//		//walkForward = true;
+//	}
+//}
+//
+//void rightLegWalk(float height) {
+//	if (autoWalk && walkCount % 2 != 0) {
+//		if (raiseRightLeg && rRightLeg < 90 || !raiseRightLeg && rRightLeg > 0)
+//			rRightLeg += legRSpeed;
+//		glTranslatef(height, 0, 0), glRotatef(rRightLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
+//	}
+//}
+
 void leftLeg() {
 	float thighBaseRadius = 0.08, thighTopRadius = thighBaseRadius - 0.01, height = 0.52, slices = 30, stacks = 30;
 	float calfBaseRadius = thighTopRadius, calfTopRadius = calfBaseRadius - 0.02;
@@ -1800,10 +1833,11 @@ void leftLeg() {
 
 	height -= 0.01;
 	glPushMatrix();
-	if (!(rLeftLeg < 0) || (autoWalk && walkCount % 2 == 0)) {
+	if (!(rLeftLeg < 0) || autoWalk) {
 		if (raiseLeftLeg && rLeftLeg < 90 || !raiseLeftLeg && rLeftLeg > 0)
 			rLeftLeg += legLSpeed;
 		glTranslatef(height, 0, 0), glRotatef(rLeftLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
+		//walkForward = true;
 	}
 	glPushMatrix();
 	glRotatef(-90, 0.0, 1.0, 0.0);
@@ -1849,12 +1883,11 @@ void rightLeg() {
 
 	height -= 0.01;
 	glPushMatrix();
-	if (!(rRightLeg < 0)) {
+	if (!(rRightLeg < 0) || autoWalk) {
 		if (raiseRightLeg && rRightLeg < 90 || !raiseRightLeg && rRightLeg > 0)
 			rRightLeg += legRSpeed;
 		glTranslatef(height, 0, 0), glRotatef(rRightLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
 	}
-
 	glPushMatrix();
 	glRotatef(-90, 0.0, 1.0, 0.0);
 	glTranslatef(0.25, 0, 0);
@@ -1990,7 +2023,10 @@ void robotBody() {
 
 	//left leg
 	glPushMatrix();
-	glRotatef(-rLeftLeg, 1.0, 0, 0);
+	if(autoWalk)
+		glRotatef(-(rLeftLeg += legLSpeed), 1.0, 0, 0);
+	else
+		glRotatef(-rLeftLeg, 1.0, 0, 0);
 	glTranslatef(-fh.xP(35), -fh.yP(140), fh.zP(0));
 	glScalef(0.7, 0.7, 0.7);
 	leftLeg();
@@ -1998,7 +2034,10 @@ void robotBody() {
 
 	//right leg
 	glPushMatrix();
-	glRotatef(-rRightLeg, 1.0, 0, 0);
+	if(autoWalk)
+		glRotatef(-(rRightLeg += legRSpeed), 1.0, 0, 0);
+	else
+		glRotatef(-rRightLeg, 1.0, 0, 0);
 	glTranslatef(fh.xP(35), -fh.yP(140), fh.zP(0));
 	glScalef(0.7, 0.7, 0.7);
 	rightLeg();
@@ -2214,30 +2253,48 @@ void animation() {
 	{
 		if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -35)
 			rLeftLeg += legLSpeed;
-		if (raiseRightLeg && rRightLeg < 45 || !raiseRightLeg && rRightLeg > -35)
+		else if (raiseRightLeg && rRightLeg < 45 || !raiseRightLeg && rRightLeg > -35)
 			rRightLeg += legRSpeed;
 
 		if (autoWalk) {
-			walkCount++;			
-			//if (walkCount == 1) { //by default turned off
-			//}
-			//else if (walkCount % 2 == 0) {
-			//	llCount = 0;
-			//	for(int i = 0; i < 2; i++)
-			//		if (llCount++ % 2 == 0) {
-			//			raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
-			//		}
-			//		else
-			//			raiseLeftLeg = false, llCount++, legLSpeed = -2;
-			//}
-			//else {
-			//	lrCount = 0;
-			//	for (int i = 0; i < 2; i++)
-			//		if (lrCount % 2 == 0)
-			//			raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
-			//		else
-			//			raiseRightLeg = false, lrCount++, legRSpeed = -2;
-			//}
+			//walkCount++;			
+			if (walkCount == 1) { //by default turned off
+			}
+			else if (walkCount % 2 == 0) {
+				//llCount = 0;
+				/*for(int i = 0; i < 2; i++)
+					if (llCount++ % 2 == 0) {
+						raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
+					}
+					else
+						raiseLeftLeg = false, llCount++, legLSpeed = -2;*/
+				/*raiseLeftLeg = true, raiseRightLeg = false;
+				legLSpeed = 2, legRSpeed = -2;*/
+				/*if (llCount % 2 == 0) {
+					raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
+				}
+				else
+					raiseLeftLeg = false, llCount++, legLSpeed = -2;*/
+				if (rLeftLeg < 45)
+					legLSpeed = -2;
+				else if (rLeftLeg > -35)
+					legLSpeed = 2;
+			}
+			else if (walkCount % 2 != 0){
+				//lrCount = 0;
+				/*for (int i = 0; i < 2; i++)
+					if (lrCount % 2 == 0)
+						raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
+					else
+						raiseRightLeg = false, lrCount++, legRSpeed = -2;*/
+				/*if (lrCount % 2 == 0)
+					raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
+				else
+					raiseRightLeg = false, lrCount++, legRSpeed = -2;*/
+				//legRSpeed = 2, legLSpeed = -2;
+				//legRSpeed = -2;
+			}
+			walkCount++;
 		}
 		else
 			wCount = 0, walkCount = 0, autoWalk = false;
