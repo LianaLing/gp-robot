@@ -62,10 +62,11 @@ float rotate = 0;
 float xR = 0, yR = 0, zR = 0, xT = 0, yT = 0, zT = 0;
 float maskRotate = 0, maskRotateSpeed = 0.5;
 float nodRotate = 0, nodRotateSpeed = 0.5;
-int bCount = 1, mCount = 1, nCount = 1, wCount = 1, walkCount = 1, sCount = 1, weaponCount = 1, weaponFireCount = 1;
-boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false, weaponOn = false, weaponFireOn = false, walkForward = false;
+int bCount = 1, mCount = 1, nCount = 1, wCount = 1, walkCount = 1, sCount = 1, weaponCount = 1, weaponRotateCount = 1, weaponFireCount = 1;
+boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false, weaponOn = false, weaponRotateOn = false, weaponFireOn = false;
 float walkSpeed = 1;
-float gunRotating = 0;
+float gunRotating = 0, gunXRotating = 0, bulletShot = 0;
+int bulletCount = 0;
 //===================================
 
 //============== LIANA ==============
@@ -349,6 +350,16 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 		}
 		else if (wParam == VK_F2) {	// F2
+			weaponRotateCount *= -1;
+			if (weaponRotateCount == -1) {
+				weaponRotateOn = true;
+			}
+			else {
+				weaponRotateOn = false;
+			}
+		}
+		else if (wParam == VK_F3) {	// F3
+			bulletCount++;
 			weaponFireCount *= -1;
 			if (weaponFireCount == -1) {
 				weaponFireOn = true;
@@ -1903,6 +1914,21 @@ void rightLeg() {
 	glPopMatrix();
 }
 
+void robotWeapon () {
+	if (weaponOn) {
+		w.gun(gunRotating, gunXRotating, weaponFireOn, bulletShot, bulletCount);
+	}
+	if (weaponRotateOn && gunXRotating < 90) {
+		gunXRotating++;
+	}
+	else if (!weaponRotateOn && gunXRotating > 0) {
+		gunXRotating--;
+	}
+	if (weaponFireOn & weaponOn & weaponRotateOn) {
+		bulletShot += 0.1;
+	}
+}
+
 void robotBody() {
 	// adomen 0 + chest
 	glPushMatrix();
@@ -2305,7 +2331,7 @@ void animation() {
 
 	// ================== Gun ==========================
 	{
-		if (weaponFireOn) {
+		if (weaponRotateOn) {
 			gunRotating++;
 		}
 	}
@@ -2324,18 +2350,7 @@ void display(){
 		glTranslatef(xT, yT, zT);
 		glPushMatrix();
 		robotBody();
-		if (weaponOn) {
-			w.gun(gunRotating);
-		}
-		glPopMatrix();
-		break;
-	case 2:
-		glPushMatrix();
-		glScalef(zoom, zoom, zoom);
-		glTranslatef(xT, yT, zT);
-		// body 
-		glPushMatrix();
-		robotBody();
+		robotWeapon();
 		glPopMatrix();
 		break;
 	case 3:
@@ -2383,10 +2398,6 @@ void display(){
 		//else
 		//	if(armLowerRotate >= -90)
 		//		armLowerRotate -= armRSpeed;
-
-		
-
-
 		//glRotatef(0.3, 0, 1.0, 0);
 		glPushMatrix();
 		if (armTurnUp || armTurnDown)
@@ -2403,7 +2414,7 @@ void display(){
 		//glTranslatef(xT, yT, zT);
 		//glRotatef(90, 0, 1, 0);
 		glPushMatrix();
-		w.gun(gunRotating);
+		w.gun(gunRotating, gunXRotating, weaponFireOn, bulletShot, bulletCount);
 		glPopMatrix();
 		glPopMatrix();
 		break;
@@ -2413,6 +2424,7 @@ void display(){
 		glTranslatef(xT, yT, zT);
 		glPushMatrix();
 		robotBody();
+		robotWeapon();
 		glPopMatrix();
 		break;
 	}
