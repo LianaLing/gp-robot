@@ -115,6 +115,30 @@ void weapon::holder() {
 	fh3.color('b');
 	fh3.cylinder(glutype, 0.12, 0.1, 0.06, slice, stack);
 	glPopMatrix();
+
+	// btm
+	glPushMatrix();
+	glTranslatef(0, 0, 0.4);
+	fh3.color('b');
+	fh3.sphere(glutype, 0.1, slice, stack);
+	glPopMatrix();
+}
+
+void weapon::bullet(float i, boolean weaponFireOn, float bulletShot) {
+	if (bulletShot > 10) {
+		bulletShot = 0;
+		bullet(i, weaponFireOn, bulletShot);
+	}
+	if (weaponFireOn) {
+		glPushMatrix();
+		glRotatef(-90, 0, 1, 0);
+		glTranslatef(0, 0, bulletShot);
+		glRotatef(i, 0, 0, 1);
+		glTranslatef(0, 0.12, 0);
+		fh3.sphere(glutype, 0.02, slice, stack);
+		glPopMatrix();
+	}
+	
 }
 
 void weapon::pipe(float i) {
@@ -135,12 +159,30 @@ void weapon::pipe(float i) {
 	fh3.disk(glutype, 0, 0.02, slice, 1);
 	glPopMatrix();
 	glPopMatrix();
+
+
 }
 
-void weapon::gun(float gunRotating) {
+void weapon::gun(float gunRotating, float gunXRotating, boolean weaponFireOn, float bulletShot, int bulletCount) {
+	//
 	glPushMatrix();
 	glScalef(wZoom, wZoom, wZoom);
+	//glRotatef(-30, 1, 0, 0);
+	glTranslatef(1, 0, 0);
+	glRotatef(15, 0, 0, 1);
+	glTranslatef(-0.2, 0, -0.4);
+	glRotatef(90, 0, 1, 0);
+	glTranslatef(-0.6, 3.6, -0.5);
+	//glRotatef(-90, 1, 0, 0);
+	glTranslatef(0.7, 0, 0);
+	//glRotatef(gunRotating, 0, 1, 0);
 
+	glTranslatef(0, -0.7, 0);
+	glRotatef(gunXRotating - 90, 0, 0, 1);
+	glTranslatef(0, 0.7, 0);
+
+	glTranslatef(-0.7, 0.4, 0);
+	
 	// ==================== gun ====================
 	glPushMatrix();
 	glRotatef(gunRotating, 1, 0, 0);
@@ -148,6 +190,9 @@ void weapon::gun(float gunRotating) {
 	// pipe
 	glPushMatrix();
 	for (int i = 0; i < 360; i += 45) {	// got 8 cylinder
+
+		bullet(i, weaponFireOn, bulletShot);
+		bullet(i, weaponFireOn, bulletShot);
 		pipe(i);
 	}
 
@@ -217,6 +262,7 @@ void weapon::gun(float gunRotating) {
 	// =============================================
 
 	// ================= gun back ==================
+
 	// back
 	glPushMatrix();
 	glTranslatef(0.85, 0, 0);
