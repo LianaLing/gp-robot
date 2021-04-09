@@ -352,6 +352,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			
 			if (actionKeyNo == 6) {
 				textureOn = !textureOn;
+				h.textureOn(textureOn);
+				b.textureOn(textureOn);
 			}
 			
 		} // T

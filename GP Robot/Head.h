@@ -11,6 +11,7 @@
 namespace H {
 	class head {
 	public:
+		void textureOn(boolean);
 		void eye();
 		void rightTop();
 		void eyeMid();

@@ -11,6 +11,7 @@
 namespace B {
 	class body {
 	public:
+		void textureOn(boolean);
 		void upperChest();
 		void lowerChest();
 		void neck();
