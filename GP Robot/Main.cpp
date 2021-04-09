@@ -33,6 +33,7 @@ std::string str = " ";
 std::string dir = " ";
 float zoom = 1.0, cameraTranslateSpeed = 0.1;
 char view = 'o', rotation = ' ';
+LPCSTR textureImg = "Box.bmp";
 float testRotate = 0;
 
 //LIGHTING
@@ -61,11 +62,10 @@ float rotate = 0;
 float xR = 0, yR = 0, zR = 0, xT = 0, yT = 0, zT = 0;
 float maskRotate = 0, maskRotateSpeed = 0.5;
 float nodRotate = 0, nodRotateSpeed = 0.5;
-int bCount = 1, mCount = 1, nCount = 1, wCount = 1, walkCount = 1, sCount = 1, gunCount = 1, gunRotateCount = 1, swordCount = 1, swordOpenCount = 1;
+int wCount = 1, walkCount = 1;
 boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false, gunOn = false, gunRotateOn = false, gunFireOn = false, swordOn = false, swordOpenOn = false;
 float walkSpeed = 1;
 float gunRotating = 0, gunXRotating = 0, bulletShot = 0;
-int bulletCount = 0;
 float swordMiddle = 0;
 //===================================
 
@@ -223,13 +223,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				lightType = GL_AMBIENT;
 		} // A
 		else if (wParam == 0x42) { // B to bow or straighten body
-			bCount *= -1;
-			if (bCount == -1) {
-				bow = true;
-			}
-			else {
-				bow = false;
-			}
+			bow = !bow;
 		} // B
 		else if (wParam == 0x44) { // D
 			/*xR = 0, yR = 1, zR = 0;
@@ -262,13 +256,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			if (actionKeyNo == 5)
 				lightRX = 0, lightRY = 0, lightRZ = 1.0;
 			else {
-				mCount *= -1;
-				if (mCount == -1) {
-					openMask = true;
-				}
-				else {
-					openMask = false;
-				}
+				openMask = !openMask;
 			}
 		} // M
 		else if (wParam == 0x4E) { // N
@@ -276,13 +264,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			if (actionKeyNo == 5)
 				lightRX = 0, lightRY = 0, lightRZ = -1.0;
 			else {
-				nCount *= -1;
-				if (nCount == -1) {
-					nod = true;
-				}
-				else {
-					nod = false;
-				}
+				nod = !nod;
 			}
 		} // N
 		else if (wParam == 0x4F){ // O
@@ -304,10 +286,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				view = 'p', pCount++;
 		} // P
 		else if (wParam == 0x51) { // Q
-		ry -= rSpeedP;
+			ry -= rSpeedP;
 		} // Q
 		else if (wParam == 0x52) { // R
-		ry += rSpeedP;
+			ry += rSpeedP;
 		} // R
 		else if (wParam == 0x53) { // S
 			/*xR = 1, yR = 0, zR = 0;
@@ -343,24 +325,12 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		} //X
 		else if (wParam == 0x59) { // Y
 			rotation = 'y';
-			aYCount *= -1;
-			if (aYCount == -1) {
-				armUpperRotateY = true;
-			}
-			else {
-				armUpperRotateY = false;
-			}
+			armUpperRotateY = !armUpperRotateY;
 		} // Y
 		else if (wParam == 0x5A) { // Z
 			rotation = 'z';
 			stop = false;
-			aZCount *= -1;
-			if (aZCount == -1) {
-				armUpperRotateZ = true;
-			}
-			else {
-				armUpperRotateZ = false;
-			}
+			armUpperRotateZ = !armUpperRotateZ;
 		} // Z
 		else if (wParam == VK_ADD || wParam == 0xBB) {
 			zoom += 0.2;
@@ -369,46 +339,23 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			zoom -= 0.2;
 		}
 		else if (wParam == VK_F1) {	// F1
-			gunCount *= -1;
-			if (gunCount == -1) {
-				gunOn = true;
-			}
-			else {
-				gunOn = false;
+			gunOn = !gunOn;
+			if (gunOn == false) {
 				gunFireOn = false;
 			}
 		}
 		else if (wParam == VK_F2) {	// F2
-			gunRotateCount *= -1;
-			if (gunRotateCount == -1) {
-				gunRotateOn = true;
-			}
-			else {
-				gunRotateOn = false;
-			}
+			gunRotateOn = !gunRotateOn;
 		}
 		else if (wParam == VK_F3) {	// F3
 			bulletShot = 0;
 			gunFireOn = true;
-			
 		}
 		else if (wParam == VK_F4) {	// F4
-			swordCount *= -1;
-			if (swordCount == -1) {
-				swordOn = true;
-			}
-			else {
-				swordOn = false;
-			}
+			swordOn = !swordOn;
 		}
 		else if (wParam == VK_F5) {	// F5
-			swordOpenCount *= -1;
-			if (swordOpenCount == -1) {
-				swordOpenOn = true;
-			}
-			else {
-				swordOpenOn = false;
-			}
+			swordOpenOn = !swordOpenOn;
 		}
 		break;
 	default:
