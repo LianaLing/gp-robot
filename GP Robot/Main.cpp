@@ -33,6 +33,7 @@ std::string str = " ";
 std::string dir = " ";
 float zoom = 1.0, cameraTranslateSpeed = 0.1;
 char view = 'o', rotation = ' ';
+float testRotate = 0;
 
 //LIGHTING
 float lightDir = 0;
@@ -60,11 +61,12 @@ float rotate = 0;
 float xR = 0, yR = 0, zR = 0, xT = 0, yT = 0, zT = 0;
 float maskRotate = 0, maskRotateSpeed = 0.5;
 float nodRotate = 0, nodRotateSpeed = 0.5;
-int bCount = 1, mCount = 1, nCount = 1, wCount = 1, walkCount = 1, sCount = 1, weaponCount = 1, weaponRotateCount = 1, weaponFireCount = 1;
-boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false, weaponOn = false, weaponRotateOn = false, weaponFireOn = false;
+int bCount = 1, mCount = 1, nCount = 1, wCount = 1, walkCount = 1, sCount = 1, gunCount = 1, gunRotateCount = 1, swordCount = 1, swordOpenCount = 1;
+boolean openMask = false, bow = false, nod = false, autoWalk = false, stop = false, gunOn = false, gunRotateOn = false, gunFireOn = false, swordOn = false, swordOpenOn = false;
 float walkSpeed = 1;
 float gunRotating = 0, gunXRotating = 0, bulletShot = 0;
 int bulletCount = 0;
+float swordMiddle = 0;
 //===================================
 
 //============== LIANA ==============
@@ -162,7 +164,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			stop = false;
 			dir = "left";
 			if (actionKeyNo == 4) {
-				xT += cameraTranslateSpeed;
+				xT -= cameraTranslateSpeed;
 			}
 			else if (actionKeyNo == 5) {
 				//lighting
@@ -182,7 +184,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			stop = false;
 			dir = "right";
 			if (actionKeyNo == 4) {
-				xT -= cameraTranslateSpeed;
+				xT += cameraTranslateSpeed;
 			}
 			else if (actionKeyNo == 5) {
 				//lighting
@@ -367,31 +369,45 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			zoom -= 0.2;
 		}
 		else if (wParam == VK_F1) {	// F1
-			weaponCount *= -1;
-			if (weaponCount == -1) {
-				weaponOn = true;
+			gunCount *= -1;
+			if (gunCount == -1) {
+				gunOn = true;
 			}
 			else {
-				weaponOn = false;
+				gunOn = false;
+				gunFireOn = false;
 			}
 		}
 		else if (wParam == VK_F2) {	// F2
-			weaponRotateCount *= -1;
-			if (weaponRotateCount == -1) {
-				weaponRotateOn = true;
+			gunRotateCount *= -1;
+			if (gunRotateCount == -1) {
+				gunRotateOn = true;
 			}
 			else {
-				weaponRotateOn = false;
+				gunRotateOn = false;
 			}
 		}
 		else if (wParam == VK_F3) {	// F3
-			bulletCount++;
-			weaponFireCount *= -1;
-			if (weaponFireCount == -1) {
-				weaponFireOn = true;
+			bulletShot = 0;
+			gunFireOn = true;
+			
+		}
+		else if (wParam == VK_F4) {	// F4
+			swordCount *= -1;
+			if (swordCount == -1) {
+				swordOn = true;
 			}
 			else {
-				weaponFireOn = false;
+				swordOn = false;
+			}
+		}
+		else if (wParam == VK_F5) {	// F5
+			swordOpenCount *= -1;
+			if (swordOpenCount == -1) {
+				swordOpenOn = true;
+			}
+			else {
+				swordOpenOn = false;
 			}
 		}
 		break;
@@ -1717,6 +1733,7 @@ void leftArm() {
 		glRotatef(armLowerRotate, armx2, army2, armz2);
 	}
 	armUpperArmour();
+	glRotatef(-90, 1.0, 0.0, 0.0);
 	glRotatef(90, 0.0, 1.0, 0.0);
 
 	glPushMatrix();
@@ -1751,6 +1768,22 @@ void leftArm() {
 		glRotatef(-armAngle, armx, army, armz);
 
 	glPushMatrix();
+
+	// sword
+	glPushMatrix();
+	glTranslatef(0.05, 0.3, 0);
+	glRotatef(-90, 1, 0, 0);
+	glTranslatef(0, -0.3, 0);
+	glRotatef(90, 0, 1, 0);
+	glTranslatef(0, 0, -0.7);
+	glTranslatef(0, 0, 0.3);
+	glTranslatef(0, 0, height + 0.1);
+	
+	if (swordOn) {
+		w.sword(swordMiddle);
+	}
+	glPopMatrix();
+
 	glRotatef(-90, 0.0, 1.0, 0.0);
 	glTranslatef(0.27, 0, 0);
 	armUpperArmour();
@@ -1777,6 +1810,7 @@ void rightArm() {
 		glRotatef(-armLowerRotate, armx2, army2, armz2);
 	}
 	armUpperArmour();	// add here, jiayou
+	glRotatef(90, 1.0, 0.0, 0.0);
 	glRotatef(90, 0.0, 1.0, 0.0);
 
 	glPushMatrix();
@@ -1804,6 +1838,7 @@ void rightArm() {
 	fh.color('r');
 	fh.cylinder(GLUtype, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
 	glPopMatrix();
+
 	glPopMatrix();
 
 	glPushMatrix();
@@ -1811,16 +1846,17 @@ void rightArm() {
 		glRotatef(-armAngle, armx, army, armz);
 
 	glPushMatrix();
+
 	glRotatef(-90, 0.0, 1.0, 0.0);
 	glTranslatef(0.27, 0, 0);
 	armUpperArmour();
 	glPopMatrix();
 	glTranslatef(0, -laTopRadius - 0.01, height + palmSize);
-	//glRotatef(90, 1.0, 0, 0);
 	glRotatef(90, 0, 1.0, 0);
 	glScalef(palmSize, palmSize, palmSize);
 	rightPalm(nonGLUtype, 1.0, 0.5, 2);
 	glPopMatrix();
+
 	glPopMatrix();
 
 }
@@ -1940,18 +1976,21 @@ void rightLeg() {
 	glPopMatrix();
 }
 
-void robotWeapon () {
-	if (weaponOn) {
-		w.gun(gunRotating, gunXRotating, weaponFireOn, bulletShot, bulletCount);
+void robotWeapon() {
+	if (gunOn) {
+		w.gun(gunRotating, gunXRotating, gunFireOn, bulletShot);
 	}
-	if (weaponRotateOn && gunXRotating < 90) {
+	if (gunRotateOn && gunXRotating < 90) {
 		gunXRotating++;
 	}
-	else if (!weaponRotateOn && gunXRotating > 0) {
+	else if (!gunRotateOn && gunXRotating > 0) {
 		gunXRotating--;
 	}
-	if (weaponFireOn & weaponOn & weaponRotateOn) {
+	if (gunFireOn & gunOn & gunRotateOn) {
 		bulletShot += 0.1;
+	}
+	if (bulletShot > 15) {
+		gunFireOn = false;
 	}
 }
 
@@ -2194,7 +2233,7 @@ void switchView(char view) {
 void animation() {
 	//==================== test =========================
 	{
-
+		testRotate++;
 	}
 	//===================================================
 
@@ -2316,10 +2355,10 @@ void animation() {
 		}
 
 		// for right hand rotate
-		if (armTurnUp && !armTurnDown && armLowerRotate > -90 && !stop) {
+		if (armTurnUp && !armTurnDown && armLowerRotate > -30 && !stop) {
 			armLowerRotate -= armRSpeed;
 		}
-		else if (armTurnDown && !armTurnUp && armLowerRotate < 30 && !stop) {
+		else if (armTurnDown && !armTurnUp && armLowerRotate < 90 && !stop) {
 			armLowerRotate += armRSpeed;
 		}
 
@@ -2407,8 +2446,24 @@ void animation() {
 
 	// ================== Gun ==========================
 	{
-		if (weaponRotateOn) {
+		if (gunRotateOn) {
 			gunRotating++;
+		}
+	}
+	// =================================================
+
+	// ================= sword =========================
+	{
+		
+		if (swordOn && swordOpenOn) {
+			if (swordMiddle < 0.69) {
+				swordMiddle += 0.01;
+			}
+		}
+		else if (swordOn && !swordOpenOn) {
+			if (swordMiddle > 0.01) {
+				swordMiddle -= 0.01;
+			}
 		}
 	}
 	// =================================================
@@ -2490,7 +2545,8 @@ void display(){
 		//glTranslatef(xT, yT, zT);
 		//glRotatef(90, 0, 1, 0);
 		glPushMatrix();
-		w.gun(gunRotating, gunXRotating, weaponFireOn, bulletShot, bulletCount);
+		//w.gun(gunRotating, gunXRotating, gunFireOn, bulletShot);
+		w.sword(swordMiddle);
 		glPopMatrix();
 		glPopMatrix();
 		break;

@@ -17,7 +17,8 @@ namespace W {
 		void holder();
 		void bullet(float i, boolean weaponFireOn, float bulletShot);
 		void pipe(float i);
-		void gun(float gunRotating, float gunXRotating, boolean weaponFireOn, float bulletShot, int bulletCount);
+		void gun(float gunRotating, float gunXRotating, boolean weaponFireOn, float bulletShot);
+		void sword(float swordMiddle);
 	};
 }
 

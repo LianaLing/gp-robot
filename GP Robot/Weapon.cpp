@@ -124,12 +124,8 @@ void weapon::holder() {
 	glPopMatrix();
 }
 
-void weapon::bullet(float i, boolean weaponFireOn, float bulletShot) {
-	if (bulletShot > 10) {
-		bulletShot = 0;
-		bullet(i, weaponFireOn, bulletShot);
-	}
-	if (weaponFireOn) {
+void weapon::bullet(float i, boolean gunFireOn, float bulletShot) {
+	if (gunFireOn) {
 		glPushMatrix();
 		glRotatef(-90, 0, 1, 0);
 		glTranslatef(0, 0, bulletShot);
@@ -138,7 +134,6 @@ void weapon::bullet(float i, boolean weaponFireOn, float bulletShot) {
 		fh3.sphere(glutype, 0.02, slice, stack);
 		glPopMatrix();
 	}
-	
 }
 
 void weapon::pipe(float i) {
@@ -159,11 +154,9 @@ void weapon::pipe(float i) {
 	fh3.disk(glutype, 0, 0.02, slice, 1);
 	glPopMatrix();
 	glPopMatrix();
-
-
 }
 
-void weapon::gun(float gunRotating, float gunXRotating, boolean weaponFireOn, float bulletShot, int bulletCount) {
+void weapon::gun(float gunRotating, float gunXRotating, boolean gunFireOn, float bulletShot) {
 	//
 	glPushMatrix();
 	glScalef(wZoom, wZoom, wZoom);
@@ -191,8 +184,7 @@ void weapon::gun(float gunRotating, float gunXRotating, boolean weaponFireOn, fl
 	glPushMatrix();
 	for (int i = 0; i < 360; i += 45) {	// got 8 cylinder
 
-		bullet(i, weaponFireOn, bulletShot);
-		bullet(i, weaponFireOn, bulletShot);
+		bullet(i, gunFireOn, bulletShot);
 		pipe(i);
 	}
 
@@ -285,6 +277,51 @@ void weapon::gun(float gunRotating, float gunXRotating, boolean weaponFireOn, fl
 	glPopMatrix();
 
 	// =============================================
+
+	glPopMatrix();
+}
+
+void weapon::sword(float swordMiddle) {
+	glPushMatrix();
+	glScalef(wZoom + 0.2, wZoom, wZoom);
+
+	// holder
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	fh3.color('b');
+	fh3.cylinder(glutype, 0.08, 0.08, 0.7, slice, stack);
+
+	glPushMatrix();
+	glTranslatef(0, 0, 0.7);
+	fh3.color('c');
+	fh3.disk(glutype, 0, 0.08, slice, 1);
+	glPopMatrix();
+
+	// middle
+	glPushMatrix();
+	glTranslatef(-swordMiddle, 0, 0);	// x = -0.5
+	glRotatef(90, 0, 1, 0);
+	fh3.color('c');
+	fh3.cylinder(glutype, 0.05, 0.08, 0.7, slice, stack);
+	glPopMatrix();
+
+	// front
+	glPushMatrix();
+	glTranslatef(-(swordMiddle * 2), 0, 0);	// x = -0.5
+	glRotatef(90, 0, 1, 0);
+	fh3.color('y');
+	fh3.cylinder(glutype, 0.05, 0.05, 0.7, slice, stack);
+	glPopMatrix();
+
+	// front top
+	glPushMatrix();
+	glTranslatef(-((swordMiddle) * 2 + 0.1), 0, 0);	// x = -0.5
+	glRotatef(90, 0, 1, 0);
+	fh3.color('r');
+	fh3.cylinder(glutype, 0.08, 0.08, 0.1, slice, stack);
+	fh3.color('c');
+	fh3.disk(glutype, 0, 0.08, slice, 1);
+	glPopMatrix();
 
 	glPopMatrix();
 }
