@@ -20,8 +20,8 @@ using namespace W;
 #define WIDTH VALUE
 #define HEIGHT VALUE
 #define DEPTH VALUE
-#define ORTHO_VIEW 1.0
-#define FRUSTUM_VIEW 1.0
+#define ORTHO_VIEW 1
+#define FRUSTUM_VIEW 1
 
 function fh;
 body b;
@@ -33,8 +33,15 @@ std::string str = " ";
 std::string dir = " ";
 float zoom = 1.0, cameraTranslateSpeed = 0.1;
 char view = 'o', rotation = ' ';
-LPCSTR textureImg = "Box.bmp";
 float testRotate = 0;
+
+// Texture
+GLuint texture = 3;	// texture name
+BITMAP BMP;			// bitmap structure
+HBITMAP hBMP = NULL;	// bitmap handle.
+boolean textureOn = false;
+LPCSTR textureImg = "redMetal.bmp";
+int textureCount = 0;
 
 //LIGHTING
 float lightDir = 0;
@@ -85,7 +92,7 @@ GLenum nonGLUtype = GL_POLYGON;
 //GLenum nonGLUtype = GL_LINE_LOOP;
 GLenum GLUtype = GLU_FILL;
 //GLenum GLUtype = GLU_LINE;
-int pCount = 0;
+boolean isOrtho = false;
 float ry = 0, rSpeedP = 10.0;
 //===================================
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -225,6 +232,27 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == 0x42) { // B to bow or straighten body
 			bow = !bow;
 		} // B
+		else if (wParam == 0x43) { // C
+			if (actionKeyNo == 5) {
+				textureCount++;
+				if (textureCount == 1) {
+					textureImg = "redMetal.bmp";
+				}
+				if (textureCount == 2) {
+					textureImg = "redMetal2.bmp";
+				}
+				if (textureCount == 3) {
+					textureImg = "redMetal.bmp";
+				}
+				if (textureCount == 4) {
+					textureImg = "redMetal.bmp";
+				}
+				if (textureCount == 5) {
+					textureCount = 1;
+				}
+			}
+			
+		} // C
 		else if (wParam == 0x44) { // D
 			/*xR = 0, yR = 1, zR = 0;
 			str = "rightRotate";*/
@@ -280,10 +308,20 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 		} // O
 		else if (wParam == 0x50) { // P
-			if (pCount % 2 == 0)
-				view = 'o', pCount++;
-			else
-				view = 'p', pCount++;
+			if (isOrtho % 2 == 0) {
+				isOrtho++;
+				glMatrixMode(GL_PROJECTION);
+				glLoadIdentity();
+				glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);
+				//glOrtho(-8.0 * 16 / 9, 8.0 * 16 / 9, -8.0, 8.0, -8.0, 8.0);
+			}
+			else {
+				isOrtho++;
+				glMatrixMode(GL_PROJECTION);
+				glLoadIdentity();
+				gluPerspective(100.0, 1, -1, 1);
+				glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
+			}
 		} // P
 		else if (wParam == 0x51) { // Q
 			ry -= rSpeedP;
@@ -309,6 +347,14 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else
 				stop = true;
 		} // S
+		else if (wParam == 0x54) { // T
+			
+			if (actionKeyNo == 5) {
+				textureOn = !textureOn;
+
+			}
+			
+		} // T
 		else if (wParam == 0x57) { // W
 			/*xR = 1, yR = 0, zR = 0;
 			str = "upRotate";*/
@@ -400,8 +446,9 @@ bool initPixelFormat(HDC hdc)
 
 void init() {
 	glClearColor(0, 0, 0, 0);
-	glEnable(GL_DEPTH_TEST);
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
 }
 
 //============================= DANNY =================================
@@ -2088,72 +2135,72 @@ void lighting() {
 	//glEnable(GL_LIGHTING);
 	//glLightfv(GL_LIGHT0, GL_AMBIENT, amb); //configure light0, default position at origin
 	//glEnable(GL_LIGHT0); //turn on light
-	//glLightfv(GL_LIGHT0, GL_POSITION, posA); //configure light0 position
-	/*float params_[3];
-	if (lightType == GL_AMBIENT)
-		params_[0] = amb[0], params_[1] = amb[1], params_[2] = amb[2];
-	else if (lightType == GL_DIFFUSE)
-		params_[0] = diff[0], params_[1] = diff[1], params_[2] = diff[2];
-	else
-		params_[0] = spec[0], params_[1] = spec[1], params_[2] = spec[2];*/
+//glLightfv(GL_LIGHT0, GL_POSITION, posA); //configure light0 position
+/*float params_[3];
+if (lightType == GL_AMBIENT)
+	params_[0] = amb[0], params_[1] = amb[1], params_[2] = amb[2];
+else if (lightType == GL_DIFFUSE)
+	params_[0] = diff[0], params_[1] = diff[1], params_[2] = diff[2];
+else
+	params_[0] = spec[0], params_[1] = spec[1], params_[2] = spec[2];*/
 
-	posA[0] = lightRX;
-	posA[1] = lightRY;
-	posA[2] = lightRZ;
+posA[0] = lightRX;
+posA[1] = lightRY;
+posA[2] = lightRZ;
 
-	posD[0] = lightRX;
-	posD[1] = lightRY;
-	posD[2] = lightRZ;
+posD[0] = lightRX;
+posD[1] = lightRY;
+posD[2] = lightRZ;
 
-	posS[0] = lightRX;
-	posS[1] = lightRY;
-	posS[2] = lightRZ;
+posS[0] = lightRX;
+posS[1] = lightRY;
+posS[2] = lightRZ;
 
-	if (lightOn)
-		glEnable(GL_LIGHTING);
-	else
-		glDisable(GL_LIGHTING);
-	/*glLightfv(GL_LIGHT0, lightType, params_);
-	glLightfv(GL_LIGHT0, GL_POSITION, posD);
-	glEnable(lightType);
+if (lightOn)
+glEnable(GL_LIGHTING);
+else
+glDisable(GL_LIGHTING);
+/*glLightfv(GL_LIGHT0, lightType, params_);
+glLightfv(GL_LIGHT0, GL_POSITION, posD);
+glEnable(lightType);
 
-	glLightfv(GL_LIGHT0, lightType, params_);
+glLightfv(GL_LIGHT0, lightType, params_);
+glEnable(GL_LIGHT0);
+glLightfv(GL_LIGHT0, GL_POSITION, posD);*/
+
+glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
+glLightfv(GL_LIGHT0, GL_POSITION, posA);
+
+glLightfv(GL_LIGHT1, GL_DIFFUSE, diff);
+glLightfv(GL_LIGHT1, GL_POSITION, posD);
+
+glLightfv(GL_LIGHT2, GL_SPECULAR, spec);
+glLightfv(GL_LIGHT2, GL_POSITION, posS);
+
+
+if (lightType == GL_AMBIENT) {
+	fh.color('r');
 	glEnable(GL_LIGHT0);
-	glLightfv(GL_LIGHT0, GL_POSITION, posD);*/
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHT2);
+	//glMaterialfv(GL_FRONT, GL_AMBIENT, diffM);
+}
+else if (lightType == GL_DIFFUSE) {
+	fh.color('g');
+	glEnable(GL_LIGHT1);
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT2);
+	//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffM);
+}
+else {
+	fh.color('b');
+	glEnable(GL_LIGHT2);
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHT1);
+	//glMaterialfv(GL_FRONT, GL_SPECULAR, diffM);
+}
 
-	glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
-	glLightfv(GL_LIGHT0, GL_POSITION, posA);
-
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, diff);
-	glLightfv(GL_LIGHT1, GL_POSITION, posD);
-
-	glLightfv(GL_LIGHT2, GL_SPECULAR, spec);
-	glLightfv(GL_LIGHT2, GL_POSITION, posS);
-
-
-	if (lightType == GL_AMBIENT) {
-		fh.color('r');
-		glEnable(GL_LIGHT0);
-		glDisable(GL_LIGHT1);
-		glDisable(GL_LIGHT2);
-		//glMaterialfv(GL_FRONT, GL_AMBIENT, diffM);
-	}
-	else if (lightType == GL_DIFFUSE) {
-		fh.color('g');
-		glEnable(GL_LIGHT1);
-		glDisable(GL_LIGHT0);
-		glDisable(GL_LIGHT2);
-		//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffM);
-	}
-	else {
-		fh.color('b');
-		glEnable(GL_LIGHT2);
-		glDisable(GL_LIGHT0);
-		glDisable(GL_LIGHT1);
-		//glMaterialfv(GL_FRONT, GL_SPECULAR, diffM);
-	}
-
-	//glMaterialfv(GL_FRONT, lightType, diffM);
+//glMaterialfv(GL_FRONT, lightType, diffM);
 }
 
 void switchView(char view) {
@@ -2166,7 +2213,7 @@ void switchView(char view) {
 	else {
 		glRotatef(ry, 0.0, 1.0, 0);
 	}
-	switch (view) {
+	/*switch (view) {
 	case 'o':
 		glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);
 		break;
@@ -2174,8 +2221,43 @@ void switchView(char view) {
 		gluPerspective(60.0, 1.0, -1.0, 1.0);
 		glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
 		break;
-	}
+	}*/
+
 }
+
+void addTexture() {
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+
+	HBITMAP hBMP = (HBITMAP)LoadImage(GetModuleHandle(NULL),
+		textureImg, IMAGE_BITMAP, 0, 0,
+		LR_CREATEDIBSECTION | LR_LOADFROMFILE);
+
+	GetObject(hBMP, sizeof(BMP), &BMP);
+
+	// Assign texture to polygon
+	if (textureOn) {
+		fh.color('w'), glEnable(GL_TEXTURE_2D);
+	}
+	else {
+		glDisable(GL_TEXTURE_2D);
+	}
+	glEnable(GL_TEXTURE_2D);
+
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, BMP.bmWidth, BMP.bmHeight, 0,
+		GL_BGR_EXT, GL_UNSIGNED_BYTE, BMP.bmBits);
+	DeleteObject(hBMP);
+}
+
+void removeTexture() {
+	glDisable(GL_TEXTURE_2D);
+
+	glDeleteTextures(1, &texture);
+}
+
 
 void animation() {
 	//==================== test =========================
@@ -2418,9 +2500,18 @@ void animation() {
 
 void display(){
 	init();
-	switchView(view);
+	//switchView(view);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	if (actionKeyNo == 2) {
+		glRotatef(ry, 1.0, 0.0, 0);
+	}
+	else {
+		glRotatef(ry, 0.0, 1.0, 0);
+	}
 	animation();
 	lighting();
+	addTexture();
 	switch (actionKeyNo) {
 	case 1:
 		glPushMatrix();
@@ -2486,6 +2577,20 @@ void display(){
 		glPopMatrix();
 		glPopMatrix();
 		break;
+	case 7:
+		/*C[0] = 0, C[1] = 0, C[2] = 0;
+		C[3] = 0.2, C[4] = 0, C[5] = 0;
+		C[6] = 0.2, C[7] = 0.2, C[8] = 0;
+		glColor3f(1, 1, 1);
+		glLineWidth(3);
+		glRotatef(1, 0, 1, 0);
+		fh.poly3(GL_LINE_STRIP, C, SIZE);
+		C[0] = 0, C[1] = 0, C[2] = 0;
+		C[3] = -0.2, C[4] = 0, C[5] = 0;
+		C[6] = -0.2, C[7] = 0.2, C[8] = 0;
+		glColor3f(1, 0, 0);
+		fh.poly3(GL_LINE_STRIP, C, SIZE);*/
+		break;
 	case 8:
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
@@ -2507,6 +2612,7 @@ void display(){
 		glPopMatrix();
 		break;
 	}
+	removeTexture();
 }
 //--------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
@@ -2549,6 +2655,10 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);
 
 	while (true)
 	{
