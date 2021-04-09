@@ -46,10 +46,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="redMetal.jpg">
+    <Image Include="redMetal2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="redMetal2.bmp">
+    <Image Include="redMetal.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

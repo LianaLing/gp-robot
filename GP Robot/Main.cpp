@@ -40,7 +40,7 @@ GLuint texture = 3;	// texture name
 BITMAP BMP;			// bitmap structure
 HBITMAP hBMP = NULL;	// bitmap handle.
 boolean textureOn = false;
-LPCSTR textureImg = "redMetal.bmp";
+LPCSTR textureImg = "redMetal2.bmp";
 int textureCount = 0;
 
 //LIGHTING
@@ -233,22 +233,23 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			bow = !bow;
 		} // B
 		else if (wParam == 0x43) { // C
-			if (actionKeyNo == 5) {
+			if (actionKeyNo == 6) {
 				textureCount++;
 				if (textureCount == 1) {
 					textureImg = "redMetal.bmp";
 				}
 				if (textureCount == 2) {
 					textureImg = "redMetal2.bmp";
-				}
+				}/*
 				if (textureCount == 3) {
 					textureImg = "redMetal.bmp";
 				}
 				if (textureCount == 4) {
 					textureImg = "redMetal.bmp";
-				}
-				if (textureCount == 5) {
+				}*/
+				if (textureCount == 3) {
 					textureCount = 1;
+					textureImg = "redMetal.bmp";
 				}
 			}
 			
@@ -349,9 +350,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		} // S
 		else if (wParam == 0x54) { // T
 			
-			if (actionKeyNo == 5) {
+			if (actionKeyNo == 6) {
 				textureOn = !textureOn;
-
 			}
 			
 		} // T
@@ -517,7 +517,7 @@ void finger(GLenum type, float size, float size2, int lineWidth) {
 	glTranslatef(-size / 3.0 * 2, size, 0);
 
 	glRotatef(-90, 0, 0, 1);
-	fh.color('r');
+	//fh.color('r');
 	fh.cuboid(type, size / 3.0, size2, lineWidth);
 	glPopMatrix();
 
@@ -528,7 +528,7 @@ void finger(GLenum type, float size, float size2, int lineWidth) {
 	glTranslatef(-size / 3.0, size, 0);
 	
 	glRotatef(-90, 0, 0, 1);
-	fh.color('g');
+	//fh.color('g');
 	fh.cuboid(type, size / 3.0, size2, lineWidth);
 	glPopMatrix();
 	glPopMatrix();
@@ -559,7 +559,7 @@ void finger2(GLenum type, float size, float size2, int lineWidth) {
 	glTranslatef(-size / 3.0 * 2, size, 0);
 
 	glRotatef(-90, 0, 0, 1);
-	fh.color('r');
+	//fh.color('r');
 	fh.cuboid(type, size / 3.0, size2, lineWidth);
 	glPopMatrix();
 
@@ -570,7 +570,7 @@ void finger2(GLenum type, float size, float size2, int lineWidth) {
 	glTranslatef(-size / 3.0, size, 0);
 
 	glRotatef(-90, 0, 0, 1);
-	fh.color('g');
+	//fh.color('g');
 	fh.cuboid(type, size / 3.0, size2, lineWidth);
 	glPopMatrix();
 	glPopMatrix();
@@ -601,50 +601,50 @@ void leftPalm(GLenum type, float size, float size2, int lineWidth) {
 	//front
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(0, size, size2);
-	glVertex3f(0, 0, size2);
-	glVertex3f(size, 0, size2);
-	glVertex3f(size, size, size2);
+	glTexCoord2f(0.0, 1.0),	glVertex3f(0, size, size2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, 0, size2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size, 0, size2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size, size, size2);
 	glEnd();
 	//right
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(size, size, size2);
-	glVertex3f(size, 0, size2);
-	glVertex3f(size, 0, 0);
-	glVertex3f(size, size, 0);
+	glTexCoord2f(0.0, 1.0),	glVertex3f(size, size, size2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(size, 0, size2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size, size, 0);
 	glEnd();
 	//left
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(0, size, size2);
-	glVertex3f(0, 0, size2);
-	glVertex3f(0, 0, 0);
-	glVertex3f(0, size, 0);
+	glTexCoord2f(0.0, 1.0),	glVertex3f(0, size, size2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, 0, size2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(0, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(0, size, 0);
 	glEnd();
 	//bottom
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(0, 0, size2);
-	glVertex3f(0, 0, 0);
-	glVertex3f(size, 0, 0);
-	glVertex3f(size, 0, size2);
+	glTexCoord2f(0.0, 1.0),	glVertex3f(0, 0, size2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, 0, 0);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size, 0, size2);
 	glEnd();
 	//top
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(0, size, size2);
-	glVertex3f(0, size, 0);
-	glVertex3f(size, size, 0);
-	glVertex3f(size, size, size2);
+	glTexCoord2f(0.0, 1.0),	glVertex3f(0, size, size2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, size, 0);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size, size, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size, size, size2);
 	glEnd();
 	//back
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(0, size, 0);
-	glVertex3f(0, 0, 0);
-	glVertex3f(size, 0, 0);
-	glVertex3f(size, size, 0);
+	glTexCoord2f(0.0, 1.0),	glVertex3f(0, size, 0);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, 0, 0);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size, size, 0);
 	glEnd();
 	glPopMatrix();
 
@@ -712,50 +712,50 @@ void rightPalm(GLenum type, float size, float size2, int lineWidth) {
 	//front
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(0, size, size2);
-	glVertex3f(0, 0, size2);
-	glVertex3f(size, 0, size2);
-	glVertex3f(size, size, size2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, size, size2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, 0, size2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size, 0, size2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size, size, size2);
 	glEnd();
 	//right
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(size, size, size2);
-	glVertex3f(size, 0, size2);
-	glVertex3f(size, 0, 0);
-	glVertex3f(size, size, 0);
+	glTexCoord2f(0.0, 1.0), glVertex3f(size, size, size2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(size, 0, size2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size, size, 0);
 	glEnd();
 	//left
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(0, size, size2);
-	glVertex3f(0, 0, size2);
-	glVertex3f(0, 0, 0);
-	glVertex3f(0, size, 0);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, size, size2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, 0, size2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(0, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(0, size, 0);
 	glEnd();
 	//bottom
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(0, 0, size2);
-	glVertex3f(0, 0, 0);
-	glVertex3f(size, 0, 0);
-	glVertex3f(size, 0, size2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, 0, size2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, 0, 0);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size, 0, size2);
 	glEnd();
 	//top
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(0, size, size2);
-	glVertex3f(0, size, 0);
-	glVertex3f(size, size, 0);
-	glVertex3f(size, size, size2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, size, size2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, size, 0);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size, size, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size, size, size2);
 	glEnd();
 	//back
 	fh.color('w');
 	glBegin(type);
-	glVertex3f(0, size, 0);
-	glVertex3f(0, 0, 0);
-	glVertex3f(size, 0, 0);
-	glVertex3f(size, size, 0);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, size, 0);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, 0, 0);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size, size, 0);
 	glEnd();
 	glPopMatrix();
 
@@ -856,215 +856,215 @@ void armArmour1(GLenum typeQ, GLenum typeT, GLenum typeP) {
 	fh.color('w');
 
 	glBegin(typeQ);
-	fh.v3f(400, 3, direction * 0);
-	fh.v3f(445, 3, direction * 0);
-	fh.v3f(445, 33, direction * 94);
-	fh.v3f(400, 33, direction * 94);
+	glTexCoord2f(0.0, 1.0), fh.v3f(400, 3, direction * 0);
+	glTexCoord2f(1.0, 1.0), fh.v3f(445, 3, direction * 0);
+	glTexCoord2f(1.0, 0.0), fh.v3f(445, 33, direction * 94);
+	glTexCoord2f(0.0, 0.0), fh.v3f(400, 33, direction * 94);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(445, 3, direction * 0);
-	fh.v3f(445, 33, direction * 94);
-	fh.v3f(540, 33, direction * 94);
+	glTexCoord2f(0.0, 1.0), fh.v3f(445, 3, direction * 0);
+	glTexCoord2f(1.0, 1.0), fh.v3f(445, 33, direction * 94);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 33, direction * 94);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(445, 33, direction * 94);
-	fh.v3f(540, 33, direction * 94);
-	fh.v3f(540, 75, direction * 152);
-	fh.v3f(445, 75, direction * 152);
+	glTexCoord2f(0.0, 1.0), fh.v3f(445, 33, direction * 94);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 33, direction * 94);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 75, direction * 152);
+	glTexCoord2f(0.0, 0.0), fh.v3f(445, 75, direction * 152);
 	glEnd();
 
 	//join tgt
 	glBegin(typeQ);
-	fh.v3f(445, 3, direction * 0);
-	fh.v3f(540, 33, direction * 94);
-	fh.v3f(540, 33, -direction * 94);
-	fh.v3f(445, 3, -direction * 0);
+	glTexCoord2f(0.0, 1.0), fh.v3f(445, 3, direction * 0);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 33, direction * 94);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 33, -direction * 94);
+	glTexCoord2f(0.0, 0.0), fh.v3f(445, 3, -direction * 0);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(445, 3, direction * 0);
-	fh.v3f(445, 33, direction * 94);
-	fh.v3f(540, 33, direction * 94);
+	glTexCoord2f(0.0, 1.0), fh.v3f(445, 3, direction * 0);
+	glTexCoord2f(1.0, 1.0), fh.v3f(445, 33, direction * 94);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 33, direction * 94);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(400, 33, direction * 94);
-	fh.v3f(445, 33, direction * 94);
-	fh.v3f(445, 75, direction * 152);
-	fh.v3f(400, 75, direction * 152);
+	glTexCoord2f(0.0, 1.0), fh.v3f(400, 33, direction * 94);
+	glTexCoord2f(1.0, 1.0), fh.v3f(445, 33, direction * 94);
+	glTexCoord2f(1.0, 0.0), fh.v3f(445, 75, direction * 152);
+	glTexCoord2f(0.0, 0.0), fh.v3f(400, 75, direction * 152);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(540, 33, direction * 94);
-	fh.v3f(540, 75, direction * 152);
-	fh.v3f(604, 75, direction * 152);
+	glTexCoord2f(0.0, 1.0), fh.v3f(540, 33, direction * 94);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 75, direction * 152);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 75, direction * 152);
 	glEnd();
 
 	//join tgt
 	glBegin(typeQ);
-	fh.v3f(540, 33, direction * 94);
-	fh.v3f(604, 75, direction * 152);
-	fh.v3f(604, 75, -direction * 152);
-	fh.v3f(540, 33, -direction * 94);
+	glTexCoord2f(0.0, 1.0), fh.v3f(540, 33, direction * 94);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 75, direction * 152);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 75, -direction * 152);
+	glTexCoord2f(0.0, 0.0), fh.v3f(540, 33, -direction * 94);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(400, 75, direction * 152);
-	fh.v3f(400, 100, direction * 171);
-	fh.v3f(340, 100, direction * 171);
-	glEnd();
+	glTexCoord2f(0.0, 1.0), fh.v3f(400, 75, direction * 152);
+	glTexCoord2f(1.0, 1.0), fh.v3f(400, 100, direction * 171);
+	glTexCoord2f(1.0, 0.0), fh.v3f(340, 100, direction * 171);
+	glTexCoord2f(0.0, 0.0), glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(400, 75, direction * 152);
-	fh.v3f(604, 75, direction * 152);
-	fh.v3f(604, 100, direction * 171);
-	fh.v3f(400, 100, direction * 171);
+	glTexCoord2f(0.0, 1.0), fh.v3f(400, 75, direction * 152);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 75, direction * 152);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 100, direction * 171);
+	glTexCoord2f(0.0, 0.0), fh.v3f(400, 100, direction * 171);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(604, 75, direction * 152);
-	fh.v3f(604, 100, direction * 171);
-	fh.v3f(630, 100, direction * 171);
+	glTexCoord2f(0.0, 1.0), fh.v3f(604, 75, direction * 152);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 100, direction * 171);
+	glTexCoord2f(1.0, 0.0), fh.v3f(630, 100, direction * 171);
 	glEnd();
 
 	//join tgt
 	glBegin(typeQ);
-	fh.v3f(604, 75, direction * 152);
-	fh.v3f(630, 100, direction * 171);
-	fh.v3f(630, 100, -direction * 171);
-	fh.v3f(604, 75, -direction * 152);
+	glTexCoord2f(0.0, 1.0), fh.v3f(604, 75, direction * 152);
+	glTexCoord2f(1.0, 1.0), fh.v3f(630, 100, direction * 171);
+	glTexCoord2f(1.0, 0.0), fh.v3f(630, 100, -direction * 171);
+	glTexCoord2f(0.0, 0.0), fh.v3f(604, 75, -direction * 152);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(340, 100, direction * 171);
-	fh.v3f(604, 100, direction * 171);
-	fh.v3f(604, 170, direction * 202);
-	fh.v3f(340, 170, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 100, direction * 171);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 100, direction * 171);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 170, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(340, 170, direction * 202);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(604, 100, direction * 171);
-	fh.v3f(630, 100, direction * 171);
-	fh.v3f(685, 170, direction * 202);
-	fh.v3f(604, 170, direction * 202);
-	glEnd();
-
-	//join tgt
-	glBegin(typeQ);
-	fh.v3f(630, 100, direction * 171);
-	fh.v3f(685, 170, direction * 202);
-	fh.v3f(685, 170, -direction * 202);
-	fh.v3f(630, 100, -direction * 171);
-	glEnd();
-
-	glBegin(typeQ);
-	fh.v3f(340, 170, direction * 202);
-	fh.v3f(664, 170, direction * 202);
-	fh.v3f(664, 253, direction * 202);
-	fh.v3f(340, 253, direction * 202);
-	glEnd();
-
-	glBegin(typeQ);
-	fh.v3f(664, 170, direction * 202);
-	fh.v3f(685, 170, direction * 202);
-	fh.v3f(703, 253, direction * 202);
-	fh.v3f(664, 253, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(604, 100, direction * 171);
+	glTexCoord2f(1.0, 1.0), fh.v3f(630, 100, direction * 171);
+	glTexCoord2f(1.0, 0.0), fh.v3f(685, 170, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(604, 170, direction * 202);
 	glEnd();
 
 	//join tgt
 	glBegin(typeQ);
-	fh.v3f(685, 170, direction * 202);
-	fh.v3f(703, 253, direction * 202);
-	fh.v3f(703, 253, -direction * 202);
-	fh.v3f(685, 170, -direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(630, 100, direction * 171);
+	glTexCoord2f(1.0, 1.0), fh.v3f(685, 170, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(685, 170, -direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(630, 100, -direction * 171);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(340, 253, direction * 202);
-	fh.v3f(604, 253, direction * 202);
-	fh.v3f(604, 292, direction * 202);
-	fh.v3f(340, 292, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 170, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(664, 170, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(664, 253, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(340, 253, direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+	glTexCoord2f(0.0, 1.0), fh.v3f(664, 170, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(685, 170, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(703, 253, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(664, 253, direction * 202);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+	glTexCoord2f(0.0, 1.0), fh.v3f(685, 170, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(703, 253, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(703, 253, -direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(685, 170, -direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 253, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 253, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 292, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(340, 292, direction * 202);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(604, 253, direction * 202);
-	fh.v3f(703, 253, direction * 202);
-	fh.v3f(604, 292, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(604, 253, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(703, 253, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 292, direction * 202);
 	glEnd();
 
 	//join tgt
 	glBegin(typeQ);
-	fh.v3f(703, 253, direction * 202);
-	fh.v3f(604, 292, direction * 202);
-	fh.v3f(604, 292, -direction * 202);
-	fh.v3f(703, 253, -direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(703, 253, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 292, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 292, -direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(703, 253, -direction * 202);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(340, 292, direction * 202);
-	fh.v3f(540, 292, direction * 202);
-	fh.v3f(540, 317, direction * 202);
-	fh.v3f(340, 317, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 292, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 292, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 317, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(340, 317, direction * 202);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(540, 292, direction * 202);
-	fh.v3f(604, 292, direction * 202);
-	fh.v3f(540, 317, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(540, 292, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 292, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 317, direction * 202);
 	glEnd();
 
 	//join tgt
 	glBegin(typeQ);
-	fh.v3f(604, 292, direction * 202);
-	fh.v3f(540, 317, direction * 202);
-	fh.v3f(540, 317, -direction * 202);
-	fh.v3f(604, 292, -direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(604, 292, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 317, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 317, -direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(604, 292, -direction * 202);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(340, 317, direction * 202);
-	fh.v3f(540, 317, direction * 202);
-	fh.v3f(540, 400, direction * 202);
-	fh.v3f(340, 400, direction * 202);
-	glEnd();
-
-	//join tgt
-	glBegin(typeQ);
-	fh.v3f(540, 317, direction * 202);
-	fh.v3f(540, 400, direction * 202);
-	fh.v3f(540, 400, -direction * 202);
-	fh.v3f(540, 317, -direction * 202);
-	glEnd();
-
-	glBegin(typeQ);
-	fh.v3f(470, 400, direction * 202);
-	fh.v3f(540, 400, direction * 202);
-	fh.v3f(540, 434, direction * 202);
-	fh.v3f(445, 434, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 317, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 317, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 400, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(340, 400, direction * 202);
 	glEnd();
 
 	//join tgt
 	glBegin(typeQ);
-	fh.v3f(540, 400, direction * 202);
-	fh.v3f(540, 434, direction * 202);
-	fh.v3f(540, 434, -direction * 202);
-	fh.v3f(540, 400, -direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(540, 317, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 400, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 400, -direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(540, 317, -direction * 202);
+	glEnd();
+
+	glBegin(typeQ);
+	glTexCoord2f(0.0, 1.0), fh.v3f(470, 400, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 400, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 434, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(445, 434, direction * 202);
+	glEnd();
+
+	//join tgt
+	glBegin(typeQ);
+	glTexCoord2f(0.0, 1.0), fh.v3f(540, 400, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 434, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 434, -direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(540, 400, -direction * 202);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(340, 434, direction * 202);
-	fh.v3f(540, 434, direction * 202);
-	fh.v3f(340, 543, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 434, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 434, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(340, 543, direction * 202);
 	glEnd();
 
 	//join tgt
 	glBegin(typeQ);
-	fh.v3f(540, 434, direction * 202);
-	fh.v3f(340, 543, direction * 202);
-	fh.v3f(340, 543, -direction * 202);
-	fh.v3f(540, 434, -direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(540, 434, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(340, 543, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(340, 543, -direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(540, 434, -direction * 202);
 	glEnd();
 
 	fh.color('r');
@@ -1084,131 +1084,131 @@ void armArmour2(GLenum typeQ, GLenum typeT, GLenum typeP) {
 	fh.color('w');
 
 	glBegin(typeQ);
-	fh.v3f(400, 3, direction * 0);
-	fh.v3f(445, 3, direction * 0);
-	fh.v3f(445, 33, direction * 94);
-	fh.v3f(400, 33, direction * 94);
+	glTexCoord2f(0.0, 1.0), fh.v3f(400, 3, direction * 0);
+	glTexCoord2f(1.0, 1.0), fh.v3f(445, 3, direction * 0);
+	glTexCoord2f(1.0, 0.0), fh.v3f(445, 33, direction * 94);
+	glTexCoord2f(0.0, 0.0), fh.v3f(400, 33, direction * 94);
 	glEnd();
 
 	//fh.color('y');
 	glBegin(typeT);
-	fh.v3f(445, 3, direction * 0);
-	fh.v3f(445, 33, direction * 94);
-	fh.v3f(540, 33, direction * 94);
+	glTexCoord2f(0.0, 1.0), fh.v3f(445, 3, direction * 0);
+	glTexCoord2f(1.0, 1.0), fh.v3f(445, 33, direction * 94);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 33, direction * 94);
 	glEnd();
 
 	//fh.color('r');
 	glBegin(typeQ);
-	fh.v3f(400, 33, direction * 94);
-	fh.v3f(445, 33, direction * 94);
-	fh.v3f(445, 75, direction * 152);
-	fh.v3f(400, 75, direction * 152);
+	glTexCoord2f(0.0, 1.0), fh.v3f(400, 33, direction * 94);
+	glTexCoord2f(1.0, 1.0), fh.v3f(445, 33, direction * 94);
+	glTexCoord2f(1.0, 0.0), fh.v3f(445, 75, direction * 152);
+	glTexCoord2f(0.0, 0.0), fh.v3f(400, 75, direction * 152);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(445, 33, direction * 94);
-	fh.v3f(540, 33, direction * 94);
-	fh.v3f(540, 75, direction * 152);
-	fh.v3f(445, 75, direction * 152);
+	glTexCoord2f(0.0, 1.0), fh.v3f(445, 33, direction * 94);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 33, direction * 94);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 75, direction * 152);
+	glTexCoord2f(0.0, 0.0), fh.v3f(445, 75, direction * 152);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(540, 33, direction * 94);
-	fh.v3f(540, 75, direction * 152);
-	fh.v3f(604, 75, direction * 152);
+	glTexCoord2f(0.0, 1.0), fh.v3f(540, 33, direction * 94);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 75, direction * 152);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 75, direction * 152);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(400, 75, direction * 152);
-	fh.v3f(400, 100, direction * 171);
-	fh.v3f(340, 100, direction * 171);
+	glTexCoord2f(0.0, 1.0), fh.v3f(400, 75, direction * 152);
+	glTexCoord2f(1.0, 1.0), fh.v3f(400, 100, direction * 171);
+	glTexCoord2f(1.0, 0.0), fh.v3f(340, 100, direction * 171);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(400, 75, direction * 152);
-	fh.v3f(604, 75, direction * 152);
-	fh.v3f(604, 100, direction * 171);
-	fh.v3f(400, 100, direction * 171);
+	glTexCoord2f(0.0, 1.0), fh.v3f(400, 75, direction * 152);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 75, direction * 152);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 100, direction * 171);
+	glTexCoord2f(0.0, 0.0), fh.v3f(400, 100, direction * 171);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(604, 75, direction * 152);
-	fh.v3f(604, 100, direction * 171);
-	fh.v3f(630, 100, direction * 171);
+	glTexCoord2f(0.0, 1.0), fh.v3f(604, 75, direction * 152);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 100, direction * 171);
+	glTexCoord2f(1.0, 0.0), fh.v3f(630, 100, direction * 171);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(340, 100, direction * 171);
-	fh.v3f(604, 100, direction * 171);
-	fh.v3f(604, 170, direction * 202);
-	fh.v3f(340, 170, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 100, direction * 171);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 100, direction * 171);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 170, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(340, 170, direction * 202);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(604, 100, direction * 171);
-	fh.v3f(630, 100, direction * 171);
-	fh.v3f(685, 170, direction * 202);
-	fh.v3f(604, 170, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(604, 100, direction * 171);
+	glTexCoord2f(1.0, 1.0), fh.v3f(630, 100, direction * 171);
+	glTexCoord2f(1.0, 0.0), fh.v3f(685, 170, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(604, 170, direction * 202);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(340, 170, direction * 202);
-	fh.v3f(664, 170, direction * 202);
-	fh.v3f(664, 253, direction * 202);
-	fh.v3f(340, 253, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 170, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(664, 170, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(664, 253, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(340, 253, direction * 202);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(664, 170, direction * 202);
-	fh.v3f(685, 170, direction * 202);
-	fh.v3f(703, 253, direction * 202);
-	fh.v3f(664, 253, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(664, 170, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(685, 170, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(703, 253, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(664, 253, direction * 202);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(340, 253, direction * 202);
-	fh.v3f(604, 253, direction * 202);
-	fh.v3f(604, 292, direction * 202);
-	fh.v3f(340, 292, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 253, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 253, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 292, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(340, 292, direction * 202);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(604, 253, direction * 202);
-	fh.v3f(703, 253, direction * 202);
-	fh.v3f(604, 292, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(604, 253, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(703, 253, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(604, 292, direction * 202);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(340, 292, direction * 202);
-	fh.v3f(540, 292, direction * 202);
-	fh.v3f(540, 317, direction * 202);
-	fh.v3f(340, 317, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 292, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 292, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 317, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(340, 317, direction * 202);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(540, 292, direction * 202);
-	fh.v3f(604, 292, direction * 202);
-	fh.v3f(540, 317, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(540, 292, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(604, 292, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 317, direction * 202);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(340, 317, direction * 202);
-	fh.v3f(540, 317, direction * 202);
-	fh.v3f(540, 400, direction * 202);
-	fh.v3f(340, 400, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 317, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 317, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 400, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(340, 400, direction * 202);
 	glEnd();
 
 	glBegin(typeQ);
-	fh.v3f(470, 400, direction * 202);
-	fh.v3f(540, 400, direction * 202);
-	fh.v3f(540, 434, direction * 202);
-	fh.v3f(445, 434, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(470, 400, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 400, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(540, 434, direction * 202);
+	glTexCoord2f(0.0, 0.0), fh.v3f(445, 434, direction * 202);
 	glEnd();
 
 	glBegin(typeT);
-	fh.v3f(340, 434, direction * 202);
-	fh.v3f(540, 434, direction * 202);
-	fh.v3f(340, 543, direction * 202);
+	glTexCoord2f(0.0, 1.0), fh.v3f(340, 434, direction * 202);
+	glTexCoord2f(1.0, 1.0), fh.v3f(540, 434, direction * 202);
+	glTexCoord2f(1.0, 0.0), fh.v3f(340, 543, direction * 202);
 	glEnd();
 
 	fh.color('r');
@@ -1245,71 +1245,71 @@ void armUpperArmour3() {
 	glRotatef(180, 0, 1, 0);
 	glTranslatef(-length2, 0, 0);
 	// 1 (top)
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, -depth / 2);
-	glVertex3f(length2, height / 2, depth / 2);
-	glVertex3f(length, height, depth / 2);
-	glVertex3f(length, height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length, height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length, height, -depth / 2);
 	glEnd();
 
 	// 2 (top back)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length, height / 2, depth);
-	glVertex3f(length, height, depth / 2);
-	glVertex3f(length2, height / 2, depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length, height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length, height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, height / 2, depth / 2);
 	glEnd();
 
 	// 3 (back)
-	fh.color('c');
+	if(textureOn)fh.color('w'); else fh.color('c');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, -depth / 2);
-	glVertex3f(length2, -height / 2, -depth / 2);
-	glVertex3f(length, -height / 2, -depth);
-	glVertex3f(length, height / 2, -depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height / 2, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length, -height / 2, -depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length, height / 2, -depth);
 	glEnd();
 
 	// 4 (back btm)
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	glBegin(nonGLUtype);
-	glVertex3f(length, -height / 2, depth);
-	glVertex3f(length, -height, depth / 2);
-	glVertex3f(length2, -height / 2, depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length, -height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length, -height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, -height / 2, depth / 2);
 	glEnd();
 
 	// 5 (btm)
-	fh.color('w');
+	if(textureOn)fh.color('w'); else fh.color('w');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height / 2, -depth / 2);
-	glVertex3f(length2, -height / 2, depth / 2);
-	glVertex3f(length, -height, depth / 2);
-	glVertex3f(length, -height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length, -height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length, -height, -depth / 2);
 	glEnd();
 
 	// 6 (front btm)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length, -height / 2, -depth);
-	glVertex3f(length, -height, -depth / 2);
-	glVertex3f(length2, -height / 2, -depth / 2);
-	glEnd();
+	glTexCoord2f(0.0, 1.0), glVertex3f(length, -height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length, -height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, -height / 2, -depth / 2);
+	glTexCoord2f(0.0, 0.0), glEnd();
 
 	// 7 (front)
-	fh.color('c');
+	if(textureOn)fh.color('w'); else fh.color('c');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, depth / 2);
-	glVertex3f(length2, -height / 2, depth / 2);
-	glVertex3f(length, -height / 2, depth);
-	glVertex3f(length, height / 2, depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length, -height / 2, depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length, height / 2, depth);
 	glEnd();
 
 	// 8 (front top)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length, height / 2, -depth);
-	glVertex3f(length, height, -depth / 2);
-	glVertex3f(length2, height / 2, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length, height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length, height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, height / 2, -depth / 2);
 	glEnd();
 	glPopMatrix();
 }
@@ -1321,152 +1321,152 @@ void armUpperArmour2() {
 	depth = height;
 
 	// 1 (top)
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	glBegin(nonGLUtype);
-	glVertex3f(0, height / 2, -depth / 2);
-	glVertex3f(0, height / 2, depth / 2);
-	glVertex3f(length2, height, depth / 2);
-	glVertex3f(length2, height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2, height, -depth / 2);
 	glEnd();
 
 	// 2 (top back)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, -depth);
-	glVertex3f(length2, height, -depth / 2);
-	glVertex3f(0, height / 2, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(0, height / 2, -depth / 2);
 	glEnd();
 
 	// 3 (back)
-	fh.color('c');
+	if(textureOn)fh.color('w'); else fh.color('c');
 	glBegin(nonGLUtype);
-	glVertex3f(0, height / 2, -depth / 2);
-	glVertex3f(0, -height / 2, -depth / 2);
-	glVertex3f(length2, -height / 2, -depth);
-	glVertex3f(length2, height / 2, -depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, -height / 2, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, -height / 2, -depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2, height / 2, -depth);
 	glEnd();
 
 	// 4 (back btm)
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height / 2, -depth);
-	glVertex3f(length2, -height, -depth / 2);
-	glVertex3f(0, -height / 2, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(0, -height / 2, -depth / 2);
 	glEnd();
 
 	// 5 (btm)
-	fh.color('w');
+	if(textureOn)fh.color('w'); else fh.color('w');
 	glBegin(nonGLUtype);
-	glVertex3f(0, -height / 2, -depth / 2);
-	glVertex3f(0, -height / 2, depth / 2);
-	glVertex3f(length2, -height, depth / 2);
-	glVertex3f(length2, -height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, -height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, -height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, -height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2, -height, -depth / 2);
 	glEnd();
 
 	// 6 (front btm)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height / 2, depth);
-	glVertex3f(length2, -height, depth / 2);
-	glVertex3f(0, -height / 2, depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(0, -height / 2, depth / 2);
 	glEnd();
 
 	// 7 (front)
-	fh.color('c');
+	if(textureOn)fh.color('w'); else fh.color('c');
 	glBegin(nonGLUtype);
-	glVertex3f(0, height / 2, depth / 2);
-	glVertex3f(0, -height / 2, depth / 2);
-	glVertex3f(length2, -height / 2, depth);
-	glVertex3f(length2, height / 2, depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, height / 2, depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, -height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, -height / 2, depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2, height / 2, depth);
 	glEnd();
 
 	// 8 (front top)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, depth);
-	glVertex3f(length2, height, depth / 2);
-	glVertex3f(0, height / 2, depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(0, height / 2, depth / 2);
 	glEnd();
 }
 
 void armUpperArmour() {
 	// height = 0.27 or 108 pixel
 	float depth, height = 0.08, length, length2;
-	length = 108/(WIDTH / 2);
+	length = 108 / (WIDTH / 2);
 	length2 = length / 3;
 	depth = height;
 	glPushMatrix();
 	glTranslatef(-0.27, 0, 0);
 	// 1 (top)
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height, -depth / 2);
-	glVertex3f(length2, height, depth / 2);
-	glVertex3f(length2 + length2, height, depth / 2);
-	glVertex3f(length2 + length2, height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, height, -depth / 2);
 	glEnd();
 
 	// 2 (top back)
-	fh.color('b');
+	if(textureOn)fh.color('w'); else fh.color('b');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, -depth);
-	glVertex3f(length2, height, -depth / 2);
-	glVertex3f(length2 + length2, height, -depth / 2);
-	glVertex3f(length2 + length2, height / 2, -depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, height, -depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, height / 2, -depth);
 	glEnd();
 
 	// 3 (back)
-	fh.color('g');
+	if(textureOn)fh.color('w'); else fh.color('g');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, -depth);
-	glVertex3f(length2, -height / 2, -depth);
-	glVertex3f(length2 + length2, -height / 2, -depth);
-	glVertex3f(length2 + length2, height / 2, -depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height / 2, -depth);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, -height / 2, -depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, height / 2, -depth);
 	glEnd();
 
 	// 4 (back btm)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height / 2, -depth);
-	glVertex3f(length2, -height, -depth / 2);
-	glVertex3f(length2 + length2,- height, -depth / 2);
-	glVertex3f(length2 + length2, -height / 2, -depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, -height, -depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, -height / 2, -depth);
 	glEnd();
 
 	// 5 (btm)
-	fh.color('w');
+	if(textureOn)fh.color('w'); else fh.color('w');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height, -depth / 2);
-	glVertex3f(length2, -height, depth / 2);
-	glVertex3f(length2 + length2, -height, depth / 2);
-	glVertex3f(length2 + length2, -height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, -height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, -height, -depth / 2);
 	glEnd();
 
 	// 6 (front btm)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height / 2, depth);
-	glVertex3f(length2, -height, depth / 2);
-	glVertex3f(length2 + length2, -height, depth / 2);
-	glVertex3f(length2 + length2, -height / 2, depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, -height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, -height / 2, depth);
 	glEnd();
 
 	// 7 (front)
-	fh.color('g');
+	if(textureOn)fh.color('w'); else fh.color('g');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, depth);
-	glVertex3f(length2, -height / 2, depth);
-	glVertex3f(length2 + length2, -height / 2, depth);
-	glVertex3f(length2 + length2, height / 2, depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height / 2, depth);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, -height / 2, depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, height / 2, depth);
 	glEnd();
 
 	// 8 (front top)
-	fh.color('b');
+	if(textureOn)fh.color('w'); else fh.color('b');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, depth);
-	glVertex3f(length2, height, depth / 2);
-	glVertex3f(length2 + length2, height, depth / 2);
-	glVertex3f(length2 + length2, height / 2, depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, height / 2, depth);
 	glEnd();
 
 	armUpperArmour2();
@@ -1486,71 +1486,71 @@ void legUpperArmour3() {
 	glRotatef(180, 0, 1, 0);
 	glTranslatef(-length2, 0, 0);
 	// 1 (top)
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, -depth / 2);
-	glVertex3f(length2, height / 2, depth / 2);
-	glVertex3f(length, height, depth / 2);
-	glVertex3f(length, height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length, height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length, height, -depth / 2);
 	glEnd();
 
 	// 2 (top back)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length, height / 2, depth);
-	glVertex3f(length, height, depth / 2);
-	glVertex3f(length2, height / 2, depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length, height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length, height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, height / 2, depth / 2);
 	glEnd();
 
 	// 3 (back)
-	fh.color('c');
+	if(textureOn)fh.color('w'); else fh.color('c');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, -depth / 2);
-	glVertex3f(length2, -height / 2, -depth / 2);
-	glVertex3f(length, -height / 2, -depth);
-	glVertex3f(length, height / 2, -depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height / 2, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length, -height / 2, -depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length, height / 2, -depth);
 	glEnd();
 
 	// 4 (back btm)
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	glBegin(nonGLUtype);
-	glVertex3f(length, -height / 2, depth);
-	glVertex3f(length, -height, depth / 2);
-	glVertex3f(length2, -height / 2, depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length, -height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length, -height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, -height / 2, depth / 2);
 	glEnd();
 
 	// 5 (btm)
-	fh.color('w');
+	if(textureOn)fh.color('w'); else fh.color('w');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height / 2, -depth / 2);
-	glVertex3f(length2, -height / 2, depth / 2);
-	glVertex3f(length, -height, depth / 2);
-	glVertex3f(length, -height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length, -height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length, -height, -depth / 2);
 	glEnd();
 
 	// 6 (front btm)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length, -height / 2, -depth);
-	glVertex3f(length, -height, -depth / 2);
-	glVertex3f(length2, -height / 2, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length, -height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length, -height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, -height / 2, -depth / 2);
 	glEnd();
 
 	// 7 (front)
-	fh.color('c');
+	if(textureOn)fh.color('w'); else fh.color('c');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, depth / 2);
-	glVertex3f(length2, -height / 2, depth / 2);
-	glVertex3f(length, -height / 2, depth);
-	glVertex3f(length, height / 2, depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length, -height / 2, depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length, height / 2, depth);
 	glEnd();
 
 	// 8 (front top)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length, height / 2, -depth);
-	glVertex3f(length, height, -depth / 2);
-	glVertex3f(length2, height / 2, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length, height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length, height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, height / 2, -depth / 2);
 	glEnd();
 	glPopMatrix();
 }
@@ -1562,71 +1562,71 @@ void legUpperArmour2() {
 	depth = height;
 
 	// 1 (top)
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	glBegin(nonGLUtype);
-	glVertex3f(0, height / 2, -depth / 2);
-	glVertex3f(0, height / 2, depth / 2);
-	glVertex3f(length2, height, depth / 2);
-	glVertex3f(length2, height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2, height, -depth / 2);
 	glEnd();
 
 	// 2 (top back)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, -depth);
-	glVertex3f(length2, height, -depth / 2);
-	glVertex3f(0, height / 2, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(0, height / 2, -depth / 2);
 	glEnd();
 
 	// 3 (back)
-	fh.color('c');
+	if(textureOn)fh.color('w'); else fh.color('c');
 	glBegin(nonGLUtype);
-	glVertex3f(0, height / 2, -depth / 2);
-	glVertex3f(0, -height / 2, -depth / 2);
-	glVertex3f(length2, -height / 2, -depth);
-	glVertex3f(length2, height / 2, -depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, -height / 2, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, -height / 2, -depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2, height / 2, -depth);
 	glEnd();
 
 	// 4 (back btm)
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height / 2, -depth);
-	glVertex3f(length2, -height, -depth / 2);
-	glVertex3f(0, -height / 2, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(0, -height / 2, -depth / 2);
 	glEnd();
 
 	// 5 (btm)
-	fh.color('w');
+	if(textureOn)fh.color('w'); else fh.color('w');
 	glBegin(nonGLUtype);
-	glVertex3f(0, -height / 2, -depth / 2);
-	glVertex3f(0, -height / 2, depth / 2);
-	glVertex3f(length2, -height, depth / 2);
-	glVertex3f(length2, -height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, -height / 2, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, -height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, -height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2, -height, -depth / 2);
 	glEnd();
 
 	// 6 (front btm)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height / 2, depth);
-	glVertex3f(length2, -height, depth / 2);
-	glVertex3f(0, -height / 2, depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(0, -height / 2, depth / 2);
 	glEnd();
 
 	// 7 (front)
-	fh.color('c');
+	if(textureOn)fh.color('w'); else fh.color('c');
 	glBegin(nonGLUtype);
-	glVertex3f(0, height / 2, depth / 2);
-	glVertex3f(0, -height / 2, depth / 2);
-	glVertex3f(length2, -height / 2, depth);
-	glVertex3f(length2, height / 2, depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, height / 2, depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, -height / 2, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2, -height / 2, depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2, height / 2, depth);
 	glEnd();
 
 	// 8 (front top)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, depth);
-	glVertex3f(length2, height, depth / 2);
-	glVertex3f(0, height / 2, depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(0, height / 2, depth / 2);
 	glEnd();
 }
 
@@ -1639,75 +1639,75 @@ void legUpperArmour() {
 	glPushMatrix();
 	glTranslatef(-0.27, 0, 0);
 	// 1 (top)
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height, -depth / 2);
-	glVertex3f(length2, height, depth / 2);
-	glVertex3f(length2 + length2, height, depth / 2);
-	glVertex3f(length2 + length2, height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, height, -depth / 2);
 	glEnd();
 
 	// 2 (top back)
-	fh.color('b');
+	if(textureOn)fh.color('w'); else fh.color('b');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, -depth);
-	glVertex3f(length2, height, -depth / 2);
-	glVertex3f(length2 + length2, height, -depth / 2);
-	glVertex3f(length2 + length2, height / 2, -depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, height, -depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, height / 2, -depth);
 	glEnd();
 
 	// 3 (back)
-	fh.color('g');
+	if(textureOn)fh.color('w'); else fh.color('g');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, -depth);
-	glVertex3f(length2, -height / 2, -depth);
-	glVertex3f(length2 + length2, -height / 2, -depth);
-	glVertex3f(length2 + length2, height / 2, -depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height / 2, -depth);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, -height / 2, -depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, height / 2, -depth);
 	glEnd();
 
 	// 4 (back btm)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height / 2, -depth);
-	glVertex3f(length2, -height, -depth / 2);
-	glVertex3f(length2 + length2, -height, -depth / 2);
-	glVertex3f(length2 + length2, -height / 2, -depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height / 2, -depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height, -depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, -height, -depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, -height / 2, -depth);
 	glEnd();
 
 	// 5 (btm)
-	fh.color('w');
+	if(textureOn)fh.color('w'); else fh.color('w');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height, -depth / 2);
-	glVertex3f(length2, -height, depth / 2);
-	glVertex3f(length2 + length2, -height, depth / 2);
-	glVertex3f(length2 + length2, -height, -depth / 2);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height, -depth / 2);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, -height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, -height, -depth / 2);
 	glEnd();
 
 	// 6 (front btm)
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, -height / 2, depth);
-	glVertex3f(length2, -height, depth / 2);
-	glVertex3f(length2 + length2, -height, depth / 2);
-	glVertex3f(length2 + length2, -height / 2, depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, -height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, -height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, -height / 2, depth);
 	glEnd();
 
 	// 7 (front)
-	fh.color('g');
+	if(textureOn)fh.color('w'); else fh.color('g');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, depth);
-	glVertex3f(length2, -height / 2, depth);
-	glVertex3f(length2 + length2, -height / 2, depth);
-	glVertex3f(length2 + length2, height / 2, depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, -height / 2, depth);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, -height / 2, depth);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, height / 2, depth);
 	glEnd();
 
 	// 8 (front top)
-	fh.color('b');
+	if(textureOn)fh.color('w'); else fh.color('b');
 	glBegin(nonGLUtype);
-	glVertex3f(length2, height / 2, depth);
-	glVertex3f(length2, height, depth / 2);
-	glVertex3f(length2 + length2, height, depth / 2);
-	glVertex3f(length2 + length2, height / 2, depth);
+	glTexCoord2f(0.0, 1.0), glVertex3f(length2, height / 2, depth);
+	glTexCoord2f(1.0, 1.0), glVertex3f(length2, height, depth / 2);
+	glTexCoord2f(1.0, 0.0), glVertex3f(length2 + length2, height, depth / 2);
+	glTexCoord2f(0.0, 0.0), glVertex3f(length2 + length2, height / 2, depth);
 	glEnd();
 
 	legUpperArmour2();
@@ -1733,7 +1733,7 @@ void leftArm() {
 	glPushMatrix();
 
 	glTranslatef(0, 0, -height);
-	fh.color('g');
+	if(textureOn)fh.color('w'); else fh.color('g');
 	fh.sphere(GLUtype, sRadius, slices, stacks);
 	fh.cylinder(GLUtype, uaBaseRadius, uaTopRadius, height, slices, stacks); //upperarm
 	glPopMatrix();
@@ -1743,7 +1743,7 @@ void leftArm() {
 	//glTranslatef(0, 0, height);
 
 	glPushMatrix();
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	fh.sphere(GLUtype, sRadius, slices, stacks); //elbow
 	glPopMatrix();
 
@@ -1752,7 +1752,7 @@ void leftArm() {
 	if (armUp || armDown)
 		glRotatef(-armAngle, armx, army, armz);
 
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	fh.cylinder(GLUtype, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
 	glPopMatrix();
 	glPopMatrix();
@@ -1810,7 +1810,7 @@ void rightArm() {
 	glPushMatrix();
 
 	glTranslatef(0, 0, -height);
-	fh.color('g');
+	if(textureOn)fh.color('w'); else fh.color('g');
 	fh.sphere(GLUtype, sRadius, slices, stacks);
 	fh.cylinder(GLUtype, uaBaseRadius, uaTopRadius, height, slices, stacks); //upperarm
 	glPopMatrix();
@@ -1820,7 +1820,7 @@ void rightArm() {
 	//glTranslatef(0, 0, height);
 
 	glPushMatrix();
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	fh.sphere(GLUtype, sRadius, slices, stacks); //elbow
 	glPopMatrix();
 
@@ -1829,7 +1829,7 @@ void rightArm() {
 	if (armUp || armDown)
 		glRotatef(-armAngle, armx, army, armz);
 
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	fh.cylinder(GLUtype, laBaseRadius, laTopRadius, height, slices, stacks); //lowerarm
 	glPopMatrix();
 
@@ -1888,13 +1888,13 @@ void leftLeg() {
 
 	glPushMatrix();
 	glTranslatef(0, 0, -height);
-	fh.color('g');
+	if(textureOn)fh.color('w'); else fh.color('g');
 	fh.sphere(GLU_LINE, thighBaseRadius, slices, stacks);
 	fh.cylinder(GLUtype, thighBaseRadius, thighTopRadius, height, slices, stacks); //thigh
 	glPopMatrix();
 
 	glPushMatrix();
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	fh.sphere(GLUtype, sRadius, slices, stacks); //knee
 	glPopMatrix();
 
@@ -1912,7 +1912,7 @@ void leftLeg() {
 	legUpperArmour();
 	glPopMatrix();
 
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	fh.cylinder(GLUtype, calfBaseRadius, calfTopRadius, height, slices, stacks); //calf
 
 	shoe(height, footSize, sRadius, slices, stacks);
@@ -1938,13 +1938,13 @@ void rightLeg() {
 
 	glPushMatrix();
 	glTranslatef(0, 0, -height);
-	fh.color('g');
+	if(textureOn)fh.color('w'); else fh.color('g');
 	fh.sphere(GLU_LINE, thighBaseRadius, slices, stacks);
 	fh.cylinder(GLUtype, thighBaseRadius, thighTopRadius, height, slices, stacks); //thigh
 	glPopMatrix();
 
 	glPushMatrix();
-	fh.color('y');
+	if(textureOn)fh.color('w'); else fh.color('y');
 	fh.sphere(GLUtype, sRadius, slices, stacks); //knee
 	glPopMatrix();
 
@@ -1961,7 +1961,7 @@ void rightLeg() {
 	legUpperArmour();
 	glPopMatrix();
 
-	fh.color('r');
+	if(textureOn)fh.color('w'); else fh.color('r');
 	fh.cylinder(GLUtype, calfBaseRadius, calfTopRadius, height, slices, stacks); //calf
 
 	shoe(height, footSize, sRadius, slices, stacks);
@@ -2241,7 +2241,7 @@ void addTexture() {
 	else {
 		glDisable(GL_TEXTURE_2D);
 	}
-	glEnable(GL_TEXTURE_2D);
+	//glEnable(GL_TEXTURE_2D);
 
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -2253,11 +2253,10 @@ void addTexture() {
 }
 
 void removeTexture() {
+	glDeleteTextures(1, &texture);
 	glDisable(GL_TEXTURE_2D);
 
-	glDeleteTextures(1, &texture);
 }
-
 
 void animation() {
 	//==================== test =========================
@@ -2522,75 +2521,75 @@ void display(){
 		robotWeapon();
 		glPopMatrix();
 		break;
-	case 3:
-		//// leg
-		//glPushMatrix();
-		//glScalef(zoom, zoom, zoom);
-		//if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -35)
-		//	rLeftLeg += legLSpeed;
+	//case 3:
+	//	//// leg
+	//	//glPushMatrix();
+	//	//glScalef(zoom, zoom, zoom);
+	//	//if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -35)
+	//	//	rLeftLeg += legLSpeed;
 
-		//glTranslatef(0, 0.52, 0);
-		//glRotatef(-rLeftLeg, 1.0, 0, 0);
-		//glTranslatef(0, -0.52, 0);
-		//leftLeg();
-		//glPopMatrix();
-		break;
-	case 6:
-		//if ((armUp && armAngle > 110) || (armDown && armAngle > 0)) //raise hand
-		//	armAngle -= armRSpeed;
-		//else if (armAngle == 110)
-		//	armAngle = armAngle;
-		//else if (armAngle == 0)
-		//{ }
-		//	
-		//else
-		//	armAngle += armRSpeed;
+	//	//glTranslatef(0, 0.52, 0);
+	//	//glRotatef(-rLeftLeg, 1.0, 0, 0);
+	//	//glTranslatef(0, -0.52, 0);
+	//	//leftLeg();
+	//	//glPopMatrix();
+	//	break;
+	//case 6:
+	//	//if ((armUp && armAngle > 110) || (armDown && armAngle > 0)) //raise hand
+	//	//	armAngle -= armRSpeed;
+	//	//else if (armAngle == 110)
+	//	//	armAngle = armAngle;
+	//	//else if (armAngle == 0)
+	//	//{ }
+	//	//	
+	//	//else
+	//	//	armAngle += armRSpeed;
 
-		//---------- lower arm lift -----------
-		if (armAngle == 110) {
-			armAngle = 110;
-		}
-		else if (armAngle == 0) {
-			armAngle = 0;
-			armDown = false;
-		}
+	//	//---------- lower arm lift -----------
+	//	//if (armAngle == 110) {
+	//	//	armAngle = 110;
+	//	//}
+	//	//else if (armAngle == 0) {
+	//	//	armAngle = 0;
+	//	//	armDown = false;
+	//	//}
 
-		if (armUp == true && armAngle <= 110) {
-			armAngle += armRSpeed;
-		}
-		else if (armDown == true) {
-			armAngle -= armRSpeed;
-		}
+	//	//if (armUp == true && armAngle <= 110) {
+	//	//	armAngle += armRSpeed;
+	//	//}
+	//	//else if (armDown == true) {
+	//	//	armAngle -= armRSpeed;
+	//	//}
 
-		//if (armDirection == 1 && armLowerRotate <= 30) //arm rotate
-		//	armLowerRotate += armRSpeed;
-		//else
-		//	if(armLowerRotate >= -90)
-		//		armLowerRotate -= armRSpeed;
-		//glRotatef(0.3, 0, 1.0, 0);
-		glPushMatrix();
-		if (armTurnUp || armTurnDown)
-			glRotatef(armLowerRotate, armx2, army2, armz2);
-		glPushMatrix();
-		glScalef(zoom, zoom, zoom);
-		leftArm();
-		glPopMatrix();
-		glPopMatrix();
-		break;
-	case 7:
-		/*C[0] = 0, C[1] = 0, C[2] = 0;
-		C[3] = 0.2, C[4] = 0, C[5] = 0;
-		C[6] = 0.2, C[7] = 0.2, C[8] = 0;
-		glColor3f(1, 1, 1);
-		glLineWidth(3);
-		glRotatef(1, 0, 1, 0);
-		fh.poly3(GL_LINE_STRIP, C, SIZE);
-		C[0] = 0, C[1] = 0, C[2] = 0;
-		C[3] = -0.2, C[4] = 0, C[5] = 0;
-		C[6] = -0.2, C[7] = 0.2, C[8] = 0;
-		glColor3f(1, 0, 0);
-		fh.poly3(GL_LINE_STRIP, C, SIZE);*/
-		break;
+	//	////if (armDirection == 1 && armLowerRotate <= 30) //arm rotate
+	//	////	armLowerRotate += armRSpeed;
+	//	////else
+	//	////	if(armLowerRotate >= -90)
+	//	////		armLowerRotate -= armRSpeed;
+	//	////glRotatef(0.3, 0, 1.0, 0);
+	//	//glPushMatrix();
+	//	//if (armTurnUp || armTurnDown)
+	//	//	glRotatef(armLowerRotate, armx2, army2, armz2);
+	//	//glPushMatrix();
+	//	//glScalef(zoom, zoom, zoom);
+	//	//leftArm();
+	//	//glPopMatrix();
+	//	//glPopMatrix();
+	//	break;
+	//case 7:
+	//	/*C[0] = 0, C[1] = 0, C[2] = 0;
+	//	C[3] = 0.2, C[4] = 0, C[5] = 0;
+	//	C[6] = 0.2, C[7] = 0.2, C[8] = 0;
+	//	glColor3f(1, 1, 1);
+	//	glLineWidth(3);
+	//	glRotatef(1, 0, 1, 0);
+	//	fh.poly3(GL_LINE_STRIP, C, SIZE);
+	//	C[0] = 0, C[1] = 0, C[2] = 0;
+	//	C[3] = -0.2, C[4] = 0, C[5] = 0;
+	//	C[6] = -0.2, C[7] = 0.2, C[8] = 0;
+	//	glColor3f(1, 0, 0);
+	//	fh.poly3(GL_LINE_STRIP, C, SIZE);*/
+	//	break;
 	case 8:
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);

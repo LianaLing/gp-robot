@@ -147,6 +147,7 @@ void function::sphere(GLenum type, float radius, int slices, int stacks) {
 	GLUquadricObj* sphere = NULL;
 	sphere = gluNewQuadric();
 	gluQuadricDrawStyle(sphere, type);
+	gluQuadricTexture(sphere, true);
 	gluSphere(sphere, radius, slices, stacks);
 	gluDeleteQuadric(sphere);
 }
@@ -155,6 +156,7 @@ void function::cylinder(GLenum type, float baseRadius, float topRadius, float he
 	GLUquadricObj* cylinder = NULL;
 	cylinder = gluNewQuadric();
 	gluQuadricDrawStyle(cylinder, type);
+	gluQuadricTexture(cylinder, true);
 	gluCylinder(cylinder, baseRadius, topRadius, height, slices, stacks);
 	gluDeleteQuadric(cylinder);
 }
@@ -205,35 +207,31 @@ void function::pyramid(GLenum type, float size, int lineWidth) {
 	float x = size, y = size, z = size;
 	glBegin(type);
 	//front
-	glVertex3f(0, y, 0);
-	glVertex3f(-x, -y, z);
-	glVertex3f(x, -y, z);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, y, 0);
+	glTexCoord2f(1.0, 1.0), glVertex3f(-x, -y, z);
+	glTexCoord2f(1.0, 0.0), glVertex3f(x, -y, z);
 
 	//right
-	glVertex3f(0, y, 0);
-	glVertex3f(x, -y, z);
-	glVertex3f(x, -y, -z);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, y, 0);
+	glTexCoord2f(1.0, 1.0), glVertex3f(x, -y, z);
+	glTexCoord2f(1.0, 0.0), glVertex3f(x, -y, -z);
 
 	//back
-	glVertex3f(0, y, 0);
-	glVertex3f(x, -y, -z);
-	glVertex3f(-x, -y, -z);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, y, 0);
+	glTexCoord2f(1.0, 1.0), glVertex3f(x, -y, -z);
+	glTexCoord2f(1.0, 0.0), glVertex3f(-x, -y, -z);
 
 	//left
-	glVertex3f(0, y, 0);
-	glVertex3f(-x, -y, -z);
-	glVertex3f(-x, -y, z);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, y, 0);
+	glTexCoord2f(1.0, 1.0), glVertex3f(-x, -y, -z);
+	glTexCoord2f(1.0, 0.0), glVertex3f(-x, -y, z);
 	glEnd();
 
 	glBegin(type);
-	glVertex3f(-x, -y, z);
-	glVertex3f(x, -y, z);
-	glVertex3f(x, -y, z);
-	glVertex3f(x, -y, -z);
-	glVertex3f(x, -y, -z);
-	glVertex3f(-x, -y, -z);
-	glVertex3f(-x, -y, -z);
-	glVertex3f(-x, -y, z);
+	glTexCoord2f(0.0, 1.0), glVertex3f(-x, -y, z);
+	glTexCoord2f(1.0, 1.0), glVertex3f(x, -y, z);
+	glTexCoord2f(1.0, 0.0), glVertex3f(x, -y, z);
+	glTexCoord2f(0.0, 0.0), glVertex3f(x, -y, -z);
 	glEnd();
 }
 
@@ -289,59 +287,59 @@ void function::cuboid(GLenum type, float size, float ratio, int lineWidth) {
 	//front
 	//fh.color('b');
 	glBegin(type);
-	glVertex3f(0, size, size);
-	glVertex3f(0, 0, size);
-	glVertex3f(size * ratio, 0, size);
-	glVertex3f(size * ratio, size, size);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, size, size);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, 0, size);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size * ratio, 0, size);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size * ratio, size, size);
 	glEnd();
 	//right
 	//fh.color('g');
 	glBegin(type);
-	glVertex3f(size * ratio, size, size);
-	glVertex3f(size * ratio, 0, size);
-	glVertex3f(size * ratio, 0, 0);
-	glVertex3f(size * ratio, size, 0);
+	glTexCoord2f(0.0, 1.0), glVertex3f(size * ratio, size, size);
+	glTexCoord2f(1.0, 1.0), glVertex3f(size * ratio, 0, size);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size * ratio, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(size * ratio, size, 0);
 	glEnd();
 	//left
 	//fh.color('w');
 	glBegin(type);
-	glVertex3f(0, size, size);
-	glVertex3f(0, 0, size);
-	glVertex3f(0, 0, 0);
-	glVertex3f(0, size, 0);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, size, size);
+	glTexCoord2f(1.0, 1.0), glVertex3f(0, 0, size);
+	glTexCoord2f(1.0, 0.0), glVertex3f(0, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(0, size, 0);
 	glEnd();
 	//bottom
 	//fh.color('g');
 	glBegin(type);
-	glVertex3f(0, 0, size);
-	glVertex3f(size * ratio, 0, size);
-	glVertex3f(size * ratio, 0, 0);
-	glVertex3f(0, 0, 0);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, 0, size);
+	glTexCoord2f(1.0, 1.0), glVertex3f(size * ratio, 0, size);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size * ratio, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(0, 0, 0);
 	glEnd();
 	//top
 	//glColor3f(1.0, 1.0, 0.0);
 	glBegin(type);
-	glVertex3f(0, size, size);
-	glVertex3f(size * ratio, size, size);
-	glVertex3f(size * ratio, size, 0);
-	glVertex3f(0, size, 0);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, size, size);
+	glTexCoord2f(1.0, 1.0), glVertex3f(size * ratio, size, size);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size * ratio, size, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(0, size, 0);
 	glEnd();
 	//back
 	//glColor3f(0, 1.0, 1.0);
 	glBegin(type);
-	glVertex3f(0, size, 0);
-	glVertex3f(size * ratio, size, 0);
-	glVertex3f(size * ratio, 0, 0);
-	glVertex3f(0, 0, 0);
+	glTexCoord2f(0.0, 1.0), glVertex3f(0, size, 0);
+	glTexCoord2f(1.0, 1.0), glVertex3f(size * ratio, size, 0);
+	glTexCoord2f(1.0, 0.0), glVertex3f(size * ratio, 0, 0);
+	glTexCoord2f(0.0, 0.0), glVertex3f(0, 0, 0);
 	glEnd();
 }
 
 void function::quad(GLenum gltype, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
 	glBegin(gltype);
-	glVertex2f(x1, y1);
-	glVertex2f(x2, y2);
-	glVertex2f(x3, y3);
-	glVertex2f(x4, y4);
+	glTexCoord2f(0.0, 1.0), glVertex2f(x1, y1);
+	glTexCoord2f(1.0, 1.0), glVertex2f(x2, y2);
+	glTexCoord2f(1.0, 0.0), glVertex2f(x3, y3);
+	glTexCoord2f(0.0, 0.0), glVertex2f(x4, y4);
 	glEnd();
 }
 

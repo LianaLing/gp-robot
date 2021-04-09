@@ -156,7 +156,7 @@
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="redMetal.jpg" />
+    <Image Include="redMetal.bmp" />
     <Image Include="redMetal2.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
