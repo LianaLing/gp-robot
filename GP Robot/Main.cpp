@@ -88,7 +88,7 @@ boolean fingerBend = false;
 
 //================= LEG ==================
 boolean raiseLeftLeg = false, raiseRightLeg = false, autoWalk = false;
-float rLeftLeg = 0, rRightLeg = 0, legLSpeed = 0, legRSpeed = 0, walkSpeed;
+float rLeftLeg = 0, rRightLeg = 0, legLSpeed = 0, legRSpeed = 0, walkSpeed = 1;
 int walkCount = 0;
 
 //================= VIEW =================
@@ -2395,10 +2395,10 @@ if (AR4 == 0) {
 
 		// auto walk
 		if (walkCount == 1) {
-			rLeftLeg += walkSpeed, rRightLeg -= walkSpeed, armUpperY += armRotateSpeed;
+			rLeftLeg += walkSpeed, rRightLeg -= walkSpeed, armUpperY -= armRotateSpeed;
 		}
 		else if (walkCount == 2) {
-			rLeftLeg -= walkSpeed, rRightLeg += walkSpeed, armUpperY -= armRotateSpeed;
+			rLeftLeg -= walkSpeed, rRightLeg += walkSpeed, armUpperY += armRotateSpeed;
 		}
 		
 		if (rLeftLeg == 30) {
