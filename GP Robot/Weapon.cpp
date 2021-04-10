@@ -287,8 +287,8 @@ void weapon::sword(float swordMiddle) {
 
 	glPushMatrix();
 	glTranslatef(0, 0, 0.7);
-	fh3.color('c');
-	fh3.disk(glutype, 0, 0.08, slice, 1);
+	//fh3.color('c');
+	//fh3.disk(glutype, 0, 0.08, slice, 1);
 	glPopMatrix();
 
 	// middle

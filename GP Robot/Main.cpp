@@ -148,7 +148,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_UP) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				yT += cameraTranslateSpeed;
+				if (yT < 1) {
+					yT += cameraTranslateSpeed;
+				}
 			}
 			else if (actionKeyNo == 5) {	//lighting
 				lightRX = 0, lightRY = 1.0, lightRZ = 0;
@@ -162,7 +164,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_DOWN) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				yT -= cameraTranslateSpeed;
+				if (yT > -1) {
+					yT -= cameraTranslateSpeed;
+				}
 			}
 			else if (actionKeyNo == 5) {	//lighting
 				lightRX = 0, lightRY = -1.0, lightRZ = 0;
@@ -176,7 +180,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_LEFT) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				xT -= cameraTranslateSpeed;
+				if (xT > -1) {
+					xT -= cameraTranslateSpeed;
+				}
 			}
 			else if (actionKeyNo == 5) {	//lighting
 				lightRX = -1.0, lightRY = 0, lightRZ = 0;
@@ -191,7 +197,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_RIGHT) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				xT += cameraTranslateSpeed;
+				if (xT < 1) {
+					xT += cameraTranslateSpeed;
+				}
 			}
 			else if (actionKeyNo == 5) {	//lighting
 				lightRX = 1.0, lightRY = 0, lightRZ = 0;
@@ -364,10 +372,14 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			armUpperRotateZ = !armUpperRotateZ;
 		} // Z
 		else if (wParam == VK_ADD || wParam == 0xBB) {
-			zoom += 0.2;
+			if (zoom < 3) {
+				zoom += 0.2;
+			}
 		}
 		else if (wParam == VK_SUBTRACT || wParam == 0xBD) {
-			zoom -= 0.2;
+			if (zoom > 0.4) {
+				zoom -= 0.2;
+			}
 		}
 		else if (wParam == VK_F1) {	// F1
 			gunOn = !gunOn;
@@ -1757,7 +1769,7 @@ void leftArm() {
 	glTranslatef(0, 0, 0.3);
 	glTranslatef(0, 0, height + 0.1);
 	
-	if (swordOn) {
+	if (swordOn && fingerBend) {
 		w.sword(swordMiddle);
 	}
 	glPopMatrix();
@@ -1768,13 +1780,11 @@ void leftArm() {
 	glPopMatrix();
 
 	glTranslatef(0, -laTopRadius - 0.01, height + palmSize);
-	//glRotatef(90, 1.0, 0, 0);
 	glRotatef(90, 0, 1.0, 0);
 	glScalef(palmSize, palmSize, palmSize);
 	leftPalm(nonGLUtype, 1.0, 0.5, 2);
 	glPopMatrix();
 	glPopMatrix();
-
 }
 
 void rightArm() {
@@ -1836,7 +1846,6 @@ void rightArm() {
 	glPopMatrix();
 
 	glPopMatrix();
-
 }
 
 //void leftLegWalk(float height) {
