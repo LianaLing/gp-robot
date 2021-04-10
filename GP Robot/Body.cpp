@@ -1042,16 +1042,3 @@ void body::below() {
 	glTexCoord2f(1.0, 0.0), fh2.v3f(442.5, 400, -36.25 + 20);
 	glEnd();
 }
-
-void body::upperChestArmor() {
-	//// front top
-	//if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0, 0.5);
-	//glBegin(gltype2);
-	//fh2.v3f(356.25, 270, 30);
-	//fh2.v3f(340, 307.5, 50);
-	//fh2.v3f(460, 307.5, 50);
-	//fh2.v3f(443.75, 270, 30);
-	//glEnd();
-
-
-}

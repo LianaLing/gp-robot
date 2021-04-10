@@ -21,7 +21,6 @@ namespace B {
 		void adomen2();
 		void adomen3();
 		void below();
-		void upperChestArmor();
 	};
 }
 

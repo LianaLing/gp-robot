@@ -23,19 +23,19 @@ void head::eye() {
 	if(tOn) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 1, 1);
 	// right
 	glBegin(gltype);
-	glTexCoord2f(0.0, 1.0), fh_head.v3f(427.5, 400, 130);
-	glTexCoord2f(1.0, 1.0), fh_head.v3f(427.5, 415, 130);
-	glTexCoord2f(1.0, 0.0), fh_head.v3f(472.5, 415, 115);
-	glTexCoord2f(0.0, 0.0), fh_head.v3f(492.5, 400, 92.5);
+	fh_head.v3f(427.5, 400, 130);
+	fh_head.v3f(427.5, 415, 130);
+	fh_head.v3f(472.5, 415, 115);
+	fh_head.v3f(492.5, 400, 92.5);
 	fh_head.v3f(487.5, 387.5, 100);
 	glEnd();
 
 	// left
 	glBegin(gltype);
-	glTexCoord2f(0.0, 1.0), fh_head.v3f(372.5, 400, 130);
-	glTexCoord2f(1.0, 1.0), fh_head.v3f(372.5, 415, 130);
-	glTexCoord2f(1.0, 0.0), fh_head.v3f(327.5, 415, 115);
-	glTexCoord2f(0.0, 0.0), fh_head.v3f(307.5, 400, 92.5);
+	fh_head.v3f(372.5, 400, 130);
+	fh_head.v3f(372.5, 415, 130);
+	fh_head.v3f(327.5, 415, 115);
+	fh_head.v3f(307.5, 400, 92.5);
 	fh_head.v3f(312.5, 387.5, 100);
 	glEnd();
 }
