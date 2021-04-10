@@ -1,5 +1,5 @@
 ﻿  Main.cpp
-D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(97,45): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(97,52): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(119,18): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(376,16): warning C4305: '+=': truncation from 'double' to 'float'
 D:\Users\ADMIN\Documents\gp-robot\GP Robot\Main.cpp(381,16): warning C4305: '-=': truncation from 'double' to 'float'

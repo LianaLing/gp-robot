@@ -20,8 +20,8 @@ using namespace W;
 #define WIDTH VALUE
 #define HEIGHT VALUE
 #define DEPTH VALUE
-#define ORTHO_VIEW 1
-#define FRUSTUM_VIEW 1
+#define ORTHO_VIEW 5.0
+#define FRUSTUM_VIEW 1.0
 
 function fh;
 body b;
@@ -94,7 +94,7 @@ int walkCount = 0;
 //================= VIEW =================
 char view = 'o';
 boolean isOrtho = false, sideView = true;
-float zoom = 1.0, cameraTranslateSpeed = 0.1, rSpeedP = 10.0;
+float zoom = ORTHO_VIEW, cameraTranslateSpeed = 0.1, rSpeedP = 10.0;
 float xT = 0, yT = 0, zT = 0, ry = 0;
 char rotation = ' ';
 
@@ -148,7 +148,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_UP) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				if (yT < 1) {
+				if (yT < ORTHO_VIEW) {
 					yT += cameraTranslateSpeed;
 				}
 			}
@@ -164,7 +164,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_DOWN) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				if (yT > -1) {
+				if (yT > -ORTHO_VIEW) {
 					yT -= cameraTranslateSpeed;
 				}
 			}
@@ -180,7 +180,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_LEFT) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				if (xT > -1) {
+				if (xT > -ORTHO_VIEW) {
 					xT -= cameraTranslateSpeed;
 				}
 			}
@@ -197,7 +197,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_RIGHT) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				if (xT < 1) {
+				if (xT < ORTHO_VIEW) {
 					xT += cameraTranslateSpeed;
 				}
 			}
@@ -372,12 +372,12 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			armUpperRotateZ = !armUpperRotateZ;
 		} // Z
 		else if (wParam == VK_ADD || wParam == 0xBB) {
-			if (zoom < 3) {
+			if (zoom < ORTHO_VIEW * 3) {
 				zoom += 0.2;
 			}
 		}
 		else if (wParam == VK_SUBTRACT || wParam == 0xBD) {
-			if (zoom > 0.4) {
+			if (zoom > ORTHO_VIEW / 2.5) {
 				zoom -= 0.2;
 			}
 		}
