@@ -21,7 +21,7 @@ using namespace W;
 #define HEIGHT VALUE
 #define DEPTH VALUE
 #define ORTHO_VIEW 5.0
-#define FRUSTUM_VIEW 1.0
+#define FRUSTUM_VIEW 5.0
 
 function fh;
 body b;
@@ -92,9 +92,9 @@ float rLeftLeg = 0, rRightLeg = 0, legLSpeed = 0, legRSpeed = 0, walkSpeed = 1;
 int walkCount = 0;
 
 //================= VIEW =================
-char view = 'o';
-boolean isOrtho = false, sideView = true;
-float zoom = ORTHO_VIEW, cameraTranslateSpeed = 0.1, rSpeedP = 10.0;
+char view = 'p';
+boolean isOrtho = true, sideView = true;
+float zoom = 1, cameraTranslateSpeed = 0.1, rSpeedP = 10.0, isWalkZLimite = false;
 float xT = 0, yT = 0, zT = 0, ry = 0;
 char rotation = ' ';
 
@@ -148,8 +148,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_UP) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				if (yT < ORTHO_VIEW) {
-					yT += cameraTranslateSpeed;
+				if (zT < ORTHO_VIEW) {
+					zT += cameraTranslateSpeed;
 				}
 			}
 			else if (actionKeyNo == 5) {	//lighting
@@ -164,8 +164,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_DOWN) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				if (yT > -ORTHO_VIEW) {
-					yT -= cameraTranslateSpeed;
+				if (zT > -ORTHO_VIEW) {
+					zT -= cameraTranslateSpeed;
 				}
 			}
 			else if (actionKeyNo == 5) {	//lighting
@@ -228,7 +228,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 			rotation = ' ';
 
-			walkCount = 0, autoWalk = 0;
+			walkCount = 0, autoWalk = 0, zT = 0;
 		}
 		else if (wParam == 0x41) { // A
 			if (actionKeyNo == 5)
@@ -312,19 +312,21 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 		} // O
 		else if (wParam == 0x50) { // P
-			if (isOrtho % 2 == 0) {
-				isOrtho++;
+			isOrtho = !isOrtho;
+			if (isOrtho) {
+				//view = 'o';
 				glMatrixMode(GL_PROJECTION);
 				glLoadIdentity();
 				glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);
 				//glOrtho(-8.0 * 16 / 9, 8.0 * 16 / 9, -8.0, 8.0, -8.0, 8.0);
 			}
 			else {
-				isOrtho++;
+				//view = 'p';
 				glMatrixMode(GL_PROJECTION);
 				glLoadIdentity();
-				gluPerspective(100.0, 1, -1, 1);
+				gluPerspective(60.0, 10, 10, -10);
 				glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
+				//ry = 180;
 			}
 		} // P
 		else if (wParam == 0x51) { // Q
@@ -377,7 +379,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 		}
 		else if (wParam == VK_SUBTRACT || wParam == 0xBD) {
-			if (zoom > ORTHO_VIEW / 2.5) {
+			if (zoom > ORTHO_VIEW / 5) {
 				zoom -= 0.2;
 			}
 		}
@@ -404,7 +406,6 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 	default:
 		break;
 	}
-
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 //--------------------------------------------------------------------
@@ -442,7 +443,7 @@ bool initPixelFormat(HDC hdc)
 //--------------------------------------------------------------------
 
 void init() {
-	glClearColor(0, 0, 0, 0);
+	//glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 }
@@ -2096,6 +2097,15 @@ void robotBody() {
 	glPopMatrix();
 }
 
+void skyBox() {
+	glDisable(GL_DEPTH_TEST);
+
+	fh.color('w');
+	fh.sphere(GLUtype, ORTHO_VIEW * 2, 30, 30);
+
+	glEnable(GL_DEPTH_TEST);
+}
+
 //============================= LIANA =================================
 
 void lighting() {
@@ -2170,7 +2180,17 @@ void lighting() {
 	//glMaterialfv(GL_FRONT, lightType, diffM);
 }
 
-void switchView(char view) {
+void switchView() {
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	
+	/*if (isOrtho) {
+		glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);
+	}
+	else{*/
+		//gluPerspective(60.0, 1.0, -2, 2);
+		//glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
+	//}
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	if (actionKeyNo == 2) {
@@ -2181,17 +2201,12 @@ void switchView(char view) {
 	}
 	if (actionKeyNo == 4) {
 		glTranslatef(xT, yT, zT);
+		//gluLookAt(xT, yT, zT, 1, 1, 1, 1, 0, 0);
+	}
+	if (autoWalk) {
+		glTranslatef(0, 0, zT);
 	}
 	glScalef(zoom, zoom, zoom);
-	/*switch (view) {
-	case 'o':
-		glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);
-		break;
-	case 'p':
-		gluPerspective(60.0, 1.0, -1.0, 1.0);
-		glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
-		break;
-	}*/
 }
 
 void addTexture() {
@@ -2403,6 +2418,10 @@ if (AR4 == 0) {
 			rRightLeg += legRSpeed;
 
 		// auto walk
+		if (autoWalk && !isWalkZLimite) {
+			zT += cameraTranslateSpeed / 100;
+		}
+
 		if (walkCount == 1) {
 			rLeftLeg += walkSpeed, rRightLeg -= walkSpeed, armUpperY -= armRotateSpeed;
 		}
@@ -2415,6 +2434,11 @@ if (AR4 == 0) {
 		}
 		else if (rRightLeg == 30) {
 			walkCount = 1;
+		}
+
+		if (zT > 0.5) {
+			isWalkZLimite = true;
+			walkCount = 0;
 		}
 		
 		//if (autoWalk) {
@@ -2491,7 +2515,11 @@ if (AR4 == 0) {
 
 void display(){
 	init();
-	switchView(view);
+	//skyBox();
+	
+	switchView();
+	
+	
 	animation();
 	lighting();
 	addTexture();
@@ -2565,9 +2593,9 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
 
-	glMatrixMode(GL_PROJECTION);
+	/*glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);
+	glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);*/
 
 	while (true)
 	{
