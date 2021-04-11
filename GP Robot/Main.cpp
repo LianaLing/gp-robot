@@ -6,12 +6,16 @@
 #include <string>
 #include "Function.h"
 #include "Body.h"
+#include "Body2.h"
 #include "Head.h"
+#include "Head2.h"
 #include "Weapon.h"
 
 using namespace N;
 using namespace B;
+using namespace B2;
 using namespace H;
+using namespace H2;
 using namespace W;
 
 #define WINDOW_TITLE "IRON-MAN"
@@ -20,12 +24,14 @@ using namespace W;
 #define WIDTH VALUE
 #define HEIGHT VALUE
 #define DEPTH VALUE
-#define ORTHO_VIEW 5.0
-#define FRUSTUM_VIEW 5.0
+#define ORTHO_VIEW 1.0
+#define FRUSTUM_VIEW 1.0
 
 function fh;
 body b;
+body2 b2;
 head h;
+head2 h2;
 weapon w;
 
 //================ COMMON =================
@@ -40,11 +46,12 @@ float testRotate = 0;
 boolean stop = false;
 
 //================ TEXTURE ================
-GLuint texture = 3;	// texture name
+GLuint texture;	// texture name
 BITMAP BMP;			// bitmap structure
 HBITMAP hBMP = NULL;	// bitmap handle.
 boolean textureOn = false;
 LPCSTR textureImg = "redMetal2.bmp";
+LPCSTR textureImg2 = "universe.bmp";
 int textureCount = 0;
 
 //=============== LIGHTING ================
@@ -324,7 +331,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				//view = 'p';
 				glMatrixMode(GL_PROJECTION);
 				glLoadIdentity();
-				gluPerspective(60.0, 10, 10, -10);
+				gluPerspective(60.0, 1, 10, -10);
 				glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
 				//ry = 180;
 			}
@@ -443,7 +450,7 @@ bool initPixelFormat(HDC hdc)
 //--------------------------------------------------------------------
 
 void init() {
-	//glClearColor(0, 0, 0, 0);
+	glClearColor(0.5, 0.5, 0.5, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 }
@@ -499,6 +506,61 @@ void helmet() {
 	// right
 	glTranslatef(fh.xP(230), fh.yP(0), fh.zP(0));
 	h.ear();
+
+	glPopMatrix();
+}
+
+void helmet2() {
+
+	helmet();
+
+	glPushMatrix();
+	glRotatef(nodRotate, 1, 0, 0);
+
+	glPushMatrix();
+	glScalef(1, 1, 1.3);
+
+	h2.headTop();
+
+	// right
+	h2.headRightTop1();
+	h2.headRightTop2();
+	h2.headRightMid();
+	h2.headRightBtm();
+	h2.headRightBtm2();
+	h2.headRightBack();
+
+	// left
+	h2.headLeftTop1();
+	h2.headLeftTop2();
+	h2.headLeftMid();
+	h2.headLeftBtm();
+	h2.headLeftBtm2();
+	h2.headLeftBack();
+
+	glPushMatrix();
+	glTranslatef(0, 0, -0.65); // back to original place
+	glRotatef(-maskRotate, 1, 0, 0);
+	glTranslatef(0, 0, 0.65); // go to center point
+	h2.mask();
+	glPopMatrix();
+
+	glPopMatrix();
+
+	h2.btmCover();
+
+	// right
+	glTranslatef(fh.xP(-115), fh.yP(10), -fh.zP(55));
+	h2.ear();
+
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	fh.cylinder(GLU_FILL, fh.yP(55), fh.yP(55), fh.yP(230), 50, 50);
+	glPopMatrix();
+
+	// right
+	glTranslatef(fh.xP(230), fh.yP(0), fh.zP(0));
+	h2.ear();
 
 	glPopMatrix();
 }
@@ -2097,12 +2159,132 @@ void robotBody() {
 	glPopMatrix();
 }
 
+void robotBody2() {
+
+	robotBody();
+
+	// adomen 0 + chest
+	glPushMatrix();
+	glRotatef(AR4, 1, 0, 0);
+	glTranslatef(0, fh.yP(85), 0);
+	glRotatef(AR2, 1, 0, 0);
+	b2.chest();
+	b2.adomen0();
+
+	// head
+	glPushMatrix();
+	glTranslatef(0, fh.yP(185), fh.zP(20));
+	glScalef(0.25, 0.25, 0.25);
+	helmet2();
+	glPopMatrix();
+
+	//arm right
+	glPushMatrix();
+
+	glTranslatef(fh.xP(170), fh.yP(110), fh.zP(0));
+	glScalef(0.9, 0.9, 0.9);
+	glTranslatef(-0.3, 0, 0);
+
+	// arm armour
+	glPushMatrix();
+	glTranslatef(0, -0.05, 0);
+	glScalef(0.15, 0.15, 0.15);
+	armArmour();
+	glPopMatrix();
+
+	if (rotation == 'z') {
+		glRotatef(armUpperZ, 0, 0, 1);
+	}
+	if (rotation == 'y' || autoWalk) {
+		glRotatef(armUpperY * armDirection, 1, 0, 0);
+	}
+	glRotatef(-85, 0, 0, 1);
+	glTranslatef(0.3, 0, 0);
+	rightArm();
+	glPopMatrix();
+
+	//arm left
+	glPushMatrix();
+	glRotatef(180, 0, 1, 0);
+	glTranslatef(fh.xP(170), fh.yP(110), fh.zP(0));
+	glScalef(0.9, 0.9, 0.9);
+	glTranslatef(-0.3, 0, 0);
+
+	// arm armour
+	glPushMatrix();
+	glTranslatef(0, -0.05, 0);
+	glScalef(0.15, 0.15, 0.15);
+	armArmour();
+	glPopMatrix();
+
+	if (rotation == 'z') {
+		glRotatef(armUpperZ, 0, 0, 1);
+	}
+	if (rotation == 'y' || autoWalk) {
+		glRotatef(armUpperY * armDirection, 1, 0, 0);
+	}
+
+	glRotatef(-85, 0, 0, 1);
+	glTranslatef(0.3, 0, 0);
+	leftArm();
+	glPopMatrix();
+
+	glPopMatrix();
+
+	// adomen 1
+	glPushMatrix();
+	glRotatef(AR3, 1, 0, 0);
+	glTranslatef(0, fh.yP(72.5), 0);
+	glRotatef(AR, 1, 0, 0);
+	b2.adomen1();
+	glPopMatrix();
+
+	// adomen 2
+	glPushMatrix();
+	glRotatef(AR0, 1, 0, 0);
+	glTranslatef(0, fh.yP(60), 0);
+	glRotatef(0, 1, 0, 0);
+	b2.adomen2();
+	glPopMatrix();
+
+	// adomen 3
+	glPushMatrix();
+	glRotatef(AR1, 1, 0, 0);
+	glTranslatef(0, fh.yP(47.5), 0);
+	b2.adomen3();
+	glPopMatrix();
+
+	// below
+	glPushMatrix();
+	glTranslatef(0, fh.yP(47.5), 0);
+	b2.below();
+	glPopMatrix();
+
+	//left leg
+	glPushMatrix();
+	glRotatef(-rLeftLeg, 1.0, 0, 0);
+	glTranslatef(-fh.xP(35), -fh.yP(140), fh.zP(0));
+	glScalef(0.7, 0.7, 0.7);
+	leftLeg();
+	glPopMatrix();
+
+	//right leg
+	glPushMatrix();
+	glRotatef(-rRightLeg, 1.0, 0, 0);
+	glTranslatef(fh.xP(35), -fh.yP(140), fh.zP(0));
+	glScalef(0.7, 0.7, 0.7);
+	rightLeg();
+	glPopMatrix();
+}
+
 void skyBox() {
 	glDisable(GL_DEPTH_TEST);
 
 	fh.color('w');
+	//textureImg = "universe.bmp";
+	//addTexture();
 	fh.sphere(GLUtype, ORTHO_VIEW * 2, 30, 30);
-
+	//removeTexture();
 	glEnable(GL_DEPTH_TEST);
 }
 
@@ -2181,16 +2363,6 @@ void lighting() {
 }
 
 void switchView() {
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-	
-	/*if (isOrtho) {
-		glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);
-	}
-	else{*/
-		//gluPerspective(60.0, 1.0, -2, 2);
-		//glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
-	//}
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	if (actionKeyNo == 2) {
@@ -2209,11 +2381,11 @@ void switchView() {
 	glScalef(zoom, zoom, zoom);
 }
 
-void addTexture() {
+GLuint addTexture(LPCSTR textureName) {
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
 	HBITMAP hBMP = (HBITMAP)LoadImage(GetModuleHandle(NULL),
-		textureImg, IMAGE_BITMAP, 0, 0,
+		textureName, IMAGE_BITMAP, 0, 0,
 		LR_CREATEDIBSECTION | LR_LOADFROMFILE);
 
 	GetObject(hBMP, sizeof(BMP), &BMP);
@@ -2225,7 +2397,6 @@ void addTexture() {
 	else {
 		glDisable(GL_TEXTURE_2D);
 	}
-	//glEnable(GL_TEXTURE_2D);
 
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -2234,10 +2405,12 @@ void addTexture() {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, BMP.bmWidth, BMP.bmHeight, 0,
 		GL_BGR_EXT, GL_UNSIGNED_BYTE, BMP.bmBits);
 	DeleteObject(hBMP);
+
+	return texture;
 }
 
-void removeTexture() {
-	glDeleteTextures(1, &texture);
+void removeTexture(GLuint *textures) {
+	glDeleteTextures(1, textures);
 	glDisable(GL_TEXTURE_2D);
 }
 
@@ -2514,19 +2687,26 @@ if (AR4 == 0) {
 }
 
 void display(){
+	GLuint textures[3];
 	init();
-	//skyBox();
-	
+
+	// sky box
+	textures[0] = addTexture("sky.bmp");
+	fh.sphere(GLUtype, ORTHO_VIEW * 2, 50, 50);
+	glDeleteTextures(1, &textures[0]);
+
 	switchView();
-	
-	
+
 	animation();
+
 	lighting();
-	addTexture();
+
+	textures[1] = addTexture(textureImg);
+
 	switch (actionKeyNo) {
 	case 1:
 		glPushMatrix();
-		robotBody();
+		robotBody2();
 		robotWeapon();
 		glPopMatrix();
 		break;
@@ -2544,12 +2724,14 @@ void display(){
 		break;
 	default:
 		glPushMatrix();
-		robotBody();
+		robotBody2();
 		robotWeapon();
 		glPopMatrix();
 		break;
 	}
-	removeTexture();
+	glDeleteTextures(1, &textures[1]);
+	glDisable(GL_TEXTURE_2D);
+	//removeTexture();
 }
 //--------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)

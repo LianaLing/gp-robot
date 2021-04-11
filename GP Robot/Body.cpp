@@ -19,7 +19,7 @@ void body::textureOn(boolean t) {
 }
 void body::upperChest() {
 	// front top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.7, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.7, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(378.75, 265, 25);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(356.25, 270, 30);
@@ -28,7 +28,7 @@ void body::upperChest() {
 	glEnd();
 
 	// front btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25, 270, 30);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(340 + 20, 307.5, 50);
@@ -37,7 +37,7 @@ void body::upperChest() {
 	glEnd();
 
 	// left top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 1, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 1, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(378.75, 265, -37.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(356.25, 270, -42.5);
@@ -46,7 +46,7 @@ void body::upperChest() {
 	glEnd();
 
 	// left btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0, 1, 0);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0, 1, 0);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25, 270, -42.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(340, 307.5, -60 + 20);
@@ -55,7 +55,7 @@ void body::upperChest() {
 	glEnd();
 
 	// right top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(421.25, 265, 25);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(443.75, 270, 30);
@@ -64,7 +64,7 @@ void body::upperChest() {
 	glEnd();
 
 	// right btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.2, 1, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.2, 1, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(443.75, 270, -42.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(460, 307.5, -60 + 20);
@@ -73,7 +73,7 @@ void body::upperChest() {
 	glEnd();
 
 	// back top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0, 0.7, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0, 0.7, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(378.75, 265, -37.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(356.25, 270, -42.5);
@@ -82,7 +82,7 @@ void body::upperChest() {
 	glEnd();
 
 	// back btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.3, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.3, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25, 270, -42.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(340 + 20, 307.5, -60);
@@ -91,7 +91,7 @@ void body::upperChest() {
 	glEnd();
 
 	// front btm left 
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.3, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.3, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25, 270, 30);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(340 + 20, 307.5, 50);
@@ -99,7 +99,7 @@ void body::upperChest() {
 	glEnd();
 
 	// front btm right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.1, 0.7);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.1, 0.7);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(443.75, 270, 30);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(460 - 20, 307.5, 50);
@@ -107,7 +107,7 @@ void body::upperChest() {
 	glEnd();
 
 	// back btm left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.3, 0.4);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.3, 0.4);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25, 270, -42.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(340 + 20, 307.5, -60);
@@ -115,7 +115,7 @@ void body::upperChest() {
 	glEnd();
 
 	// back btm right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.3, 0.7);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.3, 0.7);
 	glBegin(gltype2);
 	fh2.v3f(443.75, 270, -42.5);
 	fh2.v3f(460 - 20, 307.5, -60);
@@ -123,7 +123,7 @@ void body::upperChest() {
 	glEnd();
 
 	// left btm left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 1, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 1, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25, 270, -42.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(340, 307.5, -60 + 20);
@@ -131,7 +131,7 @@ void body::upperChest() {
 	glEnd();
 
 	// left btm right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 1, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 1, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25, 270, 30);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(340, 307.5, 50 - 20);
@@ -139,7 +139,7 @@ void body::upperChest() {
 	glEnd();
 
 	// right btm right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 1, 0.1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 1, 0.1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(443.75, 270, -42.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(460, 307.5, -60 + 20);
@@ -147,7 +147,7 @@ void body::upperChest() {
 	glEnd();
 
 	// right btm left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 1, 0.8);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 1, 0.8);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(443.75, 270, 30);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(460, 307.5, 50 - 20);
@@ -157,7 +157,7 @@ void body::upperChest() {
 
 void body::lowerChest() {
 	// front top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(340 + 20, 307.5, 50);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(343.75 + 20, 327.5, 57.5);
@@ -169,11 +169,11 @@ void body::lowerChest() {
 
 
 	// middle light
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 1, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 1, 1);
 	fh2.sphere(GL_POLYGON, 13, 13, 13, 400, 321, 45, 0, 100, 0, 100, 1, 1, 1);
 
 	// front btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.7, 0.7);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.7, 0.7);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(343.75 + 20, 327.5, 57.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(346.25 + 20, 352.5, 52.5);
@@ -182,7 +182,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// left top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 1, 0.7);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 1, 0.7);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(340, 307.5, -60 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(343.75, 327.5, -60 + 20);
@@ -191,7 +191,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// left btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.7, 0.7);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.7, 0.7);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(343.75, 327.5, -60 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(346.25, 352.5, -47.5 + 20);
@@ -200,7 +200,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// right top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.5, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.5, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(460, 307.5, 50 - 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(456.25, 327.5, 57.5 - 20);
@@ -209,7 +209,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// right btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(456.25, 327.5, -60 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(453.75, 352.5, -47.5 + 20);
@@ -218,7 +218,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// back top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.5, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.5, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(340 + 20, 307.5, -60);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(343.75 + 20, 327.5, -60);
@@ -227,7 +227,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// back btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(343.75 + 20, 327.5, -60);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(346.25 + 20, 352.5, -47.5);
@@ -236,7 +236,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// front top left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.3, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.3, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(340 + 5, 307.5, 50 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(343.75 + 5, 327.5, 57.5 - 5);
@@ -245,7 +245,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// front top right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.2, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.2, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(460 - 20, 307.5, 50);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(456.25 - 20, 327.5, 57.5);
@@ -254,7 +254,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// back top left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.4, 0.5, 0.6);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.4, 0.5, 0.6);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(340 + 5, 307.5, -60 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(343.75 + 5, 327.5, -60 + 5);
@@ -263,7 +263,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// back top right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.2, 0.5, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.2, 0.5, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(460 - 20, 307.5, -60);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(456.25 - 20, 327.5, -60);
@@ -272,7 +272,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// left top left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.2, 1, 0.9);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.2, 1, 0.9);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(340 + 20, 307.5, -60);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(343.75 + 20, 327.5, -60);
@@ -281,7 +281,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// left top right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.1, 0.5, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.1, 0.5, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(340, 307.5, 50 - 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(343.75, 327.5, 57.5 - 20);
@@ -290,7 +290,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// right top left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.5, 0.6);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.5, 0.6);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(460 - 5, 307.5, 50 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(456.25 - 5, 327.5, 57.5 - 5);
@@ -299,7 +299,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// right top right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.5, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.5, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(460, 307.5, -60 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(456.25, 327.5, -60 + 20);
@@ -308,7 +308,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// front btm left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 1, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 1, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(343.75 + 5, 327.5, 57.5 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(346.25 + 5, 352.5, 52.5 - 5);
@@ -317,7 +317,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// front btm right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.7, 0.2);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.7, 0.2);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(456.25 - 20, 327.5, 57.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(453.75 - 20, 352.5, 52.5);
@@ -326,7 +326,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// back btm left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0, 0);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0, 0);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(343.75 + 5, 327.5, -60 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(346.25 + 5, 352.5, -47.5 + 5);
@@ -335,7 +335,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// back btm right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.3, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.3, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(456.25 - 20, 327.5, -60);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(453.75 - 20, 352.5, -47.5);
@@ -344,7 +344,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// left btm right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(343.75, 327.5, 57.5 - 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(346.25, 352.5, 52.5 - 20);
@@ -353,7 +353,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// left btm left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.1, 0.3, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.1, 0.3, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(343.75 + 5, 327.5, -60 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(346.25 + 5, 352.5, -47.5 + 5);
@@ -362,7 +362,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// right btm left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 1, 0.7);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 1, 0.7);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(456.25, 327.5, 57.5 - 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(453.75, 352.5, 52.5 - 20);
@@ -371,7 +371,7 @@ void body::lowerChest() {
 	glEnd();
 
 	// right btm right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.4, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.4, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(456.25 - 5, 327.5, -60 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(453.75 - 5, 352.5, -47.5 + 5);
@@ -383,7 +383,7 @@ void body::lowerChest() {
 
 void body::neck() {
 	// front btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.7, 0.2);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.7, 0.2);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(382, 240, 15);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(378.75, 265, 25);
@@ -392,7 +392,7 @@ void body::neck() {
 	glEnd();
 
 	// left btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.4, 0.2);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.4, 0.2);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(382, 240, -15);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(378.75, 265, -25);
@@ -401,7 +401,7 @@ void body::neck() {
 	glEnd();
 
 	// right btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.4, 0.6);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.4, 0.6);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(800 - 382, 240, -15);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(800 - 378.75, 265, -25);
@@ -410,7 +410,7 @@ void body::neck() {
 	glEnd();
 
 	// back btm
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.4, 0.1, 0.8);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.4, 0.1, 0.8);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(382, 240, -15);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(378.75, 265, -25);
@@ -419,7 +419,7 @@ void body::neck() {
 	glEnd();
 
 	// front top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.4, 0.1, 0.8);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.4, 0.1, 0.8);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(382, 210, 15);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(382, 240, 15);
@@ -428,7 +428,7 @@ void body::neck() {
 	glEnd();
 
 	// left top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.4, 0.6);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.4, 0.6);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(382, 210, -15);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(382, 240, -15);
@@ -437,7 +437,7 @@ void body::neck() {
 	glEnd();
 
 	// right top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.4, 0.2);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.4, 0.2);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(800 - 382, 210, -15);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(800 - 382, 240, -15);
@@ -446,7 +446,7 @@ void body::neck() {
 	glEnd();
 
 	// back top
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.7, 0.2);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.7, 0.2);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(382, 210, -15);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(382, 240, -15);
@@ -465,7 +465,7 @@ void body::adomen0() {
 	//GLenum type2 = GL_POLYGON;
 
 	// front
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 1, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 1, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(346.25 + 20, 352.5, 52.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(351.25 + 20, 400, 50);
@@ -474,7 +474,7 @@ void body::adomen0() {
 	glEnd();
 
 	// back
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.5, 0.4);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0.5, 0.4);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(346.25 + 20, 352.5, -47.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(351.25 + 20, 400, -36.25);
@@ -483,7 +483,7 @@ void body::adomen0() {
 	glEnd();
 
 	// left
-	if(tOn2) fh2.color('w'); else fh2.color('r');
+	if (tOn2) fh2.color('w'); else fh2.color('r');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(346.25, 352.5, -47.5 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(351.25, 400, -36.25 + 20);
@@ -492,7 +492,7 @@ void body::adomen0() {
 	glEnd();
 
 	// right
-	if(tOn2) fh2.color('w'); else fh2.color('b');
+	if (tOn2) fh2.color('w'); else fh2.color('b');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(453.75, 352.5, -47.5 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(448.75, 400, -36.25 + 20);
@@ -501,7 +501,7 @@ void body::adomen0() {
 	glEnd();
 
 	// front left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(346.25 + 5, 352.5, 52.5 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(351.25 + 5, 400, 50 - 5);
@@ -510,7 +510,7 @@ void body::adomen0() {
 	glEnd();
 
 	// left right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(346.25, 352.5, 52.5 - 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(351.25, 400, 50 - 20);
@@ -519,7 +519,7 @@ void body::adomen0() {
 	glEnd();
 
 	// front right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(453.75 - 5, 352.5, 52.5 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(448.75 - 5, 400, 50 - 5);
@@ -528,7 +528,7 @@ void body::adomen0() {
 	glEnd();
 
 	// right left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.2, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.2, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(453.75 - 5, 352.5, 52.5 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(448.75 - 5, 400, 50 - 5);
@@ -537,7 +537,7 @@ void body::adomen0() {
 	glEnd();
 
 	// back left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(346.25 + 5, 352.5, -47.5 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(351.25 + 5, 400, -36.25 + 5);
@@ -546,7 +546,7 @@ void body::adomen0() {
 	glEnd();
 
 	// left left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(346.25 + 5, 352.5, -47.5 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(351.25 + 5, 400, -36.25 + 5);
@@ -555,7 +555,7 @@ void body::adomen0() {
 	glEnd();
 
 	// back right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.5, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.5, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(453.75 - 20, 352.5, -47.5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(448.75 - 20, 400, -36.25);
@@ -564,7 +564,7 @@ void body::adomen0() {
 	glEnd();
 
 	// right right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.9, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.9, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(453.75 - 5, 352.5, -47.5 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(448.75 - 5, 400, -36.25 + 5);
@@ -576,7 +576,7 @@ void body::adomen0() {
 void body::adomen1() {
 	//GLenum type2 = GL_POLYGON;
 
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0, 1);
 	// front
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(351.25 + 20, 387.5, 50);
@@ -586,7 +586,7 @@ void body::adomen1() {
 	glEnd();
 
 	// back
-	if(tOn2) fh2.color('w'); else fh2.color('r');
+	if (tOn2) fh2.color('w'); else fh2.color('r');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(351.25 + 20, 387.5, -36.25);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(353.75 + 20, 400, -36.25);
@@ -595,7 +595,7 @@ void body::adomen1() {
 	glEnd();
 
 	// left
-	if(tOn2) fh2.color('w'); else fh2.color('y');
+	if (tOn2) fh2.color('w'); else fh2.color('y');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(351.25, 387.5, -36.25 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(353.75, 400, -36.25 + 20);
@@ -604,7 +604,7 @@ void body::adomen1() {
 	glEnd();
 
 	// right
-	if(tOn2) fh2.color('w'); else fh2.color('c');
+	if (tOn2) fh2.color('w'); else fh2.color('c');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(448.75, 387.5, -36.25 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(446.25, 400, -36.25 + 20);
@@ -613,7 +613,7 @@ void body::adomen1() {
 	glEnd();
 
 	// front left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(351.25 + 5, 387.5, 50.0 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(353.75 + 5, 400, 50 - 5);
@@ -622,7 +622,7 @@ void body::adomen1() {
 	glEnd();
 
 	// left right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(351.25, 387.5, 50.0 - 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(353.75, 400, 50 - 20);
@@ -631,7 +631,7 @@ void body::adomen1() {
 	glEnd();
 
 	// front right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(448.75 - 5, 387.5, 50.0 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(446.25 - 5, 400, 50 - 5);
@@ -640,7 +640,7 @@ void body::adomen1() {
 	glEnd();
 
 	// right left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(448.75 - 5, 387.5, 50.0 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(446.25 - 5, 400, 50 - 5);
@@ -649,7 +649,7 @@ void body::adomen1() {
 	glEnd();
 
 	// back left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.2, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.2, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(351.25 + 5, 387.5, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(353.75 + 5, 400, -36.25 + 5);
@@ -658,7 +658,7 @@ void body::adomen1() {
 	glEnd();
 
 	// left left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 1, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 1, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(351.25 + 5, 387.5, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(353.75 + 5, 400, -36.25 + 5);
@@ -667,7 +667,7 @@ void body::adomen1() {
 	glEnd();
 
 	// back right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.5, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.5, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(448.75 - 20, 387.5, -36.25);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(446.25 - 20, 400, -36.25);
@@ -676,7 +676,7 @@ void body::adomen1() {
 	glEnd();
 
 	// right right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.6, 0.4);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.6, 0.4);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(448.75 - 5, 387.5, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(446.25 - 5, 400, -36.25 + 5);
@@ -688,7 +688,7 @@ void body::adomen1() {
 void body::adomen2() {
 	//GLenum type2 = GL_POLYGON;
 
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 1, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 1, 1);
 	// front
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(353.75 + 20, 387.5, 50);
@@ -698,7 +698,7 @@ void body::adomen2() {
 	glEnd();
 
 	// back
-	if(tOn2) fh2.color('w'); else fh2.color('y');
+	if (tOn2) fh2.color('w'); else fh2.color('y');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(353.75 + 20, 387.5, -36.25);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(356.25 + 20, 400, -36.25);
@@ -707,7 +707,7 @@ void body::adomen2() {
 	glEnd();
 
 	// left
-	if(tOn2) fh2.color('w'); else fh2.color('b');
+	if (tOn2) fh2.color('w'); else fh2.color('b');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(353.75, 387.5, -36.25 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(356.25, 400, -36.25 + 20);
@@ -716,7 +716,7 @@ void body::adomen2() {
 	glEnd();
 
 	// right
-	if(tOn2) fh2.color('w'); else fh2.color('b');
+	if (tOn2) fh2.color('w'); else fh2.color('b');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(446.25, 387.5, -36.25 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(443.75, 400, -36.25 + 20);
@@ -725,7 +725,7 @@ void body::adomen2() {
 	glEnd();
 
 	// front left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(353.75 + 5, 387.5, 50.0 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(356.25 + 5, 400, 50 - 5);
@@ -734,7 +734,7 @@ void body::adomen2() {
 	glEnd();
 
 	// left right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(353.75, 387.5, 50.0 - 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(356.25, 400, 50 - 20);
@@ -743,7 +743,7 @@ void body::adomen2() {
 	glEnd();
 
 	// front right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(446.25 - 5, 387.5, 50.0 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(443.75 - 5, 400, 50 - 5);
@@ -752,7 +752,7 @@ void body::adomen2() {
 	glEnd();
 
 	// right left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.2, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.2, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(446.25 - 5, 387.5, 50.0 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(443.75 - 5, 400, 50 - 5);
@@ -761,7 +761,7 @@ void body::adomen2() {
 	glEnd();
 
 	// back left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(353.75 + 5, 387.5, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(356.25 + 5, 400, -36.25 + 5);
@@ -770,7 +770,7 @@ void body::adomen2() {
 	glEnd();
 
 	// left left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(353.75 + 5, 387.5, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(356.25 + 5, 400, -36.25 + 5);
@@ -779,7 +779,7 @@ void body::adomen2() {
 	glEnd();
 
 	// back right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.5, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.5, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(446.25 - 20, 387.5, -36.25);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(443.75 - 20, 400, -36.25);
@@ -788,7 +788,7 @@ void body::adomen2() {
 	glEnd();
 
 	// right right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.9, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.9, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(446.25 - 5, 387.5, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(443.75 - 5, 400, -36.25 + 5);
@@ -800,7 +800,7 @@ void body::adomen2() {
 void body::adomen3() {
 	//GLenum type2 = GL_POLYGON;
 
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(1, 0, 1);
 	// front
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25 + 20, 387.5, 50);
@@ -810,7 +810,7 @@ void body::adomen3() {
 	glEnd();
 
 	// back
-	if(tOn2) fh2.color('w'); else fh2.color('r');
+	if (tOn2) fh2.color('w'); else fh2.color('r');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25 + 20, 387.5, -36.25);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(357.5 + 20, 400, -36.25);
@@ -819,7 +819,7 @@ void body::adomen3() {
 	glEnd();
 
 	// left
-	if(tOn2) fh2.color('w'); else fh2.color('y');
+	if (tOn2) fh2.color('w'); else fh2.color('y');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25, 387.5, -36.25 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(357.5, 400, -36.25 + 20);
@@ -828,7 +828,7 @@ void body::adomen3() {
 	glEnd();
 
 	// right
-	if(tOn2) fh2.color('w'); else fh2.color('c');
+	if (tOn2) fh2.color('w'); else fh2.color('c');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(443.75, 387.5, -36.25 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(442.5, 400, -36.25 + 20);
@@ -837,7 +837,7 @@ void body::adomen3() {
 	glEnd();
 
 	// front left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25 + 5, 387.5, 50.0 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(357.5 + 5, 400, 50 - 5);
@@ -846,7 +846,7 @@ void body::adomen3() {
 	glEnd();
 
 	// left right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.5, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25, 387.5, 50.0 - 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(357.5, 400, 50 - 20);
@@ -855,7 +855,7 @@ void body::adomen3() {
 	glEnd();
 
 	// front right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(443.75 - 5, 387.5, 50.0 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(442.5 - 5, 400, 50 - 5);
@@ -864,7 +864,7 @@ void body::adomen3() {
 	glEnd();
 
 	// right left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.7, 1);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(443.75 - 5, 387.5, 50.0 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(442.5 - 5, 400, 50 - 5);
@@ -873,7 +873,7 @@ void body::adomen3() {
 	glEnd();
 
 	// back left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.2, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.2, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25 + 5, 387.5, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(357.5 + 5, 400, -36.25 + 5);
@@ -882,7 +882,7 @@ void body::adomen3() {
 	glEnd();
 
 	// left left
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 1, 0.3);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 1, 0.3);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(356.25 + 5, 387.5, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(357.5 + 5, 400, -36.25 + 5);
@@ -891,7 +891,7 @@ void body::adomen3() {
 	glEnd();
 
 	// back right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.5, 0.5);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.6, 0.5, 0.5);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(443.75 - 20, 387.5, -36.25);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(442.5 - 20, 400, -36.25);
@@ -900,7 +900,7 @@ void body::adomen3() {
 	glEnd();
 
 	// right right
-	if(tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.6, 0.4);
+	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.6, 0.4);
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(443.75 - 5, 387.5, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(442.5 - 5, 400, -36.25 + 5);
@@ -912,7 +912,7 @@ void body::adomen3() {
 
 void body::below() {
 	// front top
-	if(tOn2) fh2.color('w'); else fh2.color('w');
+	if (tOn2) fh2.color('w'); else fh2.color('w');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(357.5 + 20, 400, 50);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(378.75, 427.5, 50);
@@ -921,7 +921,7 @@ void body::below() {
 	glEnd();
 
 	// front btm
-	if(tOn2) fh2.color('w'); else fh2.color('b');
+	if (tOn2) fh2.color('w'); else fh2.color('b');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(378.75, 427.5, 50);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(391.25, 457.5, 50 - 10);
@@ -930,7 +930,7 @@ void body::below() {
 	glEnd();
 
 	// back top
-	if(tOn2) fh2.color('w'); else fh2.color('g');
+	if (tOn2) fh2.color('w'); else fh2.color('g');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(357.5 + 20, 400, -36.25);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(378.75, 427.5, -45);
@@ -939,7 +939,7 @@ void body::below() {
 	glEnd();
 
 	// back btm
-	if(tOn2) fh2.color('w'); else fh2.color('b');
+	if (tOn2) fh2.color('w'); else fh2.color('b');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(378.75, 427.5, -45);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(391.25, 457.5, -36.25);
@@ -948,7 +948,7 @@ void body::below() {
 	glEnd();
 
 	// left
-	if(tOn2) fh2.color('w'); else fh2.color('c');
+	if (tOn2) fh2.color('w'); else fh2.color('c');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(357.5, 400, -36.25 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(378.75, 427.5, -45);
@@ -959,7 +959,7 @@ void body::below() {
 	glEnd();
 
 	// right
-	if(tOn2) fh2.color('w'); else fh2.color('c');
+	if (tOn2) fh2.color('w'); else fh2.color('c');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(442.5, 400, -36.25 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(421.25, 427.5, -45);
@@ -970,7 +970,7 @@ void body::below() {
 	glEnd();
 
 	// btm
-	if(tOn2) fh2.color('w'); else fh2.color('r');
+	if (tOn2) fh2.color('w'); else fh2.color('r');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(391.25, 457.5, -36.25);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(391.25, 457.5, 50 - 10);
@@ -979,7 +979,7 @@ void body::below() {
 	glEnd();
 
 	// front left
-	if(tOn2) fh2.color('w'); else fh2.color('r');
+	if (tOn2) fh2.color('w'); else fh2.color('r');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(357.5 + 5, 400, 50 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(378.75, 427.5, 50);
@@ -987,7 +987,7 @@ void body::below() {
 	glEnd();
 
 	// left right
-	if(tOn2) fh2.color('w'); else fh2.color('g');
+	if (tOn2) fh2.color('w'); else fh2.color('g');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(357.5, 400, 50 - 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(378.75, 427.5, 50);
@@ -995,7 +995,7 @@ void body::below() {
 	glEnd();
 
 	// front right
-	if(tOn2) fh2.color('w'); else fh2.color('r');
+	if (tOn2) fh2.color('w'); else fh2.color('r');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(442.5 - 20, 400, 50);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(421.25, 427.5, 50);
@@ -1003,7 +1003,7 @@ void body::below() {
 	glEnd();
 
 	// right left
-	if(tOn2) fh2.color('w'); else fh2.color('g');
+	if (tOn2) fh2.color('w'); else fh2.color('g');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(437.5, 400, 50 - 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(421.25, 427.5, 50);
@@ -1011,7 +1011,7 @@ void body::below() {
 	glEnd();
 
 	// back left
-	if(tOn2) fh2.color('w'); else fh2.color('r');
+	if (tOn2) fh2.color('w'); else fh2.color('r');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(357.5 + 5, 400, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(378.75, 427.5, -45);
@@ -1019,7 +1019,7 @@ void body::below() {
 	glEnd();
 
 	// front right
-	if(tOn2) fh2.color('w'); else fh2.color('r');
+	if (tOn2) fh2.color('w'); else fh2.color('r');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(442.5 - 20, 400, -36.25);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(421.25, 427.5, -45);
@@ -1027,7 +1027,7 @@ void body::below() {
 	glEnd();
 
 	// left left
-	if(tOn2) fh2.color('w'); else fh2.color('g');
+	if (tOn2) fh2.color('w'); else fh2.color('g');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(357.5 + 5, 400, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(378.75, 427.5, -45);
@@ -1035,7 +1035,7 @@ void body::below() {
 	glEnd();
 
 	// right right
-	if(tOn2) fh2.color('w'); else fh2.color('g');
+	if (tOn2) fh2.color('w'); else fh2.color('g');
 	glBegin(gltype2);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(437.5, 400, -36.25 + 5);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(421.25, 427.5, -45);

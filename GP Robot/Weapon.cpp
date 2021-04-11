@@ -15,7 +15,7 @@ using namespace W;
 function fh3;
 
 GLenum type3 = GL_LINE_LOOP, gltype3 = GL_POLYGON;
-GLenum glutype = GLU_FILL, glutype2 = GLU_LINE;
+GLenum glutype = GLU_FILL, glutype4 = GLU_LINE;
 float baseRadius = 0.2, topRadius = baseRadius, height = 0.5, slice = 30, stack = slice;
 float baseRadius2 = 0.18, topRadius2 = baseRadius2;
 float wZoom = 0.2;
@@ -24,7 +24,7 @@ void weapon::frontGun() {
 	glColor3f(0.2, 0.6, 0.8);
 	fh3.cylinder(glutype, baseRadius, topRadius, height, slice, stack);
 	fh3.color('o');
-	fh3.cylinder(glutype2, baseRadius + 0.001, topRadius + 0.001, height, 15, 1);
+	fh3.cylinder(glutype4, baseRadius + 0.001, topRadius + 0.001, height, 15, 1);
 
 	// inner surface
 	glColor3f(0.4, 0.4, 0.8);
@@ -50,7 +50,7 @@ void weapon::weaponRing() {
 	glColor3f(0.2, 0.6, 0.8);
 	fh3.cylinder(glutype, baseRadius, topRadius, height / 8, slice, stack);
 	fh3.color('o');
-	fh3.cylinder(glutype2, baseRadius + 0.001, topRadius + 0.001, height / 8, 15, 1);
+	fh3.cylinder(glutype4, baseRadius + 0.001, topRadius + 0.001, height / 8, 15, 1);
 
 	// front
 	fh3.color('c');
@@ -70,7 +70,7 @@ void weapon::weaponRing2() {
 	glColor3f(0.2, 0.6, 0.8);
 	fh3.cylinder(glutype, baseRadius + 0.03, topRadius + 0.03, (height + 0.1) / 8, slice, stack);
 	fh3.color('o');
-	fh3.cylinder(glutype2, baseRadius + 0.031, topRadius + 0.031, (height + 0.1) / 8, 15, 1);
+	fh3.cylinder(glutype4, baseRadius + 0.031, topRadius + 0.031, (height + 0.1) / 8, 15, 1);
 
 	// front
 	fh3.color('c');

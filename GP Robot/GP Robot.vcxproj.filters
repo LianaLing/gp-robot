@@ -30,6 +30,12 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Body2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Head2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Function.h">
@@ -44,12 +50,24 @@
     <ClInclude Include="Weapon.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Body2.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Head2.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="redMetal2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="redMetal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="universe.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="sky.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -144,20 +144,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Body.cpp" />
+    <ClCompile Include="Body2.cpp" />
     <ClCompile Include="Function.cpp" />
     <ClCompile Include="Head.cpp" />
+    <ClCompile Include="Head2.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Body2.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="Body.h" />
     <ClInclude Include="Head.h" />
+    <ClInclude Include="Head2.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="redMetal.bmp" />
     <Image Include="redMetal2.bmp" />
+    <Image Include="sky.bmp" />
+    <Image Include="universe.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
