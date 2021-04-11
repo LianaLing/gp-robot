@@ -70,5 +70,17 @@
     <Image Include="sky.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="groundGrass.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="blackMetal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="greenMetal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="dannyFace.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

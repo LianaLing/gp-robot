@@ -405,6 +405,7 @@ void function::disk(GLenum type, float innerRadius, float outerRadius, int slice
 	GLUquadricObj* disk = NULL;
 	disk = gluNewQuadric();
 	gluQuadricDrawStyle(disk, type);
+	gluQuadricTexture(disk, true);
 	gluDisk(disk, innerRadius, outerRadius, slices, loop);
 	gluDeleteQuadric(disk);
 }

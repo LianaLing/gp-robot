@@ -403,10 +403,10 @@ void body::neck() {
 	// right btm
 	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.3, 0.4, 0.6);
 	glBegin(gltype2);
-	glTexCoord2f(0.0, 1.0), fh2.v3f(800 - 382, 240, -15);
-	glTexCoord2f(1.0, 1.0), fh2.v3f(800 - 378.75, 265, -25);
-	glTexCoord2f(1.0, 0.0), fh2.v3f(800 - 378.75, 265, 25);
-	glTexCoord2f(0.0, 0.0), fh2.v3f(800 - 382, 240, 15);
+	glTexCoord2f(0.0, 1.0), fh2.v3f(800.0 - 382, 240, -15);
+	glTexCoord2f(1.0, 1.0), fh2.v3f(800.0 - 378.75, 265, -25);
+	glTexCoord2f(1.0, 0.0), fh2.v3f(800.0 - 378.75, 265, 25);
+	glTexCoord2f(0.0, 0.0), fh2.v3f(800.0 - 382, 240, 15);
 	glEnd();
 
 	// back btm
@@ -439,10 +439,10 @@ void body::neck() {
 	// right top
 	if (tOn2) glColor3f(1.0, 1.0, 1.0); else glColor3f(0.7, 0.4, 0.2);
 	glBegin(gltype2);
-	glTexCoord2f(0.0, 1.0), fh2.v3f(800 - 382, 210, -15);
-	glTexCoord2f(1.0, 1.0), fh2.v3f(800 - 382, 240, -15);
-	glTexCoord2f(1.0, 0.0), fh2.v3f(800 - 382, 240, 15);
-	glTexCoord2f(0.0, 0.0), fh2.v3f(800 - 382, 210, 15);
+	glTexCoord2f(0.0, 1.0), fh2.v3f(800.0 - 382, 210, -15);
+	glTexCoord2f(1.0, 1.0), fh2.v3f(800.0 - 382, 240, -15);
+	glTexCoord2f(1.0, 0.0), fh2.v3f(800.0 - 382, 240, 15);
+	glTexCoord2f(0.0, 0.0), fh2.v3f(800.0 - 382, 210, 15);
 	glEnd();
 
 	// back top

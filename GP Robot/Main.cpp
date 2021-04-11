@@ -35,7 +35,7 @@ head2 h2;
 weapon w;
 
 //================ COMMON =================
-int actionKeyNo = 1;
+int actionKeyNo = 8;
 std::string str = " ";
 std::string walkStr = " ";
 GLenum nonGLUtype = GL_POLYGON;
@@ -50,9 +50,9 @@ GLuint texture;	// texture name
 BITMAP BMP;			// bitmap structure
 HBITMAP hBMP = NULL;	// bitmap handle.
 boolean textureOn = false;
-LPCSTR textureImg = "redMetal2.bmp";
+LPCSTR textureImg = "greenMetal.bmp";
 LPCSTR textureImg2 = "universe.bmp";
-int textureCount = 0;
+int textureCount = 1;
 
 //=============== LIGHTING ================
 float lightDir = 0;
@@ -100,7 +100,7 @@ int walkCount = 0;
 
 //================= VIEW =================
 char view = 'p';
-boolean isOrtho = true, sideView = true;
+boolean isOrtho = false, sideView = true;
 float zoom = 1, cameraTranslateSpeed = 0.1, rSpeedP = 10.0, isWalkZLimite = false;
 float xT = 0, yT = 0, zT = 0, ry = 0;
 char rotation = ' ';
@@ -248,20 +248,20 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			if (actionKeyNo == 6) {
 				textureCount++;
 				if (textureCount == 1) {
-					textureImg = "redMetal.bmp";
+					textureImg = "redMetal2.bmp";
 				}
 				if (textureCount == 2) {
-					textureImg = "redMetal2.bmp";
-				}/*
-				if (textureCount == 3) {
-					textureImg = "redMetal.bmp";
+					textureImg = "blackMetal.bmp";
 				}
+				if (textureCount == 3) {
+					textureImg = "greenMetal.bmp";
+				}/*
 				if (textureCount == 4) {
 					textureImg = "redMetal.bmp";
 				}*/
-				if (textureCount == 3) {
+				if (textureCount == 4) {
 					textureCount = 1;
-					textureImg = "redMetal.bmp";
+					textureImg = "redMetal2.bmp";
 				}
 			}
 		} // C
@@ -331,7 +331,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				//view = 'p';
 				glMatrixMode(GL_PROJECTION);
 				glLoadIdentity();
-				gluPerspective(60.0, 1, 10, -10);
+				gluPerspective(60.0, 1, 1, -1);
 				glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
 				//ry = 180;
 			}
@@ -455,10 +455,406 @@ void init() {
 	glEnable(GL_DEPTH_TEST);
 }
 
+void lighting() {
+	//glEnable(GL_LIGHTING);
+	//glLightfv(GL_LIGHT0, GL_AMBIENT, amb); //configure light0, default position at origin
+	//glEnable(GL_LIGHT0); //turn on light
+//glLightfv(GL_LIGHT0, GL_POSITION, posA); //configure light0 position
+	/*float params_[3];
+	if (lightType == GL_AMBIENT)
+		params_[0] = amb[0], params_[1] = amb[1], params_[2] = amb[2];
+	else if (lightType == GL_DIFFUSE)
+		params_[0] = diff[0], params_[1] = diff[1], params_[2] = diff[2];
+	else
+		params_[0] = spec[0], params_[1] = spec[1], params_[2] = spec[2];*/
+
+	posA[0] = lightRX;
+	posA[1] = lightRY;
+	posA[2] = lightRZ;
+
+	posD[0] = lightRX;
+	posD[1] = lightRY;
+	posD[2] = lightRZ;
+
+	posS[0] = lightRX;
+	posS[1] = lightRY;
+	posS[2] = lightRZ;
+
+	if (lightOn)
+		glEnable(GL_LIGHTING);
+	else
+		glDisable(GL_LIGHTING);
+	/*glLightfv(GL_LIGHT0, lightType, params_);
+	glLightfv(GL_LIGHT0, GL_POSITION, posD);
+	glEnable(lightType);
+
+	glLightfv(GL_LIGHT0, lightType, params_);
+	glEnable(GL_LIGHT0);
+	glLightfv(GL_LIGHT0, GL_POSITION, posD);*/
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
+	glLightfv(GL_LIGHT0, GL_POSITION, posA);
+
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, diff);
+	glLightfv(GL_LIGHT1, GL_POSITION, posD);
+
+	glLightfv(GL_LIGHT2, GL_SPECULAR, spec);
+	glLightfv(GL_LIGHT2, GL_POSITION, posS);
+
+
+	if (lightType == GL_AMBIENT) {
+		fh.color('r');
+		glEnable(GL_LIGHT0);
+		glDisable(GL_LIGHT1);
+		glDisable(GL_LIGHT2);
+		//glMaterialfv(GL_FRONT, GL_AMBIENT, diffM);
+	}
+	else if (lightType == GL_DIFFUSE) {
+		fh.color('g');
+		glEnable(GL_LIGHT1);
+		glDisable(GL_LIGHT0);
+		glDisable(GL_LIGHT2);
+		//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffM);
+	}
+	else {
+		fh.color('b');
+		glEnable(GL_LIGHT2);
+		glDisable(GL_LIGHT0);
+		glDisable(GL_LIGHT1);
+		//glMaterialfv(GL_FRONT, GL_SPECULAR, diffM);
+	}
+
+	//glMaterialfv(GL_FRONT, lightType, diffM);
+}
+
+void cameraView() {
+
+	if (actionKeyNo == 2) {
+		glRotatef(ry, 1.0, 0.0, 0);
+	}
+	else {
+		glRotatef(ry + 180, 0.0, 1.0, 0);
+	}
+	if (actionKeyNo == 4) {
+		glTranslatef(xT, yT, zT);
+		//gluLookAt(xT, yT, zT, 1, 1, 1, 1, 0, 0);
+	}
+	if (autoWalk) {
+		glTranslatef(0, 0, zT);
+	}
+
+}
+
+GLuint addTexture(LPCSTR textureName) {
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+
+	HBITMAP hBMP = (HBITMAP)LoadImage(GetModuleHandle(NULL),
+		textureName, IMAGE_BITMAP, 0, 0,
+		LR_CREATEDIBSECTION | LR_LOADFROMFILE);
+
+	GetObject(hBMP, sizeof(BMP), &BMP);
+
+	// Assign texture to polygon
+	if (textureOn) {
+		fh.color('w'), glEnable(GL_TEXTURE_2D);
+	}
+	else {
+		glDisable(GL_TEXTURE_2D);
+	}
+
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, BMP.bmWidth, BMP.bmHeight, 0,
+		GL_BGR_EXT, GL_UNSIGNED_BYTE, BMP.bmBits);
+	DeleteObject(hBMP);
+
+	return texture;
+}
+
+void removeTexture(GLuint* textures) {
+	glDeleteTextures(1, textures);
+	glDisable(GL_TEXTURE_2D);
+}
+
+void animation() {
+	//==================== test =========================
+	{
+		testRotate++;
+	}
+	//===================================================
+
+	//==================== body =========================
+	{
+		int angle = 10, angle2 = angle + 1, angle3 = angle2 + 1, angle4 = angle - 5, an = 5;
+
+		// press 'B' to bow or straighten the body 
+		if (bow) {
+			if (AR1 < angle4) {
+				AR1 += 0.1;
+			}
+			if (AR1 == angle4) {
+				AR1 = angle4;
+			}
+
+			if (AR0 < angle) {
+				AR0 += 0.1;
+			}
+			if (AR0 == angle) {
+				AR0 = angle;
+			}
+
+			if (AR3 < angle2) {
+				AR3 += 0.1;
+				if (AR < an) {
+					AR += 0.1;
+				}
+			}
+			if (AR3 == angle2) {
+				AR3 = angle2;
+			}
+
+			if (AR4 < angle3) {
+				AR4 += 0.1;
+				if (AR2 < (an + an)) {
+					AR2 += 0.1;
+				}
+			}
+			if (AR4 == angle3) {
+				AR4 = angle3;
+			}
+		}
+
+		if (!bow) {
+			if (AR1 >= 0) {
+				AR1 -= 0.1;
+			}
+			if (AR1 == 0) {
+				AR1 = 0;
+			}
+
+			if (AR0 >= 0) {
+				AR0 -= 0.1;
+			}
+			if (AR0 == 0) {
+				AR0 = 0;
+			}
+
+			if (AR3 >= 0) {
+				AR3 -= 0.1;
+				if (AR >= 0) {
+					AR -= 0.1;
+				}
+			}
+			if (AR3 == 0) {
+				AR3 = 0;
+			}
+
+			if (AR4 >= 0) {
+				AR4 -= 0.1;
+				if (AR2 >= 0) {
+					AR2 -= 0.1;
+				}
+			}
+			if (AR4 == 0) {
+				AR4 = 0;
+			}
+		}
+	}
+	//===================================================
+
+	// =================== head =========================
+	{
+
+		if (openMask && maskRotate <= 30) {
+			maskRotate += maskRotateSpeed;
+		}
+		else if (!openMask && maskRotate > 0) {
+			maskRotate -= maskRotateSpeed;
+		}
+
+		if (nod && nodRotate < 20) {
+			nodRotate += nodRotateSpeed;
+		}
+		else if (!nod && nodRotate > 0) {
+			nodRotate -= nodRotateSpeed;
+		}
+	}
+	// ==================================================
+
+	// =============== arm rotate =======================
+	{
+		if (rotation == 'z') {
+			if (armUpperRotateZ && armUpperZ < 60 && !stop) {
+				armUpperZ++;
+			}
+			else if (!armUpperRotateZ && armUpperZ >= 0 && !stop) {
+				armUpperZ--;
+			}
+		}
+		else if (rotation == 'y') {
+			if (armUpperRotateY && armUpperY < 45 && !stop) {
+				armUpperY++;
+			}
+			else if (!armUpperRotateY && armUpperY > -45 && !stop) {
+				armUpperY--;
+			}
+		}
+
+		//// auto walk (hand)
+		//if (walkCount == 1) {
+		//	armUpperY++;
+		//}
+		//else if (walkCount == 2) {
+		//	armUpperY--;
+		//}
+
+		// for right hand rotate
+		if (armTurnUp && !armTurnDown && armLowerRotate > -30 && !stop) {
+			armLowerRotate -= armRSpeed;
+		}
+		else if (armTurnDown && !armTurnUp && armLowerRotate < 90 && !stop) {
+			armLowerRotate += armRSpeed;
+		}
+
+		// finger animation
+		if (fingerBend && fingerRotate <= 45 && !stop)
+			fingerRotate += fingerRSpeed;
+		else if (!fingerBend && fingerRotate > 45 && !stop) {
+			fingerRotate -= fingerRSpeed;
+		}
+	}
+	// =================================================
+
+	// ============== Lower Arm lift ===================
+	{
+		if (armAngle == 110) {
+			armAngle = 110;
+		}
+		else if (armAngle == 0) {
+			armAngle = 0;
+			armDown = false;
+		}
+
+		if (armUp == true && armAngle <= 110 && !stop) {
+			armAngle += armRSpeed;
+		}
+		else if (armDown == true && !stop) {
+			armAngle -= armRSpeed;
+		}
+	}
+	// =================================================
+
+	// ================== Leg ==========================
+	{
+		// for the leg rotate to back angle 
+		if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -30)
+			rLeftLeg += legLSpeed;
+		else if (raiseRightLeg && rRightLeg < 45 || !raiseRightLeg && rRightLeg > -30)
+			rRightLeg += legRSpeed;
+
+		// auto walk
+		if (autoWalk && !isWalkZLimite) {
+			zT += cameraTranslateSpeed / 50;
+		}
+
+		if (walkCount == 1) {
+			rLeftLeg += walkSpeed, rRightLeg -= walkSpeed, armUpperY -= armRotateSpeed;
+		}
+		else if (walkCount == 2) {
+			rLeftLeg -= walkSpeed, rRightLeg += walkSpeed, armUpperY += armRotateSpeed;
+		}
+
+		if (rLeftLeg == 30) {
+			walkCount = 2;
+		}
+		else if (rRightLeg == 30) {
+			walkCount = 1;
+		}
+
+		if (zT > 1) {
+			isWalkZLimite = true;
+			walkCount = 0;
+		}
+
+		//if (autoWalk) {
+		//	//walkCount++;			
+		//	if (walkCount == 1) { //by default turned off
+		//	}
+		//	else if (walkCount % 2 == 0) {
+		//		//llCount = 0;
+		//		/*for(int i = 0; i < 2; i++)
+		//			if (llCount++ % 2 == 0) {
+		//				raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
+		//			}
+		//			else
+		//				raiseLeftLeg = false, llCount++, legLSpeed = -2;*/
+		//		/*raiseLeftLeg = true, raiseRightLeg = false;
+		//		legLSpeed = 2, legRSpeed = -2;*/
+		//		/*if (llCount % 2 == 0) {
+		//			raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
+		//		}
+		//		else
+		//			raiseLeftLeg = false, llCount++, legLSpeed = -2;*/
+		//		if (rLeftLeg < 45)
+		//			legLSpeed = -2;
+		//		else if (rLeftLeg > -35)
+		//			legLSpeed = 2;
+		//	}
+		//	else if (walkCount % 2 != 0){
+		//		//lrCount = 0;
+		//		/*for (int i = 0; i < 2; i++)
+		//			if (lrCount % 2 == 0)
+		//				raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
+		//			else
+		//				raiseRightLeg = false, lrCount++, legRSpeed = -2;*/
+		//		/*if (lrCount % 2 == 0)
+		//			raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
+		//		else
+		//			raiseRightLeg = false, lrCount++, legRSpeed = -2;*/
+		//		//legRSpeed = 2, legLSpeed = -2;
+		//		//legRSpeed = -2;
+		//	}
+		//	walkCount++;
+		//}
+		//else
+		//	wCount = 0, walkCount = 0, autoWalk = false;
+
+
+	}
+	// =================================================
+
+	// ================== Gun ==========================
+	{
+		if (gunRotateOn) {
+			gunRotating++;
+		}
+	}
+	// =================================================
+
+	// ================= sword =========================
+	{
+
+		if (swordOn && swordOpenOn) {
+			if (swordMiddle < 0.69) {
+				swordMiddle += 0.01;
+			}
+		}
+		else if (swordOn && !swordOpenOn) {
+			if (swordMiddle > 0.01) {
+				swordMiddle -= 0.01;
+			}
+		}
+	}
+	// =================================================
+}
+
 //============================= DANNY =================================
 
 // head
 void helmet() {
+	GLuint textures2[2];
 	glPushMatrix();
 	glRotatef(nodRotate, 1, 0, 0);
 
@@ -487,12 +883,31 @@ void helmet() {
 	glTranslatef(0, 0, -0.65); // back to original place
 	glRotatef(-maskRotate, 1, 0, 0);
 	glTranslatef(0, 0, 0.65); // go to center point
+	
 	h.mask();
-	glPopMatrix();
 
 	glPopMatrix();
 
+	glPushMatrix();
+	//glScalef(0.9, 0.9, 0.9);
+
+	if (textureOn || !textureOn) {
+		textures2[0] = addTexture("dannyFace.bmp");
+		glEnable(GL_TEXTURE_2D);
+		glBegin(GL_POLYGON);
+		glTexCoord2f(0.0, 1.0), fh.v3f(800.0 - 500.0, 260.0, 53.0);
+		glTexCoord2f(0.1, 0.0), fh.v3f(800.0 - 467.5, 517.5, 75);
+		glTexCoord2f(0.9, 0.0), fh.v3f(467.5, 517.5, 75);
+		glTexCoord2f(1.0, 1.0), fh.v3f(500.0, 260.0, 53.0);
+		glEnd();
+		glDeleteTextures(0, &textures2[0]);
+		glDisable(GL_TEXTURE_2D);
+	}
+	
+	textures2[1] = addTexture(textureImg);
+	glPopMatrix();
 	h.btmCover();
+	glPopMatrix();
 
 	// right
 	glTranslatef(fh.xP(-115), fh.yP(10), -fh.zP(55));
@@ -2278,460 +2693,69 @@ void robotBody2() {
 }
 
 void skyBox() {
-	glDisable(GL_DEPTH_TEST);
-
+	glEnable(GL_TEXTURE_2D);
+	glPushMatrix();
+	glRotatef(-90, 1, 0, 0);
 	fh.color('w');
-	//textureImg = "universe.bmp";
-	//addTexture();
-	fh.sphere(GLUtype, ORTHO_VIEW * 2, 30, 30);
-	//removeTexture();
-	glEnable(GL_DEPTH_TEST);
+	fh.sphere(GLUtype, ORTHO_VIEW * 2, 50, 50);
+	glPopMatrix();
+}
+
+void ground () {
+	glEnable(GL_TEXTURE_2D);
+	glPushMatrix();
+	glTranslatef(0, -fh.yP(300), 0);
+	glRotatef(-90, 1, 0, 0);
+	glRotatef(-90, 0, 0, 1);
+	fh.disk(GLU_FILL, 0, FRUSTUM_VIEW * 1.85, 50, 1);
+	glPopMatrix();
 }
 
 //============================= LIANA =================================
 
-void lighting() {
-	//glEnable(GL_LIGHTING);
-	//glLightfv(GL_LIGHT0, GL_AMBIENT, amb); //configure light0, default position at origin
-	//glEnable(GL_LIGHT0); //turn on light
-//glLightfv(GL_LIGHT0, GL_POSITION, posA); //configure light0 position
-	/*float params_[3];
-	if (lightType == GL_AMBIENT)
-		params_[0] = amb[0], params_[1] = amb[1], params_[2] = amb[2];
-	else if (lightType == GL_DIFFUSE)
-		params_[0] = diff[0], params_[1] = diff[1], params_[2] = diff[2];
-	else
-		params_[0] = spec[0], params_[1] = spec[1], params_[2] = spec[2];*/
-
-	posA[0] = lightRX;
-	posA[1] = lightRY;
-	posA[2] = lightRZ;
-
-	posD[0] = lightRX;
-	posD[1] = lightRY;
-	posD[2] = lightRZ;
-
-	posS[0] = lightRX;
-	posS[1] = lightRY;
-	posS[2] = lightRZ;
-
-	if (lightOn)
-		glEnable(GL_LIGHTING);
-	else
-		glDisable(GL_LIGHTING);
-	/*glLightfv(GL_LIGHT0, lightType, params_);
-	glLightfv(GL_LIGHT0, GL_POSITION, posD);
-	glEnable(lightType);
-
-	glLightfv(GL_LIGHT0, lightType, params_);
-	glEnable(GL_LIGHT0);
-	glLightfv(GL_LIGHT0, GL_POSITION, posD);*/
-
-	glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
-	glLightfv(GL_LIGHT0, GL_POSITION, posA);
-
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, diff);
-	glLightfv(GL_LIGHT1, GL_POSITION, posD);
-
-	glLightfv(GL_LIGHT2, GL_SPECULAR, spec);
-	glLightfv(GL_LIGHT2, GL_POSITION, posS);
-
-
-	if (lightType == GL_AMBIENT) {
-		fh.color('r');
-		glEnable(GL_LIGHT0);
-		glDisable(GL_LIGHT1);
-		glDisable(GL_LIGHT2);
-		//glMaterialfv(GL_FRONT, GL_AMBIENT, diffM);
-	}
-	else if (lightType == GL_DIFFUSE) {
-		fh.color('g');
-		glEnable(GL_LIGHT1);
-		glDisable(GL_LIGHT0);
-		glDisable(GL_LIGHT2);
-		//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffM);
-	}
-	else {
-		fh.color('b');
-		glEnable(GL_LIGHT2);
-		glDisable(GL_LIGHT0);
-		glDisable(GL_LIGHT1);
-		//glMaterialfv(GL_FRONT, GL_SPECULAR, diffM);
-	}
-
-	//glMaterialfv(GL_FRONT, lightType, diffM);
-}
-
-void switchView() {
+void display() {
+	GLuint textures[10];
+	init();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	if (actionKeyNo == 2) {
-		glRotatef(ry, 1.0, 0.0, 0);
-	}
-	else {
-		glRotatef(ry, 0.0, 1.0, 0);
-	}
-	if (actionKeyNo == 4) {
-		glTranslatef(xT, yT, zT);
-		//gluLookAt(xT, yT, zT, 1, 1, 1, 1, 0, 0);
-	}
-	if (autoWalk) {
-		glTranslatef(0, 0, zT);
-	}
 	glScalef(zoom, zoom, zoom);
-}
-
-GLuint addTexture(LPCSTR textureName) {
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-
-	HBITMAP hBMP = (HBITMAP)LoadImage(GetModuleHandle(NULL),
-		textureName, IMAGE_BITMAP, 0, 0,
-		LR_CREATEDIBSECTION | LR_LOADFROMFILE);
-
-	GetObject(hBMP, sizeof(BMP), &BMP);
-
-	// Assign texture to polygon
-	if (textureOn) {
-		fh.color('w'), glEnable(GL_TEXTURE_2D);
-	}
-	else {
-		glDisable(GL_TEXTURE_2D);
-	}
-
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, BMP.bmWidth, BMP.bmHeight, 0,
-		GL_BGR_EXT, GL_UNSIGNED_BYTE, BMP.bmBits);
-	DeleteObject(hBMP);
-
-	return texture;
-}
-
-void removeTexture(GLuint *textures) {
-	glDeleteTextures(1, textures);
-	glDisable(GL_TEXTURE_2D);
-}
-
-void animation() {
-	//==================== test =========================
-	{
-		testRotate++;
-	}
-	//===================================================
-
-	//==================== body =========================
-	{
-		int angle = 10, angle2 = angle + 1, angle3 = angle2 + 1, angle4 = angle - 5, an = 5;
-
-		// press 'B' to bow or straighten the body 
-		if (bow) {
-			if (AR1 < angle4) {
-				AR1 += 0.1;
-			}
-			if (AR1 == angle4) {
-				AR1 = angle4;
-			}
-
-			if (AR0 < angle) {
-				AR0 += 0.1;
-			}
-			if (AR0 == angle) {
-				AR0 = angle;
-			}
-
-			if (AR3 < angle2) {
-				AR3 += 0.1;
-				if (AR < an) {
-					AR += 0.1;
-				}
-			}
-			if (AR3 == angle2) {
-				AR3 = angle2;
-			}
-
-			if (AR4 < angle3) {
-				AR4 += 0.1;
-				if (AR2 < (an + an)) {
-					AR2 += 0.1;
-				}
-			}
-			if (AR4 == angle3) {
-				AR4 = angle3;
-			}
-		}
-
-		if (!bow) {
-			if (AR1 >= 0) {
-				AR1 -= 0.1;
-			}
-			if (AR1 == 0) {
-				AR1 = 0;
-			}
-
-			if (AR0 >= 0) {
-				AR0 -= 0.1;
-			}
-			if (AR0 == 0) {
-				AR0 = 0;
-			}
-
-			if (AR3 >= 0) {
-				AR3 -= 0.1;
-				if (AR >= 0) {
-					AR -= 0.1;
-				}
-			}
-			if (AR3 == 0) {
-				AR3 = 0;
-			}
-
-if (AR4 >= 0) {
-	AR4 -= 0.1;
-	if (AR2 >= 0) {
-		AR2 -= 0.1;
-	}
-}
-if (AR4 == 0) {
-	AR4 = 0;
-}
-		}
-	}
-	//===================================================
-
-	// =================== head =========================
-	{
-
-	if (openMask && maskRotate <= 30) {
-		maskRotate += maskRotateSpeed;
-	}
-	else if (!openMask && maskRotate > 0) {
-		maskRotate -= maskRotateSpeed;
-	}
-
-	if (nod && nodRotate < 20) {
-		nodRotate += nodRotateSpeed;
-	}
-	else if (!nod && nodRotate > 0) {
-		nodRotate -= nodRotateSpeed;
-	}
-	}
-	// ==================================================
-
-	// =============== arm rotate =======================
-	{
-		if (rotation == 'z') {
-			if (armUpperRotateZ && armUpperZ < 60 && !stop) {
-				armUpperZ++;
-			}
-			else if (!armUpperRotateZ && armUpperZ >= 0 && !stop) {
-				armUpperZ--;
-			}
-		}
-		else if (rotation == 'y') {
-			if (armUpperRotateY && armUpperY < 45 && !stop) {
-				armUpperY++;
-			}
-			else if (!armUpperRotateY && armUpperY > -45 && !stop) {
-				armUpperY--;
-			}
-		}
-
-		//// auto walk (hand)
-		//if (walkCount == 1) {
-		//	armUpperY++;
-		//}
-		//else if (walkCount == 2) {
-		//	armUpperY--;
-		//}
-
-		// for right hand rotate
-		if (armTurnUp && !armTurnDown && armLowerRotate > -30 && !stop) {
-			armLowerRotate -= armRSpeed;
-		}
-		else if (armTurnDown && !armTurnUp && armLowerRotate < 90 && !stop) {
-			armLowerRotate += armRSpeed;
-		}
-
-		// finger animation
-		if (fingerBend && fingerRotate <= 45 && !stop)
-			fingerRotate += fingerRSpeed;
-		else if (!fingerBend && fingerRotate > 45 && !stop) {
-			fingerRotate -= fingerRSpeed;
-		}
-	}
-	// =================================================
-
-	// ============== Lower Arm lift ===================
-	{
-		if (armAngle == 110) {
-			armAngle = 110;
-		}
-		else if (armAngle == 0) {
-			armAngle = 0;
-			armDown = false;
-		}
-
-		if (armUp == true && armAngle <= 110 && !stop) {
-			armAngle += armRSpeed;
-		}
-		else if (armDown == true && !stop) {
-			armAngle -= armRSpeed;
-		}
-	}
-	// =================================================
-
-	// ================== Leg ==========================
-	{
-		// for the leg rotate to back angle 
-		if (raiseLeftLeg && rLeftLeg < 45 || !raiseLeftLeg && rLeftLeg > -30)
-			rLeftLeg += legLSpeed;
-		else if (raiseRightLeg && rRightLeg < 45 || !raiseRightLeg && rRightLeg > -30)
-			rRightLeg += legRSpeed;
-
-		// auto walk
-		if (autoWalk && !isWalkZLimite) {
-			zT += cameraTranslateSpeed / 100;
-		}
-
-		if (walkCount == 1) {
-			rLeftLeg += walkSpeed, rRightLeg -= walkSpeed, armUpperY -= armRotateSpeed;
-		}
-		else if (walkCount == 2) {
-			rLeftLeg -= walkSpeed, rRightLeg += walkSpeed, armUpperY += armRotateSpeed;
-		}
-		
-		if (rLeftLeg == 30) {
-			walkCount = 2;
-		}
-		else if (rRightLeg == 30) {
-			walkCount = 1;
-		}
-
-		if (zT > 0.5) {
-			isWalkZLimite = true;
-			walkCount = 0;
-		}
-		
-		//if (autoWalk) {
-		//	//walkCount++;			
-		//	if (walkCount == 1) { //by default turned off
-		//	}
-		//	else if (walkCount % 2 == 0) {
-		//		//llCount = 0;
-		//		/*for(int i = 0; i < 2; i++)
-		//			if (llCount++ % 2 == 0) {
-		//				raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
-		//			}
-		//			else
-		//				raiseLeftLeg = false, llCount++, legLSpeed = -2;*/
-		//		/*raiseLeftLeg = true, raiseRightLeg = false;
-		//		legLSpeed = 2, legRSpeed = -2;*/
-		//		/*if (llCount % 2 == 0) {
-		//			raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
-		//		}
-		//		else
-		//			raiseLeftLeg = false, llCount++, legLSpeed = -2;*/
-		//		if (rLeftLeg < 45)
-		//			legLSpeed = -2;
-		//		else if (rLeftLeg > -35)
-		//			legLSpeed = 2;
-		//	}
-		//	else if (walkCount % 2 != 0){
-		//		//lrCount = 0;
-		//		/*for (int i = 0; i < 2; i++)
-		//			if (lrCount % 2 == 0)
-		//				raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
-		//			else
-		//				raiseRightLeg = false, lrCount++, legRSpeed = -2;*/
-		//		/*if (lrCount % 2 == 0)
-		//			raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
-		//		else
-		//			raiseRightLeg = false, lrCount++, legRSpeed = -2;*/
-		//		//legRSpeed = 2, legLSpeed = -2;
-		//		//legRSpeed = -2;
-		//	}
-		//	walkCount++;
-		//}
-		//else
-		//	wCount = 0, walkCount = 0, autoWalk = false;
-
-
-	}
-	// =================================================
-
-	// ================== Gun ==========================
-	{
-		if (gunRotateOn) {
-			gunRotating++;
-		}
-	}
-	// =================================================
-
-	// ================= sword =========================
-	{
-		
-		if (swordOn && swordOpenOn) {
-			if (swordMiddle < 0.69) {
-				swordMiddle += 0.01;
-			}
-		}
-		else if (swordOn && !swordOpenOn) {
-			if (swordMiddle > 0.01) {
-				swordMiddle -= 0.01;
-			}
-		}
-	}
-	// =================================================
-}
-
-void display(){
-	GLuint textures[3];
-	init();
 
 	// sky box
 	textures[0] = addTexture("sky.bmp");
-	fh.sphere(GLUtype, ORTHO_VIEW * 2, 50, 50);
+	skyBox();
 	glDeleteTextures(1, &textures[0]);
 
-	switchView();
+	// ground
+	textures[1] = addTexture("groundGrass.bmp");
+	ground();
+	glDeleteTextures(1, &textures[1]);
 
 	animation();
 
 	lighting();
 
-	textures[1] = addTexture(textureImg);
+	textures[2] = addTexture(textureImg);
 
 	switch (actionKeyNo) {
-	case 1:
-		glPushMatrix();
-		robotBody2();
-		robotWeapon();
-		glPopMatrix();
-		break;
-	
 	case 8:
 		glPushMatrix();
 		glScalef(zoom, zoom, zoom);
-		//glTranslatef(xT, yT, zT);
-		//glRotatef(90, 0, 1, 0);
 		glPushMatrix();
-		//w.gun(gunRotating, gunXRotating, gunFireOn, bulletShot);
-		w.sword(swordMiddle);
+		cameraView();
+		helmet();
 		glPopMatrix();
 		glPopMatrix();
 		break;
 	default:
 		glPushMatrix();
-		robotBody2();
+		cameraView();
+		robotBody();
 		robotWeapon();
 		glPopMatrix();
 		break;
 	}
-	glDeleteTextures(1, &textures[1]);
+	glDeleteTextures(1, &textures[2]);
 	glDisable(GL_TEXTURE_2D);
-	//removeTexture();
 }
 //--------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
@@ -2778,6 +2802,10 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 	/*glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);*/
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(60.0, 1, 1, -1);
+	glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
 
 	while (true)
 	{

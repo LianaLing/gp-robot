@@ -160,6 +160,10 @@
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="blackMetal.bmp" />
+    <Image Include="dannyFace.bmp" />
+    <Image Include="greenMetal.bmp" />
+    <Image Include="groundGrass.bmp" />
     <Image Include="redMetal.bmp" />
     <Image Include="redMetal2.bmp" />
     <Image Include="sky.bmp" />
