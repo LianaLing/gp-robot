@@ -235,7 +235,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 			rotation = ' ';
 
-			walkCount = 0, autoWalk = 0, zT = 0;
+			walkCount = 0, autoWalk = 0, zT = 0, isWalkZLimite = false;
 		}
 		else if (wParam == 0x41) { // A
 			if (actionKeyNo == 5)
