@@ -47,7 +47,7 @@ GLenum GLUtype = GLU_FILL;
 float testRotate = 0;
 boolean stop = false;
 ISoundEngine* SoundEngine = createIrrKlangDevice();
-
+float xxT = 0, yyT = 0;
 //================ TEXTURE ================
 GLuint texture;	// texture name
 BITMAP BMP;			// bitmap structure
@@ -62,17 +62,18 @@ float lightDir = 0;
 float lightRX = 0, lightRY = 0, lightRZ = 0;
 GLenum lightType = GL_SPECULAR;
 
-float amb[] = {1.0, 0, 0}; //ambient
+float amb[] = {1.0, 1.0, 1.0}; //ambient
 //float posDX = lightRX, posDY = light, posDY = 0;
 float posA[] = { lightRX, lightRY, lightRZ};
-float diffA[] = { 1.0, 0.0, 0.0 };
+//float diffA[] = { 1.0, 0.0, 0.0 };
 
 float diff[] = { 0.0, 1.0, 0.0 }; //diffuse
-float diffM[] = { 0.0, 1.0, 0.0 };
+float diffD[] = { 0.0, 1.0, 0.0 };
 float posD[] = { lightRX, lightRY, lightRZ};
+float ambM[] = {1.0, 0.0, 0.0};
 
 float spec[] = { 0.0, 0.0, 1.0 }; //specular
-float specM[] = { 1.0, 0.0, 0.0 };
+float specM[] = { 0.0, 0.0, 1.0 };
 float posS[] = { lightRX, lightRY, lightRZ};
 boolean lightOn = false;
 float lightCount = 1;
@@ -203,6 +204,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else if (rotation == 'y') {
 				armDirection = +1.0, armTurnDown = true, armTurnUp = false;
 			}
+			else if (actionKeyNo == 9){
+				xxT -= 0.5;
+			}
 		}
 		else if (wParam == VK_RIGHT) {
 			stop = false;
@@ -219,6 +223,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 			else if (rotation == 'y') {
 				armDirection = -1.0, armTurnDown = true, armTurnUp = false;
+			}
+			else if (actionKeyNo == 9) {
+				xxT += 0.5;
 			}
 		}
 		else if (wParam == VK_SPACE) {
@@ -332,6 +339,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				//view = 'o';
 				glMatrixMode(GL_PROJECTION);
 				glLoadIdentity();
+				glTranslatef(xxT, yyT, 0.0);
 				glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);
 				//glOrtho(-8.0 * 16 / 9, 8.0 * 16 / 9, -8.0, 8.0, -8.0, 8.0);
 			}
@@ -339,7 +347,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				//view = 'p';
 				glMatrixMode(GL_PROJECTION);
 				glLoadIdentity();
-				gluPerspective(60.0, 1, 1, -1);
+				//glTranslatef(xxT, yyT, 0.0);
+				gluPerspective(60.0, 1, -1, 1);
 				glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
 				//ry = 180;
 			}
@@ -459,7 +468,7 @@ bool initPixelFormat(HDC hdc)
 void init() {
 	glClearColor(0.5, 0.5, 0.5, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_TEST);
 }
 
 void lighting() {
@@ -514,21 +523,21 @@ void lighting() {
 		glEnable(GL_LIGHT0);
 		glDisable(GL_LIGHT1);
 		glDisable(GL_LIGHT2);
-		//glMaterialfv(GL_FRONT, GL_AMBIENT, diffM);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, ambM);
 	}
 	else if (lightType == GL_DIFFUSE) {
 		fh.color('g');
 		glEnable(GL_LIGHT1);
 		glDisable(GL_LIGHT0);
 		glDisable(GL_LIGHT2);
-		//glMaterialfv(GL_FRONT, GL_DIFFUSE, diffM);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, diffD);
 	}
 	else {
 		fh.color('b');
 		glEnable(GL_LIGHT2);
 		glDisable(GL_LIGHT0);
 		glDisable(GL_LIGHT1);
-		//glMaterialfv(GL_FRONT, GL_SPECULAR, diffM);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, specM);
 	}
 
 	//glMaterialfv(GL_FRONT, lightType, diffM);
@@ -899,7 +908,7 @@ void helmet() {
 	//glScalef(0.9, 0.9, 0.9);
 
 	if (textureOn || !textureOn) {
-		textures2[0] = addTexture("dannyFace.bmp");
+		//textures2[0] = addTexture("dannyFace.bmp");
 		glEnable(GL_TEXTURE_2D);
 		glBegin(GL_POLYGON);
 		glTexCoord2f(0.0, 1.0), fh.v3f(800.0 - 500.0, 260.0, 53.0);
@@ -2724,8 +2733,12 @@ void display() {
 	GLuint textures[10];
 
 	init();
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glTranslatef(xxT, yyT, 0.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
 	glScalef(zoom, zoom, zoom);
 	
 	// sky box
