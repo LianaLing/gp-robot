@@ -14,7 +14,7 @@ using namespace W;
 
 function fh3;
 
-GLenum type3 = GL_LINE_LOOP, gltype3 = GL_POLYGON;
+GLenum glQuad3 = GL_QUADS, glLine3 = GL_LINE_LOOP, glTri3 = GL_TRIANGLES;
 GLenum glutype = GLU_FILL, glutype4 = GLU_LINE;
 float baseRadius = 0.2, topRadius = baseRadius, height = 0.5, slice = 30, stack = slice;
 float baseRadius2 = 0.18, topRadius2 = baseRadius2;
@@ -239,7 +239,7 @@ void weapon::gun(float gunRotating, float gunXRotating, boolean gunFireOn, float
 	glPushMatrix();
 	glTranslatef(-0.15, 0.15, -0.15);
 	fh3.color('w');
-	fh3.cube(gltype3, 0.3, 3);
+	fh3.cube(glQuad3, 0.3, 3);
 	glPopMatrix();
 	glPopMatrix();
 
@@ -283,12 +283,6 @@ void weapon::sword(float swordMiddle) {
 	glRotatef(90, 0, 1, 0);
 	fh3.color('b');
 	fh3.cylinder(glutype, 0.08, 0.08, 0.7, slice, stack);
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(0, 0, 0.7);
-	//fh3.color('c');
-	//fh3.disk(glutype, 0, 0.08, slice, 1);
 	glPopMatrix();
 
 	// middle
