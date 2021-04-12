@@ -37,7 +37,7 @@ head2 h2;
 weapon w;
 
 //================ COMMON =================
-int actionKeyNo = 8;
+int actionKeyNo = 1;
 std::string str = " ";
 std::string walkStr = " ";
 GLenum nonGLUtype = GL_POLYGON;
