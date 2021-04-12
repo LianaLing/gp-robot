@@ -4,6 +4,7 @@
 #include <math.h>
 #include <iostream>
 #include <string>
+#include <irrKlang.h>
 #include "Function.h"
 #include "Body.h"
 #include "Body2.h"
@@ -17,6 +18,7 @@ using namespace B2;
 using namespace H;
 using namespace H2;
 using namespace W;
+using namespace irrklang;
 
 #define WINDOW_TITLE "IRON-MAN"
 #define CW 10
@@ -44,13 +46,14 @@ GLenum GLUtype = GLU_FILL;
 //GLenum GLUtype = GLU_LINE;
 float testRotate = 0;
 boolean stop = false;
+ISoundEngine* SoundEngine = createIrrKlangDevice();
 
 //================ TEXTURE ================
 GLuint texture;	// texture name
 BITMAP BMP;			// bitmap structure
 HBITMAP hBMP = NULL;	// bitmap handle.
 boolean textureOn = false;
-LPCSTR textureImg = "greenMetal.bmp";
+LPCSTR textureImg = "redMetal.bmp";
 LPCSTR textureImg2 = "universe.bmp";
 int textureCount = 1;
 
@@ -249,12 +252,16 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				textureCount++;
 				if (textureCount == 1) {
 					textureImg = "redMetal2.bmp";
+					SoundEngine->stopAllSounds();
 				}
 				if (textureCount == 2) {
 					textureImg = "blackMetal.bmp";
+					SoundEngine->stopAllSounds();
 				}
 				if (textureCount == 3) {
-					textureImg = "greenMetal.bmp";
+					textureImg = "greenMetal2.bmp";
+					
+					SoundEngine->play2D("GreenLight.mp3", true);
 				}/*
 				if (textureCount == 4) {
 					textureImg = "redMetal.bmp";
@@ -262,6 +269,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				if (textureCount == 4) {
 					textureCount = 1;
 					textureImg = "redMetal2.bmp";
+					SoundEngine->stopAllSounds();
 				}
 			}
 		} // C
@@ -351,7 +359,6 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				stop = true;
 		} // S
 		else if (wParam == 0x54) { // T
-			
 			if (actionKeyNo == 6) {
 				textureOn = !textureOn;
 				h.textureOn(textureOn);
@@ -2715,11 +2722,12 @@ void ground () {
 
 void display() {
 	GLuint textures[10];
+
 	init();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glScalef(zoom, zoom, zoom);
-
+	
 	// sky box
 	textures[0] = addTexture("sky.bmp");
 	skyBox();
@@ -2807,6 +2815,8 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 	gluPerspective(60.0, 1, 1, -1);
 	glFrustum(-FRUSTUM_VIEW, FRUSTUM_VIEW, -FRUSTUM_VIEW, FRUSTUM_VIEW, 1.0, FRUSTUM_VIEW * 2 + 1.0);
 
+	
+	
 	while (true)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -2816,9 +2826,9 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-
+		
 		display();
-
+		
 		SwapBuffers(hdc);
 	}
 
