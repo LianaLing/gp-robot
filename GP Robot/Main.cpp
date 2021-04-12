@@ -65,10 +65,10 @@ GLenum lightType = GL_SPECULAR;
 float amb[] = {1.0, 1.0, 1.0}; //ambient
 //float posDX = lightRX, posDY = light, posDY = 0;
 float posA[] = { lightRX, lightRY, lightRZ};
-//float diffA[] = { 1.0, 0.0, 0.0 };
+float ambA[] = { 0.0, 1.0, 0.0 };
 
 float diff[] = { 0.0, 1.0, 0.0 }; //diffuse
-float diffD[] = { 0.0, 1.0, 0.0 };
+float diffM[] = { 0.0, 1.0, 0.0 };
 float posD[] = { lightRX, lightRY, lightRZ};
 float ambM[] = {1.0, 0.0, 0.0};
 
@@ -468,7 +468,7 @@ bool initPixelFormat(HDC hdc)
 void init() {
 	glClearColor(0.5, 0.5, 0.5, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void lighting() {
@@ -530,13 +530,13 @@ void lighting() {
 		glEnable(GL_LIGHT1);
 		glDisable(GL_LIGHT0);
 		glDisable(GL_LIGHT2);
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, diffD);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, diffM);
 	}
 	else {
 		fh.color('b');
-		glEnable(GL_LIGHT2);
-		glDisable(GL_LIGHT0);
-		glDisable(GL_LIGHT1);
+		//glEnable(GL_LIGHT2);
+		glEnable(GL_LIGHT0);
+		glEnable(GL_LIGHT1);
 		glMaterialfv(GL_FRONT, GL_SPECULAR, specM);
 	}
 
