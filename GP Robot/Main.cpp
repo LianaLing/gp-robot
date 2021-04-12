@@ -46,7 +46,7 @@ GLenum GLUtype = GLU_FILL;
 //GLenum GLUtype = GLU_LINE;
 float testRotate = 0;
 boolean stop = false;
-ISoundEngine* SoundEngine = createIrrKlangDevice();
+
 float xxT = 0, yyT = 0;
 //================ TEXTURE ================
 GLuint texture;	// texture name
@@ -114,6 +114,10 @@ boolean gunOn = false, gunRotateOn = false, gunFireOn = false, swordOn = false, 
 float gunRotating = 0, gunXRotating = 0, bulletShot = 0;
 float swordMiddle = 0;
 
+//================= MUSIC =================
+ISoundEngine* SoundEngine = createIrrKlangDevice();
+boolean isSoundOn = false;
+
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
@@ -166,8 +170,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else if (actionKeyNo == 5) {	//lighting
 				lightRX = 0, lightRY = 1.0, lightRZ = 0;
 			}
-			else if (actionKeyNo == 8) {
-				//rotate++;
+			else if (actionKeyNo == 9) {
+				if (yyT < 1.5) {
+					yyT += cameraTranslateSpeed;
+				}
 			}
 			else
 				armx = 1.0, army = 0, armz = 0, armUp = true, armDown = false;
@@ -182,8 +188,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else if (actionKeyNo == 5) {	//lighting
 				lightRX = 0, lightRY = -1.0, lightRZ = 0;
 			}
-			else if (actionKeyNo == 8) {
-				//rotate--;
+			else if (actionKeyNo == 9) {
+				if (yyT > -1.5) {
+					yyT -= cameraTranslateSpeed;
+				}
 			}
 			else
 				armx = 1.0, army = 0, armz = 0, armUp = false, armDown = true;
@@ -191,8 +199,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_LEFT) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				if (xT > -ORTHO_VIEW) {
-					xT -= cameraTranslateSpeed;
+				if (xT < ORTHO_VIEW) {
+					xT += cameraTranslateSpeed;
 				}
 			}
 			else if (actionKeyNo == 5) {	//lighting
@@ -205,14 +213,16 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				armDirection = +1.0, armTurnDown = true, armTurnUp = false;
 			}
 			else if (actionKeyNo == 9){
-				xxT -= 0.5;
+				if (xxT > -1.5) {
+					xxT -= cameraTranslateSpeed;
+				}
 			}
 		}
 		else if (wParam == VK_RIGHT) {
 			stop = false;
 			if (actionKeyNo == 4) {
-				if (xT < ORTHO_VIEW) {
-					xT += cameraTranslateSpeed;
+				if (xT > -ORTHO_VIEW) {
+					xT -= cameraTranslateSpeed;
 				}
 			}
 			else if (actionKeyNo == 5) {	//lighting
@@ -225,7 +235,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				armDirection = -1.0, armTurnDown = true, armTurnUp = false;
 			}
 			else if (actionKeyNo == 9) {
-				xxT += 0.5;
+				if (xxT < 1.5) {
+					xxT += cameraTranslateSpeed;
+				}
+				
 			}
 		}
 		else if (wParam == VK_SPACE) {
@@ -242,10 +255,11 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			rRightLeg = 0, legRSpeed = 0;
 
 			armUpperZ = 0;
-
 			rotation = ' ';
 
 			walkCount = 0, autoWalk = 0, zT = 0, isWalkZLimite = false;
+			isSoundOn = false;
+			lightOn = false, lightRX = 0, lightRY = 0, lightRZ = 0;
 		}
 		else if (wParam == 0x41) { // A
 			if (actionKeyNo == 5)
@@ -256,26 +270,30 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		} // B
 		else if (wParam == 0x43) { // C
 			if (actionKeyNo == 6) {
+				textureOn = true;
 				textureCount++;
 				if (textureCount == 1) {
 					textureImg = "redMetal2.bmp";
+					lightOn = false, lightRX = 0, lightRY = 0, lightRZ = 0;
 					SoundEngine->stopAllSounds();
 				}
 				if (textureCount == 2) {
 					textureImg = "blackMetal.bmp";
+					lightOn = false, lightRX = 0, lightRY = 0, lightRZ = 0;
 					SoundEngine->stopAllSounds();
 				}
 				if (textureCount == 3) {
 					textureImg = "greenMetal2.bmp";
-					
-					SoundEngine->play2D("GreenLight.mp3", true);
-				}/*
-				if (textureCount == 4) {
-					textureImg = "redMetal.bmp";
-				}*/
+					lightOn = true;
+					lightType = GL_DIFFUSE;
+					lightRX = 0, lightRY = 0, lightRZ = 1.0;
+					isSoundOn = true;
+					SoundEngine->play2D("GreenLight.mp3", isSoundOn);
+				}
 				if (textureCount == 4) {
 					textureCount = 1;
 					textureImg = "redMetal2.bmp";
+					lightOn = false, lightRX = 0, lightRY = 0, lightRZ = 0;
 					SoundEngine->stopAllSounds();
 				}
 			}
@@ -336,14 +354,12 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == 0x50) { // P
 			isOrtho = !isOrtho;
 			if (isOrtho) {
-				//view = 'o';
 				glMatrixMode(GL_PROJECTION);
 				glLoadIdentity();
 				glTranslatef(xxT, yyT, 0.0);
 				glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);
 			}
 			else {
-				//view = 'p';
 				glMatrixMode(GL_PROJECTION);
 				glLoadIdentity();
 				gluPerspective(60.0, 1, FRUSTUM_VIEW, -FRUSTUM_VIEW);
@@ -351,10 +367,14 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 		} // P
 		else if (wParam == 0x51) { // Q
-			ry -= rSpeedP;
+			if (actionKeyNo != 9) {
+				ry += rSpeedP;
+			}
 		} // Q
 		else if (wParam == 0x52) { // R
-			ry += rSpeedP;
+			if (actionKeyNo != 9) {
+				ry -= rSpeedP;
+			}
 		} // R
 		else if (wParam == 0x53) { // S
 			if (actionKeyNo == 3)
@@ -370,7 +390,6 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				h.textureOn(textureOn);
 				b.textureOn(textureOn);
 			}
-			
 		} // T
 		else if (wParam == 0x57) { // W
 			autoWalk = !autoWalk;
@@ -399,7 +418,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 		}
 		else if (wParam == VK_SUBTRACT || wParam == 0xBD) {
-			if (zoom > ORTHO_VIEW / 5) {
+			if (zoom > ORTHO_VIEW / 4.9) {
 				zoom -= 0.2;
 			}
 		}
@@ -415,7 +434,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_F3) {	// F3
 			bulletShot = 0;
 			gunFireOn = true;
-			SoundEngine->play2D("pew.mp3", true);
+			isSoundOn = true;
+			SoundEngine->play2D("pew.mp3", isSoundOn);
 		}
 		else if (wParam == VK_F4) {	// F4
 			swordOn = !swordOn;
@@ -463,24 +483,7 @@ bool initPixelFormat(HDC hdc)
 }
 //--------------------------------------------------------------------
 
-void init() {
-	glClearColor(0.5, 0.5, 0.5, 0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
-}
-
 void lighting() {
-	//glEnable(GL_LIGHTING);
-	//glLightfv(GL_LIGHT0, GL_AMBIENT, amb); //configure light0, default position at origin
-	//glEnable(GL_LIGHT0); //turn on light
-//glLightfv(GL_LIGHT0, GL_POSITION, posA); //configure light0 position
-	/*float params_[3];
-	if (lightType == GL_AMBIENT)
-		params_[0] = amb[0], params_[1] = amb[1], params_[2] = amb[2];
-	else if (lightType == GL_DIFFUSE)
-		params_[0] = diff[0], params_[1] = diff[1], params_[2] = diff[2];
-	else
-		params_[0] = spec[0], params_[1] = spec[1], params_[2] = spec[2];*/
 
 	posA[0] = lightRX;
 	posA[1] = lightRY;
@@ -498,13 +501,6 @@ void lighting() {
 		glEnable(GL_LIGHTING);
 	else
 		glDisable(GL_LIGHTING);
-	/*glLightfv(GL_LIGHT0, lightType, params_);
-	glLightfv(GL_LIGHT0, GL_POSITION, posD);
-	glEnable(lightType);
-
-	glLightfv(GL_LIGHT0, lightType, params_);
-	glEnable(GL_LIGHT0);
-	glLightfv(GL_LIGHT0, GL_POSITION, posD);*/
 
 	glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
 	glLightfv(GL_LIGHT0, GL_POSITION, posA);
@@ -590,6 +586,13 @@ GLuint addTexture(LPCSTR textureName) {
 void removeTexture(GLuint* textures) {
 	glDeleteTextures(1, textures);
 	glDisable(GL_TEXTURE_2D);
+}
+
+void init() {
+	GLuint textures2[1];
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void animation() {
@@ -716,14 +719,6 @@ void animation() {
 			}
 		}
 
-		//// auto walk (hand)
-		//if (walkCount == 1) {
-		//	armUpperY++;
-		//}
-		//else if (walkCount == 2) {
-		//	armUpperY--;
-		//}
-
 		// for right hand rotate
 		if (armTurnUp && !armTurnDown && armLowerRotate > -30 && !stop) {
 			armLowerRotate -= armRSpeed;
@@ -791,51 +786,6 @@ void animation() {
 			isWalkZLimite = true;
 			walkCount = 0;
 		}
-
-		//if (autoWalk) {
-		//	//walkCount++;			
-		//	if (walkCount == 1) { //by default turned off
-		//	}
-		//	else if (walkCount % 2 == 0) {
-		//		//llCount = 0;
-		//		/*for(int i = 0; i < 2; i++)
-		//			if (llCount++ % 2 == 0) {
-		//				raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
-		//			}
-		//			else
-		//				raiseLeftLeg = false, llCount++, legLSpeed = -2;*/
-		//		/*raiseLeftLeg = true, raiseRightLeg = false;
-		//		legLSpeed = 2, legRSpeed = -2;*/
-		//		/*if (llCount % 2 == 0) {
-		//			raiseLeftLeg = true, raiseRightLeg = false, llCount++, lrCount--, legLSpeed = 2, legRSpeed = -2;
-		//		}
-		//		else
-		//			raiseLeftLeg = false, llCount++, legLSpeed = -2;*/
-		//		if (rLeftLeg < 45)
-		//			legLSpeed = -2;
-		//		else if (rLeftLeg > -35)
-		//			legLSpeed = 2;
-		//	}
-		//	else if (walkCount % 2 != 0){
-		//		//lrCount = 0;
-		//		/*for (int i = 0; i < 2; i++)
-		//			if (lrCount % 2 == 0)
-		//				raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
-		//			else
-		//				raiseRightLeg = false, lrCount++, legRSpeed = -2;*/
-		//		/*if (lrCount % 2 == 0)
-		//			raiseRightLeg = true, raiseLeftLeg = false, lrCount++, llCount--, legRSpeed = 2, legLSpeed = -2;
-		//		else
-		//			raiseRightLeg = false, lrCount++, legRSpeed = -2;*/
-		//		//legRSpeed = 2, legLSpeed = -2;
-		//		//legRSpeed = -2;
-		//	}
-		//	walkCount++;
-		//}
-		//else
-		//	wCount = 0, walkCount = 0, autoWalk = false;
-
-
 	}
 	// =================================================
 
@@ -882,7 +832,6 @@ void face() {
 	}
 }
 
-// head
 void helmet() {
 	GLuint textures2[2];
 	glPushMatrix();
@@ -922,7 +871,6 @@ void helmet() {
 	glScalef(0.9, 0.9, 0.9);
 	face();
 	
-	//glDeleteTextures(1, &textures2[0]);
 	textures2[1] = addTexture(textureImg);
 	glPopMatrix();
 	h.btmCover();
@@ -944,9 +892,69 @@ void helmet() {
 	glPopMatrix();
 	glDeleteTextures(1, &textures2[1]);
 }
-//============================= DANNY =================================
 
-//============================= LIANA =================================
+void helmet2() {
+	helmet();
+	GLuint textures2[2];
+	glPushMatrix();
+	glRotatef(nodRotate, 1, 0, 0);
+
+	glPushMatrix();
+	glScalef(1, 1, 1.3);
+
+	h2.headTop();
+
+	// right
+	h2.headRightTop1();
+	h2.headRightTop2();
+	h2.headRightMid();
+	h2.headRightBtm();
+	h2.headRightBtm2();
+	h2.headRightBack();
+
+	// left
+	h2.headLeftTop1();
+	h2.headLeftTop2();
+	h2.headLeftMid();
+	h2.headLeftBtm();
+	h2.headLeftBtm2();
+	h2.headLeftBack();
+
+	glPushMatrix();
+	glTranslatef(0, 0, -0.65); // back to original place
+	glRotatef(-maskRotate, 1, 0, 0);
+	glTranslatef(0, 0, 0.65); // go to center point
+
+	h2.mask();
+
+	glPopMatrix();
+
+	glPushMatrix();
+	glScalef(0.9, 0.9, 0.9);
+	face();
+
+	//glDeleteTextures(1, &textures2[0]);
+	textures2[1] = addTexture(textureImg);
+	glPopMatrix();
+	h2.btmCover();
+	glPopMatrix();
+
+	// right
+	glTranslatef(fh.xP(-115), fh.yP(10), -fh.zP(55));
+	h2.ear();
+
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	fh.cylinder(GLU_FILL, fh.yP(55), fh.yP(55), fh.yP(230), 50, 50);
+	glPopMatrix();
+
+	// right
+	glTranslatef(fh.xP(230), fh.yP(0), fh.zP(0));
+	h2.ear();
+
+	glPopMatrix();
+	glDeleteTextures(1, &textures2[1]);
+}
 
 void finger(GLenum type, float size, float size2, int lineWidth) {
 	glPushMatrix();
@@ -2178,9 +2186,7 @@ void leftArm() {
 	glPopMatrix();
 
 	glPushMatrix();
-	//glRotatef(-90, 1.0, 0, 0);
-	//glTranslatef(0, 0, height);
-
+	
 	glPushMatrix();
 	if(textureOn)fh.color('w'); else fh.color('y');
 	fh.sphere(GLUtype, sRadius, slices, stacks); //elbow
@@ -2290,23 +2296,6 @@ void rightArm() {
 
 	glPopMatrix();
 }
-
-//void leftLegWalk(float height) {
-//	if(autoWalk && walkCount % 2 == 0){
-//		if (raiseLeftLeg && rLeftLeg < 90 || !raiseLeftLeg && rLeftLeg > 0)
-//			rLeftLeg += legLSpeed;
-//		glTranslatef(height, 0, 0), glRotatef(rLeftLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
-//		//walkForward = true;
-//	}
-//}
-//
-//void rightLegWalk(float height) {
-//	if (autoWalk && walkCount % 2 != 0) {
-//		if (raiseRightLeg && rRightLeg < 90 || !raiseRightLeg && rRightLeg > 0)
-//			rRightLeg += legRSpeed;
-//		glTranslatef(height, 0, 0), glRotatef(rRightLeg, 1.0, 0, 0), glTranslatef(-height, 0, 0);
-//	}
-//}
 
 void leftLeg() {
 	float thighBaseRadius = 0.08, thighTopRadius = thighBaseRadius - 0.01, height = 0.52, slices = 30, stacks = 30;
@@ -2425,6 +2414,7 @@ void robotWeapon() {
 }
 
 void robotBody() {
+	glLineWidth(1);
 	GLuint textures3[1];
 	// adomen 0 + chest
 	glPushMatrix();
@@ -2440,7 +2430,7 @@ void robotBody() {
 	glPushMatrix();
 	glTranslatef(0, fh.yP(185), fh.zP(20));
 	glScalef(0.25, 0.25, 0.25);
-	helmet();
+	helmet2();
 	glPopMatrix();
 
 	//arm right
@@ -2563,16 +2553,10 @@ void ground(){
 	glPopMatrix();
 }
 
-//============================= LIANA =================================
-
 void display() {
 	GLuint textures[10];
 
 	init();
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-	
-
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glTranslatef(xxT, yyT, 0.0);
@@ -2594,24 +2578,12 @@ void display() {
 
 	textures[2] = addTexture(textureImg);
 
-	switch (actionKeyNo) {
-	case 8:
-		glPushMatrix();
-		glScalef(zoom, zoom, zoom);
-		glPushMatrix();
-		cameraView();
-		helmet();
-		glPopMatrix();
-		glPopMatrix();
-		break;
-	default:
-		glPushMatrix();
-		cameraView();
-		robotBody();
-		robotWeapon();
-		glPopMatrix();
-		break;
-	}
+	glPushMatrix();
+	cameraView();
+	robotBody();
+	robotWeapon();
+	glPopMatrix();
+
 	glDeleteTextures(1, &textures[2]);
 	glDisable(GL_TEXTURE_2D);
 }
@@ -2657,9 +2629,6 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
 
-	/*glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(-ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW, -ORTHO_VIEW, ORTHO_VIEW);*/
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(60, 1, FRUSTUM_VIEW, -FRUSTUM_VIEW);

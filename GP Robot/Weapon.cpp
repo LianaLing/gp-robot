@@ -180,8 +180,8 @@ void weapon::gun(float gunRotating, float gunXRotating, boolean gunFireOn, float
 	// pipe
 	glPushMatrix();
 	for (int i = 0; i < 360; i += 45) {	// got 8 cylinder
-		bullet(i, gunFireOn, bulletShot);
-		pipe(i);
+		bullet(i, gunFireOn, bulletShot);	// 1 * 8 = 8
+		pipe(i);	// 2 * 8 = 16
 	}
 	glPopMatrix();
 
@@ -190,35 +190,35 @@ void weapon::gun(float gunRotating, float gunXRotating, boolean gunFireOn, float
 	
 	glTranslatef(-0.5, 0, 0);
 	glRotatef(90, 0, 1, 0);
-	weaponRing();
+	weaponRing();	// 4
 	glPopMatrix();
 
 	// ring
 	glPushMatrix();
 	glTranslatef(-0.65, 0, 0);
 	glRotatef(90, 0, 1, 0);
-	weaponRing();
+	weaponRing();	// 4
 	glPopMatrix();
 
 	// middle ring
 	glPushMatrix();
 	glTranslatef(-0.2, 0, 0);
 	glRotatef(90, 0, 1, 0);
-	weaponRing2();
+	weaponRing2();	// 4
 	glPopMatrix();
 	
 	// front
 	glPushMatrix();
 	glTranslatef(-0.75, 0, 0);
 	glRotatef(-90, 0, 1, 0);
-	frontGun();
+	frontGun();		// 5
 	glPopMatrix();
 
 	// middle back ring
 	glPushMatrix();
 	glTranslatef(0.3, 0, 0);
 	glRotatef(90, 0, 1, 0);
-	weaponRing2();
+	weaponRing2();	// 4
 	glPopMatrix();
 
 	glPopMatrix();
@@ -233,13 +233,13 @@ void weapon::gun(float gunRotating, float gunXRotating, boolean gunFireOn, float
 	glTranslatef(0, -0.1, 0);
 	glPushMatrix();
 	glRotatef(90, 1, 0, 0);
-	holder();
+	holder();	// 6
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-0.15, 0.15, -0.15);
 	fh3.color('w');
-	fh3.cube(glQuad3, 0.3, 3);
+	fh3.cube(glQuad3, 0.3, 3);	// 6
 	glPopMatrix();
 	glPopMatrix();
 
@@ -252,21 +252,21 @@ void weapon::gun(float gunRotating, float gunXRotating, boolean gunFireOn, float
 	glPushMatrix();
 	glTranslatef(0.85, 0, 0);
 	glRotatef(-90, 0, 1, 0);
-	frontGun();
+	frontGun();	// 5
 	glPopMatrix();
 
 	// back 2
 	glPushMatrix();
 	glTranslatef(1.355, 0, 0);
 	glRotatef(-90, 0, 1, 0);
-	frontGun();
+	frontGun();	// 5
 	glPopMatrix();
 
 	// middle back ring 2
 	glPushMatrix();
 	glTranslatef(1.355, 0, 0);
 	glRotatef(90, 0, 1, 0);
-	weaponRing2();
+	weaponRing2();	// 4
 	glPopMatrix();
 
 	// =============================================
