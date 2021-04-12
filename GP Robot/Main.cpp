@@ -418,6 +418,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == VK_F3) {	// F3
 			bulletShot = 0;
 			gunFireOn = true;
+			SoundEngine->play2D("pew.mp3", true);
 		}
 		else if (wParam == VK_F4) {	// F4
 			swordOn = !swordOn;
@@ -468,7 +469,7 @@ bool initPixelFormat(HDC hdc)
 void init() {
 	glClearColor(0.5, 0.5, 0.5, 0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void lighting() {
@@ -868,6 +869,22 @@ void animation() {
 
 //============================= DANNY =================================
 
+void face() {
+	GLuint textures2[1];
+	if (textureOn || !textureOn) {
+		textures2[0] = addTexture("dannyFace.bmp");
+		glEnable(GL_TEXTURE_2D);
+		glBegin(GL_POLYGON);
+		glTexCoord2f(0.0, 1.0), fh.v3f(800.0 - 500.0, 260.0, 53.0);
+		glTexCoord2f(0.1, 0.0), fh.v3f(800.0 - 467.5, 517.5, 75);
+		glTexCoord2f(0.9, 0.0), fh.v3f(467.5, 517.5, 75);
+		glTexCoord2f(1.0, 1.0), fh.v3f(500.0, 260.0, 53.0);
+		glEnd();
+		glDeleteTextures(1, &textures2[0]);
+		glDisable(GL_TEXTURE_2D);
+	}
+}
+
 // head
 void helmet() {
 	GLuint textures2[2];
@@ -906,20 +923,9 @@ void helmet() {
 
 	glPushMatrix();
 	//glScalef(0.9, 0.9, 0.9);
-
-	if (textureOn || !textureOn) {
-		//textures2[0] = addTexture("dannyFace.bmp");
-		glEnable(GL_TEXTURE_2D);
-		glBegin(GL_POLYGON);
-		glTexCoord2f(0.0, 1.0), fh.v3f(800.0 - 500.0, 260.0, 53.0);
-		glTexCoord2f(0.1, 0.0), fh.v3f(800.0 - 467.5, 517.5, 75);
-		glTexCoord2f(0.9, 0.0), fh.v3f(467.5, 517.5, 75);
-		glTexCoord2f(1.0, 1.0), fh.v3f(500.0, 260.0, 53.0);
-		glEnd();
-		glDeleteTextures(0, &textures2[0]);
-		glDisable(GL_TEXTURE_2D);
-	}
+	face();
 	
+	glDeleteTextures(1, &textures2[0]);
 	textures2[1] = addTexture(textureImg);
 	glPopMatrix();
 	h.btmCover();
