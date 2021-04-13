@@ -950,7 +950,7 @@ void body::below() {
 
 	// left
 	if (tOn2) fh2.color('w'); else fh2.color('c');
-	glBegin(glQuad2);
+	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(357.5, 400, -36.25 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(378.75, 427.5, -45);
 	glTexCoord2f(1.0, 0.0), fh2.v3f(391.25, 457.5, -36.25);
@@ -961,7 +961,7 @@ void body::below() {
 
 	// right
 	if (tOn2) fh2.color('w'); else fh2.color('c');
-	glBegin(glQuad2);
+	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0), fh2.v3f(442.5, 400, -36.25 + 20);
 	glTexCoord2f(1.0, 1.0), fh2.v3f(421.25, 427.5, -45);
 	glTexCoord2f(1.0, 0.0), fh2.v3f(408.75, 457.5, -36.25);
